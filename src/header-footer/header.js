@@ -10,12 +10,13 @@ const Header = () => {
   };
 
   return (
-    <div>
+    <div className='flex space-x-4 items-center'>
       <button onClick={() => changeLanguage('es')}>Español</button>
       <button onClick={() => changeLanguage('eu')}>Euskera</button>
       
-      <div>
-        <ul>
+      <img src='/img/logo.png' className='size-32'/>
+      <div className=''>
+        <ul className='list-none flex space-x-4'>
             <li>{t('menu:hasiera')}</li>
             <li>{t('menu:galduta')}</li>
             <li>{t('menu:mapa')}</li>

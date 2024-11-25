@@ -1,4 +1,5 @@
 import Header from './header-footer/header';
+import './index.css';
 
 
 function App() {

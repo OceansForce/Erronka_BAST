@@ -3,6 +3,7 @@ import i18n from './118n/i18n';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './desplegable/lenguageSelector';
 import DarkModeToggle from './dark-light/dark'
+import User from './user/user'
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -29,7 +30,7 @@ const Header = () => {
       {/* Componente LanguageSelector con la función changeLanguage como prop */}
       <LanguageSelector changeLanguage={changeLanguage} />
       <DarkModeToggle />
-      
+      <User />
     </div>
   );
 };

@@ -33,7 +33,7 @@ const Header = () => {
         </ul>
       </div>
 
-      <div className='flex'>
+      <div className='flex items-center space-x-6'>
         {/* Componente LanguageSelector con la función changeLanguage como prop */}
         <LanguageSelector changeLanguage={changeLanguage} />
         <DarkModeToggle />

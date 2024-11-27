@@ -25,7 +25,7 @@ const UserOptions = () => {
     <div className="relative language-selector">
       <img
         src="/img/icons/users/user-dog.jpg"
-        className="w-10 h-10 cursor-pointer rounded-full"
+        className="size-12 cursor-pointer rounded-full"
         alt="Seleccionar idioma"
         onClick={toggleDropdown}
       />

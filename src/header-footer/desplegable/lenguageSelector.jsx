@@ -24,7 +24,7 @@ const LanguageSelector = ({ changeLanguage }) => {
     <div className="relative language-selector">
       <img
         src="/img/icons/menu/language.svg"
-        className="w-10 h-10 cursor-pointer"
+        className="size-7 cursor-pointer"
         alt="Seleccionar idioma"
         onClick={toggleDropdown}
       />

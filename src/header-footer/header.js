@@ -1,12 +1,12 @@
 import React from 'react';
 import i18n from './118n/i18n';
 import { useTranslation } from 'react-i18next';
-import LanguageSelector from './desplegable/lenguageSelector';
-import DarkModeToggle from './dark-light/dark'
-import User from './user/user'
+import LanguageSelector from './header/desplegable/lenguageSelector';
+import DarkModeToggle from './header/dark-light/dark'
+import User from './header/user/user'
 
-import Adopzioa  from './desplegable/adopzioa';
-import Denda from './desplegable/denda';
+import Adopzioa  from './header/desplegable/adopzioa';
+import Denda from './header/desplegable/denda';
 
 
 const Header = () => {

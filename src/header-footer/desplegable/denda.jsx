@@ -20,16 +20,16 @@ const Denda = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <li>
-        <div className='flex items-center font-semibold text-xl'>
-            <img className='size-3.5 dark:hidden' src='/img/icons/menu/gezia.svg'/>
-            <img className='size-3.5 hidden dark:block' src='/img/icons/menu/gezia_dark.svg'/>
-            <a href="#" className="text-black dark:text-white">
+     <li className='flex items-center justify-center'>
+        <div className='flex items-center font-semibold text-xl text-center'>
+          <a href="#" className="text-black dark:text-white">
             {t('menu:denda')}
-            </a>
+          </a>
+          <img className='size-3.5 dark:hidden' src='/img/icons/menu/gezia.svg'/>
+          <img className='size-3.5 hidden dark:block' src='/img/icons/menu/gezia_dark.svg'/>
         </div>
-        
       </li>
+
 
       {isOpen && (
         <div className="absolute left-0 pt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-md z-10">

@@ -18,16 +18,16 @@ const Header = () => {
   };
 
   return (
-    <div className='flex space-x-4 items-center justify-around w-full'>
+    <div className='flex space-x-4 items-center justify-around w-full p-3'>
       <div >
-        <img src='/img/logo.png' className='size-32' alt="Logo" />
+        <img src='/img/logo.png' className='size-20' alt="Logo" />
       </div>
       
       <div className='justify-center flex-center'>
         <ul className='list-none flex space-x-4'>
-          <li><a href="#" className="text-black dark:text-white">{t('menu:hasiera')}</a></li>
-          <li><a href='#' className="text-black dark:text-white">{t('menu:galduta')}</a></li>
-          <li><a href='#' className="text-black dark:text-white">{t('menu:mapa')}</a></li>
+          <li><a href="#" className="text-black dark:text-white font-semibold text-xl">{t('menu:hasiera')}</a></li>
+          <li><a href='#' className="text-black dark:text-white font-semibold text-xl">{t('menu:galduta')}</a></li>
+          <li><a href='#' className="text-black dark:text-white font-semibold text-xl">{t('menu:mapa')}</a></li>
           <Adopzioa />
           <Denda />
         </ul>

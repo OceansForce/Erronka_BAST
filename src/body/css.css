@@ -1,4 +1,5 @@
 body{
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,4 +11,15 @@ body{
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+}
+
+.data{
+    font-size: 0.8rem;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Evita que el contenido desborde horizontalmente */
   }

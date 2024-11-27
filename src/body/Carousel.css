@@ -1,0 +1,86 @@
+/* Carrusel contenedor principal */
+.carousel-container {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Contenedor del carrusel */
+.carousel-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Contenedor de los elementos del carrusel */
+.carousel-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  gap: 10px;
+  width: 100%;
+  grid-template-rows: repeat(2, auto); /* 2 filas */
+  transition: transform 0.5s ease-in-out; /* Transición suave */
+}
+
+/* Estilo para cada item del carrusel */
+.carousel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 250px;
+  border-radius: 8px;
+}
+
+.carousel-text {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.carousel-button {
+  background-color:transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.carousel-button:disabled {
+  cursor: not-allowed;
+}
+
+
+  @media  (max-width: 770px) {
+    .carousel-content {
+      grid-template-columns: repeat(2, 1fr); /* 3 columnas */
+      grid-template-rows: repeat(3, 1fr); /* 2 filas */
+    }
+  }
+
+  @media  (max-width: 640px) {
+    .carousel-content {
+      
+      grid-template-columns: repeat(1, 1fr); /* 3 columnas */
+      grid-template-rows: repeat(1, 1fr); /* 2 filas */
+      padding: none;
+    }
+
+    .carousel-item {
+      flex: 0 0 100%; /* Un elemento por fila */
+      max-width: 100%;
+    }
+  }
+  
+  
+  

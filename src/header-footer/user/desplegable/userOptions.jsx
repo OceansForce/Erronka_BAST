@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const UserOptions = ({ changeLanguage }) => {
+const UserOptions = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { t } = useTranslation();
   // Alterna la visibilidad del menú
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -30,17 +31,37 @@ const UserOptions = ({ changeLanguage }) => {
       />
 
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-md z-10">
+        <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-md z-10">
           <ul className="list-none p-2">
-            <li
-              className="cursor-pointer hover:bg-gray-100 p-2 rounded"
-            >
-              Euskera
+
+
+            <li className="p-2 rounded">
+              <h2 className='font-semibold text-center'>{t('user:agurra')}, Manex</h2>
             </li>
-            <li
-              className="cursor-pointer hover:bg-gray-100 p-2 rounded"
-            >
-              Español
+
+            <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
+              <a href='#' className='flex items-center'>
+                <img className='size-8 rounded-full' src='/img/icons/users/user-dog.jpg'/>
+                <h4 className='ml-3'>{t('user:profila')}</h4>
+              </a>
+            </li>
+            <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
+              <a href='#' className='flex items-center'>
+                <img className='size-8 rounded-full' src='/img/icons/users/chat.svg'/>
+                <h4 className='ml-3'>{t('user:chat')}</h4>
+              </a>
+            </li>
+            <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
+              <a href='#' className='flex items-center'>
+                <img className='size-8 rounded-full' src='/img/icons/users/config.svg'/>
+                <h4 className='ml-3'>{t('user:konfig')}</h4>
+              </a>
+            </li>
+            <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
+              <a href='#' className='flex items-center'>
+                <img className='size-8 rounded-full' src='/img/icons/users/exit.svg'/>
+                <h4 className='ml-3'>{t('user:exit')}</h4>
+              </a>
             </li>
           </ul>
         </div>

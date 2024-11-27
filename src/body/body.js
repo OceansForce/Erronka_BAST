@@ -111,7 +111,7 @@ const Body = () => {
 
     return (
         <div className="carousel-container w-2/3">
-            <button onClick={prev} className="carousel-button prev" disabled={currentIndex === 0}>
+            <button onClick={prev} className="carousel-button prev dark:text-white" disabled={currentIndex === 0}>
                 ←
             </button>
             <div className="carousel-wrapper">
@@ -120,15 +120,15 @@ const Body = () => {
                         <div key={item.id} className="carousel-item">
                             <img src={item.img} alt={item.title} className="carousel-img rounded-t-lg" />
                             <div className="carousel-text">
-                                <h3 className="text-center font-bold text-slate-600">{item.title}</h3>
-                                <p className="text-left data pb-3 pt-2">{item.date}</p>
-                                <p className="text-justify text-slate-600">{item.description}</p>
+                                <h3 className="text-center font-bold text-slate-600 dark:text-white">{item.title}</h3>
+                                <p className="text-left data pb-3 pt-2 dark:text-white">{item.date}</p>
+                                <p className="text-justify text-slate-600 dark:text-white">{item.description}</p>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
-            <button onClick={next} className="carousel-button next" disabled={(currentIndex + 1) * itemsPerPage >= items.length}>
+            <button onClick={next} className="carousel-button next dark:text-white" disabled={(currentIndex + 1) * itemsPerPage >= items.length}>
                 →
             </button>
         </div>

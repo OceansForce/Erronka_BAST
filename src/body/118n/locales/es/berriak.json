@@ -1,79 +1,54 @@
 {
-    "carousel": {
-      "items": [
-        {
-          "id": 1,
-          "title": "La nariz de tu perro es única",
-          "date": "2024/11/27",
-          "description": "Seguro que sospechabas algo, pero la nariz de tu compañero peludo además de ser un detector infalible de chuches y […]"
-        },
-        {
-          "id": 2,
-          "title": "La obesidad en los perros",
-          "date": "2024/9/15",
-          "description": "La obesidad en nuestros perros es más común de lo que podemos creer y puede deberse a diferentes causas. A […]"
-        },
-        {
-          "id": 3,
-          "title": "La procesionaria ya está aquí",
-          "date": "2024/4/3",
-          "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos […]"
-        },
-        {
-          "id": 4,
-          "title": "Otra curiosidad de los perros",
-          "date": "2024/11/28",
-          "description": "Las patas de los perros también tienen características únicas que los hacen increíbles […]"
-        },
-        {
-          "id": 5,
-          "title": "Perros y su comunicación",
-          "date": "2024/12/10",
-          "description": "Descubre cómo los perros usan su lenguaje corporal para comunicarse contigo […]"
-        },
-        {
-          "id": 6,
-          "title": "El sueño de los perros",
-          "date": "2024/6/19",
-          "description": "¿Sabías que los perros sueñan como los humanos? Aprende más sobre el ciclo de sueño de tu perro […]"
-        },
-        {
-          "id": 7,
-          "title": "La procesionaria ya está aquí",
-          "date": "2024/4/3",
-          "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos […]"
-        },
-        {
-          "id": 8,
-          "title": "La procesionaria ya está aquí",
-          "date": "2024/4/3",
-          "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos […]"
-        },
-        {
-          "id": 9,
-          "title": "La procesionaria ya está aquí",
-          "date": "2024/4/3",
-          "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos […]"
-        },
-        {
-          "id": 10,
-          "title": "La procesionaria ya está aquí",
-          "date": "2024/4/3",
-          "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos […]"
-        },
-        {
-          "id": 11,
-          "title": "La procesionaria ya está aquí",
-          "date": "2024/4/3",
-          "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos […]"
-        },
-        {
-          "id": 12,
-          "title": "La procesionaria ya está aquí",
-          "date": "2024/4/3",
-          "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos […]"
-        }
-      ]
+  "carousel": {
+    "items": {
+      "0": {
+        "title": "La nariz de tu perro es única",
+        "description": "Seguro que sospechabas algo, pero la nariz de tu compañero peludo no solo es un detector infalible de chuches..."
+      },
+      "1": {
+        "title": "La obesidad en los perros",
+        "description": "La obesidad en nuestros perros es más común de lo que podemos creer y puede deberse a diferentes causas..."
+      },
+      "2": {
+        "title": "La procesionaria ya está aquí",
+        "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos..."
+      },
+      "3": {
+        "title": "Otra curiosidad de los perros",
+        "description": "Las patas de los perros también tienen características únicas que los hacen increíbles..."
+      },
+      "4": {
+        "title": "Perros y su comunicación",
+        "description": "Descubre cómo los perros usan su lenguaje corporal para comunicarse contigo..."
+      },
+      "5": {
+        "title": "El sueño de los perros",
+        "description": "¿Sabías que los perros sueñan como los humanos? Aprende más sobre el ciclo de sueño de tu perro..."
+      },
+      "6": {
+        "title": "Otra curiosidad de los perros",
+        "description": "Las patas de los perros también tienen características únicas que los hacen increíbles..."
+      },
+      "7": {
+        "title": "Perros y su comunicación",
+        "description": "Descubre cómo los perros usan su lenguaje corporal para comunicarse contigo..."
+      },
+      "8": {
+        "title": "El sueño de los perros",
+        "description": "¿Sabías que los perros sueñan como los humanos? Aprende más sobre el ciclo de sueño de tu perro..."
+      },
+      "9": {
+        "title": "La procesionaria ya está aquí",
+        "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos..."
+      },
+      "10": {
+        "title": "Otra curiosidad de los perros",
+        "description": "Las patas de los perros también tienen características únicas que los hacen increíbles..."
+      },
+      "11": {
+        "title": "Perros y su comunicación",
+        "description": "Descubre cómo los perros usan su lenguaje corporal para comunicarse contigo..."
+      }
     }
   }
-  
+}

@@ -6,16 +6,24 @@ import LanguageDetector from 'i18next-browser-languagedetector'; // Para detecta
 import esMenu from './locales/es/menu.json';
 import euMenu from './locales/eu/menu.json';
 
+// User hizkuntza gehituta
+import euUser from './locales/eu/user.json';
+import esUser from './locales/es/user.json';
+
+
 i18n
   .use(LanguageDetector)  // Detecta el idioma del navegador
   .use(initReactI18next)   // Integra i18next con React
   .init({
     resources: {
       es: {
-        menu: esMenu
+        menu: esMenu,
+        user: esUser
       },
       eu: {
-        menu: euMenu
+        menu: euMenu,
+        user: euUser
+
       }
     },
     fallbackLng: 'eu', // Cambié a 'es' como fallback por si no se detecta el idioma

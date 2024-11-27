@@ -18,7 +18,7 @@ i18n
         berriak: euBerriak
       }
     },
-    fallbackLng: 'es', // Cambié a 'es' como fallback por si no se detecta el idioma
+    fallbackLng: 'eu', // Cambié a 'es' como fallback por si no se detecta el idioma
     debug: true, // Habilitar la depuración
     interpolation: {
       escapeValue: false // React ya se encarga de escapar valores

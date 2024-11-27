@@ -22,7 +22,8 @@ const Denda = () => {
     >
       <li>
         <div className='flex items-center font-semibold text-xl'>
-            <img className='size-5' src='/img/icons/menu/gezia.svg'/>
+            <img className='size-3.5 dark:hidden' src='/img/icons/menu/gezia.svg'/>
+            <img className='size-3.5 hidden dark:block' src='/img/icons/menu/gezia_dark.svg'/>
             <a href="#" className="text-black dark:text-white">
             {t('menu:denda')}
             </a>

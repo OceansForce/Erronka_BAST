@@ -14,10 +14,12 @@ const Header = () => {
   };
 
   return (
-    <div className='flex space-x-4 items-center'>
-      <img src='/img/logo.png' className='size-32' alt="Logo" />
+    <div className='flex space-x-4 items-center justify-between w-full'>
+      <div >
+        <img src='/img/logo.png' className='size-32' alt="Logo" />
+      </div>
       
-      <div className='justify-center'>
+      <div className='justify-center flex-center'>
         <ul className='list-none flex space-x-4'>
           <li><a href="#" className="text-black dark:text-white">{t('menu:hasiera')}</a></li>
           <li><a href='#' className="text-black dark:text-white">{t('menu:galduta')}</a></li>
@@ -27,10 +29,13 @@ const Header = () => {
         </ul>
       </div>
 
-      {/* Componente LanguageSelector con la función changeLanguage como prop */}
-      <LanguageSelector changeLanguage={changeLanguage} />
-      <DarkModeToggle />
-      <User />
+      <div className='flex'>
+        {/* Componente LanguageSelector con la función changeLanguage como prop */}
+        <LanguageSelector changeLanguage={changeLanguage} />
+        <DarkModeToggle />
+        <User />
+      </div>
+      
     </div>
   );
 };

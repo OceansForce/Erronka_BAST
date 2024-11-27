@@ -35,25 +35,25 @@ const Adopzioa = () => {
           <ul className="list-none p-2">
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
               <a href="#" className="flex items-center">
-                <img className="size-8 rounded-full" src="/img/icons/users/user-dog.jpg" />
+                <img className="size-11 rounded-full" src="/img/icons/animals/adopta_perro.gif" />
                 <h4 className="ml-3">{t('adopzio:txakurra')}</h4>
               </a>
             </li>
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
               <a href="#" className="flex items-center">
-                <img className="size-8 rounded-full" src="/img/icons/users/chat.svg" />
+                <img className="size-11 rounded-full" src="/img/icons/animals/adopta_ppp.gif" />
                 <h4 className="ml-3">{t('adopzio:ppp')}</h4>
               </a>
             </li>
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
               <a href="#" className="flex items-center">
-                <img className="size-8 rounded-full" src="/img/icons/users/config.svg" />
+                <img className="size-11 rounded-full" src="/img/icons/animals/adopta_gato-1.gif" />
                 <h4 className="ml-3">{t('adopzio:katua')}</h4>
               </a>
             </li>
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
               <a href="#" className="flex items-center">
-                <img className="size-8 rounded-full" src="/img/icons/users/exit.svg" />
+                <img className="size-11 rounded-full" src="/img/icons/animals/adopta_otros.gif" />
                 <h4 className="ml-3">{t('adopzio:Besteak')}</h4>
               </a>
             </li>

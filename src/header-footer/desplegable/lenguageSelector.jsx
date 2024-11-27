@@ -24,10 +24,19 @@ const LanguageSelector = ({ changeLanguage }) => {
     <div className="relative language-selector">
       <img
         src="/img/icons/menu/language.svg"
-        className="size-7 cursor-pointer"
+        className="size-7 cursor-pointer dark:hidden"
         alt="Seleccionar idioma"
         onClick={toggleDropdown}
       />
+      <img
+        src="/img/icons/menu/language_black.svg"
+        className="size-7 cursor-pointer hidden dark:block"
+        alt="Seleccionar idioma"
+        onClick={toggleDropdown}
+      />
+
+
+      
 
       {isOpen && (
         <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-md z-10">

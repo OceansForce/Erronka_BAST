@@ -3,20 +3,20 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector'; // Para detectar el idioma del navegador
 
 // Importar archivos de traducción
-import esMenu from './locales/es/menu.json';
-import euMenu from './locales/eu/menu.json';
+import esMenu from './locales/es/menu/menu.json';
+import euMenu from './locales/eu/menu/menu.json';
 
 // User hizkuntza gehituta
-import euUser from './locales/eu/user.json';
-import esUser from './locales/es/user.json';
+import euUser from './locales/eu/menu/user.json';
+import esUser from './locales/es/menu/user.json';
 
 // Denda hizkuntza gehituta
-import euDenda from './locales/eu/denda.json';
-import esDenda from './locales/es/denda.json';
+import euDenda from './locales/eu/menu/denda.json';
+import esDenda from './locales/es/menu/denda.json';
 
 // Adopzio hizkuntza gehituta
-import euAdopzio from './locales/eu/adopzio.json';
-import esAdopzio from './locales/es/adopzio.json';
+import euAdopzio from './locales/eu/menu/adopzio.json';
+import esAdopzio from './locales/es/menu/adopzio.json';
 
 
 i18n
@@ -30,6 +30,8 @@ i18n
 
         denda: esDenda,
         adopzio: esAdopzio
+
+        
       },
       eu: {
         menu: euMenu,

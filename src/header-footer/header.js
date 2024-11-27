@@ -1,5 +1,5 @@
 import React from 'react';
-import i18n from './118n/i18n';
+import i18n from '../118n/menu';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './header/desplegable/lenguageSelector';
 import DarkModeToggle from './header/dark-light/dark'

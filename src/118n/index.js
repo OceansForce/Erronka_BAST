@@ -3,8 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector'; // Para detectar el idioma del navegador
 
 // Importar archivos de traducción
-import esBerriak from './locales/es/berriak.json';
-import euBerriak from './locales/eu/berriak.json';
+import esBerriak from './locales/es/index/body/berriak.json';
+import euBerriak from './locales/eu/index/body/berriak.json';
 
 i18n
   .use(LanguageDetector)  // Detecta el idioma del navegador

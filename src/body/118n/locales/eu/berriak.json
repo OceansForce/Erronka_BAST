@@ -1,0 +1,55 @@
+{
+        "carousel": {
+          "items": {
+            "0": {
+              "title": "Zure txakurraren sudurra bakarra da",
+              "description": "Ziur zerbait susmatzen zenuela, baina zure lagun pelutsaren sudurra ez da bakarrik gozokiak detektatzeko gai..."
+            },
+            "1": {
+              "title": "Txakurren obesitatea",
+              "description": "Txakurren obesitatea uste dugun baino ohikoagoa da, eta hainbat kausa izan ditzake..."
+            },
+            "2": {
+              "title": "Prozesionariak hemen daude",
+              "description": "Prozesionariak hemen daude eta zure txakurrentzat arriskutsuak izan daitezke. Ikasi nola babestu..."
+            },
+            "3": {
+              "title": "Txakurren beste jakintza bat",
+              "description": "Txakurren hankek ezaugarri bereziak dituzte, eta horrek izugarri egiten ditu..."
+            },
+            "4": {
+              "title": "Txakurrak eta beren komunikazioa",
+              "description": "Ikasi nola erabiltzen duten txakurren gorputz-hizkuntza zurekin komunikatzeko..."
+            },
+            "5": {
+              "title": "Txakurren loa",
+              "description": "Badakizue txakurrak ere amets egiten dutela, giza moduan? Ikasi zure txakurraren lo-zikloari buruz..."
+            },
+            "6": {
+              "title": "Txakurren beste jakintza bat",
+              "description": "Txakurren hankek ezaugarri bereziak dituzte, eta horrek izugarri egiten ditu..."
+            },
+            "7": {
+              "title": "Txakurrak eta beren komunikazioa",
+              "description": "Ikasi nola erabiltzen duten txakurren gorputz-hizkuntza zurekin komunikatzeko..."
+            },
+            "8": {
+              "title": "Txakurren loa",
+              "description": "Badakizue txakurrak ere amets egiten dutela, giza moduan? Ikasi zure txakurraren lo-zikloari buruz..."
+            },
+            "9": {
+              "title": "Prozesionariak hemen daude",
+              "description": "Prozesionariak hemen daude eta zure txakurrentzat arriskutsuak izan daitezke. Ikasi nola babestu..."
+            },
+            "10": {
+              "title": "Txakurren beste jakintza bat",
+              "description": "Txakurren hankek ezaugarri bereziak dituzte, eta horrek izugarri egiten ditu..."
+            },
+            "11": {
+              "title": "Txakurrak eta beren komunikazioa",
+              "description": "Ikasi nola erabiltzen duten txakurren gorputz-hizkuntza zurekin komunikatzeko..."
+            }
+          }
+        }
+      }
+      

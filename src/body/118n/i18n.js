@@ -3,8 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector'; // Para detectar el idioma del navegador
 
 // Importar archivos de traducción
-import esMenu from './locales/es/menu.json';
-import euMenu from './locales/eu/menu.json';
+import esBerriak from './locales/es/berriak.json';
+import euBerriak from './locales/eu/berriak.json';
 
 i18n
   .use(LanguageDetector)  // Detecta el idioma del navegador
@@ -12,13 +12,13 @@ i18n
   .init({
     resources: {
       es: {
-        menu: esMenu
+        berriak: esBerriak
       },
       eu: {
-        menu: euMenu
+        berriak: euBerriak
       }
     },
-    fallbackLng: 'es', // Cambié a 'es' como fallback por si no se detecta el idioma
+    fallbackLng: 'eu', // Cambié a 'es' como fallback por si no se detecta el idioma
     debug: true, // Habilitar la depuración
     interpolation: {
       escapeValue: false // React ya se encarga de escapar valores

@@ -1,0 +1,54 @@
+{
+  "carousel": {
+    "items": {
+      "0": {
+        "title": "La nariz de tu perro es única",
+        "description": "Seguro que sospechabas algo, pero la nariz de tu compañero peludo no solo es un detector infalible de chuches..."
+      },
+      "1": {
+        "title": "La obesidad en los perros",
+        "description": "La obesidad en nuestros perros es más común de lo que podemos creer y puede deberse a diferentes causas..."
+      },
+      "2": {
+        "title": "La procesionaria ya está aquí",
+        "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos..."
+      },
+      "3": {
+        "title": "Otra curiosidad de los perros",
+        "description": "Las patas de los perros también tienen características únicas que los hacen increíbles..."
+      },
+      "4": {
+        "title": "Perros y su comunicación",
+        "description": "Descubre cómo los perros usan su lenguaje corporal para comunicarse contigo..."
+      },
+      "5": {
+        "title": "El sueño de los perros",
+        "description": "¿Sabías que los perros sueñan como los humanos? Aprende más sobre el ciclo de sueño de tu perro..."
+      },
+      "6": {
+        "title": "Otra curiosidad de los perros",
+        "description": "Las patas de los perros también tienen características únicas que los hacen increíbles..."
+      },
+      "7": {
+        "title": "Perros y su comunicación",
+        "description": "Descubre cómo los perros usan su lenguaje corporal para comunicarse contigo..."
+      },
+      "8": {
+        "title": "El sueño de los perros",
+        "description": "¿Sabías que los perros sueñan como los humanos? Aprende más sobre el ciclo de sueño de tu perro..."
+      },
+      "9": {
+        "title": "La procesionaria ya está aquí",
+        "description": "La procesionaria ya está aquí y puede ser peligrosa para tus perros. Aprende cómo protegerlos..."
+      },
+      "10": {
+        "title": "Otra curiosidad de los perros",
+        "description": "Las patas de los perros también tienen características únicas que los hacen increíbles..."
+      },
+      "11": {
+        "title": "Perros y su comunicación",
+        "description": "Descubre cómo los perros usan su lenguaje corporal para comunicarse contigo..."
+      }
+    }
+  }
+}

@@ -12,8 +12,10 @@ function App() {
         <Header />
       </div>
 
-      <div  className="App container">
-        <Body />
+      <div  className="App">
+        <div className='flex items-center w-auto justify-center'>
+           <Body />
+        </div>
       </div>
       <div className="App">
         <Footer />

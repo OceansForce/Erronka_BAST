@@ -110,7 +110,7 @@ const Body = () => {
     const currentItems = items.slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage);
 
     return (
-        <div className="carousel-container">
+        <div className="carousel-container w-2/3">
             <button onClick={prev} className="carousel-button prev" disabled={currentIndex === 0}>
                 ←
             </button>

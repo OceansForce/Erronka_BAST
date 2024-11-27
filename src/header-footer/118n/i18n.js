@@ -10,6 +10,14 @@ import euMenu from './locales/eu/menu.json';
 import euUser from './locales/eu/user.json';
 import esUser from './locales/es/user.json';
 
+// Denda hizkuntza gehituta
+import euDenda from './locales/eu/denda.json';
+import esDenda from './locales/es/denda.json';
+
+// Adopzio hizkuntza gehituta
+import euAdopzio from './locales/eu/adopzio.json';
+import esAdopzio from './locales/es/adopzio.json';
+
 
 i18n
   .use(LanguageDetector)  // Detecta el idioma del navegador
@@ -18,11 +26,17 @@ i18n
     resources: {
       es: {
         menu: esMenu,
-        user: esUser
+        user: esUser,
+
+        denda: esDenda,
+        adopzio: esAdopzio
       },
       eu: {
         menu: euMenu,
-        user: euUser
+        user: euUser,
+
+        denda: euDenda,
+        adopzio: euAdopzio
 
       }
     },

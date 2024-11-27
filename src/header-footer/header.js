@@ -23,7 +23,7 @@ const Header = () => {
         <img src='/img/logo.png' className='size-20' alt="Logo" />
       </div>
       
-      <div className='justify-center flex-center p-3'>
+      <div className='justify-center flex-center p-3 capitalize'>
         <ul className='list-none flex flex-col sm:flex-row sm:space-x-4 text-center sm:text-left'>
           <li><a href="#" className="text-black dark:text-white font-semibold text-xl">{t('menu:hasiera')}</a></li>
           <li><a href='#' className="text-black dark:text-white font-semibold text-xl">{t('menu:galduta')}</a></li>

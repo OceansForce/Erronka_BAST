@@ -1,0 +1,78 @@
+{
+  "carousel": {
+    "items": [
+      {
+        "id": 1,
+        "title": "Zure txakurraren sudurra bakarra da",
+        "date": "2024/11/27",
+        "description": "Zerbait susmatzen zenuen ziur, baina zure lagun iletsuaren sudurra goxokien detektagailu infalible bat izateaz gain, […]"
+      },
+      {
+        "id": 2,
+        "title": "Txakurren obesitatea",
+        "date": "2024/9/15",
+        "description": "Txakurrengan obesitatea ohikoagoa da uste duguna baino eta arrazoi desberdinetan izan daiteke. […]"
+      },
+      {
+        "id": 3,
+        "title": "Procesionaria dagoeneko hemen dago",
+        "date": "2024/4/3",
+        "description": "Procesionaria dagoeneko hemen dago eta arriskutsua izan daiteke zure txakurrentzat. Babesteko nola ikasi […]"
+      },
+      {
+        "id": 4,
+        "title": "Txakurrei buruzko beste bitxikeria bat",
+        "date": "2024/11/28",
+        "description": "Txakurren oinak ere ezaugarri bereziak dituzte, eta horrek izugarriak egiten ditu […]"
+      },
+      {
+        "id": 5,
+        "title": "Txakurrak eta haien komunikazioa",
+        "date": "2024/12/10",
+        "description": "Txakurrak gorputz hizkuntza erabiliz nola komunikatzen diren ezagutu zurekin […]"
+      },
+      {
+        "id": 6,
+        "title": "Txakurren ametsak",
+        "date": "2024/6/19",
+        "description": "Ba al zenekien txakurrek gizakiek bezala amets egiten dutela? Zure txakurraren loaren zikloari buruz gehiago ikasi […]"
+      },
+      {
+        "id": 7,
+        "title": "Procesionaria dagoeneko hemen dago",
+        "date": "2024/4/3",
+        "description": "Procesionaria dagoeneko hemen dago eta arriskutsua izan daiteke zure txakurrentzat. Babesteko nola ikasi […]"
+      },
+      {
+        "id": 8,
+        "title": "Procesionaria dagoeneko hemen dago",
+        "date": "2024/4/3",
+        "description": "Procesionaria dagoeneko hemen dago eta arriskutsua izan daiteke zure txakurrentzat. Babesteko nola ikasi […]"
+      },
+      {
+        "id": 9,
+        "title": "Procesionaria dagoeneko hemen dago",
+        "date": "2024/4/3",
+        "description": "Procesionaria dagoeneko hemen dago eta arriskutsua izan daiteke zure txakurrentzat. Babesteko nola ikasi […]"
+      },
+      {
+        "id": 10,
+        "title": "Procesionaria dagoeneko hemen dago",
+        "date": "2024/4/3",
+        "description": "Procesionaria dagoeneko hemen dago eta arriskutsua izan daiteke zure txakurrentzat. Babesteko nola ikasi […]"
+      },
+      {
+        "id": 11,
+        "title": "Procesionaria dagoeneko hemen dago",
+        "date": "2024/4/3",
+        "description": "Procesionaria dagoeneko hemen dago eta arriskutsua izan daiteke zure txakurrentzat. Babesteko nola ikasi […]"
+      },
+      {
+        "id": 12,
+        "title": "Procesionaria dagoeneko hemen dago",
+        "date": "2024/4/3",
+        "description": "Procesionaria dagoeneko hemen dago eta arriskutsua izan daiteke zure txakurrentzat. Babesteko nola ikasi […]"
+      }
+    ]
+  }
+}

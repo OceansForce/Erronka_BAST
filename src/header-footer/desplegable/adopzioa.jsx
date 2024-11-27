@@ -21,9 +21,13 @@ const Adopzioa = () => {
       onMouseLeave={handleMouseLeave}
     >
       <li>
-        <a href="#" className="text-black dark:text-white">
-          {t('menu:adopzio')}
-        </a>
+        <div className='flex items-center'>
+            <img className='size-5' src='/img/icons/menu/gezia.svg'/>
+            <a href="#" className="text-black dark:text-white">
+            {t('menu:adopzio')}
+            </a>
+        </div>
+        
       </li>
 
       {isOpen && (

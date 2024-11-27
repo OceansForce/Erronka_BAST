@@ -5,6 +5,10 @@ import LanguageSelector from './desplegable/lenguageSelector';
 import DarkModeToggle from './dark-light/dark'
 import User from './user/user'
 
+import Adopzioa  from './desplegable/adopzioa';
+import Denda from './desplegable/denda';
+
+
 const Header = () => {
   const { t, i18n } = useTranslation();
 
@@ -24,8 +28,8 @@ const Header = () => {
           <li><a href="#" className="text-black dark:text-white">{t('menu:hasiera')}</a></li>
           <li><a href='#' className="text-black dark:text-white">{t('menu:galduta')}</a></li>
           <li><a href='#' className="text-black dark:text-white">{t('menu:mapa')}</a></li>
-          <li><a href='#' className="text-black dark:text-white">{t('menu:adopzio')}</a></li>
-          <li><a href='#' className="text-black dark:text-white">{t('menu:denda')}</a></li>
+          <Adopzioa />
+          <Denda />
         </ul>
       </div>
 

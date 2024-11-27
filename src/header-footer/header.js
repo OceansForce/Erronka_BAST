@@ -14,7 +14,7 @@ const Header = () => {
   };
 
   return (
-    <div className='flex space-x-4 items-center justify-between w-full'>
+    <div className='flex space-x-4 items-center justify-around w-full'>
       <div >
         <img src='/img/logo.png' className='size-32' alt="Logo" />
       </div>

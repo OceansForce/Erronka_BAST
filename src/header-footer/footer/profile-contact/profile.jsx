@@ -21,7 +21,6 @@ const Profile = ({ onActiveChange }) => {
     }
   }, [isDarkMode]);
 
-  // Llamar al callback solo si está definido
   useEffect(() => {
     if (onActiveChange) {
       onActiveChange(activeButton);

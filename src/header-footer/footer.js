@@ -15,8 +15,8 @@ const Footer = () => {
       {activeSection === 'Profile' && <Datuak />}
       {activeSection === 'Contact' && <Formulario />}
 
-      <div className="flex flex-row justify-between mt-16 text-neutral-700 dark:text-gray-300">
-        <div className="w-1/4 text-center">
+      <div className="flex flex-col md:flex-row items-center text-center justify-between mt-16 text-neutral-700 dark:text-gray-300 ">
+        <div className="w-1/4 text-center mb-8">
           <p>Typeface by Manex and Julen</p>
           <div className="space-x-4">
             <a href="#">© 2024</a>

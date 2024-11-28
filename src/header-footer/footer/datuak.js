@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const Datuak = () => {
   
   return (
-    <div className='flex flex-row justify-around'>
+    <div className='flex flex-col items-center text-center md:text-start md:flex-row justify-around'>
         <div>
           <p className='text-neutral-700 dark:text-gray-400 text-lg'>
             Get in touch

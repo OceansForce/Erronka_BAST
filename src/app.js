@@ -15,7 +15,7 @@ function App() {
       <div className="App w-auto">
           <Wallpaper />
       </div>
-      <div  className="App">
+      <div  className="App background">
         
         <div className='flex items-center w-auto justify-center'>
            <Carrusel />

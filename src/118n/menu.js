@@ -19,6 +19,9 @@ import euAdopzio from './locales/eu/menu/adopzio.json';
 import esAdopzio from './locales/es/menu/adopzio.json';
 
 
+import esBerriak from './locales/es/index/body/berriak.json';
+import euBerriak from './locales/eu/index/body/berriak.json';
+
 i18n
   .use(LanguageDetector)  // Detecta el idioma del navegador
   .use(initReactI18next)   // Integra i18next con React
@@ -29,20 +32,23 @@ i18n
         user: esUser,
 
         denda: esDenda,
-        adopzio: esAdopzio
+        adopzio: esAdopzio,
 
-        
+        berriak: esBerriak
       },
       eu: {
         menu: euMenu,
         user: euUser,
 
         denda: euDenda,
-        adopzio: euAdopzio
+        adopzio: euAdopzio,
+
+        berriak: euBerriak
+
 
       }
     },
-    fallbackLng: 'eu', // Cambié a 'es' como fallback por si no se detecta el idioma
+    fallbackLng: 'es', // Cambié a 'es' como fallback por si no se detecta el idioma
     debug: true, // Habilitar la depuración
     interpolation: {
       escapeValue: false // React ya se encarga de escapar valores

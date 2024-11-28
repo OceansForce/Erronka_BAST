@@ -9,7 +9,7 @@ const Datuak = () => {
   return (
     <div className='flex flex-col items-center text-center md:text-start md:flex-row justify-around'>
         <div>
-          <p className='text-neutral-700 dark:text-gray-400 text-lg'>
+          <p className='text-neutral-700 dark:text-gray-400 text-lg mt-6 sm:mt-0'>
           {t('datuak:desarrollado')}
           </p>
           <p className='dark:text-slate-300'>guts@berserk.com</p>
@@ -17,7 +17,7 @@ const Datuak = () => {
           
         </div>
         <div>
-          <p className='text-neutral-700 text-lg dark:text-gray-400'>
+          <p className='text-neutral-700 text-lg dark:text-gray-400 mt-6 sm:mt-0'>
           {t('datuak:rrss')}
           </p>
           <a href='#' className='dark:text-slate-300'>Linkedin</a><br/>
@@ -25,7 +25,7 @@ const Datuak = () => {
           <a href='#' className='dark:text-slate-300'>X</a>
         </div>
         <div>
-          <p className='text-neutral-700 text-lg dark:text-gray-400'>
+          <p className='text-neutral-700 text-lg dark:text-gray-400 mt-6 sm:mt-0'>
           {t('datuak:oficinas')}
           </p>
           <p className='dark:text-slate-300'>IES Xabier Zubiri Manteo BHI</p>
@@ -33,7 +33,7 @@ const Datuak = () => {
           <p className='dark:text-slate-300'>20001 Donostia, Euskal Herria</p>
         </div>
         <div>
-          <p className='text-neutral-700 text-lg dark:text-gray-400'>
+          <p className='text-neutral-700 text-lg dark:text-gray-400 mt-6 sm:mt-0'>
           {t('datuak:horarios')}
           </p>
           <p className='dark:text-slate-300'>{t('datuak:hora')}</p>

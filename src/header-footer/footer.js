@@ -13,7 +13,7 @@ const Footer = () => {
   const [activeSection, setActiveSection] = useState('Profile');
 
   return (
-    <div className="space-x-4 w-full p-16 bg-primary dark:bg-dark md:flex-row">
+    <div className="sm:space-x-4 w-full p-16 bg-primary dark:bg-dark md:flex-row">
       
       {activeSection === 'Profile' && <Datuak />}
       {activeSection === 'Contact' && <Formulario />}
@@ -21,10 +21,10 @@ const Footer = () => {
       <div className="flex flex-col md:flex-row items-center text-center justify-between mt-16 text-neutral-700 dark:text-gray-300 ">
         <div className="w-1/4 text-center mb-8">
           <p>{t('datuak:desarrollado')}</p>
-          <div className="space-x-4">
-            <a href="#">© 2024</a>
-            <a href="#">Data Privacy</a>
-            <a href="#">Imprint</a>
+          <div className="space-x-4 sm:flex-row mt-6 sm:mt-0 flex-col flex text-center sm:text-center items-center justify-center">
+            <a href="#" className='text-center'>© 2024</a>
+            <a href="#" className='text-center'>Data Privacy</a>
+            <a href="#" className='text-center'>Imprint</a>
           </div>
         </div>
        

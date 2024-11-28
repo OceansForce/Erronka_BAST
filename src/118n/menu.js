@@ -22,6 +22,15 @@ import esAdopzio from './locales/es/menu/adopzio.json';
 import esBerriak from './locales/es/index/body/berriak.json';
 import euBerriak from './locales/eu/index/body/berriak.json';
 
+
+// FOOTER
+import esDatos from './locales/es/footer/datos.json';
+import euDatos from './locales/eu/footer/datos.json';
+
+import esformulario from './locales/es/footer/formulario.json';
+import euFormulario from './locales/eu/footer/formulario.json';
+
+
 i18n
   .use(LanguageDetector)  // Detecta el idioma del navegador
   .use(initReactI18next)   // Integra i18next con React
@@ -34,7 +43,12 @@ i18n
         denda: esDenda,
         adopzio: esAdopzio,
 
-        berriak: esBerriak
+        berriak: esBerriak,
+
+
+
+        datuak:esDatos,
+        formulario:esformulario
       },
       eu: {
         menu: euMenu,
@@ -43,8 +57,11 @@ i18n
         denda: euDenda,
         adopzio: euAdopzio,
 
-        berriak: euBerriak
+        berriak: euBerriak,
 
+
+        datuak:euDatos,
+        formulario:euFormulario
 
       }
     },

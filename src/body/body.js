@@ -76,7 +76,7 @@ import i18n from '../118n/index';
 
 import "./Carousel.css";
 
-const Body = () => {
+const Carrusel = () => {
     console.log(i18n.language);  // Muestra el idioma actual
 
   const { t } = useTranslation();  // Usamos el hook useTranslation para acceder a las traducciones
@@ -139,5 +139,5 @@ const Body = () => {
   );
 };
 
-export default carrusel;
+export default Carrusel;
 

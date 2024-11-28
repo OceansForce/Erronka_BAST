@@ -22,7 +22,10 @@ const Header = () => {
     
     <div className='flex flex-col space-x-4 items-center justify-around w-full p-3 bg-primary dark:bg-dark md:flex-row'>
       <div >
-        <img src='/img/logo.png' className='size-20' alt="Logo" />
+        <a href='#'>
+          <img src='/img/logo.png' className='size-20' alt="Logo" />
+        </a>
+        
       </div>
       
       <div className='justify-center flex-center p-3 capitalize'>

@@ -19,7 +19,7 @@ const Footer = () => {
       {activeSection === 'Contact' && <Formulario />}
 
       <div className="flex flex-col md:flex-row items-center text-center justify-between mt-16 text-neutral-700 dark:text-gray-300 ">
-        <div className="w-1/4 text-center mb-8">
+        <div className="sm:w-1/4 text-center mb-8 w-full">
           <p>{t('datuak:desarrollado')}</p>
           <div className="space-x-4 sm:flex-row mt-6 sm:mt-0 flex-col flex text-center sm:text-center items-center justify-center">
             <a href="#" className='text-center'>© 2024</a>

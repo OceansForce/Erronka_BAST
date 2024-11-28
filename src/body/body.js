@@ -72,7 +72,7 @@
 
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import i18n from '../118n/index';
+import i18n from '../118n/menu';
 
 import "./Carousel.css";
 

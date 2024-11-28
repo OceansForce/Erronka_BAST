@@ -17,7 +17,9 @@ const Header = () => {
     i18n.changeLanguage(lang);  // Cambia el idioma
   };
 
+
   return (
+    
     <div className='flex flex-col space-x-4 items-center justify-around w-full p-3 bg-primary dark:bg-dark md:flex-row'>
       <div >
         <img src='/img/logo.png' className='size-20' alt="Logo" />

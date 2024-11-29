@@ -12,8 +12,8 @@ const Datuak = () => {
           <p className='text-neutral-700 dark:text-gray-400 text-lg mt-6 sm:mt-0'>
           {t('datuak:contact')}
           </p>
-          <p className='dark:text-slate-300'>guts@berserk.com</p>
-          <p className='dark:text-slate-300'>griffith@berserk.com</p>
+          <p className='dark:text-slate-300'>maranzadieg23wg@ikzubirimanteo.com</p>
+          <p className='dark:text-slate-300'>jgarciama23wg@ikzubirimanteo.com</p>
           
         </div>
         <div>

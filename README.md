@@ -19,3 +19,6 @@ Animales
 	
 	-Relleno
 		-Cam online
+
+# Figma
+link: https://www.figma.com/design/temND4i3xU8kVSQWnDVEaq/WEB?node-id=0-1&m=dev&t=iHOF6NxIPXCtiBgs-1 

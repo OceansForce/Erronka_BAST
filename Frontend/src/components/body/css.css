@@ -20,7 +20,7 @@ body{
 body, html {
     margin: 0;
     padding: 0;
-    width: 100%;
+    
     overflow-x: hidden; /* Evita que el contenido desborde horizontalmente */
 }
 
@@ -34,7 +34,7 @@ body, html {
 }
 
 .background{
-    background-image: url("./../../public/img/animal-paw-prints-simple-seamless-pattern-on-white-background-vector-Photoroom.png");
+    background-image: url("./../../../public/img/animal-paw-prints-simple-seamless-pattern-on-white-background-vector-Photoroom.png");
     background-repeat: no-repeat; 
     background-size: 100% 100%; 
     background-position: center;

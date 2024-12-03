@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';  // Asegúrate de importar Link
+
+
+
 
 const Adopzioa = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,9 +26,9 @@ const Adopzioa = () => {
     >
       <li className='flex items-center justify-center'>
         <div className='flex items-center font-semibold text-xl text-center'>
-          <a href="#" className="text-black dark:text-white">
+          <Link to="/adopzio" className="text-black dark:text-white">
             {t('menu:adopzio')}
-          </a>
+          </Link>
           <img className='size-3.5 dark:hidden' src='/img/icons/menu/gezia.svg'/>
           <img className='size-3.5 hidden dark:block' src='/img/icons/menu/gezia_dark.svg'/>
         </div>

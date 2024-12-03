@@ -15,4 +15,8 @@
   body {
     background-color: var(--color-bg);
     transition: background-color 0.3s;
+    width: 100%;
+  }
+  #root{
+    width: 100%;
   }

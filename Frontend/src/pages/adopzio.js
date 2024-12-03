@@ -8,7 +8,7 @@ function adopzio() {
        <div className="App">
           <Header />
         </div>
-        <div className="App">
+        <div className="App w-full">
           HELLOW
         </div>        
         <div className="App">

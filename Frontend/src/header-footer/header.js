@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import LanguageSelector from './header/desplegable/lenguageSelector';
 import DarkModeToggle from './header/dark-light/dark'
 import User from './header/user/user'
+import { Link } from 'react-router-dom';  // Asegúrate de importar Link
+
 
 import Adopzioa  from './header/desplegable/adopzioa';
 import Denda from './header/desplegable/denda';
@@ -30,7 +32,7 @@ const Header = () => {
       
       <div className='justify-center flex-center p-3 capitalize'>
         <ul className='list-none flex flex-col sm:flex-row sm:space-x-4 text-center sm:text-left'>
-          <li><a href="#" className="text-black dark:text-white font-semibold text-xl">{t('menu:hasiera')}</a></li>
+          <li><Link to="/" className="text-black dark:text-white font-semibold text-xl">{t('menu:hasiera')}</Link></li>
           <li><a href='#' className="text-black dark:text-white font-semibold text-xl">{t('menu:galduta')}</a></li>
           <li><a href='#' className="text-black dark:text-white font-semibold text-xl">{t('menu:mapa')}</a></li>
           <Adopzioa />

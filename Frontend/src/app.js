@@ -1,30 +1,21 @@
-import Header from './header-footer/header';
-import Wallpaper from './body/wallpaper.js';
-import Carrusel from './body/body.js';
-import Footer from './header-footer/footer';
 import './index.css';
-import './body/css.css';
-import "./body/Carousel.css"; 
+import Index from './pages/index';
+import Adopzioa from './pages/adopzio';
+
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Cambié Switch por Routes
 
 function App() {
   return (
-    <>
-      <div className="App">
-        <Header />
-      </div>
-      <div className="App w-auto">
-          <Wallpaper />
-      </div>
-      <div  className="App background">
-        
-        <div className='flex items-center w-auto justify-center'>
-           <Carrusel />
-        </div>
-      </div>
-      <div className="App">
-        <Footer />
-      </div>
-    </>
+    <Router>
+      <Routes> {/* Usa Routes en lugar de Switch */}
+          <Route path="/" element={<Index />} /> {/* Usa el prop 'element' en lugar de 'component' */}
+          <Route path="/adopzio" element={<Adopzioa />} /> {/* Lo mismo aquí */}
+
+          {/* <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} /> */}
+      </Routes>
+    </Router>
   );
 }
 

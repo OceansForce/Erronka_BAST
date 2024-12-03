@@ -2,14 +2,14 @@ import adopzioak from "../components/adopzioa/adopzio";
 import Header from '../header-footer/header';
 import Footer from '../header-footer/footer';
 
-function adopzio() {
+function galduta() {
     return (
       <>
        <div className="App">
           <Header />
         </div>
         <div className="App w-full">
-          Adopzio
+          Galduta
         </div>        
         <div className="App">
           <Footer />
@@ -18,4 +18,4 @@ function adopzio() {
     );
   }
   
-export default adopzio;
+export default galduta;

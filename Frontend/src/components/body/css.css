@@ -43,3 +43,11 @@ body, html {
 .dark_bg{
     background-color: #333333;
 }
+
+.fonts_ubutu{
+    font-family: Ubuntu;
+}
+
+.fonts_ubutu_Bold{
+    font-family: Ubuntu_bold;
+}

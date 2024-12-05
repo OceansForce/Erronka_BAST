@@ -6,13 +6,19 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        ubuntu:[ "Ubuntu", "sans-serif"],
+      },
       colors: {    // Aquí debes usar "colors"
         primary: '#E0FFC6',      // Color personalizado "primary"
         dark: '#2C4F2F',          // Color personalizado "secondary"
         accent: '#38b2ac',        // Color personalizado "accent"
         dark_body: '#333333',
+        text_green: '#52C763',
+        border_green:'#72E70F',
         'dark-bg': '#1a202c',     // Color personalizado para fondos oscuros
         'light-bg': '#f7fafc',    // Color personalizado para fondos claros
+        
       }
     }
   },

@@ -10,9 +10,9 @@ const Filtroa = () => {
   const dropdownRef = useRef(null);
 
   const options = [
-    { value: "usa", label: "USA", img: "https://flagcdn.com/w40/us.png" },
-    { value: "uk", label: "UK", img: "https://flagcdn.com/w40/gb.png" },
-    { value: "fr", label: "France", img: "https://flagcdn.com/w40/fr.png" },
+    { value: "usa", label: " USA", img: "https://flagcdn.com/w40/us.png" },
+    { value: "uk", label: " UK", img: "https://flagcdn.com/w40/gb.png" },
+    { value: "fr", label: " France", img: "https://flagcdn.com/w40/fr.png" },
     { value: "de", label: "Germany", img: "https://flagcdn.com/w40/de.png" },
   ];
 
@@ -37,11 +37,11 @@ const Filtroa = () => {
   return (
     <div className="mt-10 max-w-auto flex flex-row justify-center">
       <form className="max-w-sm mx-auto">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center">
           {/* Primer Select: Custom Select */}
-          <div className="custom-select relative" ref={dropdownRef}>
+          <div className="custom-select relative w-32 " ref={dropdownRef}>
             <div
-              className="select-button flex items-center space-x-2 cursor-pointer p-2 border rounded bg-white shadow-sm"
+              className="h-10 select-button flex items-center space-x-2 cursor-pointer   bg-primary  border-bg-primary text-gray-900 text-sm rounded-l-lg border-t-2 border-l-2 border-b-2 border-l-bg-primary dark:border-l-gray-700 border-l-2 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <img
@@ -70,17 +70,17 @@ const Filtroa = () => {
               </svg>
             </div>
             {isDropdownOpen && (
-              <ul className="options absolute mt-2 bg-white border rounded shadow-lg w-full z-10">
+              <ul className="options absolute mt-2 bg-primary border rounded shadow-lg w-full z-10">
                 {options.map((option) => (
                   <li
                     key={option.value}
                     onClick={() => handleOptionSelect(option)}
-                    className="option-item flex items-center space-x-2 p-2 hover:bg-gray-100 cursor-pointer"
+                    className="option-item flex items-center space-x-2 p-2 hover:bg-primary cursor-pointer"
                   >
                     <img
                       src={option.img}
                       alt={`${option.label} Flag`}
-                      className="w-5 h-5"
+                      className="w-5 h-5 mr-1"
                     />
                     {option.label}
                   </li>
@@ -90,13 +90,11 @@ const Filtroa = () => {
           </div>
 
           {/* Segundo Select: HTML Select */}
-          <div>
-            <label htmlFor="states" className="sr-only">
-              Choose a state
-            </label>
+          <div className="m-0 ">
+          
             <select
               id="states"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-e-lg border-s-gray-100 dark:border-s-gray-700 border-s-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="h-10 bg-primary border  text-gray-900 text-sm rounded-e-lg border-s-gray-100 dark:border-s-gray-700 border-t-2 border-r-2 border-b-2  block w-full p-2.5 dark:bg-gray-700  dark:placeholder-gray-400 dark:text-white "
             >
               <option selected>Choose a state</option>
               <option value="CA">California</option>

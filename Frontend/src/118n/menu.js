@@ -21,7 +21,7 @@ import esFormulario from './locales/es/footer/formulario.json';
 // Función para cargar traducciones desde la API
 const loadTranslationsFromAPI = async (language, keys) => {
   try {
-    const response = await fetch(`http://54.221.171.239:8000/api/translations/${language}/keys`, {
+    const response = await fetch(`http://54.221.171.239:8000/api/translations/keys`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,17 +54,25 @@ const loadTranslationsFromAPI = async (language, keys) => {
 
 // Función para cargar las traducciones dinámicamente al cambiar el idioma
 const loadDynamicTranslations = async (language) => {
-  const keys = ['title0', 'descripcion0', 'title1', 'descripcion1', 'title2', 'descripcion2']; // Añade más claves si es necesario
+  const keys = ['descripcion2', 'title1', 'title2']; // Añade más claves si es necesario
 
   const translations = await loadTranslationsFromAPI(language, keys);
 
   if (translations && typeof translations === 'object') {
-    // Añadir las traducciones al i18n
+    // Añadir las traducciones al i18n para cada idioma
     Object.keys(translations).forEach((key) => {
       const value = translations[key];
 
-      if (typeof key === 'string' && typeof value === 'string') {
-        i18n.addResource(language, 'translation', key, value);
+      if (typeof key === 'string' && typeof value === 'object') {
+        // Asegúrate de que las claves sean objetos que contienen traducciones por idioma
+        Object.keys(value).forEach((lang) => {
+          const langValue = value[lang];
+          
+          if (typeof lang === 'string' && typeof langValue === 'string') {
+            // Agregar cada traducción individualmente para cada idioma
+            i18n.addResource(lang, 'translation', key, langValue);
+          }
+        });
       }
     });
   }
@@ -132,13 +140,20 @@ i18n.loadMissingTranslations = async (language, keys) => {
           console.error(`Invalid key: ${key} is not a string.`);
           return;
         }
-        if (typeof value !== 'string') {
-          console.error(`Invalid value for key ${key}: ${value} is not a string.`);
+        if (typeof value !== 'object') {
+          console.error(`Invalid value for key ${key}: ${value} is not an object.`);
           return;
         }
 
-        // Agregar cada traducción individualmente
-        i18n.addResource(language, 'translation', key, value);
+        // Agregar cada traducción individualmente para cada idioma
+        Object.keys(value).forEach((lang) => {
+          const langValue = value[lang];
+
+          if (typeof lang === 'string' && typeof langValue === 'string') {
+            // Agregar cada traducción por idioma
+            i18n.addResource(lang, 'translation', key, langValue);
+          }
+        });
       });
 
     } else {

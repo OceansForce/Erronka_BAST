@@ -1,19 +1,17 @@
-import adopzioak from "../components/adopzioa/adopzio";
+import Adopzioak from "../components/adopzioa/adopzio";
 import Header from '../header-footer/header';
 import Footer from '../header-footer/footer';
 
 function adopzio() {
     return (
       <>
-       <div className="App">
-          <Header />
-        </div>
-        <div className="App w-full">
-          Adopzio
-        </div>        
-        <div className="App">
-          <Footer />
-        </div>
+       
+        <Header />
+
+        <Adopzioak/>
+       
+        <Footer />
+       
       </>
     );
   }

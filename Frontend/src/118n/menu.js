@@ -18,10 +18,10 @@ import esDatos from './locales/es/footer/datos.json';
 import euFormulario from './locales/eu/footer/formulario.json';
 import esFormulario from './locales/es/footer/formulario.json';
 
-// Función para cargar traducciones dinámicamente desde la API
+// Función para cargar traducciones desde la API
 const loadTranslationsFromAPI = async (language, keys) => {
   try {
-    const response = await fetch(`http://107.21.65.40:8000/api/translations/${language}/keys`, {
+    const response = await fetch(`http://54.221.171.239:8000/api/translations/${language}/keys`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,24 +36,41 @@ const loadTranslationsFromAPI = async (language, keys) => {
 
     const data = await response.json();
 
-    // Verifica si las claves son cadenas y formatea correctamente la respuesta
-    const translations = data.reduce((acc, translation) => {
-      if (typeof translation.keyValue === 'string' && typeof translation.value === 'string') {
-        acc[translation.keyValue] = translation.value;
-      } else {
-        console.error('Invalid key or value in translation:', translation);
-      }
-      return acc;
-    }, {});
+    // Imprimir la respuesta para inspección
+    console.log('Response Data:', data);
 
-    return translations;
+    // Verificar si la respuesta tiene la propiedad 'translations' y es un objeto
+    if (data && data.translations && typeof data.translations === 'object') {
+      return data.translations;
+    } else {
+      console.error('Invalid response structure: translations not found.');
+      return {};
+    }
   } catch (error) {
     console.error('Failed to load translations from API:', error);
     return {};
   }
 };
 
+// Función para cargar las traducciones dinámicamente al cambiar el idioma
+const loadDynamicTranslations = async (language) => {
+  const keys = ['title0', 'descripcion0', 'title1', 'descripcion1', 'title2', 'descripcion2']; // Añade más claves si es necesario
 
+  const translations = await loadTranslationsFromAPI(language, keys);
+
+  if (translations && typeof translations === 'object') {
+    // Añadir las traducciones al i18n
+    Object.keys(translations).forEach((key) => {
+      const value = translations[key];
+
+      if (typeof key === 'string' && typeof value === 'string') {
+        i18n.addResource(language, 'translation', key, value);
+      }
+    });
+  }
+};
+
+// Inicialización de i18next
 i18n
   .use(LanguageDetector) // Detecta el idioma del navegador
   .use(initReactI18next) // Integra i18next con React
@@ -92,11 +109,44 @@ i18n
     },
   });
 
-// Función para cargar claves dinámicamente
+// Escuchar cambios de idioma
+i18n.on('languageChanged', (language) => {
+  console.log('Idioma cambiado:', language);
+  loadDynamicTranslations(language); // Cargar traducciones desde la API cuando cambie el idioma
+});
+
+// Función para cargar claves dinámicamente (opcionalmente puedes manejar claves faltantes)
 i18n.loadMissingTranslations = async (language, keys) => {
-  const translations = await loadTranslationsFromAPI(language, keys);
-  // Agregar recursos solo si es necesario
-  i18n.addResource(language, 'translation', translations);
+  try {
+    const translations = await loadTranslationsFromAPI(language, keys);
+
+    // Asegurarse de que las traducciones sean un objeto y que las claves sean cadenas
+    if (translations && typeof translations === 'object') {
+      console.log('Translations:', translations);
+
+      Object.keys(translations).forEach((key) => {
+        const value = translations[key];
+
+        // Verificación adicional para asegurarse de que la clave y el valor sean cadenas
+        if (typeof key !== 'string') {
+          console.error(`Invalid key: ${key} is not a string.`);
+          return;
+        }
+        if (typeof value !== 'string') {
+          console.error(`Invalid value for key ${key}: ${value} is not a string.`);
+          return;
+        }
+
+        // Agregar cada traducción individualmente
+        i18n.addResource(language, 'translation', key, value);
+      });
+
+    } else {
+      console.error('Las traducciones no están en el formato esperado.');
+    }
+  } catch (error) {
+    console.error('Error al cargar las traducciones:', error);
+  }
 };
 
 export default i18n;

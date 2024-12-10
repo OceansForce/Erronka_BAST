@@ -1,0 +1,65 @@
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#5237
+    [34mall[39m: [
+      [34;4mApp\Models\Translation[39;24m {#5238
+        [34mid[39m: [35m1[39m,
+        [34mkeyValue[39m: "[32mmenu-hasiera[39m",
+        [34mlanguage[39m: "[32mes[39m",
+        [34mvalue[39m: "[32mInicio[39m",
+      },
+      [34;4mApp\Models\Translation[39;24m {#5239
+        [34mid[39m: [35m2[39m,
+        [34mkeyValue[39m: "[32mmenu-galduta[39m",
+        [34mlanguage[39m: "[32mes[39m",
+        [34mvalue[39m: "[32mPerdidos[39m",
+      },
+      [34;4mApp\Models\Translation[39;24m {#5240
+        [34mid[39m: [35m3[39m,
+        [34mkeyValue[39m: "[32mmenu-mapa[39m",
+        [34mlanguage[39m: "[32mes[39m",
+        [34mvalue[39m: "[32mMapa[39m",
+      },
+      [34;4mApp\Models\Translation[39;24m {#5241
+        [34mid[39m: [35m4[39m,
+        [34mkeyValue[39m: "[32mmenu-adopzio[39m",
+        [34mlanguage[39m: "[32mes[39m",
+        [34mvalue[39m: "[32mAdopcion[39m",
+      },
+      [34;4mApp\Models\Translation[39;24m {#5242
+        [34mid[39m: [35m5[39m,
+        [34mkeyValue[39m: "[32mmenu-denda[39m",
+        [34mlanguage[39m: "[32mes[39m",
+        [34mvalue[39m: "[32mTienda[39m",
+      },
+      [34;4mApp\Models\Translation[39;24m {#5243
+        [34mid[39m: [35m6[39m,
+        [34mkeyValue[39m: "[32mmenu-hasiera[39m",
+        [34mlanguage[39m: "[32meu[39m",
+        [34mvalue[39m: "[32mHasi[39m",
+      },
+      [34;4mApp\Models\Translation[39;24m {#5244
+        [34mid[39m: [35m7[39m,
+        [34mkeyValue[39m: "[32mmenu-galduta[39m",
+        [34mlanguage[39m: "[32meu[39m",
+        [34mvalue[39m: "[32mGalduak[39m",
+      },
+      [34;4mApp\Models\Translation[39;24m {#5245
+        [34mid[39m: [35m8[39m,
+        [34mkeyValue[39m: "[32mmenu-mapa[39m",
+        [34mlanguage[39m: "[32meu[39m",
+        [34mvalue[39m: "[32mMapa[39m",
+      },
+      [34;4mApp\Models\Translation[39;24m {#5246
+        [34mid[39m: [35m9[39m,
+        [34mkeyValue[39m: "[32mmenu-adopzio[39m",
+        [34mlanguage[39m: "[32meu[39m",
+        [34mvalue[39m: "[32mAdopzioa[39m",
+      },
+      [34;4mApp\Models\Translation[39;24m {#5247
+        [34mid[39m: [35m10[39m,
+        [34mkeyValue[39m: "[32mmenu-denda[39m",
+        [34mlanguage[39m: "[32meu[39m",
+        [34mvalue[39m: "[32mDenda[39m",
+      },
+    ],
+  }
+

@@ -4,7 +4,7 @@
 
 Link: 
 ```
-http://3.87.235.201:8000/api/register
+http://3.87.235.201:8000/api/translations/keys
 ```
 Header:
 ```

@@ -4,6 +4,7 @@ import Adopzioa from './pages/adopzio';
 import Denda from './pages/denda';
 import Galduta from './pages/galduta';
 import Mapa from './pages/mapa';
+import Saioa_sortu from './pages/saioa_sortu';
 import Login from './pages/login';
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/denda" element={<Denda />} /> {/* Lo mismo aquí */}
           <Route path="/galduta" element={<Galduta />} /> {/* Lo mismo aquí */}
           <Route path="/mapa" element={<Mapa />} /> {/* Lo mismo aquí */}
+          <Route path="/saioa_sortu" element={<Saioa_sortu />} /> {/* Lo mismo aquí */}
           <Route path="/login" element={<Login />} /> {/* Lo mismo aquí */}
 
           {/* <Route path="/about" element={<About />} />

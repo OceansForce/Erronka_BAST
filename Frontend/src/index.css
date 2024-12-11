@@ -18,6 +18,10 @@ body {
 }
 #root{
   width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 /* src/index.css o src/styles.css */

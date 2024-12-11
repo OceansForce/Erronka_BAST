@@ -10,21 +10,21 @@ import "../components/body/Carousel.css";
 function Index() {
     return (
       <>
-        <div className="App">
-          <Header />
-        </div>
-        <div className="App w-auto">
-            <Wallpaper />
-        </div>
-        <div  className="App background">
+        
+        <Header />
+        
+        
+        <Wallpaper />
+        
+       
           
-          <div className='flex items-center w-auto justify-center'>
-             <Carrusel />
-          </div>
+        <div className='flex items-center w-auto justify-center'>
+          <Carrusel />
         </div>
-        <div className="App">
-          <Footer />
-        </div>
+       
+        
+        <Footer />
+        
       </>
     );
   }

@@ -30,8 +30,8 @@ const Header = () => {
         
       </div>
       
-      <div className='justify-center flex-center p-3 capitalize'>
-        <ul className='list-none flex flex-col sm:flex-row sm:space-x-4 text-center sm:text-left'>
+      <div className=' justify-center flex-center p-3 capitalize'>
+        <ul className='list-none flex flex-col sm:flex-row sm:space-x-10 text-center sm:text-left'>
           <li><Link to="/" className="text-black dark:text-white font-semibold text-xl">{t('menu:hasiera')}</Link></li>
           <li><Link to="/galduta" className="text-black dark:text-white font-semibold text-xl">{t('menu:galduta')}</Link></li>
           <li><Link to="/mapa" className="text-black dark:text-white font-semibold text-xl">{t('menu:mapa')}</Link></li>
@@ -40,14 +40,16 @@ const Header = () => {
         </ul>
       </div>
 
-      <div className='flex items-center space-x-6'>
+      <div className=' flex items-center space-x-6 '>
         {/* Componente LanguageSelector con la función changeLanguage como prop */}
         <LanguageSelector changeLanguage={changeLanguage} />
         <DarkModeToggle />
         <User />
-        <button class="transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 hover:bg-dark duration-300 p-2 rounded-md">
-        <Link to="/login" className="hover:text-white text-black dark:text-white font-semibold text-xl">Login</Link>
-        </button>
+        
+        <Link to="/saioa_sortu" ><button class="hover:text-white dark:hover:text-black  font-semibold text-md transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 dark:hover:bg-primary hover:bg-dark duration-300 p-2 rounded-md">{t('menu:Saioa_sortu')}</button></Link>
+
+        <Link to="/login" ><button class="hover:text-white dark:hover:text-black  font-semibold text-md transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 dark:hover:bg-primary hover:bg-dark duration-300 p-2 rounded-md">{t('menu:login')}</button></Link>
+        
       </div>
       
     </div>

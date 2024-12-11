@@ -17,6 +17,8 @@ import euDatos from './locales/eu/footer/datos.json';
 import esDatos from './locales/es/footer/datos.json';
 import euFormulario from './locales/eu/footer/formulario.json';
 import esFormulario from './locales/es/footer/formulario.json';
+import euSaioaSortu from './locales/eu/menu/saioa_sortu.json';
+import esSaioaSortu from './locales/es/menu/saioa_sortu.json';
 
 // Función para cargar traducciones desde la API
 const loadTranslationsFromAPI = async (language, keys) => {
@@ -92,6 +94,7 @@ i18n
         berriak: esBerriak,
         datuak: esDatos,
         formulario: esFormulario,
+        saioa_sortu: esSaioaSortu,
       },
       eu: {
         menu: euMenu,
@@ -101,6 +104,7 @@ i18n
         berriak: euBerriak,
         datuak: euDatos,
         formulario: euFormulario,
+        saioa_sortu: euSaioaSortu,
       },
     },
     fallbackLng: 'eu', // Idioma de respaldo

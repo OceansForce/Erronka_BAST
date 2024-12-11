@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from '../118n/menu';
 import { Link } from 'react-router-dom';
 
-function Login() {
+function Saioa_sortu() {
     const { t, i18n } = useTranslation();
 
     // Función para cambiar el idioma
@@ -15,8 +15,8 @@ function Login() {
     };
 
     return (
-        <>
-            <div  className='container flex  justify-center '>
+      <>
+        <div  className='container flex  justify-center '>
           <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-96 rounded-lg text-center border-black dark:border-transparent border-2'>
             <div className='w-full flex'>
               <div className='w-1/2'>
@@ -31,19 +31,27 @@ function Login() {
               </div>
               
             </div>
-            <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('menu:login')}</p>
+            <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('menu:Saioa_sortu')}</p>
             <form className='flex flex-col text-left'>
+              <label className='font-semibold dark:text-white'>{t('saioa_sortu:izena')}</label>
+              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='text' required/>
+              <label className='font-semibold dark:text-white'>{t('saioa_sortu:abizena')}</label>
+              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='text' required/>
+              <label className='font-semibold dark:text-white'>{t('saioa_sortu:nan')}</label>
+              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='text' maxLength={9} required/>
               <label className='font-semibold dark:text-white'>{t('saioa_sortu:email')}</label>
-              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='text' required/>
+              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='email' required/>
               <label className='font-semibold dark:text-white'>{t('saioa_sortu:pasahitza')}</label>
-              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='text' required/>
+              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='password' required/>
+              <label className='font-semibold dark:text-white'>{t('saioa_sortu:pasahitza_ber')}</label>
+              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='password' required/>
               <input className='bg-black text-white mt-2 p-2 rounded-lg' type='submit' value={t('saioa_sortu:input')}></input>
             </form>
           </div>
         </div>
-        </>
+       
+      </>
     );
-
-}
-
-export default Login;
+  }
+  
+export default Saioa_sortu;

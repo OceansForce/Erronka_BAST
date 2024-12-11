@@ -1,81 +1,167 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector'; // Para detectar el idioma del navegador
+import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Importar archivos de traducción
+// Importar archivos de traducción locales
 import esMenu from './locales/es/menu/menu.json';
 import euMenu from './locales/eu/menu/menu.json';
-
-// User hizkuntza gehituta
 import euUser from './locales/eu/menu/user.json';
 import esUser from './locales/es/menu/user.json';
-
-// Denda hizkuntza gehituta
 import euDenda from './locales/eu/menu/denda.json';
 import esDenda from './locales/es/menu/denda.json';
-
-// Adopzio hizkuntza gehituta
 import euAdopzio from './locales/eu/menu/adopzio.json';
 import esAdopzio from './locales/es/menu/adopzio.json';
-
-
-import esBerriak from './locales/es/index/body/berriak.json';
 import euBerriak from './locales/eu/index/body/berriak.json';
-
-
-// FOOTER
-import esDatos from './locales/es/footer/datos.json';
+import esBerriak from './locales/es/index/body/berriak.json';
 import euDatos from './locales/eu/footer/datos.json';
-
-import esformulario from './locales/es/footer/formulario.json';
+import esDatos from './locales/es/footer/datos.json';
 import euFormulario from './locales/eu/footer/formulario.json';
+import esFormulario from './locales/es/footer/formulario.json';
 
+// Función para cargar traducciones desde la API
+const loadTranslationsFromAPI = async (language, keys) => {
+  try {
+    const response = await fetch(`http://54.221.171.239:8000/api/translations/keys`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ keys }),
+    });
 
+    if (!response.ok) {
+      console.error('Error fetching translations from API:', response.statusText);
+      return {};
+    }
+
+    const data = await response.json();
+
+    // Imprimir la respuesta para inspección
+    console.log('Response Data:', data);
+
+    // Verificar si la respuesta tiene la propiedad 'translations' y es un objeto
+    if (data && data.translations && typeof data.translations === 'object') {
+      return data.translations;
+    } else {
+      console.error('Invalid response structure: translations not found.');
+      return {};
+    }
+  } catch (error) {
+    console.error('Failed to load translations from API:', error);
+    return {};
+  }
+};
+
+// Función para cargar las traducciones dinámicamente al cambiar el idioma
+const loadDynamicTranslations = async (language) => {
+  const keys = ['descripcion2', 'title1', 'title2']; // Añade más claves si es necesario
+
+  const translations = await loadTranslationsFromAPI(language, keys);
+
+  if (translations && typeof translations === 'object') {
+    // Añadir las traducciones al i18n para cada idioma
+    Object.keys(translations).forEach((key) => {
+      const value = translations[key];
+
+      if (typeof key === 'string' && typeof value === 'object') {
+        // Asegúrate de que las claves sean objetos que contienen traducciones por idioma
+        Object.keys(value).forEach((lang) => {
+          const langValue = value[lang];
+          
+          if (typeof lang === 'string' && typeof langValue === 'string') {
+            // Agregar cada traducción individualmente para cada idioma
+            i18n.addResource(lang, 'translation', key, langValue);
+          }
+        });
+      }
+    });
+  }
+};
+
+// Inicialización de i18next
 i18n
-  .use(LanguageDetector)  // Detecta el idioma del navegador
-  .use(initReactI18next)   // Integra i18next con React
+  .use(LanguageDetector) // Detecta el idioma del navegador
+  .use(initReactI18next) // Integra i18next con React
   .init({
     resources: {
       es: {
         menu: esMenu,
         user: esUser,
-
         denda: esDenda,
         adopzio: esAdopzio,
-
         berriak: esBerriak,
-
-
-
-        datuak:esDatos,
-        formulario:esformulario
+        datuak: esDatos,
+        formulario: esFormulario,
       },
       eu: {
         menu: euMenu,
         user: euUser,
-
         denda: euDenda,
         adopzio: euAdopzio,
-
         berriak: euBerriak,
-
-
-        datuak:euDatos,
-        formulario:euFormulario
-
-      }
+        datuak: euDatos,
+        formulario: euFormulario,
+      },
     },
-    fallbackLng: 'es', // Cambié a 'es' como fallback por si no se detecta el idioma
-    debug: true, // Habilitar la depuración
+    fallbackLng: 'eu', // Idioma de respaldo
+    debug: true, // Mostrar mensajes de depuración
     interpolation: {
-      escapeValue: false // React ya se encarga de escapar valores
+      escapeValue: false, // React maneja el escape de valores
     },
     detection: {
-      // Establecer un orden de preferencia de los idiomas
-      order: ['cookie', 'localStorage', 'navigator'], // Primero intenta con cookies, luego con localStorage, y luego con el idioma del navegador
-      caches: ['cookie', 'localStorage'], // Guardar el idioma en las cookies y localStorage
+      order: ['cookie', 'localStorage', 'navigator'], // Detecta idioma por cookie, localStorage o navegador
+      caches: ['cookie', 'localStorage'], // Guarda el idioma seleccionado en cookie o localStorage
+    },
+    react: {
+      useSuspense: false, // Evita errores de Suspense en carga dinámica
     },
   });
 
-export default i18n;
+// Escuchar cambios de idioma
+i18n.on('languageChanged', (language) => {
+  console.log('Idioma cambiado:', language);
+  loadDynamicTranslations(language); // Cargar traducciones desde la API cuando cambie el idioma
+});
 
+// Función para cargar claves dinámicamente (opcionalmente puedes manejar claves faltantes)
+i18n.loadMissingTranslations = async (language, keys) => {
+  try {
+    const translations = await loadTranslationsFromAPI(language, keys);
+
+    // Asegurarse de que las traducciones sean un objeto y que las claves sean cadenas
+    if (translations && typeof translations === 'object') {
+      console.log('Translations:', translations);
+
+      Object.keys(translations).forEach((key) => {
+        const value = translations[key];
+
+        // Verificación adicional para asegurarse de que la clave y el valor sean cadenas
+        if (typeof key !== 'string') {
+          console.error(`Invalid key: ${key} is not a string.`);
+          return;
+        }
+        if (typeof value !== 'object') {
+          console.error(`Invalid value for key ${key}: ${value} is not an object.`);
+          return;
+        }
+
+        // Agregar cada traducción individualmente para cada idioma
+        Object.keys(value).forEach((lang) => {
+          const langValue = value[lang];
+
+          if (typeof lang === 'string' && typeof langValue === 'string') {
+            // Agregar cada traducción por idioma
+            i18n.addResource(lang, 'translation', key, langValue);
+          }
+        });
+      });
+
+    } else {
+      console.error('Las traducciones no están en el formato esperado.');
+    }
+  } catch (error) {
+    console.error('Error al cargar las traducciones:', error);
+  }
+};
+
+export default i18n;

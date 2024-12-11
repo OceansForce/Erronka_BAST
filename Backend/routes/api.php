@@ -13,7 +13,8 @@ Route::post('register', [UserCreateController::class, 'store']);  // Ruta para c
 
 // SAIOA HASI
 use App\Http\Controllers\AuthController;
-Route::post('login', [AuthController::class, 'login']);  // Ruta para iniciar sesión
+Route::post('login', [AuthController::class, 'login']);
+
 
 
 

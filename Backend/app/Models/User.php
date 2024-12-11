@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Notifications\Notifiable; // Importar el trait correctamente
+use Laravel\Sanctum\HasApiTokens;
+
 class User extends Model
 {
     use HasFactory;
+
+    use HasApiTokens, Notifiable;
 
     // Especificar la tabla que se usará (si es diferente a la predeterminada 'users')
     protected $table = 'users';

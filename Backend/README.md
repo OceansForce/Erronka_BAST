@@ -96,3 +96,41 @@ Response Error:
 }
 ```
 </details>
+
+
+
+
+<details>
+<summary> <h2> Login </h2> </summary>
+  
+Link: 
+```
+http://3.87.235.201:8000/api/login
+```
+Header:
+```
+Content-Type:application/json
+```
+Body:
+```
+{
+  "email": "guts@example.com",
+  "password": "123maite"
+}
+
+
+```
+Response:
+```
+{
+  "token": "10|kT6wRtvYA1zHSb7Qj3olUpTE0RJSLl5WZvPIBwq08479c4c5"
+}
+```
+Response Error:
+```
+{
+  "error": "Las credenciales proporcionadas son incorrectas."
+}
+```
+</details>
+

@@ -26,8 +26,22 @@ class AuthController extends Controller
             ], 401);
         }
 
+
+	$abilities = [];
+        if ($user->role === 'admin') {
+            // Los administradores tienen todos los permisos
+            $abilities = ['*'];
+        } elseif ($user->role === 'prokektora') {
+            // Los moderadores pueden tener permisos limitados
+            $abilities = ['moderate_content', 'view_content'];
+        } else {
+            // Los usuarios normales solo pueden ver contenido
+            $abilities = ['view_content'];
+        }
+
+
         // Generar el token de acceso
-        $token = $user->createToken('YourAppName', ['*'], Carbon::now()->addDays(5))->plainTextToken;
+        $token = $user->createToken('Bast', $abilities, Carbon::now()->addDays(5))->plainTextToken;
 
         return response()->json([
             'token' => $token

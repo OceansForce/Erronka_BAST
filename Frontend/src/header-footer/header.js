@@ -2,8 +2,8 @@ import React from 'react';
 import i18n from '../118n/menu';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './header/desplegable/lenguageSelector';
-import DarkModeToggle from './header/dark-light/dark'
-import User from './header/user/user'
+import DarkModeToggle from './header/dark-light/dark';
+import User from './header/user/user';
 import { Link } from 'react-router-dom';  // Asegúrate de importar Link
 
 
@@ -45,6 +45,9 @@ const Header = () => {
         <LanguageSelector changeLanguage={changeLanguage} />
         <DarkModeToggle />
         <User />
+        <button class="transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 hover:bg-dark duration-300 p-2 rounded-md">
+        <Link to="/login" className="hover:text-white text-black dark:text-white font-semibold text-xl">Login</Link>
+        </button>
       </div>
       
     </div>

@@ -4,6 +4,7 @@ import Adopzioa from './pages/adopzio';
 import Denda from './pages/denda';
 import Galduta from './pages/galduta';
 import Mapa from './pages/mapa';
+import Login from './pages/login';
 
 
 import React from 'react';
@@ -18,6 +19,7 @@ function App() {
           <Route path="/denda" element={<Denda />} /> {/* Lo mismo aquí */}
           <Route path="/galduta" element={<Galduta />} /> {/* Lo mismo aquí */}
           <Route path="/mapa" element={<Mapa />} /> {/* Lo mismo aquí */}
+          <Route path="/login" element={<Login />} /> {/* Lo mismo aquí */}
 
           {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} /> */}

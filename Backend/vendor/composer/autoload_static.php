@@ -588,8 +588,12 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
     public static $classMap = array (
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\NewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/NewsController.php',
         'App\\Http\\Controllers\\TranslationController' => __DIR__ . '/../..' . '/app/Http/Controllers/TranslationController.php',
         'App\\Http\\Controllers\\UserCreateController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserCreateController.php',
+        'App\\Http\\Middleware\\CheckProtektoraAccess' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckProtektoraAccess.php',
+        'App\\Models\\News' => __DIR__ . '/../..' . '/app/Models/News.php',
+        'App\\Models\\Protektora' => __DIR__ . '/../..' . '/app/Models/Protektora.php',
         'App\\Models\\Translation' => __DIR__ . '/../..' . '/app/Models/Translation.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

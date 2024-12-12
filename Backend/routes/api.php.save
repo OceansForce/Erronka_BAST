@@ -16,17 +16,11 @@ use App\Http\Controllers\AuthController;
 Route::post('login', [AuthController::class, 'login']);
 
 
+
 // NEWS API
-// routes/api.php
-use App\Http\Controllers\NewsController;
-
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('news', [NewsController::class, 'store']);
-    Route::put('news/{news}', [NewsController::class, 'update'])->middleware('checkProtektora');
-    Route::delete('news/{news}', [NewsController::class, 'destroy'])->middleware('checkProtektora');
-});
 
 
 
-// Ruta protegida, requiere autenticación
+
+//Ruta protegida, requiere autenticación
 //Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);

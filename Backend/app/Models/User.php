@@ -35,6 +35,7 @@ class User extends Model
         'password',
         'year',
         'img',
+        'idProtektora',  // La relación con protektora
     ];
 
     // Para ocultar los campos como la contraseña en las respuestas JSON
@@ -47,4 +48,10 @@ class User extends Model
     protected $casts = [
         'year' => 'datetime',
     ];
+
+    // Relación con la tabla 'Protektora' (suponiendo que tienes el modelo de Protektora)
+    public function protektora()
+    {
+        return $this->belongsTo(Protektora::class, 'idProtektora');
+    }
 }

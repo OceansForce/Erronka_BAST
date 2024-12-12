@@ -16,7 +16,7 @@ function Login() {
 
     return (
         <>
-            <div  className='container flex  justify-center '>
+          <div  className='container flex  justify-center erdian'>
           <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-96 rounded-lg text-center border-black dark:border-transparent border-2'>
             <div className='w-full flex'>
               <div className='w-1/2'>

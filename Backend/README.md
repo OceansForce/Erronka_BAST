@@ -134,3 +134,52 @@ Response Error:
 ```
 </details>
 
+
+
+<details>
+<summary> <h2> Create News </h2> </summary>
+  
+Link: 
+```
+http://3.87.235.201:8000/api/news
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 2|iUwrUrIzOilpvkowMLL8eLo08oPoTjrkwRdkOdMRf38052b7
+```
+Body:
+```
+{
+  "titleES": "Título en Español",
+  "titleEU": "Titulua euskaraz",
+  "textES": "Este es el texto de la noticia en Español",
+  "textEU": "Hau da euskarazko albistearen testua"
+
+}
+
+
+
+```
+Response:
+```
+{
+  "message": "Noticia creada con \u00e9xito",
+  "news": {
+    "protektora": 1,
+    "updated_at": "2024-12-12T10:13:59.000000Z",
+    "created_at": "2024-12-12T10:13:59.000000Z",
+    "id": 5,
+    "title": "title5",
+    "text": "news5"
+  }
+}
+```
+Response Error:
+```
+{
+  "error": "Las credenciales proporcionadas son incorrectas."
+}
+```
+</details>
+

@@ -9,6 +9,9 @@ const UserOptions = () => {
     setIsOpen(!isOpen);
   };
 
+  const izena = localStorage.getItem('izena');
+
+
   // Cierra el menú si se hace clic fuera de él
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -36,7 +39,7 @@ const UserOptions = () => {
 
 
             <li className="p-2 rounded">
-              <h2 className='font-semibold text-center'>{t('user:agurra')}, Manex</h2>
+              <h2 className='font-semibold text-center'>{t('user:agurra')}, { izena }</h2>
             </li>
 
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">

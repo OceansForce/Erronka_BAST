@@ -38,6 +38,7 @@ function Login() {
 
             if (data.token) {
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('izena', data.user.name);
                 navigate('/'); // Redirige al usuario usando navigate
             } else if (data.error) {
                 alert(t('error:loginFailed'));

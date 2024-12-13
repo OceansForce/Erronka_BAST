@@ -20,6 +20,9 @@ const Header = () => {
   };
 
 
+  const token = localStorage.getItem('token');
+
+
   return (
     
     <div className='flex flex-col space-x-4 items-center justify-around w-full p-3 bg-primary dark:bg-dark md:flex-row'>
@@ -44,12 +47,26 @@ const Header = () => {
         {/* Componente LanguageSelector con la función changeLanguage como prop */}
         <LanguageSelector changeLanguage={changeLanguage} />
         <DarkModeToggle />
-        <User />
-        
-        <Link to="/saioa_sortu" ><button class="hover:text-white dark:hover:text-black  font-semibold text-md transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 dark:hover:bg-primary hover:bg-dark duration-300 p-2 rounded-md">{t('menu:Saioa_sortu')}</button></Link>
+        {!token ? (
+        <>
+          <Link to="/saioa_sortu">
+            <button className="hover:text-white dark:hover:text-black font-semibold text-md transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 dark:hover:bg-primary hover:bg-dark duration-300 p-2 rounded-md">
+              {t('menu:Saioa_sortu')}
+            </button>
+          </Link>
 
-        <Link to="/login" ><button class="hover:text-white dark:hover:text-black  font-semibold text-md transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 dark:hover:bg-primary hover:bg-dark duration-300 p-2 rounded-md">{t('menu:login')}</button></Link>
-        
+          <Link to="/login">
+            <button className="hover:text-white dark:hover:text-black font-semibold text-md transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 dark:hover:bg-primary hover:bg-dark duration-300 p-2 rounded-md">
+              {t('menu:login')}
+            </button>
+          </Link>
+        </>
+      ) : (
+        <div>
+          {/* Aquí va el contenido de usuario, como un saludo o el nombre del usuario */}
+          <User />
+        </div>
+      )}
       </div>
       
     </div>

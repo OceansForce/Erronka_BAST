@@ -117,13 +117,20 @@ Body:
   "email": "guts@example.com",
   "password": "123maite"
 }
-
-
 ```
 Response:
 ```
 {
-  "token": "10|kT6wRtvYA1zHSb7Qj3olUpTE0RJSLl5WZvPIBwq08479c4c5"
+  "user": {
+    "DNI": "12345678R",
+    "name": "Manex",
+    "secondName": "Aranzadi Ega\u00f1a",
+    "email": "manex@zubiri.com",
+    "year": "2005-01-10T00:00:00.000000Z",
+    "rola": "erabiltzaile",
+    "idProtektora": null
+  },
+  "token": "16|kFjHTrpajMNzVl3mFdxyolREya60S9Jr766ip9y0d582b690"
 }
 ```
 Response Error:

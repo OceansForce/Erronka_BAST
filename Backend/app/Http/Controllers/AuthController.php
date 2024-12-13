@@ -44,6 +44,7 @@ class AuthController extends Controller
         $token = $user->createToken('Bast', $abilities, Carbon::now()->addDays(5))->plainTextToken;
 
         return response()->json([
+	    'user' => $user,
             'token' => $token
         ]);
     }

@@ -39,6 +39,11 @@ function Login() {
             if (data.token) {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('izena', data.user.name);
+                if(data.user.idProtektora !=null){
+                  localStorage.setItem('protektora', data.user.idProtektora);
+                }
+
+
                 navigate('/'); // Redirige al usuario usando navigate
             } else if (data.error) {
                 alert(t('error:loginFailed'));

@@ -24,6 +24,13 @@ const UserOptions = () => {
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
+
+  const borrarLocalStorage = () => {
+    localStorage.clear();
+    window.location.reload();
+    //alert('localStorage ha sido borrado');
+  };
+
   return (
     <div className="relative language-selector">
       <img
@@ -61,9 +68,12 @@ const UserOptions = () => {
               </a>
             </li>
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
-              <a href='#' className='flex items-center'>
-                <img className='size-8 rounded-full' src='/img/icons/users/exit.svg'/>
-                <h4 className='ml-3'>{t('user:exit')}</h4>
+              <a href='#' className='flex items-center' onClick={(e) => {
+                e.preventDefault();  // Evita el comportamiento por defecto del enlace
+                borrarLocalStorage();
+              }}>
+                <img className='size-8 rounded-full' src='/img/icons/users/exit.svg' alt='Salir'/>
+                <h4 className='ml-3'>Salir</h4>
               </a>
             </li>
           </ul>

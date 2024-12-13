@@ -29,27 +29,35 @@ function Ad_notiziak() {
                 </div>
               
             </div>
-            <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('menu:Saioa_sortu')}</p>
+            <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('ad_notiziak:tituloa_N')}</p>
             <form className='flex flex-col text-left'>
-              <label className='font-semibold dark:text-white'>Titulo</label>
-              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='text' required/>
-              <label className='font-semibold dark:text-white'>Fecha</label>
-              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='date' required/>
-              <label className='font-semibold dark:text-white'>Irudia</label>
-              <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='file' maxLength={9} required/>
+
+              <label className='font-semibold dark:text-white'>{t('ad_notiziak:img')}</label>
+              <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' maxLength={9} required/>
 
               <div className='flex flex-row w-auto'>
                 <div className='flex flex-col w-1/2 mr-5'>
-                    <label className='font-semibold dark:text-white'>ES-Parrafo 1</label>
+                  <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:tituloa')}</label>
+                  <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='text' required/>
+                </div>
+                <div className='flex flex-col w-1/2'>
+                  <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:tituloa')}</label>
+                  <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='text' required/>
+                </div>
+              </div>
+
+              <div className='flex flex-row w-auto'>
+                <div className='flex flex-col w-1/2 mr-5'>
+                    <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:Paragrafoa')} 1</label>
                     <textarea  className='mb-2 dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
-                    <label className='font-semibold dark:text-white'>ES-Parrafo 2</label>
+                    <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:Paragrafoa')} 2</label>
                     <textarea  className='mb-2 dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
                 </div>
                 
                 <div className='flex flex-col w-1/2'>
-                <label className='font-semibold dark:text-white'>EUS-Parrafo 1</label>
+                <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:Paragrafoa')} 1</label>
                     <textarea  className='mb-2 dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
-                    <label className='font-semibold dark:text-white'>EUS-Parrafo 2</label>
+                    <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:Paragrafoa')} 2</label>
                     <textarea  className='mb-2 dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
                 </div>
                 

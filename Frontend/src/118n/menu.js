@@ -20,10 +20,14 @@ import esFormulario from './locales/es/footer/formulario.json';
 import euSaioaSortu from './locales/eu/menu/saioa_sortu.json';
 import esSaioaSortu from './locales/es/menu/saioa_sortu.json';
 
+
+import IpAPI from './config/ipAPI';
+
 // Función para cargar traducciones desde la API
 const loadTranslationsFromAPI = async (language, keys) => {
+  console.log("API: "+`${IpAPI}/api/translations/keys`);
   try {
-    const response = await fetch(`http://54.221.171.239:8000/api/translations/keys`, {
+    const response = await fetch(`${IpAPI}/api/translations/keys`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

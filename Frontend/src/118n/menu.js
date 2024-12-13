@@ -21,7 +21,7 @@ import euSaioaSortu from './locales/eu/menu/saioa_sortu.json';
 import esSaioaSortu from './locales/es/menu/saioa_sortu.json';
 
 
-import IpAPI from './config/ipAPI';
+import IpAPI from '../config/ipAPI';
 
 // Función para cargar traducciones desde la API
 const loadTranslationsFromAPI = async (language, keys) => {

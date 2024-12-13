@@ -1,5 +1,5 @@
 // src/config/config.js
-const IpAPI = 'http://34.201.64.33:8000';
+const IpAPI = 'http://52.87.172.70:8000';
   
 export default IpAPI;
   

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom'; // Usa useNavigate aquí
+
 
 const UserOptions = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +10,12 @@ const UserOptions = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  const izena = localStorage.getItem('izena');
+  const protektora = localStorage.getItem('protektora') || null;
+  //console.log("Protektora: "+protektora)
+
+
 
   // Cierra el menú si se hace clic fuera de él
   useEffect(() => {
@@ -20,6 +28,13 @@ const UserOptions = () => {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
+
+
+  const borrarLocalStorage = () => {
+    localStorage.clear();
+    window.location.reload();
+    //alert('localStorage ha sido borrado');
+  };
 
   return (
     <div className="relative language-selector">
@@ -36,8 +51,20 @@ const UserOptions = () => {
 
 
             <li className="p-2 rounded">
-              <h2 className='font-semibold text-center'>{t('user:agurra')}, Manex</h2>
+              <h2 className='font-semibold text-center'>{t('user:agurra')}, { izena }</h2>
             </li>
+
+            
+
+            {protektora !== null && (
+              <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
+                <Link to='/Ad_menu' className='flex items-center'>
+                  <img className='size-8 rounded-full' src='/img/icons/users/admin.svg' alt='Administración'/>
+                  <h4 className='ml-3'>{t('user:administration')}</h4>
+                </Link>
+              </li>
+            )}
+
 
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
               <a href='#' className='flex items-center'>
@@ -58,9 +85,12 @@ const UserOptions = () => {
               </a>
             </li>
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
-              <a href='#' className='flex items-center'>
-                <img className='size-8 rounded-full' src='/img/icons/users/exit.svg'/>
-                <h4 className='ml-3'>{t('user:exit')}</h4>
+              <a href='#' className='flex items-center' onClick={(e) => {
+                e.preventDefault();  // Evita el comportamiento por defecto del enlace
+                borrarLocalStorage();
+              }}>
+                <img className='size-8 rounded-full' src='/img/icons/users/exit.svg' alt='Salir'/>
+                <h4 className='ml-3'>Salir</h4>
               </a>
             </li>
           </ul>

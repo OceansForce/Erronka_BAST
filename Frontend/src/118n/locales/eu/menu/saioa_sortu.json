@@ -5,5 +5,7 @@
     "email":"Email",
     "pasahitza":"Pasahitza",
     "pasahitza_ber": "Berretsi Pasahitza",
-    "input": "Bidali"
+    "input": "Bidali",
+    "fecha_nacimiento":"Jaiotze Data"
+
 }

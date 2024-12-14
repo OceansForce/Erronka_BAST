@@ -9,6 +9,11 @@ import IpAPI from '../config/ipAPI';
 function Ad_notiziak() {
     const { t, i18 } = useTranslation();
 
+    // Función para cambiar el idioma
+    const changeLanguage = (lang) => {
+      i18n.changeLanguage(lang);  // Cambia el idioma
+    };
+
     // Estado para manejar los datos del formulario
     const [formData, setFormData] = useState({
         titleES: '',
@@ -79,8 +84,8 @@ function Ad_notiziak() {
                         </Link>
 
                         <div className='w-11/12 flex flex-row space-x-4 justify-end'>
-                            <LanguageSelector className='w-1/2' />
-                            <DarkModeToggle className='w-1/2' />
+                        <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
+                        <DarkModeToggle className='w-1/2' />
                         </div>
                     </div>
                     <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>

@@ -27,6 +27,10 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
+// OBTENER LAS NOTICIAS
+use App\Http\Controllers\ObtainNewsController;
+Route::get('/latest-news', [ObtainNewsController::class, 'getLatestNews']);
+
 
 // Ruta protegida, requiere autenticación
 //Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);

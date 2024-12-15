@@ -162,11 +162,7 @@ Body:
   "titleEU": "Titulua euskaraz",
   "textES": "Este es el texto de la noticia en Español",
   "textEU": "Hau da euskarazko albistearen testua"
-
 }
-
-
-
 ```
 Response:
 ```
@@ -181,6 +177,46 @@ Response:
     "text": "news5"
   }
 }
+```
+Response Error:
+```
+{
+  "error": "Las credenciales proporcionadas son incorrectas."
+}
+```
+</details>
+
+<details>
+<summary> <h2> Obtein News </h2> </summary>
+  
+Link: 
+```
+http://3.87.235.201:8000/api/latest-news?count=5&offset=10
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+[
+  {
+    "id": 6,
+    "text": "news6",
+    "protektora": 1,
+    "created_at": "2024-12-12T10:14:34.000000Z",
+    "updated_at": "2024-12-12T10:14:34.000000Z",
+    "title": "title6"
+  },
+  {
+    "id": 5,
+    "text": "news5",
+    "protektora": 1,
+    "created_at": "2024-12-12T10:13:59.000000Z",
+    "updated_at": "2024-12-12T10:13:59.000000Z",
+    "title": "title5"
+  }
+]
 ```
 Response Error:
 ```

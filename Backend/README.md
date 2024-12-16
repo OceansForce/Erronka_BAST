@@ -161,7 +161,8 @@ Body:
   "titleES": "Título en Español",
   "titleEU": "Titulua euskaraz",
   "textES": "Este es el texto de la noticia en Español",
-  "textEU": "Hau da euskarazko albistearen testua"
+  "textEU": "Hau da euskarazko albistearen testua",
+  "img": https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg
 }
 ```
 Response:
@@ -174,7 +175,8 @@ Response:
     "created_at": "2024-12-12T10:13:59.000000Z",
     "id": 5,
     "title": "title5",
-    "text": "news5"
+    "text": "news5",
+  "img": https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg
   }
 }
 ```
@@ -206,7 +208,8 @@ Response:
     "protektora": 1,
     "created_at": "2024-12-12T10:14:34.000000Z",
     "updated_at": "2024-12-12T10:14:34.000000Z",
-    "title": "title6"
+    "title": "title6",
+    "img": "url"
   },
   {
     "id": 5,
@@ -214,7 +217,8 @@ Response:
     "protektora": 1,
     "created_at": "2024-12-12T10:13:59.000000Z",
     "updated_at": "2024-12-12T10:13:59.000000Z",
-    "title": "title5"
+    "title": "title5",
+    "img": "url"
   }
 ]
 ```

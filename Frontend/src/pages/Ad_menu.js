@@ -25,14 +25,14 @@ function Ad_menua() {
                 <Link to="/Ad_notiziak" className='w-1/5 bg-primary  rounded-3xl py-20'>
                     <button className=" flex flex-col justify-center items-center ">
                             <img className="w-2/5" src="./img/newspaper-svgrepo-com.svg"/>
-                            <p className=" font-semibold fonts_ubutu text-2xl">Noticias</p>
+                            <p className=" font-semibold fonts_ubutu text-2xl">{t('ad_menua:notiziak')}</p>
                     </button>
                 </Link>
                 
                 <Link to="/Ad_galduta" className='w-1/5 bg-primary  rounded-3xl py-20'> 
                     <button className="flex flex-col justify-center items-center">
                             <img className="w-2/5" src="./img/animal-domestic-lost-svgrepo-com.svg"/>
-                            <p className=" font-semibold fonts_ubutu text-2xl">Perdidos</p>
+                            <p className=" font-semibold fonts_ubutu text-2xl">{t('ad_menua:galduta')}</p>
                     </button>
                 </Link>
 
@@ -40,7 +40,7 @@ function Ad_menua() {
                     <button className=" flex flex-col justify-center items-center ">
                    
                         <img className="w-2/5" src="./img/animal-approve-cat-svgrepo-com.svg"/>
-                        <p className=" font-semibold fonts_ubutu text-2xl">Adoptar</p>
+                        <p className=" font-semibold fonts_ubutu text-2xl">{t('ad_menua:adoptatu')}</p>
                  
                     </button>
                 </Link>

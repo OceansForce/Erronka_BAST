@@ -22,8 +22,18 @@ import esSaioaSortu from './locales/es/menu/saioa_sortu.json';
 import euNotiziak from './locales/eu/admin/notiziak.json';
 import esNotiziak from './locales/es/admin/notiziak.json';
 
+import euAd_menua from './locales/eu/admin/menua.json';
+import esAd_menua from './locales/es/admin/menua.json';
+
+import euAd_galduta from './locales/eu/admin/galduta.json';
+import esAd_galduta from './locales/es/admin/galduta.json';
+
+import euAd_adoptatu from './locales/eu/admin/adoptatu.json';
+import esAd_adoptatu from './locales/es/admin/adoptatu.json';
+
 
 import IpAPI from '../config/ipAPI';
+import Ad_adoptatu from '../pages/Ad_adoptatu';
 
 // Función para cargar traducciones desde la API
 const loadTranslationsFromAPI = async (language, keys) => {
@@ -102,6 +112,9 @@ i18n
         formulario: esFormulario,
         saioa_sortu: esSaioaSortu,
         ad_notiziak: esNotiziak,
+        ad_menua: esAd_menua,
+        ad_galduta: esAd_galduta,
+        Ad_adoptatu: esAd_adoptatu,
       },
       eu: {
         menu: euMenu,
@@ -113,6 +126,9 @@ i18n
         formulario: euFormulario,
         saioa_sortu: euSaioaSortu,
         ad_notiziak: euNotiziak,
+        ad_menua: euAd_menua,
+        ad_galduta: euAd_galduta,
+        Ad_adoptatu: euAd_adoptatu,
       },
     },
     fallbackLng: 'eu', // Idioma de respaldo

@@ -89,10 +89,10 @@ function Ad_notiziak() {
                         </div>
                     </div>
                     <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>
-                        {t('menu:Saioa_sortu')}
+                        {t('ad_notiziak:tituloa_N')}
                     </p>
                     <form className='flex flex-col text-left' onSubmit={handleSubmit}>
-                        <label className='font-semibold dark:text-white'>Titulo (ES)</label>
+                        <label className='font-semibold dark:text-white'>{t('ad_notiziak:tituloa')} (ES)</label>
                         <input
                             className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                             type='text'
@@ -101,7 +101,7 @@ function Ad_notiziak() {
                             onChange={handleChange}
                             required
                         />
-                        <label className='font-semibold dark:text-white'>Titulo (EU)</label>
+                        <label className='font-semibold dark:text-white'>{t('ad_notiziak:tituloa')} (EU)</label>
                         <input
                             className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                             type='text'
@@ -112,7 +112,7 @@ function Ad_notiziak() {
                         />
                         <div className='flex flex-row w-auto'>
                             <div className='flex flex-col w-1/2 mr-5'>
-                                <label className='font-semibold dark:text-white'>ES-Parrafo 1</label>
+                                <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:Paragrafoa')} 1</label>
                                 <textarea
                                     className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                     rows={6}
@@ -121,7 +121,7 @@ function Ad_notiziak() {
                                     onChange={handleChange}
                                     required
                                 ></textarea>
-                                <label className='font-semibold dark:text-white'>ES-Parrafo 2</label>
+                                <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:Paragrafoa')} 2</label>
                                 <textarea
                                     className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                     rows={6}
@@ -132,7 +132,7 @@ function Ad_notiziak() {
                                 ></textarea>
                             </div>
                             <div className='flex flex-col w-1/2'>
-                                <label className='font-semibold dark:text-white'>EUS-Parrafo 1</label>
+                                <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:Paragrafoa')} 1</label>
                                 <textarea
                                     className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                     rows={6}
@@ -141,7 +141,7 @@ function Ad_notiziak() {
                                     onChange={handleChange}
                                     required
                                 ></textarea>
-                                <label className='font-semibold dark:text-white'>EUS-Parrafo 2</label>
+                                <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:Paragrafoa')} 2</label>
                                 <textarea
                                     className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                     rows={6}
@@ -160,43 +160,6 @@ function Ad_notiziak() {
                     </form>
                 </div>
             </div>
-            <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('ad_notiziak:tituloa_N')}</p>
-            <form className='flex flex-col text-left'>
-
-              <label className='font-semibold dark:text-white'>{t('ad_notiziak:img')}</label>
-              <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' maxLength={9} required/>
-
-              <div className='flex flex-row w-auto'>
-                <div className='flex flex-col w-1/2 mr-5'>
-                  <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:tituloa')}</label>
-                  <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='text' required/>
-                </div>
-                <div className='flex flex-col w-1/2'>
-                  <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:tituloa')}</label>
-                  <input className='mb-2 dark:border-primary border-black border-2 rounded-lg' type='text' required/>
-                </div>
-              </div>
-
-              <div className='flex flex-row w-auto'>
-                <div className='flex flex-col w-1/2 mr-5'>
-                    <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:Paragrafoa')} 1</label>
-                    <textarea  className='mb-2 dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
-                    <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:Paragrafoa')} 2</label>
-                    <textarea  className='mb-2 dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
-                </div>
-                
-                <div className='flex flex-col w-1/2'>
-                <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:Paragrafoa')} 1</label>
-                    <textarea  className='mb-2 dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
-                    <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:Paragrafoa')} 2</label>
-                    <textarea  className='mb-2 dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
-                </div>
-                
-              </div>
-              
-              
-              <input className='bg-black text-white mt-2 p-2 rounded-lg' type='submit' value={t('saioa_sortu:input')}></input>
-            </form>
         </>
     );
 }

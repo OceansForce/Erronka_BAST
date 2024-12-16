@@ -29,28 +29,28 @@ function Ad_adoptatu(){
                 </div>
               
             </div>
-            <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>Adoptatzeko animalia gehitu</p>
+            <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('Ad_adoptatu:Titulo')}</p>
             <form className='flex flex-col text-left'>
 
               <div className='flex flex-row'>
                 <div className='flex flex-col w-1/2 mr-10'>
-                  <label className='font-semibold dark:text-white'>Izena</label>
+                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Izena')}</label>
                   <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='text' required/>
                   
-                  <label className='font-semibold dark:text-white mt-2'>Mota</label>
+                  <label className='font-semibold dark:text-white mt-2'>{t('ad_galduta:Mota')}</label>
                   <select>
-                    <option value="Txakurra">Txakurra</option>
-                    <option value="Txakurra PPP">Txakurra PPP</option>
-                    <option value="Katua">Katua</option>
-                    <option value="Beste bat">Beste bat</option>
+                    <option value="Txakurra">{t("ad_galduta:Txakurra")}</option>
+                    <option value="Txakurra PPP">{t("ad_galduta:Txakurra")} PPP</option>
+                    <option value="Katua">{t('ad_galduta:Katua')}</option>
+                    <option value="Beste bat">{t('ad_galduta:Beste_bat')}</option>
                   </select>
                 </div>
 
                 <div className='flex flex-col w-1/2'>
-                  <label className='font-semibold dark:text-white'>Babes Elkartea</label>
+                  <label className='font-semibold dark:text-white'>{t('Ad_adoptatu:Babes')}</label>
                   <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='text' required/>
 
-                  <label className='mt-2 font-semibold dark:text-white'>Adina</label> 
+                  <label className='mt-2 font-semibold dark:text-white'>{t('ad_galduta:Adina')}</label> 
                   <input type='date' className='mb-2 dark:border-primary rounded-lg' />
 
                 </div>
@@ -60,25 +60,25 @@ function Ad_adoptatu(){
               <div className='flex flex-row'>
 
                 <div className=' w-1/2 mr-10'>
-                  <label className='font-semibold dark:text-white'>Sexua</label>
+                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Sexua')}</label>
 
                     <div className='ml-3'>
-                      <input type='radio' name='Sexua' value='Arra'/><label className='ml-1 dark:text-white fonts_ubutu'>Arra</label>
+                      <input type='radio' name='Sexua' value='Arra'/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Arra')}</label>
                     </div>
 
                     <div className='ml-3'>
-                      <input type='radio' name='Sexua' value='Emea'/><label className='ml-1 dark:text-white fonts_ubutu'>Emea</label>
+                      <input type='radio' name='Sexua' value='Emea'/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Emea')}</label>
                     </div>
                 </div>
 
                 <div className=' w-1/2'>
-                  <label className='mt-2 font-semibold dark:text-white'>Esterilizatua</label> 
+                  <label className='mt-2 font-semibold dark:text-white'>{t("ad_galduta:Esterilizatua")}</label> 
                   <div className='ml-3'>
-                    <input type='radio' name='Esterilizatua' value='Bai'/><label className='ml-1 dark:text-white fonts_ubutu'>Bai</label>
+                    <input type='radio' name='Esterilizatua' value='Bai'/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
                   </div>
 
                   <div className='ml-3'>
-                    <input type='radio' name='Esterilizatua' value='Ez'/><label className='ml-1 dark:text-white fonts_ubutu'>Ez</label>
+                    <input type='radio' name='Esterilizatua' value='Ez'/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
                   </div>
 
                 </div>
@@ -87,16 +87,16 @@ function Ad_adoptatu(){
 
               <div className='flex flex-row mt-2'>
 
-                <div className=' w-1/2 flex flex-col mr-5'>
-                  <label className='font-semibold dark:text-white'>Elkarrekin bizitzeko ohitura</label>
+                <div className=' w-1/2 flex flex-col mr-10'>
+                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Elkarrekin')}</label>
                   <textarea  className='dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
                 </div>
 
                 <div className=' w-1/2 flex flex-col mr-5'>
-                  <label className='font-semibold dark:text-white'>Profil Irudia</label>
+                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Profil')}</label>
                   <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' required/>
 
-                  <label className='font-semibold dark:text-white'>Beste irudi batzuk</label>
+                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Beste')}</label>
                   <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' />
                   <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' />
                   <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' />
@@ -105,12 +105,12 @@ function Ad_adoptatu(){
 
               <div className='flex flex-row mt-2'>
                 <div className=' w-1/2 flex flex-col mr-5'>
-                  <label className='font-semibold dark:text-white'>Behar bereziak</label>
+                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Beharrak')}</label>
                   <textarea  className='dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
                 </div>
 
                 <div className=' w-1/2 flex flex-col'>
-                  <label className='font-semibold dark:text-white'>Deskribapena</label>
+                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Deskribapena')}</label>
                   <textarea  className='dark:border-primary border-black border-2 rounded-lg' rows={6} required></textarea>
                 </div>
               </div>

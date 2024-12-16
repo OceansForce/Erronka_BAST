@@ -29,7 +29,7 @@ function Ad_adoptatu(){
                 </div>
               
             </div>
-            <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>Galdutako animalia gehitu</p>
+            <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>Adoptatzeko animalia gehitu</p>
             <form className='flex flex-col text-left'>
 
               <div className='flex flex-row'>
@@ -47,7 +47,7 @@ function Ad_adoptatu(){
                 </div>
 
                 <div className='flex flex-col w-1/2'>
-                  <label className='font-semibold dark:text-white'>Non</label>
+                  <label className='font-semibold dark:text-white'>Babes Elkartea</label>
                   <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='text' required/>
 
                   <label className='mt-2 font-semibold dark:text-white'>Adina</label> 

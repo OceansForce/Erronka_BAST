@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Translation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cache;
 
 class TranslationController extends Controller
 {
@@ -24,34 +24,35 @@ class TranslationController extends Controller
         // Obtener las claves de la solicitud
         $keys = $request->input('keys');
 
-        // Obtener los idiomas disponibles (esto puede ser dinámico si la tabla de traducciones tiene varios idiomas)
-        $languages = Translation::select('language')->distinct()->get()->pluck('language')->toArray();
+        // Crear un array para almacenar las traducciones
+        $translations = [];
 
-        // Si no hay idiomas disponibles en la base de datos
-        if (empty($languages)) {
-            return response()->json(['message' => 'No languages found'], 404);
+        foreach ($keys as $key) {
+            // Crear una clave única para cada traducción (por ejemplo, 'descripcion0_es')
+            $cacheKey = 'translation_' . $key;
+
+            // Intentar obtener la traducción desde la caché
+            $translation = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($key) {
+                // Obtener todas las traducciones de la clave dada
+                return Translation::where('keyValue', $key)->get();
+            });
+
+            // Si la traducción fue encontrada, organizarla por idioma
+            if ($translation->isNotEmpty()) {
+                $translations[$key] = $translation->mapWithKeys(function ($item) {
+                    return [$item->language => $item->value]; // Organiza por idioma
+                });
+            }
         }
 
-        // Obtener las traducciones para las claves solicitadas en todos los idiomas
-        $translations = Translation::whereIn('keyValue', $keys)
-            ->whereIn('language', $languages)
-            ->get();
-
-        // Verificar si se encontraron traducciones
-        if ($translations->isEmpty()) {
+        // Si no se encontraron traducciones, devolver un mensaje de error
+        if (empty($translations)) {
             return response()->json(['message' => 'No translations found for the given keys'], 404);
         }
 
-        // Organizar las traducciones por clave y por idioma
-        $response = [];
-        foreach ($translations as $translation) {
-            // Agregar la traducción en el idioma correspondiente
-            $response[$translation->keyValue][$translation->language] = $translation->value;
-        }
-
-        // Devolver las traducciones como un objeto JSON
+        // Devolver las traducciones organizadas como un objeto JSON
         return response()->json([
-            'translations' => $response,
+            'translations' => $translations,
         ]);
     }
 }

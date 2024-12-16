@@ -47,6 +47,7 @@ function Ad_notiziak() {
             titleEU: formData.titleEU,
             textES: textES,
             textEU: textEU,
+            img: formData.img,
         };
 
         try {
@@ -107,6 +108,15 @@ function Ad_notiziak() {
                             type='text'
                             name='titleEU'
                             value={formData.titleEU}
+                            onChange={handleChange}
+                            required
+                        />
+                        <label className='font-semibold dark:text-white'>IMG URL</label>
+                        <input
+                            className='mb-2 dark:border-primary border-black border-2 rounded-lg'
+                            type='text'
+                            name='img'
+                            value={formData.img}
                             onChange={handleChange}
                             required
                         />

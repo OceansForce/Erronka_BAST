@@ -9,6 +9,7 @@ import Login from './pages/login';
 import Ad_menua from './pages/Ad_menu';
 import Ad_notiziak from './pages/Ad_notiziak';
 import Ad_galduta from './pages/Ad_galduta';
+import Ad_adoptatu from './pages/Ad_adoptatu';
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Cambié Switch por Routes
@@ -27,6 +28,7 @@ function App() {
           <Route path="/Ad_menu" element={<Ad_menua />} /> {/* Lo mismo aquí */}
           <Route path="/Ad_notiziak" element={<Ad_notiziak />} /> {/* Lo mismo aquí */}
           <Route path="/Ad_galduta" element={<Ad_galduta />} /> {/* Lo mismo aquí */}
+          <Route path="/Ad_adoptatu" element={<Ad_adoptatu />} /> {/* Lo mismo aquí */}
           {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} /> */}
       </Routes>

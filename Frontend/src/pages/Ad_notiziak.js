@@ -197,8 +197,6 @@ function Ad_notiziak() {
               
               <input className='bg-black text-white mt-2 p-2 rounded-lg' type='submit' value={t('saioa_sortu:input')}></input>
             </form>
-          </div>
-        </div>
         </>
     );
 }

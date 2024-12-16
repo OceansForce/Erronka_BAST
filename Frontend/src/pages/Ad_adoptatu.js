@@ -5,17 +5,17 @@ import { useTranslation } from 'react-i18next';
 import i18n from '../118n/menu';
 import { Link } from 'react-router-dom';
 
-function Ad_galduta() {
+function Ad_adoptatu(){
     const { t, i18n } = useTranslation();
-
+    
     // Función para cambiar el idioma
     const changeLanguage = (lang) => {
-      i18n.changeLanguage(lang);  // Cambia el idioma
+        i18n.changeLanguage(lang);  // Cambia el idioma
     };
 
     return(
         <>
-           <div  className='container flex  justify-center erdian'>
+            <div  className='container flex  justify-center erdian'>
           <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-full rounded-lg text-center border-black dark:border-transparent border-2'>
             <div className='w-full flex'>
                 
@@ -124,4 +124,4 @@ function Ad_galduta() {
     );
 }
 
-export default Ad_galduta;
+export default Ad_adoptatu;

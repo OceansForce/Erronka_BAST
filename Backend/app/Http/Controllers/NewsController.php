@@ -22,6 +22,7 @@ class NewsController extends Controller
 	            'titleEU' => 'required|string',
 	            'textES' => 'required|string',
 	            'textEU' => 'required|string',
+		    'img' => 'required|url',
 	        ]);
 	    } catch (\Illuminate\Validation\ValidationException $e) {
 	        return response()->json([
@@ -42,13 +43,14 @@ class NewsController extends Controller
 
         if (!$protektora_id) {
             return response()->json([
-                'message' => 'Este usuario no tiene una protektora asignada.',
+                'message' => 'Este usuario no tienes permisos para crear usuarios.',
             ], 403);
         }
 
         // Crear la noticia
         $news = new News();
         $news->protektora = $protektora_id;
+	$news->img = $request->input('img');
         $news->save(); // Guardamos la noticia en la base de datos, para obtener el ID
 
         // Obtener el ID de la noticia recién creada

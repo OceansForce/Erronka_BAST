@@ -11,7 +11,7 @@ class News extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['text', 'protektora', 'created_at', 'updated_at']; // protektora_id como referencia
+    protected $fillable = ['text', 'protektora', 'created_at', 'updated_at', 'img']; // protektora_id como referencia
 
     // Relación con Protektora
     public function protektora()

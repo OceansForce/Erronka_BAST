@@ -19,6 +19,8 @@ import euFormulario from './locales/eu/footer/formulario.json';
 import esFormulario from './locales/es/footer/formulario.json';
 import euSaioaSortu from './locales/eu/menu/saioa_sortu.json';
 import esSaioaSortu from './locales/es/menu/saioa_sortu.json';
+import euNotiziak from './locales/eu/admin/notiziak.json';
+import esNotiziak from './locales/es/admin/notiziak.json';
 
 
 import IpAPI from '../config/ipAPI';
@@ -99,6 +101,7 @@ i18n
         datuak: esDatos,
         formulario: esFormulario,
         saioa_sortu: esSaioaSortu,
+        ad_notiziak: esNotiziak,
       },
       eu: {
         menu: euMenu,
@@ -109,6 +112,7 @@ i18n
         datuak: euDatos,
         formulario: euFormulario,
         saioa_sortu: euSaioaSortu,
+        ad_notiziak: euNotiziak,
       },
     },
     fallbackLng: 'eu', // Idioma de respaldo

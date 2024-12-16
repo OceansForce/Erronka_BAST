@@ -26,14 +26,12 @@ function Ad_menua() {
                     </button>
                 </Link>
                 
-                 
-                <button className="w-1/5 bg-primary  rounded-3xl flex flex-col justify-center items-center py-20">
-                    
-                        <img className="w-2/5" src="./img/animal-domestic-lost-svgrepo-com.svg"/>
-                        <p className=" font-semibold fonts_ubutu text-2xl">Perdidos</p>
-                  
-                </button>
-                
+                <Link to="/Ad_galduta" className='w-1/5 bg-primary  rounded-3xl py-20'> 
+                    <button className="flex flex-col justify-center items-center">
+                            <img className="w-2/5" src="./img/animal-domestic-lost-svgrepo-com.svg"/>
+                            <p className=" font-semibold fonts_ubutu text-2xl">Perdidos</p>
+                    </button>
+                </Link>
                 <button className="w-1/5 bg-primary  rounded-3xl flex flex-col justify-center items-center py-20">
                    
                         <img className="w-2/5" src="./img/animal-approve-cat-svgrepo-com.svg"/>

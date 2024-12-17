@@ -14,8 +14,13 @@ import { useNavigate } from 'react-router-dom';
 
 function Ad_menua() {
     const { t, i18n } = useTranslation();
+
     const navigate = useNavigate();
-    checkProtektora(navigate);
+    useEffect(() => {
+        // Llamar a checkProtektora dentro del useEffect
+        checkProtektora(navigate);
+    }, [navigate]);
+        
 
     // Función para cambiar el idioma
     const changeLanguage = (lang) => {

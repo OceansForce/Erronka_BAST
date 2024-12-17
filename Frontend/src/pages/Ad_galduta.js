@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import LanguageSelector from '../header-footer/header/desplegable/lenguageSelector';
 import DarkModeToggle from '../header-footer/header/dark-light/dark';
 import React from 'react';
@@ -12,7 +13,10 @@ import { useNavigate } from 'react-router-dom';
 function Ad_galduta() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
-    checkProtektora(navigate);
+    useEffect(() => {
+      // Llamar a checkProtektora dentro del useEffect
+      checkProtektora(navigate);
+    }, [navigate]);
 
     // Función para cambiar el idioma
     const changeLanguage = (lang) => {

@@ -37,7 +37,9 @@ const UserOptions = () => {
   };
 
   return (
-    <div className="relative language-selector">
+    <div className="relative language-selector transition-all duration-300
+                           hover:scale-110 hover:shadow-lg
+                           active:scale-95 active:shadow-sm">
       <img
         src="/img/icons/users/user-dog.jpg"
         className="size-12 cursor-pointer rounded-full"

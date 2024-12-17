@@ -27,19 +27,32 @@ const Header = () => {
     
     <div className='flex flex-col space-x-4 items-center justify-around w-full p-3 bg-primary dark:bg-dark md:flex-row'>
       <div >
-        <a href='#'>
-          <img src='/img/logo.png' className='size-20' alt="Logo" />
-        </a>
+        <Link to="/">
+          <img src='/img/logo.png' className='size-20 hover:scale-110 active:scale-95 duration-300' alt="Logo" />
+        </Link>
+        
         
       </div>
       
       <div className=' justify-center flex-center p-3 capitalize'>
         <ul className='list-none flex flex-col sm:flex-row sm:space-x-10 text-center sm:text-left'>
-          <li><Link to="/" className="text-black dark:text-white font-semibold text-xl">{t('menu:hasiera')}</Link></li>
-          <li><Link to="/galduta" className="text-black dark:text-white font-semibold text-xl">{t('menu:galduta')}</Link></li>
-          <li><Link to="/mapa" className="text-black dark:text-white font-semibold text-xl">{t('menu:mapa')}</Link></li>
-          <Adopzioa />
-          <Denda />
+          <li className='transition-all duration-300
+                           hover:scale-110 hover:shadow-lg
+                           active:scale-95 active:shadow-sm'><Link to="/" className="text-black dark:text-white font-semibold text-xl">{t('menu:hasiera')}</Link></li>  
+          <li className='transition-all duration-300
+                           hover:scale-110 hover:shadow-lg
+                           active:scale-95 active:shadow-sm'><Link to="/galduta" className="text-black dark:text-white font-semibold text-xl">{t('menu:galduta')}</Link></li>
+          <li className='transition-all duration-300
+                           hover:scale-110 hover:shadow-lg
+                           active:scale-95 active:shadow-sm'><Link to="/mapa" className="text-black dark:text-white font-semibold text-xl">{t('menu:mapa')}</Link></li>
+          <li className='transition-all duration-300
+                           hover:scale-110 hover:shadow-lg
+                           active:scale-95 active:shadow-sm'><Adopzioa /></li>
+          <li className='transition-all duration-300
+                           hover:scale-110 hover:shadow-lg
+                           active:scale-95 active:shadow-sm'><Denda /></li>
+          
+          
         </ul>
       </div>
 

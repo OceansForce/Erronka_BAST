@@ -3,10 +3,16 @@ import DarkModeToggle from '../header-footer/header/dark-light/dark';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../118n/menu';
-import { Link } from 'react-router-dom';
+import BackButton from '../components/bottons/backBotom';
+import SendButom from '../components/bottons/sendBotton';
+
+import { checkProtektora } from '../components/security/security';
+import { useNavigate } from 'react-router-dom';
 
 function Ad_galduta() {
     const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
+    checkProtektora(navigate);
 
     // Función para cambiar el idioma
     const changeLanguage = (lang) => {
@@ -19,14 +25,13 @@ function Ad_galduta() {
           <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-full rounded-lg text-center border-black dark:border-transparent border-2'>
             <div className='w-full flex'>
                 
-                <Link to="/Ad_menu">
-                  <img className='w-28 bg-white px-5 rounded-full' src="/img/icons/arrow-left.svg"></img>
-                </Link>
+              <BackButton targetPage="/Ad_menu" />
+
               
-                <div className='w-11/12 flex flex-row space-x-4 justify-end'>
-                    <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
-                    <DarkModeToggle className='w-1/2' />
-                </div>
+              <div className='w-11/12 flex flex-row space-x-4 justify-end'>
+                  <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
+                  <DarkModeToggle className='w-1/2' />
+              </div>
               
             </div>
             <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('ad_galduta:Titulo')}</p>
@@ -116,7 +121,7 @@ function Ad_galduta() {
               </div>
 
 
-              <input className='bg-black text-white mt-2 p-2 rounded-lg' type='submit' value={t('saioa_sortu:input')}></input>
+              <SendButom value={t('saioa_sortu:input')} />
             </form>
           </div>
         </div>

@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import LanguageSelector from '../header-footer/header/desplegable/lenguageSelector';
 import DarkModeToggle from '../header-footer/header/dark-light/dark';
 
+import SendButom from '../components/bottons/sendBotton';
+import BackButtonLittle from '../components/bottons/backButtomLittle';
+
 import IpAPI from '../config/ipAPI';
 
 function Saioa_sortu() {
@@ -71,9 +74,7 @@ function Saioa_sortu() {
         <div className="flex flex-col dark:bg-dark bg-primary p-6 m-10 w-96 rounded-lg text-center border-black dark:border-transparent border-2">
           <div className="w-full flex">
             <div className="w-1/2">
-              <Link to="/">
-                <img className="w-2/4 bg-white px-5 rounded-full" src="/img/icons/arrow-left.svg" alt="Back"></img>
-              </Link>
+              <BackButtonLittle to="/" src="/img/icons/arrow-left.svg" />
             </div>
             <div className="w-1/2 flex flex-row space-x-4 justify-end">
               <LanguageSelector className="w-1/2" changeLanguage={changeLanguage} />
@@ -147,11 +148,12 @@ function Saioa_sortu() {
               onChange={(e) => setImg('/public/img/animal-approve-cat-svgrepo-com.svg')}
               placeholder="URL de la imagen"
             />
-            <input
+            {/* <input
               className="bg-black text-white mt-2 p-2 rounded-lg"
               type="submit"
               value={t('saioa_sortu:input')}
-            />
+            /> */}
+            <SendButom value={t('saioa_sortu:input')} />
           </form>
         </div>
       </div>

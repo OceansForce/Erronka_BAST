@@ -77,22 +77,23 @@ const Carrusel = () => {
   const hideNextButton = (currentIndex + 1) * itemsPerPage >= news.length && currentItems.length < itemsPerPage; // Ocultar el botón "next" si no hay más noticias
 
   return (
-    <div className="carousel-container w-2/3">
+    <div className="carousel-container w-2/3 sm:justify-items-center">
       {/* Solo renderizar el botón de navegación hacia la izquierda si no está desactivado */}
-      {!hidePrevButton && (
-        <button
-          onClick={prev}
-          className="carousel-button prev dark:text-white"
-        >
-          ←
-        </button>
-      )}
+      <button
+        onClick={prev}
+        className={`carousel-button prev dark:text-white text-black bg-transparent border-2 border-transparent 
+            transition-all hover:scale-125 active:scale-95 duration-300
+          ${hidePrevButton ? 'opacity-0 pointer-events-none' : ''}`}
+      >
+        ←
+      </button>
 
-      <div className="carousel-wrapper">
+
+      <div className="carousel-wrapper p-2 sm:justify-items-center">
         <div className="carousel-content">
           {currentItems.map((item) => (
-            <div key={item.id} className="carousel-item dark:bg-dark_body bg-white">
-              <img src={item.img} alt={item.title} className="carousel-img rounded-t-lg" />
+            <div key={item.id} className="carousel-item dark:bg-dark_body bg-white hover:scale-110 active:scale-95 duration-300">
+              <img src={item.img} alt={item.title} className="carousel-img rounded-t-lg w-96 h-64" />
               <div className="carousel-text">
                 <h3 className="text-center font-bold text-slate-600 dark:text-white limit_h">{item.title}</h3>
                 <p className="text-left data dark:text-white h-5">{item.date}</p>
@@ -106,14 +107,14 @@ const Carrusel = () => {
       </div>
 
       {/* Solo renderizar el botón de navegación hacia la derecha si no está desactivado */}
-      {!hideNextButton && (
-        <button
-          onClick={next}
-          className="carousel-button next dark:text-white"
-        >
-          →
-        </button>
-      )}
+      <button
+        onClick={next}
+        className={`carousel-button prev dark:text-white text-black bg-transparent border-2 border-transparent 
+            transition-all hover:scale-125 active:scale-95 duration-300
+          ${hideNextButton ? 'opacity-0 pointer-events-none' : ''}`}
+      >
+        →
+      </button>
     </div>
   );
 };

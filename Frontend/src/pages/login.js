@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../118n/menu';
 import { Link, useNavigate } from 'react-router-dom'; // Usa useNavigate aquí
+import SendButom from '../components/bottons/sendBotton';
+import BackButtonLittle from '../components/bottons/backButtomLittle';
+
 
 import IpAPI from '../config/ipAPI';
 
@@ -60,9 +63,7 @@ function Login() {
                 <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-96 rounded-lg text-center border-black dark:border-transparent border-2'>
                     <div className='w-full flex'>
                         <div className='w-1/2'>
-                            <Link to="/">
-                                <img className='w-2/4 bg-white px-5 rounded-full' src="/img/icons/arrow-left.svg" alt="Back"></img>
-                            </Link>
+                            <BackButtonLittle to="/" src="/img/icons/arrow-left.svg" />
                         </div>
                         <div className='w-1/2 flex flex-row space-x-4 justify-end'>
                             <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
@@ -87,7 +88,8 @@ function Login() {
                             onChange={(e) => setPassword(e.target.value)} 
                             required 
                         />
-                        <input className='bg-black text-white mt-2 p-2 rounded-lg' type='submit' value={t('saioa_sortu:input')} />
+                        {/* <input className='bg-black text-white mt-2 p-2 rounded-lg' type='submit' value={} /> */}
+                        <SendButom value={t('saioa_sortu:input')} />
                     </form>
                 </div>
             </div>

@@ -3,16 +3,52 @@
 @tailwind utilities;
 
 
-
 :root {
-    --color-bg: #ffffff;
-  }
+  --color-bg: #ffffff;
+}
   
-  html.dark {
-    --color-bg: #333333;
-  }
-  
-  body {
-    background-color: var(--color-bg);
-    transition: background-color 0.3s;
-  }
+html.dark {
+  --color-bg: #333333;
+}
+
+body {
+  background-color: var(--color-bg);
+  transition: background-color 0.3s;
+  width: 100%;
+}
+#root{
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+ 
+}
+
+.erdian{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 100vh; 
+}
+
+
+
+/* src/index.css o src/styles.css */
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./assets/fonts/Ubuntu/Ubuntu-Regular.ttf') format('truetype');
+       
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu_bold';
+  src: url('./assets/fonts/Ubuntu/Ubuntu-Bold.ttf') format('truetype');
+       
+  font-weight: 700;
+  font-style: normal;
+}
+
+

@@ -1,0 +1,93 @@
+body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.data{
+    font-size: 0.8rem;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    
+    overflow-x: hidden; /* Evita que el contenido desborde horizontalmente */
+}
+
+.full{
+    width: 100%;
+    height: 100%;
+}
+
+.full_w{
+    width: 100%;
+}
+
+.background{
+    background-image: url("./../../../public/img/animal-paw-prints-simple-seamless-pattern-on-white-background-vector-Photoroom.png");
+    background-repeat: no-repeat; 
+    background-size: 100% 100%; 
+    background-position: center;
+}
+
+.dark_bg{
+    background-color: #333333;
+}
+
+.fonts_ubutu{
+    font-family: Ubuntu;
+}
+
+.fonts_ubutu_Bold{
+    font-family: Ubuntu_bold;
+}
+
+
+/* Select Option */
+
+.custom-select {
+    position: relative;
+  }
+  
+  .select-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  
+  .options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    z-index: 10;
+    display: block;
+  }
+  
+  .option-item {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .option-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+/*-----------------------------*/

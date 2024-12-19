@@ -18,7 +18,21 @@ body {
 }
 #root{
   width: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+ 
 }
+
+.erdian{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 100vh; 
+}
+
+
 
 /* src/index.css o src/styles.css */
 @font-face {

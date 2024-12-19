@@ -1,0 +1,10 @@
+{
+    "izena":"Nombre",
+    "abizena":"Apellido",
+    "nan":"DNI",
+    "email":"Gmail",
+    "pasahitza":"Contraseña",
+    "pasahitza_ber": "Confirmar Contraseña",
+    "input": "Enviar",
+    "fecha_nacimiento":"Fecha de Nacimiento"
+}

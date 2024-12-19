@@ -35,11 +35,11 @@ const Filtroa = () => {
   }, []);
 
   return (
-    <div className="mt-10 max-w-auto flex flex-row justify-center z-1">
+    <div className="mt-10 max-w-auto flex flex-row justify-center z-10">
       <form className="max-w-sm mx-auto">
         <div className="flex items-center">
           {/* Primer Select: Custom Select */}
-          <div className="custom-select relative w-32 z-1" ref={dropdownRef}>
+          <div className="custom-select relative w-32" ref={dropdownRef}>
             <div
               className="h-10 select-button flex items-center space-x-2 cursor-pointer bg-primary text-gray-900 text-sm rounded-l-lg   w-full p-2.5 dark:bg-gray-700 dark:text-white border-y-2 border-l-2 border-gray-100 "
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}

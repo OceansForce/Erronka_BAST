@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 function Ad_notiziak() {
     const { t, i18 } = useTranslation();
     const navigate = useNavigate();
+    
     useEffect(() => {
         // Llamar a checkProtektora dentro del useEffect
         checkProtektora(navigate);
@@ -20,7 +21,7 @@ function Ad_notiziak() {
 
     // Función para cambiar el idioma
     const changeLanguage = (lang) => {
-      i18n.changeLanguage(lang);  // Cambia el idioma
+        i18n.changeLanguage(lang);  // Cambia el idioma
     };
 
     // Estado para manejar los datos del formulario
@@ -32,7 +33,11 @@ function Ad_notiziak() {
         paragraphEU1: '',
         paragraphEU2: '',
         date: '',
+        img: ''
     });
+
+    // Estado para manejar el mensaje de éxito
+    const [successMessage, setSuccessMessage] = useState('');
 
     // Manejador de cambios en los campos del formulario
     const handleChange = (e) => {
@@ -71,8 +76,20 @@ function Ad_notiziak() {
 
             if (response.ok) {
                 const result = await response.json();
-                //alert('Noticia creada con éxito!');
-                console.log(result);
+                // Mostrar mensaje de éxito
+                setSuccessMessage(t('ad_notiziak:noticia_creada_exitosamente'));
+
+                // Limpiar los campos del formulario
+                setFormData({
+                    titleES: '',
+                    titleEU: '',
+                    paragraphES1: '',
+                    paragraphES2: '',
+                    paragraphEU1: '',
+                    paragraphEU2: '',
+                    date: '',
+                    img: ''
+                });
             } else {
                 const error = await response.json();
                 console.error('Error al crear la noticia:', error);
@@ -89,19 +106,20 @@ function Ad_notiziak() {
             <div className='container flex justify-center erdian'>
                 <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-full rounded-lg text-center border-black dark:border-transparent border-2'>
                     <div className='w-full flex'>
-
+                        
                         <BackButton targetPage="/Ad_menu" />
-
-
-
                         <div className='w-11/12 flex flex-row space-x-4 justify-end'>
-                        <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
-                        <DarkModeToggle className='w-1/2' />
+                            <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
+                            <DarkModeToggle className='w-1/2' />
                         </div>
                     </div>
                     <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>
                         {t('ad_notiziak:tituloa_N')}
                     </p>
+
+                    {/* Mostrar mensaje de éxito si se creó la noticia */}
+                    {successMessage && <p className='text-green-500 font-semibold mb-4'>{successMessage}</p>}
+
                     <form className='flex flex-col text-left' onSubmit={handleSubmit}>
                         <label className='font-semibold dark:text-white'>{t('ad_notiziak:tituloa')} (ES)</label>
                         <input
@@ -173,7 +191,6 @@ function Ad_notiziak() {
                             </div>
                         </div>
                         
-                                
                         <SendButom value={t('saioa_sortu:input')} />
                     </form>
                 </div>

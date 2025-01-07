@@ -190,8 +190,9 @@ Response Error:
 
 <details>
 <summary> <h2> Obtein News </h2> </summary>
-  
+<p> **Get** bitartez egin behar da</p>
 Link: 
+ 
 ```
 http://3.87.235.201:8000/api/latest-news?count=5&offset=10
 ```

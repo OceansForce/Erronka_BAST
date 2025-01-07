@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     
-    <div className='flex flex-col space-x-4 items-center justify-around w-full p-3 bg-primary dark:bg-dark md:flex-row'>
+    <div className='z-20 flex flex-col space-x-4 items-center justify-around w-full p-3 bg-primary dark:bg-dark md:flex-row'>
       <div >
         <Link to="/">
           <img src='/img/logo.png' className='size-20 hover:scale-110 active:scale-95 duration-300' alt="Logo" />

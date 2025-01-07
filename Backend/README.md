@@ -190,8 +190,9 @@ Response Error:
 
 <details>
 <summary> <h2> Obtein News </h2> </summary>
-  
+<p> **Get** bitartez egin behar da</p>
 Link: 
+ 
 ```
 http://3.87.235.201:8000/api/latest-news?count=5&offset=10
 ```
@@ -221,6 +222,53 @@ Response:
     "img": "url"
   }
 ]
+```
+Response Error:
+```
+{
+  "error": "Las credenciales proporcionadas son incorrectas."
+}
+```
+</details>
+
+<details>
+    
+<summary> <h2> Update News </h2> </summary>
+<p> **Put** bitartez egin behar da</p>
+Link: 
+ 
+```
+http://54.209.224.251:8000/api/news/50
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Body:
+```
+{
+   "titleES": "Nuevo título en español",
+   "titleEU": "Berriaren izenburua euskaraz",
+   "textES": "Texto de la noticia en español.",
+   "textEU": "Albistearen testua euskaraz111.",
+   "img": "https://ejemplo.com/imagen.jpg"
+ }
+```
+Response:
+```
+{
+  "message": "Noticia actualizada con \u00e9xito",
+  "news": {
+    "id": 50,
+    "text": "news50",
+    "protektora": 1,
+    "created_at": "2025-01-07T12:05:45.000000Z",
+    "updated_at": "2025-01-07T12:45:04.000000Z",
+    "title": "title50",
+    "img": "https:\/\/ejemplo.com\/imagen.jpg"
+  }
+}
 ```
 Response Error:
 ```

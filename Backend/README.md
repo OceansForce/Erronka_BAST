@@ -337,3 +337,50 @@ Response Error:
 }
 ```
 </details>
+
+
+<details>
+    
+<summary> <h2> Put Animals to Adopt </h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+http://54.209.224.251:8000/animals-adopt-create
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Body:
+```
+{
+    "id": 1,
+    "name": "Fido",
+    "etxekoAnimalia": true,
+    "type": "txakurra",
+    "animalType": "Pastor Alemán",
+    "img": "http://url_del_imagen.com/fido.jpg",
+    "bakuna": 1,
+    "gender": 1,
+    "descripcion": "Perro amigable y enérgico",
+    "year": "2020-01-01",
+    "losted": null,
+    "noiztik": null,
+    "userID": 5,
+    "created_at": "2025-01-08 00:00:00",
+    "updated_at": "2025-01-08 00:00:00"
+}
+```
+Response:
+```
+Código 201: creado correctamente
+```
+Response Error:
+```
+{
+        "error": "Usuario no autenticado"
+}
+```
+</details>

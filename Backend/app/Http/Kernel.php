@@ -21,5 +21,5 @@ class Kernel extends HttpKernel
         'NewsCreate' => \App\Http\Middleware\CheckCreateNewsPermissions::class,
         'checkProtektoraNewsUpdate' => \App\Http\Middleware\CheckUpdateNewsPermissions::class,
     
-];
+    ];
 }

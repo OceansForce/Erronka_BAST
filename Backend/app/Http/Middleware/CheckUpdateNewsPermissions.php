@@ -20,6 +20,12 @@ class CheckUpdateNewsPermissions
         // Obtener el 'protektora_id' del usuario autenticado
         $protektora_id = $user->idProtektora;
 
+        // Verificar si el usuario es administrador
+        if ($user->idProtektora === 0) {
+            // Si es administrador, permitir la acción
+            return $next($request);
+        }
+
         // Verificar que el usuario tiene permisos para actualizar la noticia
         if ($request->news->protektora !== $protektora_id) {
             return response()->json([

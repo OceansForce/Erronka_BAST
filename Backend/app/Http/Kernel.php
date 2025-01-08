@@ -8,5 +8,8 @@ protected $routeMiddleware = [
     'cors' => \App\Http\Middleware\CorsMiddleware::class,
     // Otros middlewares...
 
-    'checkProtektora' => \App\Http\Middleware\CheckProtektoraAccess::class,
+
+    'checkProtektoraNewsCreate' => \App\Http\Middleware\CheckCreateNewsPermissions::class,
+    'checkProtektoraNewsUpdate' => \App\Http\Middleware\CheckUpdateNewsPermissions::class,
+    
 ];

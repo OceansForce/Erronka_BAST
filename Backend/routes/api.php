@@ -21,8 +21,8 @@ Route::post('login', [AuthController::class, 'login']);
 use App\Http\Controllers\NewsController;
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('news', [NewsController::class, 'store']);
-    Route::put('news/{news}', [NewsController::class, 'update']);
+    Route::post('news', [NewsController::class, 'store'])->middleware('checkProtektoraNewsCreate');
+    Route::put('news/{news}', [NewsController::class, 'update'])->middleware('checkProtektoraNewsUpdate');
     Route::delete('news/{news}', [NewsController::class, 'destroy'])->middleware('checkProtektora');
 });
 

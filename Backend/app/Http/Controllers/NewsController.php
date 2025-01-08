@@ -14,43 +14,26 @@ class NewsController extends Controller
     // Crear una noticia
     public function store(Request $request)
     {
-
-	try {
-        	// Validación de los campos de texto y título en ambos idiomas
-	        $request->validate([
-        	    'titleES' => 'required|string',
-	            'titleEU' => 'required|string',
-	            'textES' => 'required|string',
-	            'textEU' => 'required|string',
-		    'img' => 'required|url',
-	        ]);
-	    } catch (\Illuminate\Validation\ValidationException $e) {
-	        return response()->json([
-	            'message' => 'Error de validación',
-	            'errors' => $e->errors(),
-	        ], 422);
-	    }
-
-        if (!auth()->check()) {
-        	return response()->json(['message' => 'No autenticado'], 401);
-    	}
-
-        // Obtener el usuario autenticado
-        $user = auth()->user();
-
-        // Obtener el 'protektora_id' del usuario autenticado
-        $protektora_id = $user->idProtektora;
-
-        if (!$protektora_id) {
+        // Validación de los campos de texto y título en ambos idiomas
+        try {
+            $request->validate([
+                'titleES' => 'required|string',
+                'titleEU' => 'required|string',
+                'textES' => 'required|string',
+                'textEU' => 'required|string',
+                'img' => 'required|url',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
-                'message' => 'Este usuario no tienes permisos para crear usuarios.',
-            ], 403);
+                'message' => 'Error de validación',
+                'errors' => $e->errors(),
+            ], 422);
         }
 
         // Crear la noticia
         $news = new News();
-        $news->protektora = $protektora_id;
-	    $news->img = $request->input('img');
+        $news->protektora = auth()->user()->idProtektora;  // El middleware ya validó que el usuario tenga un 'protektora_id'
+        $news->img = $request->input('img');
         $news->save(); // Guardamos la noticia en la base de datos, para obtener el ID
 
         // Obtener el ID de la noticia recién creada
@@ -98,9 +81,8 @@ class NewsController extends Controller
         ], 201);
     }
     // Actualizar una noticia
-public function update(Request $request, News $news)
-{
-    try {
+    public function update(Request $request, News $news)
+    {
         // Validación de los campos de texto y título en ambos idiomas
         $request->validate([
             'titleES' => 'required|string',
@@ -109,73 +91,50 @@ public function update(Request $request, News $news)
             'textEU' => 'required|string',
             'img' => 'required|url',
         ]);
-    } catch (\Illuminate\Validation\ValidationException $e) {
+
+        // Actualizamos la imagen de la noticia
+        $news->img = $request->input('img');
+        
+        // Actualizar las traducciones para el título
+        // En español
+        $title_es = Translation::where('keyValue', 'title' . $news->id)
+            ->where('language', 'es')
+            ->first();
+        $title_es->value = $request->input('titleES');
+        $title_es->save();
+
+        // En euskera
+        $title_eu = Translation::where('keyValue', 'title' . $news->id)
+            ->where('language', 'eu')
+            ->first();
+        $title_eu->value = $request->input('titleEU');
+        $title_eu->save();
+
+        // Actualizar las traducciones para el texto
+        // En español
+        $text_es = Translation::where('keyValue', 'news' . $news->id)
+            ->where('language', 'es')
+            ->first();
+        $text_es->value = $request->input('textES');
+        $text_es->save();
+
+        // En euskera
+        $text_eu = Translation::where('keyValue', 'news' . $news->id)
+            ->where('language', 'eu')
+            ->first();
+        $text_eu->value = $request->input('textEU');
+        $text_eu->save();
+
+        // Actualizamos los campos en la tabla `news` con las claves de traducción
+        $news->title = $title_es->keyValue;  // Clave que apunta al título en español
+        $news->text = $text_es->keyValue;    // Clave que apunta al texto en español
+        $news->save();  // Guardamos nuevamente la noticia con las claves actualizadas
+
+        // Retornar la respuesta
         return response()->json([
-            'message' => 'Error de validación',
-            'errors' => $e->errors(),
-        ], 422);
-    }
-
-    if (!auth()->check()) {
-        return response()->json(['message' => 'No autenticado'], 401);
-    }
-
-    // Obtener el usuario autenticado
-    $user = auth()->user();
-
-    // Obtener el 'protektora_id' del usuario autenticado
-    $protektora_id = $user->idProtektora;
-
-    // Verificar que el usuario tiene permisos para actualizar la noticia
-    if ($news->protektora !== $protektora_id) {
-        return response()->json([
-            'message' => 'No tienes permisos para actualizar esta noticia.',
-        ], 403);
-    }
-
-    // Actualizar la noticia
-    $news->img = $request->input('img');
-    
-    // Actualizar las traducciones para el título
-    // En español
-    $title_es = Translation::where('keyValue', 'title' . $news->id)
-        ->where('language', 'es')
-        ->first();
-    $title_es->value = $request->input('titleES');
-    $title_es->save();
-
-    // En euskera
-    $title_eu = Translation::where('keyValue', 'title' . $news->id)
-        ->where('language', 'eu')
-        ->first();
-    $title_eu->value = $request->input('titleEU');
-    $title_eu->save();
-
-    // Actualizar las traducciones para el texto
-    // En español
-    $text_es = Translation::where('keyValue', 'news' . $news->id)
-        ->where('language', 'es')
-        ->first();
-    $text_es->value = $request->input('textES');
-    $text_es->save();
-
-    // En euskera
-    $text_eu = Translation::where('keyValue', 'news' . $news->id)
-        ->where('language', 'eu')
-        ->first();
-    $text_eu->value = $request->input('textEU');
-    $text_eu->save();
-
-    // Actualizamos los campos en la tabla `news` con las claves de traducción
-    $news->title = $title_es->keyValue;  // Clave que apunta al título en español
-    $news->text = $text_es->keyValue;    // Clave que apunta al texto en español
-    $news->save();  // Guardamos nuevamente la noticia con las claves actualizadas
-
-    // Retornar la respuesta
-    return response()->json([
-        'message' => 'Noticia actualizada con éxito',
-        'news' => $news
-    ], 200);
+            'message' => 'Noticia actualizada con éxito',
+            'news' => $news
+        ], 200);
     }
     // Eliminar una noticia
     public function destroy(News $news)

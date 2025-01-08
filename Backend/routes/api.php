@@ -32,5 +32,12 @@ use App\Http\Controllers\ObtainNewsController;
 Route::get('/latest-news', [ObtainNewsController::class, 'getLatestNews']);
 
 
+// OBTENER LOS ANIMALES PARA ADOPTAR
+use App\Http\Controllers\AnimalController;
+Route::get('/animals-adopt', [AnimalController::class, 'getAnimals']);
+Route::get('/animals-adopt-create', [AnimalController::class, 'createAnimal'])->middleware('\App\Http\Middleware\CheckCreateNewsPermissions');
+
+
+
 // Ruta protegida, requiere autenticación
 //Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);

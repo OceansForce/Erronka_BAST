@@ -18,7 +18,7 @@ class Kernel extends HttpKernel
         // Otros middlewares...
 
 
-        'checkProtektoraNewsCreate' => \App\Http\Middleware\CheckCreateNewsPermissions::class,
+        'NewsCreate' => \App\Http\Middleware\CheckCreateNewsPermissions::class,
         'checkProtektoraNewsUpdate' => \App\Http\Middleware\CheckUpdateNewsPermissions::class,
     
 ];

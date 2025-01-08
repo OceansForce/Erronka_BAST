@@ -278,3 +278,62 @@ Response Error:
 ```
 </details>
 
+
+<details>
+    
+<summary> <h2> Get Animals to Adopt </h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+http://54.209.224.251:8000/animals?limit=5&offset=0&protektora_id=123&type=txakurra
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+[
+    {
+        "id": 1,
+        "name": "Fido",
+        "etxekoAnimalia": true,
+        "type": "txakurra",
+        "animalType": "Dog",
+        "img": null,
+        "bakuna": 1,
+        "gender": 1,
+        "descripcion": "Friendly dog",
+        "year": "2020-05-01 00:00:00",
+        "losted": 0,
+        "noiztik": "2025-01-01 00:00:00",
+        "userID": 2,
+        "protektora_id": 123
+    },
+    {
+        "id": 2,
+        "name": "Luna",
+        "etxekoAnimalia": true,
+        "type": "katua",
+        "animalType": "Cat",
+        "img": null,
+        "bakuna": 1,
+        "gender": 0,
+        "descripcion": "Playful cat",
+        "year": "2021-03-15 00:00:00",
+        "losted": 0,
+        "noiztik": "2025-01-01 00:00:00",
+        "userID": 3,
+        "protektora_id": 123
+    }
+]
+
+```
+Response Error:
+```
+{
+    "message": "No animals found for the given criteria"
+}
+```
+</details>

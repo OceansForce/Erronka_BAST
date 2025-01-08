@@ -59,4 +59,51 @@ class AnimalController extends Controller
         // Retornar la respuesta como JSON
         return response()->json($animals);
     }
+
+    // Create animals to adopt
+    public function createAnimal(Request $request)
+    {
+        // Validación de los parámetros
+        $request->validate([
+            'name' => 'required|string|max:255', // Nombre del animal
+            'etxekoAnimalia' => 'required|boolean', // Es un animal de casa (booleano)
+            'type' => 'required|string|in:txakurra,txakurra ppp,katua,besteak', // Tipo de animal
+            'animalType' => 'nullable|string|max:255', // Subtipo del animal (opcional)
+            'img' => 'nullable|url', // Imagen del animal (opcional)
+            'bakuna' => 'required|integer|min:0', // 0 = no vacunado, otros numeros, el id de la bakuna
+            'gender' => 'required|integer|in:0,1', // Género del animal, 0 = hembra, 1 = macho
+            'descripcion' => 'nullable|string|max:255', // Descripción del animal (opcional)
+            'year' => 'nullable|date', // Año de nacimiento o ingreso (opcional)
+        ]);
+
+        // Obtener el usuario autenticado
+        $user = auth()->user();
+
+        // Si no hay usuario autenticado, devolver un error
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
+        }
+
+        // Obtener el userID del usuario autenticado
+        $userID = $user->id;
+
+        // Crear el nuevo animal
+        $animal = Animal::create([
+            'name' => $request->input('name'),
+            'etxekoAnimalia' => $request->input('etxekoAnimalia'),
+            'type' => $request->input('type'),
+            'animalType' => $request->input('animalType', null), // Si no se pasa, se guarda como null
+            'img' => $request->input('img', null), // Si no se pasa, se guarda como null
+            'bakuna' => $request->input('bakuna'),
+            'gender' => $request->input('gender'),
+            'descripcion' => $request->input('descripcion', null), // Si no se pasa, se guarda como null
+            'year' => $request->input('year', null), // Si no se pasa, se guarda como null
+            'losted' => null, // Se establece como null
+            'noiztik' => null, // Se establece como null
+            'userID' => $userID, // Asignamos el ID del usuario autenticado
+        ]);
+
+        // Retornar el animal creado en formato JSON
+        return response()->json($animal, 201); // Código 201: creado correctamente
+    }
 }

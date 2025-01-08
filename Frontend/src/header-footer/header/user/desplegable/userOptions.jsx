@@ -69,10 +69,10 @@ const UserOptions = () => {
 
 
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
-              <a href='#' className='flex items-center'>
+              <Link to="/Profila" className='flex items-center'>
                 <img className='size-8 rounded-full' src='/img/icons/users/user-dog.jpg'/>
                 <h4 className='ml-3'>{t('user:profila')}</h4>
-              </a>
+              </Link>
             </li>
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
               <a href='#' className='flex items-center'>

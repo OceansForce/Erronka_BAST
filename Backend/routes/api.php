@@ -22,7 +22,7 @@ use App\Http\Controllers\NewsController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('news', [NewsController::class, 'store'])->middleware('NewsCreate');
-    Route::put('news/{news}', [NewsController::class, 'update'])->middleware('checkProtektoraNewsUpdate');
+    Route::put('news/{news}', [NewsController::class, 'update']);
     Route::delete('news/{news}', [NewsController::class, 'destroy'])->middleware('checkProtektora');
 });
 

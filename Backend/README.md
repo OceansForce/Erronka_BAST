@@ -286,7 +286,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/animals?limit=5&offset=0&protektora_id=123&type=txakurra
+http://54.209.224.251:8000/animals-adopt?limit=5&offset=0&protektora_id=123&type=txakurra
 ```
 Header:
 ```

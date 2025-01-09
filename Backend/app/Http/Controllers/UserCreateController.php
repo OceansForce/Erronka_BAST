@@ -50,7 +50,7 @@ class UserCreateController extends Controller
                 'password' => Hash::make($request->password),
                 'year' => $request->year ? $request->year : null,
                 'img' => $request->img, // Guardar la URL de la imagen
-                'email_verification_token' => $verificationToken,
+                'email_verification_token' => $request->$verificationToken,
             ]);
 
             Mail::send('emails.verify', ['token' => $verificationToken, 'user' => $user], function ($message) use ($user) {

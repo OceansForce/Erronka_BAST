@@ -12,7 +12,7 @@ class ObtainNewsController extends Controller
     {
         // Validar los parámetros
         $request->validate([
-            'count' => 'required|integer|min:1',
+            'count' => 'required|integer|min:1|max:25',
             'offset' => 'required|integer|min:0',
         ]);
 

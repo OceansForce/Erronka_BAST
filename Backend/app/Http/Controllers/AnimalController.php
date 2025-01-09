@@ -17,33 +17,39 @@ class AnimalController extends Controller
 
         // Validación de los parámetros
         $request->validate([
-            'limit' => 'integer|min:1|max:100', // Limitar el valor de limit a entre 1 y 100
+            'limit' => 'integer|min:1|max:25', // Limitar el valor de limit a entre 1 y 25
             'offset' => 'integer|min:0',
             'protektora_id' => 'nullable|integer|min:1', // El id de la protektora es opcional
             'type' => 'nullable|string|in:txakurra,txakurra ppp,katua,besteak', // El tipo de animal es opcional
         ]);
 
-        // Query para obtener animales que cumplan con las condiciones
-        $query = Animal::with('user:idProtektora') // Cargar la relación del usuario con el campo idProtektora
-            ->whereHas('user', function($query) use ($protektoraId) {
-                $query->where('idProtektora', '!=', 0)
-                      ->whereNotNull('idProtektora');
+        // Generar una clave única para el caché basada en los parámetros de la solicitud
+        $cacheKey = "animals_{$limit}_{$offset}_{$protektoraId}_{$type}";
 
-                // Si se pasa un idProtektora, filtra por este
-                if ($protektoraId) {
-                    $query->where('idProtektora', $protektoraId);
-                }
-            });
+        // Intentar obtener los animales del caché
+        $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $protektoraId, $type) {
+            // Query para obtener animales que cumplan con las condiciones
+            $query = Animal::with('user:idProtektora') // Cargar la relación del usuario con el campo idProtektora
+                ->whereHas('user', function($query) use ($protektoraId) {
+                    $query->where('idProtektora', '!=', 0)
+                        ->whereNotNull('idProtektora');
 
-        // Si se pasa el tipo de animal, filtramos también por el tipo
-        if ($type) {
-            $query->where('type', $type);
-        }
+                    // Si se pasa un idProtektora, filtra por este
+                    if ($protektoraId) {
+                        $query->where('idProtektora', $protektoraId);
+                    }
+                });
 
-        // Aplicar paginación
-        $animals = $query->offset($offset)
-                         ->limit($limit)
-                         ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik', 'userID']); // Selecciona solo los campos necesarios
+            // Si se pasa el tipo de animal, filtramos también por el tipo
+            if ($type) {
+                $query->where('type', $type);
+            }
+
+            // Aplicar paginación y obtener los resultados
+            return $query->offset($offset)
+                        ->limit($limit)
+                        ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']); // Selecciona solo los campos necesarios
+        });
 
         // Verificar si no se encontraron resultados
         if ($animals->isEmpty()) {
@@ -59,6 +65,7 @@ class AnimalController extends Controller
         // Retornar la respuesta como JSON
         return response()->json($animals);
     }
+
 
     // Create animals to adopt
     public function createAnimal(Request $request)

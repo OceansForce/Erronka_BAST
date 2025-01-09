@@ -41,8 +41,8 @@ class User extends Model
     // Para ocultar los campos como la contraseña en las respuestas JSON
     protected $hidden = [
         'password', // No mostrar la contraseña en las respuestas JSON
-        'img',      // Si no deseas exponer la imagen directamente
-	'id',
+        // 'img',      // Si no deseas exponer la imagen directamente
+	    'id',
     ];
 
     // Para convertir 'year' a un tipo de datos 'datetime'

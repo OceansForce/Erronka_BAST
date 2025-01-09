@@ -15,7 +15,7 @@ class CheckCreateNewsPermissions
         }
 
         // Obtener el usuario autenticado
-        $user = auth()->user();
+        // $user = auth()->user();
 
         
 

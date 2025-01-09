@@ -18,10 +18,10 @@ class UserCreateController extends Controller
         $validator = \Validator::make($request->all(), [
             'DNI' => 'required|string|max:10|unique:users,DNI',
             'name' => 'required|string|max:255',
-            'secondName' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255|unique:users,email',
+            'secondName' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'year' => 'nullable|date',
+            'year' => 'required|date',
             'img' => 'nullable|url', // Validación para URL de la imagen
         ]);
 
@@ -35,6 +35,8 @@ class UserCreateController extends Controller
 
         Log::info('Datos validados correctamente');
 
+        $verificationToken = Str::random(32);
+
         // Crear el usuario
         try {
             $user = User::create([
@@ -45,7 +47,14 @@ class UserCreateController extends Controller
                 'password' => Hash::make($request->password),
                 'year' => $request->year ? $request->year : null,
                 'img' => $request->img, // Guardar la URL de la imagen
+                'email_verification_token' => $verificationToken,
             ]);
+
+            Mail::send('emails.verify', ['token' => $verificationToken], function ($message) use ($user) {
+                $message->to($user->email);
+                $message->subject('Confirma tu correo electrónico');
+            });
+            
 
             Log::info('Usuario creado exitosamente', ['user' => $user]);
 
@@ -62,6 +71,22 @@ class UserCreateController extends Controller
             ], 500); // 500 Internal Server Error
         }
     }
+    public function verifyEmail($token)
+    {
+        $user = User::where('email_verification_token', $token)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Token inválido.'], 400);
+        }
+
+        $user->update([
+            'email_verified' => true,
+            'email_verification_token' => null,
+        ]);
+
+        return response()->json(['message' => 'Correo confirmado con éxito.'], 200);
+    }
+
 
     public function edit(Request $request)
     {
@@ -75,10 +100,10 @@ class UserCreateController extends Controller
         $validator = \Validator::make($request->all(), [
             'DNI' => 'required|string|max:10|unique:users,DNI,' . $user->id, // Validar solo si el DNI ha cambiado
             'name' => 'required|string|max:255',
-            'secondName' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id, // Validar solo si el email ha cambiado
-            'password' => 'nullable|string|min:8|confirmed', // La contraseña es opcional al editar, pero si se proporciona debe cumplir con las reglas
-            'year' => 'nullable|date',
+            'secondName' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id, // Validar solo si el email ha cambiado
+            'password' => 'required|string|min:8|confirmed', // La contraseña es opcional al editar, pero si se proporciona debe cumplir con las reglas
+            'year' => 'required|date',
             'img' => 'nullable|url', // Validación para URL de la imagen
         ]);
 

@@ -65,15 +65,19 @@ class UserCreateController extends Controller
 
     public function edit(Request $request)
     {
-        Log::info('Recibida solicitud de registro', $request->all());
+        // Obtener el usuario autenticado
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
+        }
 
         // Validación de los datos recibidos
         $validator = \Validator::make($request->all(), [
-            'DNI' => 'required|string|max:10|unique:users,DNI',
+            'DNI' => 'required|string|max:10|unique:users,DNI,' . $user->id, // Validar solo si el DNI ha cambiado
             'name' => 'required|string|max:255',
             'secondName' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
+            'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id, // Validar solo si el email ha cambiado
+            'password' => 'nullable|string|min:8|confirmed', // La contraseña es opcional al editar, pero si se proporciona debe cumplir con las reglas
             'year' => 'nullable|date',
             'img' => 'nullable|url', // Validación para URL de la imagen
         ]);
@@ -86,35 +90,41 @@ class UserCreateController extends Controller
             ], 400); // 400 Bad Request
         }
 
-        Log::info('Datos validados correctamente');
-
-        // Crear el usuario
+        // Actualizar los datos del usuario
         try {
-            $user = User::create([
-                'DNI' => $request->DNI,
-                'name' => $request->name,
-                'secondName' => $request->secondName,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'year' => $request->year ? $request->year : null,
-                'img' => $request->img, // Guardar la URL de la imagen
-            ]);
+            // Actualizamos los campos proporcionados por el usuario
+            $user->DNI = $request->DNI;
+            $user->name = $request->name;
+            $user->secondName = $request->secondName;
+            $user->email = $request->email;
+            
+            // Si la contraseña fue proporcionada, la actualizamos
+            if ($request->password) {
+                $user->password = Hash::make($request->password);
+            }
+            
+            $user->year = $request->year ? $request->year : null;
+            $user->img = $request->img;
 
-            Log::info('Usuario creado exitosamente', ['user' => $user]);
+            // Guardar los cambios en la base de datos
+            $user->save();
+
+            Log::info('Usuario actualizado exitosamente', ['user' => $user]);
 
             return response()->json([
-                'message' => 'Usuario creado exitosamente',
+                'message' => 'Usuario actualizado exitosamente',
                 'user' => $user,
-            ], 201); // 201 Created
+            ], 200); // 200 OK
 
         } catch (\Exception $e) {
             // En caso de error inesperado (ej. problemas con la base de datos)
             return response()->json([
-                'message' => 'Ocurrió un error al crear el usuario.',
+                'message' => 'Ocurrió un error al actualizar los datos del usuario.',
                 'error' => $e->getMessage(),
             ], 500); // 500 Internal Server Error
         }
     }
+
 
 
 }

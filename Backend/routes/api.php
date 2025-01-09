@@ -43,6 +43,8 @@ Route::get('/latest-news', [ObtainNewsController::class, 'getLatestNews']);
 use App\Http\Controllers\AnimalController;
 Route::get('/animals-adopt', [AnimalController::class, 'getAnimals']);
 Route::get('/animals-adopt-create', [AnimalController::class, 'createAnimal'])->middleware('\App\Http\Middleware\CheckCreateNewsPermissions');
+Route::post('/animals-edit', [AnimalController::class, 'editAnimal'])->middleware('\App\Http\Middleware\BasicUserAuth');
+
 
 
 

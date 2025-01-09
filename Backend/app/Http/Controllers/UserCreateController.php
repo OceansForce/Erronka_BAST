@@ -53,10 +53,11 @@ class UserCreateController extends Controller
                 'email_verification_token' => $verificationToken,
             ]);
 
-            Mail::send('emails.verify', ['token' => $verificationToken], function ($message) use ($user) {
+            Mail::send('emails.verify', ['token' => $verificationToken, 'user' => $user], function ($message) use ($user) {
                 $message->to($user->email);
                 $message->subject('Confirma tu correo electrónico');
             });
+                        
             
 
             Log::info('Usuario creado exitosamente', ['user' => $user]);

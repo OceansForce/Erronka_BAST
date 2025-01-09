@@ -10,6 +10,13 @@ Route::post('/translations/keys', [TranslationController::class, 'getTranslation
 use App\Http\Controllers\UserCreateController;
 Route::post('register', [UserCreateController::class, 'store']);  // Ruta para crear un usuario
 
+// ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
+use App\Http\Controllers\UserController;
+Route::get('user-data', [UserController::class, 'getUser'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para crear un usuario
+
+// ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
+Route::put('user-data-edit', [UserCreateController::class, 'edit'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para crear un usuario
+
 
 // SAIOA HASI
 use App\Http\Controllers\AuthController;

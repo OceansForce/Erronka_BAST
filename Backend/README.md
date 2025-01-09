@@ -141,6 +141,130 @@ Response Error:
 ```
 </details>
 
+<details>
+    
+<summary> <h2> Get User Data </h2> </summary>
+Link: 
+ 
+```
+http://54.209.224.251:8000/user-data
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Response:
+```
+{
+    "user": {
+        "id": 1,
+        "DNI": "123456789A",
+        "name": "Juan",
+        "secondName": "Pérez",
+        "email": "juan.perez@ejemplo.com",
+        "year": "1990-05-20",
+        "img": "http://urlimagen.com/imagen.jpg"
+    },
+    "animals": [
+        {
+            "id": 1,
+            "name": "Fido",
+            "type": "txakurra",
+            "animalType": "Perro",
+            "img": "http://urlimagen.com/fido.jpg",
+            "bakuna": true,
+            "gender": "Macho",
+            "descripcion": "Perro muy amigable",
+            "year": "2020",
+            "losted": false,
+            "noiztik": "2023-01-01",
+            "userID": 1
+        },
+        {
+            "id": 2,
+            "name": "Mimi",
+            "type": "katua",
+            "animalType": "Gato",
+            "img": "http://urlimagen.com/mimi.jpg",
+            "bakuna": true,
+            "gender": "Hembra",
+            "descripcion": "Gato tranquilo",
+            "year": "2019",
+            "losted": false,
+            "noiztik": "2022-12-01",
+            "userID": 1
+        }
+    ]
+}
+
+```
+Response Error:
+```
+{
+        "error": "Usuario no autenticado"
+}
+```
+</details>
+
+<details>
+    
+<summary> <h2> Edit User Data </h2> </summary>
+<p> **Put** bitartez egin behar da</p>
+Link: 
+ 
+```
+http://54.209.224.251:8000/user-data-edit
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Body:
+```
+{
+    "DNI": "123456789B",
+    "name": "Juan",
+    "secondName": "García",
+    "email": "juan.garcia@ejemplo.com",
+    "password": "nuevaContraseña123",
+    "year": "1991-06-15",
+    "img": "http://urlimagen.com/nueva-imagen.jpg"
+}
+```
+Response:
+```
+{
+    "message": "Usuario actualizado exitosamente",
+    "user": {
+        "id": 1,
+        "DNI": "123456789B",
+        "name": "Juan",
+        "secondName": "García",
+        "email": "juan.garcia@ejemplo.com",
+        "year": "1991-06-15",
+        "img": "http://urlimagen.com/nueva-imagen.jpg"
+    }
+}
+
+
+```
+Response Error:
+```
+{
+    "message": "Datos incorrectos o incompletos.",
+    "errors": {
+        "email": ["El correo electrónico ya está en uso."]
+    }
+}
+{
+    "message": "Ocurrió un error al actualizar los datos del usuario.",
+    "error": "Error en la base de datos"
+}
+
+```
+</details>
 
 
 <details>

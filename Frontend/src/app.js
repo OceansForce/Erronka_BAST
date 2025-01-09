@@ -7,6 +7,7 @@ import Mapa from './pages/mapa';
 import Saioa_sortu from './pages/saioa_sortu';
 import Login from './pages/login';
 import Ad_menua from './pages/Ad_menu';
+import Ad_notizia_panela from './pages/Ad_notizia_panela';
 import Ad_notiziak from './pages/Ad_notiziak';
 import Ad_galduta from './pages/Ad_galduta';
 import Ad_adoptatu from './pages/Ad_adoptatu';
@@ -27,6 +28,7 @@ function App() {
           <Route path="/saioa_sortu" element={<Saioa_sortu />} /> {/* Lo mismo aquí */}
           <Route path="/login" element={<Login />} /> {/* Lo mismo aquí */}
           <Route path="/Ad_menu" element={<Ad_menua />} /> {/* Lo mismo aquí */}
+          <Route path="/Ad_notizia_panela" element={<Ad_notizia_panela />} /> {/* Lo mismo aquí */}
           <Route path="/Ad_notiziak" element={<Ad_notiziak />} /> {/* Lo mismo aquí */}
           <Route path="/Ad_galduta" element={<Ad_galduta />} /> {/* Lo mismo aquí */}
           <Route path="/Ad_adoptatu" element={<Ad_adoptatu />} /> {/* Lo mismo aquí */}

@@ -63,7 +63,7 @@ Route::post('/animals-edit', [AnimalController::class, 'editAnimal'])->middlewar
 
 
 
-Route::get('/verify-email/{token}', [UserController::class, 'verifyEmail']);
+Route::get('/verify-email/{token}', [UserCreateController::class, 'verifyEmail']);
 
 // Ruta protegida, requiere autenticación
 //Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);

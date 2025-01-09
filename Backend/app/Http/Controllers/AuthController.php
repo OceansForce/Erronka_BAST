@@ -27,7 +27,7 @@ class AuthController extends Controller
         }
 
 
-	$abilities = [];
+	    $abilities = [];
         if ($user->role === 'admin') {
             // Los administradores tienen todos los permisos
             $abilities = ['*'];

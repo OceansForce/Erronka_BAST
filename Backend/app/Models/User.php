@@ -36,6 +36,8 @@ class User extends Model
         'year',
         'img',
         'idProtektora',  // La relación con protektora
+        'email_verification_token',
+        'email_verified',
     ];
 
     // Para ocultar los campos como la contraseña en las respuestas JSON

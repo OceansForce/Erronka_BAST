@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class UserContoller extends Controller
 {
-    public function obteinUser(Request $request)
+    public function getUser(Request $request)
     {
         // Obtener el usuario autenticado
         $user = auth()->user();

@@ -1,5 +1,21 @@
 <?php
 
+
+// añadir al .env
+// despues crear las columas en la base de datos, la del token (string) y el bolean que esta verificado
+// MAIL_MAILER=smtp
+// MAIL_HOST=smtp.gmail.com
+// MAIL_PORT=587
+// MAIL_USERNAME=bastanimalsenterpise@gmail.com
+// MAIL_PASSWORD=qbhh ohlw ghfi sjfl
+// MAIL_ENCRYPTION=tls
+// MAIL_FROM_ADDRESS=bastanimalsenterpise@gmail.com
+// MAIL_FROM_NAME="${APP_NAME}"
+
+
+
+
+
 // Lortu tradukzioak
 use App\Http\Controllers\TranslationController;
 
@@ -9,6 +25,13 @@ Route::post('/translations/keys', [TranslationController::class, 'getTranslation
 // ERABILTZAILEAK SORTU
 use App\Http\Controllers\UserCreateController;
 Route::post('register', [UserCreateController::class, 'store']);  // Ruta para crear un usuario
+
+// ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
+use App\Http\Controllers\UserController;
+Route::get('user-data', [UserController::class, 'getUser'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para crear un usuario
+
+// ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
+Route::put('user-data-edit', [UserCreateController::class, 'edit'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para crear un usuario
 
 
 // SAIOA HASI
@@ -36,8 +59,11 @@ Route::get('/latest-news', [ObtainNewsController::class, 'getLatestNews']);
 use App\Http\Controllers\AnimalController;
 Route::get('/animals-adopt', [AnimalController::class, 'getAnimals']);
 Route::get('/animals-adopt-create', [AnimalController::class, 'createAnimal'])->middleware('\App\Http\Middleware\CheckCreateNewsPermissions');
+Route::post('/animals-edit', [AnimalController::class, 'editAnimal'])->middleware('\App\Http\Middleware\BasicUserAuth');
 
 
+
+Route::get('/verify-email/{token}', [UserCreateController::class, 'verifyEmail']);
 
 // Ruta protegida, requiere autenticación
 //Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);

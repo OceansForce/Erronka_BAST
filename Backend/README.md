@@ -508,3 +508,77 @@ Response Error:
 }
 ```
 </details>
+
+
+
+<details>
+    
+<summary> <h2> Edit </h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+http://54.209.224.251:8000/animals-edeit
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Body:
+```
+{
+  "id": 1,
+  "name": "Max",
+  "etxekoAnimalia": true,
+  "type": "txakurra",
+  "animalType": "Pastor Alemán",
+  "img": "http://urlimagen.com/nueva-imagen.jpg",
+  "bakuna": 2,
+  "gender": 1,
+  "descripcion": "Animal amigable y activo.",
+  "year": "2020-05-10"
+}
+
+```
+Response:
+```
+{
+  "id": 1,
+  "name": "Max",
+  "etxekoAnimalia": true,
+  "type": "txakurra",
+  "animalType": "Pastor Alemán",
+  "img": "http://urlimagen.com/nueva-imagen.jpg",
+  "bakuna": 2,
+  "gender": 1,
+  "descripcion": "Animal amigable y activo.",
+  "year": "2020-05-10",
+  "losted": null,
+  "noiztik": null,
+  "userID": 2,
+  "protektora_id": 5
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "error": "Usuario no autenticado"
+}
+{
+  "error": "No tienes permisos para editar este animal"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>

@@ -12,7 +12,7 @@ class AnimalController extends Controller
         // Obtener los parámetros de la solicitud
         $limit = $request->input('limit', 10); // Valor por defecto de 10
         $offset = $request->input('offset', 0); // Valor por defecto de 0
-        $protektoraId = $request->input('protektora_id', null); // El id de la protektora, si se pasa
+        $idProtektora = $request->input('protektora_id', null); // El id de la protektora, si se pasa
         $type = $request->input('type', null); // El tipo de animal, si se pasa
 
         // Validación de los parámetros
@@ -24,19 +24,19 @@ class AnimalController extends Controller
         ]);
 
         // Generar una clave única para el caché basada en los parámetros de la solicitud
-        $cacheKey = "animals_{$limit}_{$offset}_{$protektoraId}_{$type}";
+        $cacheKey = "animals_{$limit}_{$offset}_{$idProtektora}_{$type}";
 
         // Intentar obtener los animales del caché
-        $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $protektoraId, $type) {
+        $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $idProtektora, $type) {
             // Query para obtener animales que cumplan con las condiciones
             $query = Animal::with('user:idProtektora') // Cargar la relación del usuario con el campo idProtektora
-                ->whereHas('user', function($query) use ($protektoraId) {
+                ->whereHas('user', function($query) use ($idProtektora) {
                     $query->where('idProtektora', '!=', 0)
                         ->whereNotNull('idProtektora');
 
                     // Si se pasa un idProtektora, filtra por este
-                    if ($protektoraId) {
-                        $query->where('idProtektora', $protektoraId);
+                    if ($idProtektora) {
+                        $query->where('idProtektora', $idProtektora);
                     }
                 });
 
@@ -114,7 +114,6 @@ class AnimalController extends Controller
         return response()->json($animal, 201); // Código 201: creado correctamente
     }
 
-    // Editar animal existente
     public function editAnimal(Request $request)
     {
         // Validación de los parámetros
@@ -129,24 +128,37 @@ class AnimalController extends Controller
             'gender' => 'nullable|integer|in:0,1', // Género del animal, 0 = hembra, 1 = macho
             'descripcion' => 'nullable|string|max:255', // Descripción del animal (opcional)
             'year' => 'nullable|date', // Año de nacimiento o ingreso (opcional)
+            'userEmail' => 'nullable|string|email|max:255', // Email del usuario al que pertenece el animal
         ]);
-
+    
         // Obtener el usuario autenticado
         $user = auth()->user();
-
+    
         // Si no hay usuario autenticado, devolver un error
         if (!$user) {
             return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
         }
-
+    
         // Obtener el animal con el ID proporcionado
         $animal = Animal::find($request->input('id'));
-
+    
         // Verificar si el animal existe
         if (!$animal) {
             return response()->json(['error' => 'Animal no encontrado'], 404); // 404 Not Found
         }
-
+    
+        // Si se proporciona userEmail, buscar el usuario correspondiente
+        if ($request->has('userEmail')) {
+            $newUser = User::where('email', $request->input('userEmail'))->first();
+    
+            if (!$newUser) {
+                return response()->json(['error' => 'Usuario con el email proporcionado no encontrado'], 404); // 404 Not Found
+            }
+    
+            // Actualizar el userID del animal con el ID del nuevo usuario
+            $animal->userID = $newUser->id;
+        }
+    
         // Comprobar si el animal pertenece al usuario autenticado
         if ($animal->userID == $user->id) {
             // Si el animal pertenece al usuario autenticado, se pueden editar sus datos
@@ -161,10 +173,13 @@ class AnimalController extends Controller
                 'descripcion',
                 'year',
             ]));
-
+    
+            // Guardar cambios (incluido userID si se actualizó)
+            $animal->save();
+    
             return response()->json($animal, 200); // 200 OK
         }
-
+    
         // Si el animal no pertenece al usuario autenticado, verificar si tiene una protektora
         if ($animal->protektora_id) {
             // Verificar si el ID de la protektora del animal coincide con el ID de la protektora del usuario
@@ -181,13 +196,17 @@ class AnimalController extends Controller
                     'descripcion',
                     'year',
                 ]));
-
+    
+                // Guardar cambios (incluido userID si se actualizó)
+                $animal->save();
+    
                 return response()->json($animal, 200); // 200 OK
             }
         }
-
+    
         // Si no se cumple ninguna de las condiciones anteriores, devolver un error de autorización
         return response()->json(['error' => 'No tienes permisos para editar este animal'], 403); // 403 Forbidden
     }
+    
 
 }

@@ -19,6 +19,11 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
+        if ($user->email_verified === false) {
+            return response()->json([
+                'error' => 'El usuario no ha verificado su correo electrónico.',
+            ], 401);
+        }
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([

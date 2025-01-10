@@ -317,6 +317,7 @@ Response Error:
 <p> **Get** bitartez egin behar da</p>
 Link: 
 <p>Protektora_id is optional</p>
+    
 ```
 http://3.87.235.201:8000/api/latest-news?count=5&offset=10&protektora_id=1
 ```

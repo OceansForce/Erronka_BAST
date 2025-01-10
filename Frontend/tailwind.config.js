@@ -20,6 +20,7 @@ module.exports = {
         dark_button: '#3c663c',
         'dark-bg': '#1a202c',     // Color personalizado para fondos oscuros
         'light-bg': '#f7fafc',    // Color personalizado para fondos claros
+        aukeratuta: '#8AE690',
 
         
       }

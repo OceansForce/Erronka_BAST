@@ -107,7 +107,7 @@ function Ad_notiziak() {
                 <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-full rounded-lg text-center border-black dark:border-transparent border-2'>
                     <div className='w-full flex'>
                         
-                        <BackButton targetPage="/Ad_menu" />
+                        <BackButton targetPage="/Ad_notizia_panela" width={20}/>
                         <div className='w-11/12 flex flex-row space-x-4 justify-end'>
                             <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
                             <DarkModeToggle className='w-1/2' />

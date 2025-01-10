@@ -40,7 +40,7 @@ function Ad_menua() {
             </div>
             <div className="w-full flex flex-row bg-red erdian text-center space-x-14">
                 <AdminPanelButtom 
-                    to="/Ad_notiziak" 
+                    to="/Ad_notizia_panela" 
                     imageSrc="./img/newspaper-svgrepo-com.svg" 
                     text={t('ad_menua:notiziak')} 
                 />

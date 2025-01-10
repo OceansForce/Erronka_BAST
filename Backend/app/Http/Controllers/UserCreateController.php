@@ -154,6 +154,73 @@ class UserCreateController extends Controller
         }
     }
 
+    public function addProtectora(Request $request)
+    {
+        // Obtener el usuario autenticado
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
+        }
+
+        // Verificar si el usuario autenticado tiene un idProtektora
+        if (is_null($user->idProtektora)) {
+            return response()->json(['error' => 'El usuario no tiene asignada una protectora.'], 400); // 400 Bad Request
+        }
+
+        $idProtektora = $user->idProtektora;
+
+        // Validación de los datos recibidos
+        $validator = \Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255|unique:users,email,', 
+        ]);
+
+        // Si la validación falla, devolver un 400 Bad Request
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Datos incorrectos o incompletos.',
+                'errors' => $validator->errors()
+            ], 400); // 400 Bad Request
+        }
+
+        $email = $request->input('email');
+        $existingUser = \App\Models\User::where('email', $email)->first();
+
+        // Verificar si el usuario existe
+        if (!$existingUser) {
+            return response()->json([
+                'message' => 'El email no existe.',
+            ], 409); // 409 Conflict
+        }
+
+        // Verificar si el usuario objetivo ya tiene asignada una protectora
+        if (!is_null($existingUser->idProtektora)) {
+            return response()->json([
+                'message' => 'El usuario ya tiene asignada una protectora.',
+            ], 400); // 400 Bad Request
+        }
+
+        // Asignar el idProtektora del usuario autenticado al usuario encontrado
+        try {
+            $existingUser->idProtektora = $idProtektora;
+            $existingUser->save();
+
+            Log::info('Usuario actualizado exitosamente con protectora', ['user' => $existingUser]);
+
+            return response()->json([
+                'message' => 'Protector asignado exitosamente al usuario.',
+                'user' => $existingUser,
+            ], 200); // 200 OK
+
+        } catch (\Exception $e) {
+            // En caso de error inesperado (ej. problemas con la base de datos)
+            return response()->json([
+                'message' => 'Ocurrió un error al asignar la protectora al usuario.',
+                'error' => $e->getMessage(),
+            ], 500); // 500 Internal Server Error
+        }
+    }
+
+
 
 
 }

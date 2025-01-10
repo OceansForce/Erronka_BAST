@@ -266,6 +266,57 @@ Response Error:
 ```
 </details>
 
+<details>
+    
+<summary> <h2> Add protectora to user </h2> </summary>
+<p> **Put** bitartez egin behar da</p>
+Link: 
+ 
+```
+http://54.209.224.251:8000/user-add-protectora
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Body:
+```
+{
+    "email": "usuario@example.com"
+}
+```
+Response:
+```
+{
+    "message": "Protector asignado exitosamente al usuario.",
+    "user": {
+        "id": 2,
+        "email": "usuario@example.com",
+        "idProtektora": 1,  // idProtektora asignado al usuario
+        "created_at": "2025-01-10T12:34:56.000000Z",
+        "updated_at": "2025-01-10T12:34:56.000000Z"
+    }
+}
+```
+Response Error:
+```
+{
+    "message": "El email no existe."
+}
+{
+    "message": "El usuario ya tiene asignada una protectora."
+}
+{
+    "error": "El usuario no tiene asignada una protectora."
+}
+{
+    "message": "Ocurrió un error al asignar la protectora al usuario.",
+    "error": "Mensaje de error específico"
+}
+
+```
+</details>
 
 <details>
 <summary> <h2> Create News </h2> </summary>

@@ -26,14 +26,21 @@ class CheckCreateNewsPermissions
             return $next($request);
         }
 
-        // Verificar si el usuario tiene un 'protektora_id' asociado
-        if (!$protektora_id) {
-            return response()->json([
-                'message' => 'Este usuario no tiene permisos para crear noticias.',
-            ], 403);
-        }
 
-        // Si pasa la verificación, continuar con la solicitud
-        return $next($request);
+        return response()->json([
+            'message' => 'Este usuario no tiene permisos para crear noticias.',
+        ], 403);
+
+
+
+        // // Verificar si el usuario tiene un 'protektora_id' asociado
+        // if (!$protektora_id) {
+        //     return response()->json([
+        //         'message' => 'Este usuario no tiene permisos para crear noticias.',
+        //     ], 403);
+        // }
+
+        // // Si pasa la verificación, continuar con la solicitud
+        // return $next($request);
     }
 }

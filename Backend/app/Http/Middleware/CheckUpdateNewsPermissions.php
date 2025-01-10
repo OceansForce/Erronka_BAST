@@ -26,14 +26,18 @@ class CheckUpdateNewsPermissions
             return $next($request);
         }
 
-        // Verificar que el usuario tiene permisos para actualizar la noticia
-        if ($request->news->protektora !== $protektora_id) {
-            return response()->json([
-                'message' => 'No tienes permisos para actualizar esta noticia.',
-            ], 403);
-        }
+        return response()->json([
+            'message' => 'No tienes permisos para actualizar esta noticia.',
+        ], 403);
 
-        // Si pasa las verificaciones, continuar con la solicitud
-        return $next($request);
+        // // Verificar que el usuario tiene permisos para actualizar la noticia
+        // if ($request->news->protektora !== $protektora_id) {
+        //     return response()->json([
+        //         'message' => 'No tienes permisos para actualizar esta noticia.',
+        //     ], 403);
+        // }
+
+        // // Si pasa las verificaciones, continuar con la solicitud
+        // return $next($request);
     }
 }

@@ -55,6 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
 // OBTENER LAS NOTICIAS
 use App\Http\Controllers\ObtainNewsController;
 Route::get('/latest-news', [ObtainNewsController::class, 'getLatestNews']);
+Route::get('/new-obtein/{news}', [ObtainNewsController::class, 'getNew']);
 
 
 // OBTENER LOS ANIMALES PARA ADOPTAR

@@ -47,4 +47,39 @@ class ObtainNewsController extends Controller
         return response()->json($news);
     }
 
+    public function getNew(Request $request)
+    {
+        // Validar el parámetro newID
+        $request->validate([
+            'newID' => 'required|integer|exists:news,id', // Validamos que el newID sea obligatorio, un entero y que exista en la base de datos
+        ]);
+
+        // Obtener el parámetro newID
+        $newID = $request->input('newID');
+
+        // Buscar la noticia por ID e incluir las traducciones
+        $news = News::with('translations')->find($newID);
+
+        // Verificar si la noticia existe
+        if (!$news) {
+            return response()->json(['error' => 'Noticia no encontrada'], 404);
+        }
+
+        // Preparar los datos de la respuesta
+        $response = [
+            'id' => $news->id,
+            'translations' => $news->translations->map(function($translation) {
+                return [
+                    'title' => $translation->title,
+                    'text' => $translation->text
+                ];
+            })
+        ];
+
+        // Devolver la noticia encontrada junto con sus traducciones
+        return response()->json($response);
+    }
+
+
+
 }

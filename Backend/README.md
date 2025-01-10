@@ -513,7 +513,7 @@ Response Error:
 
 <details>
     
-<summary> <h2> Edit </h2> </summary>
+<summary> <h2> Edit animals </h2> </summary>
 <p> **Post** bitartez egin behar da</p>
 Link: 
  

@@ -34,7 +34,7 @@ Route::get('user-data', [UserController::class, 'getUser'])->middleware('\App\Ht
 Route::put('user-data-edit', [UserCreateController::class, 'edit'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para crear un usuario
 
 // ERABILTZAILE bateri ezarri protektora bat
-Route::put('user-add-protectora', [UserCreateController::class, 'addProtectora'])->middleware('\App\Http\Middleware\CheckCreateNewsPermissions');  // Ruta para crear un usuario
+Route::put('user-add-protectora', [UserCreateController::class, 'addProtectora'])->middleware('\App\Http\Middleware\AnimalMiddleware');  // Ruta para crear un usuario
 
 // SAIOA HASI
 use App\Http\Controllers\AuthController;
@@ -60,7 +60,7 @@ Route::get('/latest-news', [ObtainNewsController::class, 'getLatestNews']);
 // OBTENER LOS ANIMALES PARA ADOPTAR
 use App\Http\Controllers\AnimalController;
 Route::get('/animals-adopt', [AnimalController::class, 'getAnimals']);
-Route::get('/animals-adopt-create', [AnimalController::class, 'createAnimal'])->middleware('\App\Http\Middleware\CheckCreateNewsPermissions');
+Route::get('/animals-adopt-create', [AnimalController::class, 'createAnimal'])->middleware('\App\Http\Middleware\AnimalMiddleware');
 Route::post('/animals-edit', [AnimalController::class, 'editAnimal'])->middleware('\App\Http\Middleware\BasicUserAuth');
 
 

@@ -33,6 +33,8 @@ Route::get('user-data', [UserController::class, 'getUser'])->middleware('\App\Ht
 // ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
 Route::put('user-data-edit', [UserCreateController::class, 'edit'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para crear un usuario
 
+// ERABILTZAILE bateri ezarri protektora bat
+Route::put('user-add-protectora', [UserCreateController::class, 'addProtectora'])->middleware('\App\Http\Middleware\CheckCreateNewsPermissions');  // Ruta para crear un usuario
 
 // SAIOA HASI
 use App\Http\Controllers\AuthController;

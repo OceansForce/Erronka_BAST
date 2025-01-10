@@ -6,6 +6,7 @@ import i18n from '../118n/menu';
 import BackButton from '../components/bottons/backBotom';
 import SendButom from '../components/bottons/sendBotton';
 import { Link } from 'react-router-dom';
+import IpAPI from "./../config/ipAPI";
 
 function Ad_notizia_panela() {
 
@@ -48,9 +49,6 @@ function Ad_notizia_panela() {
                     <div className='flex flex-row text-right'>
                         <img src='./img/icons/profil/pen_white.svg' className='size-7 dark:hidden transition-all duration-300  hover:scale-110 active:scale-95 hover:bg-aukeratuta rounded-full'/>
                         <img src='./img/icons/profil/pen_Black.svg' className='size-7 hidden dark:block transition-all duration-300  hover:scale-110 active:scale-95 hover:bg-aukeratuta rounded-full'/>
-
-                        {/* <img src='./img/icons/profil/plus_white.svg' className='size-6 mr-3 dark:hidden'/>
-                        <img src='./img/icons/profil/plus_black.svg' className='size-6 mr-3 hidden dark:block '/> */}
 
                         <img src='./img/icons/notizia/trash_white.svg' className='size-7 mr-3 dark:hidden transition-all duration-300  hover:scale-110 active:scale-95 hover:bg-aukeratuta rounded-full'/>
                         <img src='./img/icons/notizia/trash_black.svg' className='size-7 mr-3 hidden dark:block transition-all duration-300  hover:scale-110 active:scale-95 hover:bg-aukeratuta rounded-full'/>

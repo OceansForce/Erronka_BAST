@@ -28,14 +28,13 @@ Route::post('register', [UserCreateController::class, 'store']);  // Ruta para c
 
 // ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
 use App\Http\Controllers\UserController;
-Route::get('user-data', [UserController::class, 'getUser'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para crear un usuario
+Route::get('user-data', [UserController::class, 'getUser'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para obtener los datos de un usuario
 
 // ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
-Route::put('user-data-edit', [UserCreateController::class, 'edit'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para crear un usuario
+Route::put('user-data-edit', [UserCreateController::class, 'edit'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para editar un usuario
 
 // ERABILTZAILE bateri ezarri protektora bat
-Route::put('user-add-protectora', [UserCreateController::class, 'addProtectora'])->middleware('\App\Http\Middleware\AnimalMiddleware');  // Ruta para crear un usuario
-
+Route::put('user-add-protectora', [UserCreateController::class, 'addProtectora'])->middleware('\App\Http\Middleware\AnimalMiddleware');  // Ruta para asignar una protectora a un usuario
 // SAIOA HASI
 use App\Http\Controllers\AuthController;
 Route::post('login', [AuthController::class, 'login']);
@@ -61,8 +60,11 @@ Route::get('/new-obtein/{news}', [ObtainNewsController::class, 'getNew']);
 // OBTENER LOS ANIMALES PARA ADOPTAR
 use App\Http\Controllers\AnimalController;
 Route::get('/animals-adopt', [AnimalController::class, 'getAnimals']);
-Route::get('/animals-adopt-create', [AnimalController::class, 'createAnimal'])->middleware('\App\Http\Middleware\AnimalMiddleware');
+Route::get('/animals-create', [AnimalController::class, 'createAnimal'])->middleware('\App\Http\Middleware\BasicUserAuth');
 Route::post('/animals-edit', [AnimalController::class, 'editAnimal'])->middleware('\App\Http\Middleware\BasicUserAuth');
+
+Route::get('/animals-personal', [AnimalController::class, 'getPersonalAnimals'])->middleware('\App\Http\Middleware\BasicUserAuth');
+
 
 
 

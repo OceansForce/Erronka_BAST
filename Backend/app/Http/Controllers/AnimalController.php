@@ -61,6 +61,57 @@ class AnimalController extends Controller
         return response()->json($animals);
     }
 
+    public function getPersonalAnimals(Request $request)
+    {
+        // Obtener los parámetros de la solicitud
+        $limit = $request->input('limit', 10); // Valor por defecto de 10
+        $offset = $request->input('offset', 0); // Valor por defecto de 0
+        $type = $request->input('type', null); // El tipo de animal, si se pasa
+
+        // Validación de los parámetros
+        $request->validate([
+            'limit' => 'integer|min:1|max:25', // Limitar el valor de limit a entre 1 y 25
+            'offset' => 'integer|min:0',
+            'type' => 'nullable|string|in:txakurra,txakurra ppp,katua,besteak', // El tipo de animal es opcional
+        ]);
+
+        // Obtener el id del usuario autenticado
+        $userId = auth()->id(); // Obtiene el id del usuario autenticado
+
+        // Verificar si el usuario está autenticado
+        if (!$userId) {
+            return response()->json(['message' => 'Usuario no autenticado'], 403);
+        }
+
+        // Generar una clave única para el caché basada en los parámetros de la solicitud
+        $cacheKey = "personal_animals_{$userId}_{$limit}_{$offset}_{$type}";
+
+        // Intentar obtener los animales del caché
+        $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $userId, $type) {
+            // Query para obtener los animales del usuario autenticado
+            $query = Animal::where('user_id', $userId); // Filtramos por el user_id del usuario autenticado
+
+            // Si se pasa el tipo de animal, filtramos también por el tipo
+            if ($type) {
+                $query->where('type', $type);
+            }
+
+            // Aplicar paginación y obtener los resultados
+            return $query->offset($offset)
+                        ->limit($limit)
+                        ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']); // Selecciona solo los campos necesarios
+        });
+
+        // Verificar si no se encontraron resultados
+        if ($animals->isEmpty()) {
+            return response()->json(['message' => 'No animals found for the given criteria'], 404);
+        }
+
+        // Retornar la respuesta como JSON
+        return response()->json($animals);
+    }
+
+
 
 
     // Create animals to adopt

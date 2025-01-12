@@ -569,15 +569,75 @@ Response Error:
 ```
 </details>
 
+<details>
+    
+<summary> <h2> Get Personal animals </h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+http://54.209.224.251:8000/animals-personal?limit=5&offset=0&protektora_id=123&type=txakurra
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Response:
+```
+[
+    {
+        "id": 1,
+        "name": "Fido",
+        "etxekoAnimalia": true,
+        "type": "txakurra",
+        "animalType": "Dog",
+        "img": null,
+        "bakuna": 1,
+        "gender": 1,
+        "descripcion": "Friendly dog",
+        "year": "2020-05-01 00:00:00",
+        "losted": 0,
+        "noiztik": "2025-01-01 00:00:00",
+        "userID": 2,
+        "protektora_id": 123
+    },
+    {
+        "id": 2,
+        "name": "Luna",
+        "etxekoAnimalia": true,
+        "type": "katua",
+        "animalType": "Cat",
+        "img": null,
+        "bakuna": 1,
+        "gender": 0,
+        "descripcion": "Playful cat",
+        "year": "2021-03-15 00:00:00",
+        "losted": 0,
+        "noiztik": "2025-01-01 00:00:00",
+        "userID": 3,
+        "protektora_id": 123
+    }
+]
+
+```
+Response Error:
+```
+{
+    "message": "No animals found for the given criteria"
+}
+```
+</details>
+
 
 <details>
     
-<summary> <h2> Put Animals to Adopt </h2> </summary>
+<summary> <h2> Create animals </h2> </summary>
 <p> **Post** bitartez egin behar da</p>
 Link: 
  
 ```
-http://54.209.224.251:8000/animals-adopt-create
+http://54.209.224.251:8000/animals-create
 ```
 Header:
 ```

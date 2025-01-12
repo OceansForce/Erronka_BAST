@@ -51,14 +51,14 @@ class ObtainNewsController extends Controller
     {
         // Validar el parámetro newID
         $request->validate([
-            'newID' => 'required|integer|exists:news,id', // Validamos que el newID sea obligatorio, un entero y que exista en la base de datos
+            'newID' => 'required|integer|exists:news,id', // Validar que newID es obligatorio, entero y existe en la base de datos
         ]);
 
         // Obtener el parámetro newID
         $newID = $request->input('newID');
 
-        // Buscar la noticia por ID e incluir las traducciones
-        $news = News::with('translations')->find($newID);
+        // Buscar la noticia con todas las traducciones relacionadas
+        $news = News::with(['textTranslations', 'titleTranslations'])->find($newID);
 
         // Verificar si la noticia existe
         if (!$news) {
@@ -68,17 +68,31 @@ class ObtainNewsController extends Controller
         // Preparar los datos de la respuesta
         $response = [
             'id' => $news->id,
-            'translations' => $news->translations->map(function($translation) {
+            'created_at' => $news->created_at,
+            'updated_at' => $news->updated_at,
+            'img' => $news->img,
+            'text_translations' => $news->textTranslations->map(function ($translation) {
                 return [
-                    'title' => $translation->title,
-                    'text' => $translation->text
+                    
+                    'keyValue' => $translation->keyValue,
+                    'language' => $translation->language,
+                    'value' => $translation->value,
                 ];
-            })
+            }),
+            'title_translations' => $news->titleTranslations->map(function ($translation) {
+                return [
+                    
+                    'keyValue' => $translation->keyValue,
+                    'language' => $translation->language,
+                    'value' => $translation->value,
+                ];
+            }),
         ];
 
         // Devolver la noticia encontrada junto con sus traducciones
         return response()->json($response);
     }
+
 
 
 

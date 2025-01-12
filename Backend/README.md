@@ -407,7 +407,7 @@ Response Error:
 ```
 </details>
 
-</details>
+<details>
 <summary> <h2> Obtein a New </h2> </summary>
 <p> **Get** bitartez egin behar da</p>
 Link: 

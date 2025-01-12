@@ -407,7 +407,8 @@ Response Error:
 ```
 </details>
 
-<summary> <h2> Obtein News </h2> </summary>
+</details>
+<summary> <h2> Obtein a New </h2> </summary>
 <p> **Get** bitartez egin behar da</p>
 Link: 
 <p>Protektora_id is optional</p>

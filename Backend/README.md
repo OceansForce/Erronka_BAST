@@ -407,6 +407,60 @@ Response Error:
 ```
 </details>
 
+<summary> <h2> Obtein News </h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+<p>Protektora_id is optional</p>
+    
+```
+http://54.157.236.145:8000/api/new-obtein/45
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+{
+  "id": 45,
+  "created_at": "2024-12-18T07:54:13.000000Z",
+  "updated_at": "2024-12-18T07:54:13.000000Z",
+  "img": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSO7bOfBsmhU_djVmxnh_aWU0oUSOYLY4RASg&s",
+  "text_translations": [
+    {
+      "keyValue": "news45",
+      "language": "es",
+      "value": "La adopci\u00f3n de perros ha ganado popularidad en los \u00faltimos a\u00f1os, con un creciente n\u00famero de personas que eligen adoptar en lugar de comprar mascotas. Este cambio en la mentalidad "
+    },
+    {
+      "keyValue": "news45",
+      "language": "eu",
+      "value": "Zakurren adopzioak ospea irabazi du azken urteetan, gero eta gehiago dira animaliak erostea baino adoptatzea aukeratzen duten pertsonak. Mentalitate honetan egon den aldaketa honek abandonatutako animalien kopurua"
+    }
+  ],
+  "title_translations": [
+    {
+      "keyValue": "title45",
+      "language": "es",
+      "value": "Adopci\u00f3n de perros en lugar de compra: un cambio en la mentalidad"
+    },
+    {
+      "keyValue": "title45",
+      "language": "eu",
+      "value": "Zakurren adopzioa erosketaren ordez: mentalitatean aldaketa bat"
+    }
+  ]
+}
+```
+Response Error:
+```
+{
+    "error": "Noticia no encontrada"
+}
+
+```
+</details>
+
 <details>
     
 <summary> <h2> Update News </h2> </summary>

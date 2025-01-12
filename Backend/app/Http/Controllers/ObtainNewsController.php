@@ -47,18 +47,10 @@ class ObtainNewsController extends Controller
         return response()->json($news);
     }
 
-    public function getNew(Request $request)
+    public function getNew($id)
     {
-        // Validar el parámetro newID
-        $request->validate([
-            'newID' => 'required|integer|exists:news,id', // Validar que newID es obligatorio, entero y existe en la base de datos
-        ]);
-
-        // Obtener el parámetro newID
-        $newID = $request->input('newID');
-
-        // Buscar la noticia con todas las traducciones relacionadas
-        $news = News::with(['textTranslations', 'titleTranslations'])->find($newID);
+        // Buscar la noticia con todas las traducciones relacionadas usando el ID de la URL
+        $news = News::with(['textTranslations', 'titleTranslations'])->find($id);
 
         // Verificar si la noticia existe
         if (!$news) {
@@ -73,7 +65,6 @@ class ObtainNewsController extends Controller
             'img' => $news->img,
             'text_translations' => $news->textTranslations->map(function ($translation) {
                 return [
-                    
                     'keyValue' => $translation->keyValue,
                     'language' => $translation->language,
                     'value' => $translation->value,
@@ -81,7 +72,6 @@ class ObtainNewsController extends Controller
             }),
             'title_translations' => $news->titleTranslations->map(function ($translation) {
                 return [
-                    
                     'keyValue' => $translation->keyValue,
                     'language' => $translation->language,
                     'value' => $translation->value,
@@ -92,6 +82,7 @@ class ObtainNewsController extends Controller
         // Devolver la noticia encontrada junto con sus traducciones
         return response()->json($response);
     }
+
 
 
 

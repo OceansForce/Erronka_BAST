@@ -36,7 +36,7 @@ class CheckCreateNewsPermissions
         // Verificar si el usuario tiene un 'protektora_id' asociado
         if (!$protektora_id) {
             return response()->json([
-                'message' => 'Este usuario no tiene permisos para crear noticias.',
+                'message' => 'Este usuario no tiene permisos para crear animales.',
             ], 403);
         }
 

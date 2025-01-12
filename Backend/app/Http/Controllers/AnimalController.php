@@ -31,10 +31,11 @@ class AnimalController extends Controller
             // Query para obtener animales que cumplan con las condiciones
             $query = Animal::with('user:idProtektora') // Cargar la relación del usuario con el campo idProtektora
                 ->whereHas('user', function($query) use ($idProtektora) {
-                    $query->where('idProtektora', '!=', 0)
+                    // Filtrar animales cuyos usuarios tengan un idProtektora mayor a 1
+                    $query->where('idProtektora', '>', 1)
                         ->whereNotNull('idProtektora');
-
-                    // Si se pasa un idProtektora, filtra por este
+                    
+                    // Si se pasa el idProtektora, filtrar también por este valor
                     if ($idProtektora) {
                         $query->where('idProtektora', $idProtektora);
                     }
@@ -56,15 +57,10 @@ class AnimalController extends Controller
             return response()->json(['message' => 'No animals found for the given criteria'], 404);
         }
 
-        // Agregar el idProtektora a la respuesta
-        $animals->each(function($animal) {
-            // Agregar el idProtektora a cada animal en la respuesta
-            $animal->protektora_id = $animal->user->idProtektora;
-        });
-
         // Retornar la respuesta como JSON
         return response()->json($animals);
     }
+
 
 
     // Create animals to adopt

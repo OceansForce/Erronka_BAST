@@ -41,4 +41,12 @@ class Animal extends Model
         'year' => 'datetime',
         'noiztik' => 'datetime',
     ];
+
+
+    // Relación con las traducciones del texto
+    public function descripcionTranslations()
+    {
+        return $this->hasMany(Translation::class, 'keyValue', 'descripcion');
+    }
+
 }

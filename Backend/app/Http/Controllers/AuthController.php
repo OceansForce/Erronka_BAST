@@ -46,7 +46,7 @@ class AuthController extends Controller
 
 
         // Generar el token de acceso
-        $token = $user->createToken('Bast', $abilities, Carbon::now()->addDays(5))->plainTextToken;
+        $token = $user->createToken('Bast', $abilities, Carbon::now()->addDays(90))->plainTextToken;
 
         return response()->json([
 	    'user' => $user,

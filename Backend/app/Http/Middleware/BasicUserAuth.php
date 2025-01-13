@@ -8,19 +8,12 @@ class BasicUserAuth
 {
     public function handle(Request $request, Closure $next)
     {
-        // Ver los encabezados completos
-        \Log::info('Encabezados de la solicitud:', $request->headers->all());
+        // Verificar si el usuario ya está autenticado, si no, permite que el siguiente middleware (auth:api) lo haga
+        if (auth()->check()) {
+            return $next($request);
+        }
 
-        // Ver el encabezado Authorization (token)
-        $authorizationHeader = $request->header('Authorization');
-        \Log::info('Encabezado Authorization:', [$authorizationHeader]);
-
-      //  // Verificar si el usuario está autenticado
-        //if (!auth()->check()) {
-          //  return response()->json(['message' => 'No autenticado'], 401);
-       // }
-
-        // Continuar con la solicitud si el usuario está autenticado
-        return $next($request);
+        // Si no está autenticado, devolver un error 401 (No autenticado)
+        return response()->json(['message' => 'No autenticado'], 401);
     }
 }

@@ -33,6 +33,7 @@ function Ad_notizia_panela() {
                 id: item.id,
                 title: t(item.title),
                 date: new Date(item.created_at).toLocaleDateString(),
+
             }));
         } catch (error) {
             console.error("Error fetching news:", error);

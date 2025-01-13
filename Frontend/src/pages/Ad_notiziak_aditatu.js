@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 function Ad_notiziak() {
+
     const [aktibatuta, setAktibatuta]= useState(true);
     const aldatu=()=>{
         setAktibatuta(!aktibatuta);
@@ -22,6 +23,10 @@ function Ad_notiziak() {
 
     const location = useLocation();
     const { id, title } = location.state || {};
+    
+    useEffect(()=>{
+        console.log(id);
+    },[id]);
     
     useEffect(() => {
         // Llamar a checkProtektora dentro del useEffect
@@ -151,7 +156,7 @@ function Ad_notiziak() {
                         <label className='font-semibold dark:text-white'>IMG URL</label>
                         <div>
                             <input
-                                className='mb-2 text-white mr-4  font-ubuntu rounded-lg'
+                                className='mb-2 text-black dark:text-white mr-4  font-ubuntu rounded-lg'
                                 type='file'
                                 disabled={aktibatuta}
                                 name='img'

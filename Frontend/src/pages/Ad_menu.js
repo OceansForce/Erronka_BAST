@@ -38,7 +38,7 @@ function Ad_menua() {
                 <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
                 <DarkModeToggle className='w-1/2' />  
             </div>
-            <div className="w-full flex flex-row bg-red erdian text-center space-x-14">
+            <div className="w-full flex flex-row flex-wrap bg-red erdian text-center space-x-14">
                 <AdminPanelButtom 
                     to="/Ad_notizia_panela" 
                     imageSrc="./img/newspaper-svgrepo-com.svg" 
@@ -55,6 +55,12 @@ function Ad_menua() {
                     to="/Ad_adoptatu" 
                     imageSrc="./img/animal-approve-cat-svgrepo-com.svg" 
                     text={t('ad_menua:adoptatu')} 
+                />
+
+                <AdminPanelButtom 
+                    to="/Ad_erabiltzaileak" 
+                    imageSrc="./img/icons/admin/user-circle-1-svgrepo-com.svg" 
+                    text={t('ad_menua:Erabiltzaileak')} 
                 />
 
             </div>

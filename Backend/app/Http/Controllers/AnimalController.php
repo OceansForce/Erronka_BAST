@@ -91,7 +91,7 @@ class AnimalController extends Controller
         // Intentar obtener los animales del caché
         $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $userId, $type) {
             // Query para obtener los animales del usuario autenticado
-            $query = Animals::where('user_id', $userId); // Filtramos por el user_id del usuario autenticado
+            $query = Animals::where('userID', $userId); // Filtramos por el user_id del usuario autenticado
 
             // Si se pasa el tipo de animal, filtramos también por el tipo
             if ($type) {

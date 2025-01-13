@@ -128,7 +128,7 @@ class AnimalController extends Controller
             return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
         }
         
-        try{
+        try {
             $request->validate([
                 'name' => 'required|string|max:255', // Nombre del animal
                 'etxekoAnimalia' => 'required|boolean', // Es un animal de casa (booleano)
@@ -140,13 +140,12 @@ class AnimalController extends Controller
                 'descripcion' => 'nullable|string|max:255', // Descripción del animal (opcional)
                 'year' => 'nullable|date', // Año de nacimiento o ingreso (opcional)
             ]);
-        }
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'message' => 'Error de validación',
                 'errors' => $e->errors(),
             ], 422);
-        }
+        }  
         //return response()->json(['error' => 'Usuario no autenticado'], 401); 
 
 

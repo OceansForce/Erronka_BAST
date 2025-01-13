@@ -586,13 +586,18 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
     );
 
     public static $classMap = array (
+        'App\\Http\\Controllers\\AnimalController' => __DIR__ . '/../..' . '/app/Http/Controllers/AnimalController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\NewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/NewsController.php',
         'App\\Http\\Controllers\\ObtainNewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ObtainNewsController.php',
         'App\\Http\\Controllers\\TranslationController' => __DIR__ . '/../..' . '/app/Http/Controllers/TranslationController.php',
         'App\\Http\\Controllers\\UserCreateController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserCreateController.php',
-        'App\\Http\\Middleware\\CheckProtektoraAccess' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckProtektoraAccess.php',
+        'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\CheckCreateNewsPermissions' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckCreateNewsPermissions.php',
+        'App\\Http\\Middleware\\CheckUpdateNewsPermissions' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckUpdateNewsPermissions.php',
+        'App\\Http\\Middleware\\CorsMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/CorsMiddleware.php',
+        'App\\Models\\Animal' => __DIR__ . '/../..' . '/app/Models/Animal.php',
         'App\\Models\\News' => __DIR__ . '/../..' . '/app/Models/News.php',
         'App\\Models\\Protektora' => __DIR__ . '/../..' . '/app/Models/Protektora.php',
         'App\\Models\\Translation' => __DIR__ . '/../..' . '/app/Models/Translation.php',

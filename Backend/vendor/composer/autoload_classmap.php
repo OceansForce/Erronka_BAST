@@ -6,13 +6,18 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Http\\Controllers\\AnimalController' => $baseDir . '/app/Http/Controllers/AnimalController.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\NewsController' => $baseDir . '/app/Http/Controllers/NewsController.php',
     'App\\Http\\Controllers\\ObtainNewsController' => $baseDir . '/app/Http/Controllers/ObtainNewsController.php',
     'App\\Http\\Controllers\\TranslationController' => $baseDir . '/app/Http/Controllers/TranslationController.php',
     'App\\Http\\Controllers\\UserCreateController' => $baseDir . '/app/Http/Controllers/UserCreateController.php',
-    'App\\Http\\Middleware\\CheckProtektoraAccess' => $baseDir . '/app/Http/Middleware/CheckProtektoraAccess.php',
+    'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
+    'App\\Http\\Middleware\\CheckCreateNewsPermissions' => $baseDir . '/app/Http/Middleware/CheckCreateNewsPermissions.php',
+    'App\\Http\\Middleware\\CheckUpdateNewsPermissions' => $baseDir . '/app/Http/Middleware/CheckUpdateNewsPermissions.php',
+    'App\\Http\\Middleware\\CorsMiddleware' => $baseDir . '/app/Http/Middleware/CorsMiddleware.php',
+    'App\\Models\\Animal' => $baseDir . '/app/Models/Animal.php',
     'App\\Models\\News' => $baseDir . '/app/Models/News.php',
     'App\\Models\\Protektora' => $baseDir . '/app/Models/Protektora.php',
     'App\\Models\\Translation' => $baseDir . '/app/Models/Translation.php',

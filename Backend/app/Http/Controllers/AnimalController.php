@@ -119,6 +119,7 @@ class AnimalController extends Controller
     // Create animals to adopt
     public function createAnimal(Request $request)
     {
+        dd($request->all());
         // Validación de los parámetros
 
         $user = auth()->user();

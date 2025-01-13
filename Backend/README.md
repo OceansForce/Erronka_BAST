@@ -147,7 +147,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/user-data
+http://54.209.224.251:8000/api/user-data
 ```
 Header:
 ```
@@ -214,7 +214,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/user-data-edit
+http://54.209.224.251:8000/api/user-data-edit
 ```
 Header:
 ```
@@ -273,7 +273,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/user-add-protectora
+http://54.209.224.251:8000/api/user-add-protectora
 ```
 Header:
 ```
@@ -517,7 +517,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/animals-adopt?limit=5&offset=0&protektora_id=123&type=txakurra
+http://54.209.224.251:8000/api/animals-adopt?limit=5&offset=0&protektora_id=123&type=txakurra
 ```
 Header:
 ```
@@ -576,7 +576,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/animals-personal?limit=5&offset=0&protektora_id=123&type=txakurra
+http://54.209.224.251:8000/api/animals-personal?limit=5&offset=0&protektora_id=123&type=txakurra
 ```
 Header:
 ```
@@ -637,7 +637,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/animals-create
+http://54.209.224.251:8000/api/animals-create
 ```
 Header:
 ```
@@ -685,7 +685,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/animals-edeit
+http://54.209.224.251:8000/api/animals-edeit
 ```
 Header:
 ```

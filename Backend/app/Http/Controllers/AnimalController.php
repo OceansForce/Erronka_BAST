@@ -119,6 +119,7 @@ class AnimalController extends Controller
     // Create animals to adopt
     public function createAnimal(Request $request)
     {
+        return response()->json(['error' => 'Usuario no autenticado'], 401); 
         // Validación de los parámetros
         $request->validate([
             'name' => 'required|string|max:255', // Nombre del animal

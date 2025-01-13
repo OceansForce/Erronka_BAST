@@ -35,7 +35,7 @@ Route::get('user-data', [UserController::class, 'getUserDate'])
 
 
 // ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
-Route::put('user-data-edit', [UserCreateController::class, 'edit'])->middleware('\App\Http\Middleware\BasicUserAuth');  // Ruta para editar un usuario
+Route::put('user-data-edit', [UserCreateController::class, 'edit'])->middleware('auth:sanctum');  // Ruta para editar un usuario
 
 // ERABILTZAILE bateri ezarri protektora bat
 Route::put('user-add-protectora', [UserCreateController::class, 'addProtectora'])->middleware('\App\Http\Middleware\AnimalMiddleware');  // Ruta para asignar una protectora a un usuario
@@ -64,7 +64,7 @@ Route::get('/new-obtein/{news}', [ObtainNewsController::class, 'getNew']);
 // OBTENER LOS ANIMALES PARA ADOPTAR
 use App\Http\Controllers\AnimalController;
 Route::get('/animals-adopt', [AnimalController::class, 'getAnimals']);
-Route::post('/animals-create', [AnimalController::class, 'createAnimal'])->middleware('auth:sanctum');
+Route::post('/animals-create', [AnimalController::class, 'createAnimal']);//->middleware('auth:sanctum');
 Route::post('/animals-edit', [AnimalController::class, 'editAnimal'])->middleware('auth:sanctum');
 
 Route::get('/animals-personal', [AnimalController::class, 'getPersonalAnimals'])->middleware('auth:sanctum');

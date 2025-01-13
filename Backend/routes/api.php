@@ -28,9 +28,9 @@ Route::post('register', [UserCreateController::class, 'store']);  // Ruta para c
 
 // ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
 use App\Http\Controllers\UserController;
-Route::get('user-data', [UserController::class, 'getUserDate']);
+Route::get('user-data', [UserController::class, 'getUserDate'])
 //    ->middleware('\App\Http\Middleware\CorsMiddleware')  // Primero CORS
-//    ->middleware('\App\Http\Middleware\BasicUserAuth');  // Luego autenticación
+    ->middleware('auth:sanctum');  // Luego autenticación
     //->middleware('\App\Http\Middleware\BasicUserAuth');  // Luego autenticación
 
 

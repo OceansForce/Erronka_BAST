@@ -27,7 +27,7 @@ class CheckUpdateNewsPermissions
         }
 
         return response()->json([
-            'message' => 'No tienes permisos para actualizar esta noticia.',
+            'message' => 'usuario no autenticado',
         ], 403);
 
         // // Verificar que el usuario tiene permisos para actualizar la noticia

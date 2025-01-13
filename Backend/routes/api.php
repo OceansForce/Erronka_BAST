@@ -64,7 +64,7 @@ Route::get('/new-obtein/{news}', [ObtainNewsController::class, 'getNew']);
 // OBTENER LOS ANIMALES PARA ADOPTAR
 use App\Http\Controllers\AnimalController;
 Route::get('/animals-adopt', [AnimalController::class, 'getAnimals']);
-Route::get('/animals-create', [AnimalController::class, 'createAnimal'])->middleware('auth:sanctum');
+Route::post('/animals-create', [AnimalController::class, 'createAnimal'])->middleware('auth:sanctum');
 Route::post('/animals-edit', [AnimalController::class, 'editAnimal'])->middleware('auth:sanctum');
 
 Route::get('/animals-personal', [AnimalController::class, 'getPersonalAnimals'])->middleware('auth:sanctum');

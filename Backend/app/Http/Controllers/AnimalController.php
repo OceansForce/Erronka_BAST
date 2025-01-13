@@ -147,7 +147,7 @@ class AnimalController extends Controller
         $userID = $user->id;
 
         // Crear el nuevo animal
-        $animal = Animals::create([
+        $animals = Animals::create([
             'name' => $request->input('name'),
             'etxekoAnimalia' => $request->input('etxekoAnimalia'),
             'type' => $request->input('type'),

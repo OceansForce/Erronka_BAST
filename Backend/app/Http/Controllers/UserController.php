@@ -19,7 +19,7 @@ class UserController extends Controller
 
 
         // Obtener todos los animales que tienen el userID igual al id del usuario autenticado
-        $animals = Animal::where('userID', $userID)->get();
+        $animals = Animals::where('userID', $userID)->get();
 
 
         // Preparar la respuesta que incluye tanto el usuario como los animales

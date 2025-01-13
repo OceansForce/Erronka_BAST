@@ -685,7 +685,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/api/animals-edeit
+http://54.209.224.251:8000/api/animals-edit
 ```
 Header:
 ```

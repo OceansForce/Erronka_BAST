@@ -120,28 +120,38 @@ class AnimalController extends Controller
     public function createAnimal(Request $request)
     {
         // Validación de los parámetros
-        // $request->validate([
-        //     'name' => 'required|string|max:255', // Nombre del animal
-        //     'etxekoAnimalia' => 'required|boolean', // Es un animal de casa (booleano)
-        //     'type' => 'required|string|in:txakurra,txakurra ppp,katua,besteak', // Tipo de animal
-        //     'animalType' => 'nullable|string|max:255', // Subtipo del animal (opcional)
-        //     'img' => 'nullable|url', // Imagen del animal (opcional)
-        //     'bakuna' => 'required|integer|min:0', // 0 = no vacunado, otros numeros, el id de la bakuna
-        //     'gender' => 'required|integer|in:0,1', // Género del animal, 0 = hembra, 1 = macho
-        //     'descripcion' => 'nullable|string|max:255', // Descripción del animal (opcional)
-        //     'year' => 'nullable|date', // Año de nacimiento o ingreso (opcional)
-        // ]);
 
-        //return response()->json(['error' => 'Usuario no autenticado'], 401); 
-
-
-        // Obtener el usuario autenticado
         $user = auth()->user();
 
         // Si no hay usuario autenticado, devolver un error
         if (!$user) {
             return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
         }
+        
+        try{
+            $request->validate([
+                'name' => 'required|string|max:255', // Nombre del animal
+                'etxekoAnimalia' => 'required|boolean', // Es un animal de casa (booleano)
+                'type' => 'required|string|in:txakurra,txakurra ppp,katua,besteak', // Tipo de animal
+                'animalType' => 'nullable|string|max:255', // Subtipo del animal (opcional)
+                'img' => 'nullable|url', // Imagen del animal (opcional)
+                'bakuna' => 'required|integer|min:0', // 0 = no vacunado, otros numeros, el id de la bakuna
+                'gender' => 'required|integer|in:0,1', // Género del animal, 0 = hembra, 1 = macho
+                'descripcion' => 'nullable|string|max:255', // Descripción del animal (opcional)
+                'year' => 'nullable|date', // Año de nacimiento o ingreso (opcional)
+            ]);
+        }
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'message' => 'Error de validación',
+                'errors' => $e->errors(),
+            ], 422);
+        }
+        //return response()->json(['error' => 'Usuario no autenticado'], 401); 
+
+
+        // Obtener el usuario autenticado
+        
 
         // Obtener el userID del usuario autenticado
         $userID = $user->id;

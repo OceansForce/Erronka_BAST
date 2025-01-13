@@ -11,7 +11,7 @@ class UserController extends Controller
         // Obtener el usuario autenticado
         $user = auth()->user();
         if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
+            return response()->json(['error' => $user], 401); // 401 Unauthorized
         }
 
         // Obtener el userID del usuario autenticado

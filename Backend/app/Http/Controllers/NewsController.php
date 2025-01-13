@@ -14,6 +14,9 @@ class NewsController extends Controller
     // Crear una noticia
     public function store(Request $request)
     {
+	if (!auth()->check()) {
+        return response()->json(['message' => 'No autenticado'], 401);
+    }
         // Validación de los campos de texto y título en ambos idiomas
         try {
             $request->validate([

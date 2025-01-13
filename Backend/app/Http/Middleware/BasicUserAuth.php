@@ -10,8 +10,8 @@ class BasicUserAuth
     public function handle(Request $request, Closure $next)
     {
         // Verificar si el usuario está autenticado
-        if (!auth()->user()) {
-            return response()->json(['message' => 'No autenticado'], 401);
+        if (!auth('api')->user()) {
+            return response()->json(['message' => auth('api')], 401);
         }
 
         // Obtener el usuario autenticado

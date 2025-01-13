@@ -1,12 +1,12 @@
 <?php
-namespace App\Http\Controller;
+namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserContoller extends Controller
 {
-    public function getUser(Request $request)
+    public function getUserDate(Request $request)
     {
         // Obtener el usuario autenticado
         $user = auth()->user();

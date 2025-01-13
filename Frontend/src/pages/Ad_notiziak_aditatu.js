@@ -25,9 +25,32 @@ function Ad_notiziak() {
     const { id, title } = location.state || {};
     
     useEffect(()=>{
-        console.log(id);
-    },[id]);
+        console.log("ID= "+id);
+    },[location.state,id]);
     
+    const fetchNews = async (count, offset) => {
+        try {
+          const response = await fetch(`${IpAPI}/api/new-obtein/${id}`);
+          const data = await response.json();
+    
+          // Preparar las claves de traducción necesarias
+          const keysToFetch = data.map(item => item.text).concat(data.map(item => item.title));
+          await i18n.loadMissingTranslations(i18n.language, keysToFetch); // Cargar traducciones faltantes
+    
+          // Mapear los datos recibidos para ajustarlos al formato requerido por el carrusel
+          return data.map(item => ({
+            id: item.id,
+            title: t(item.title), // Traducir el título recibido de la API
+            description: t(item.text).split(" ").slice(0, 20).join(" ") + (t(item.text).split(" ").length > 20 ? "..." : ""),
+            date: new Date(item.created_at).toLocaleDateString(),
+            img: item.img
+          }));
+        } catch (error) {
+          console.error("Error fetching news:", error);
+          return []; // Retornar un arreglo vacío en caso de error
+        }
+    };
+
     useEffect(() => {
         // Llamar a checkProtektora dentro del useEffect
         checkProtektora(navigate);
@@ -140,7 +163,7 @@ function Ad_notiziak() {
                             className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                             type='text'
                             name='titleES'
-                            value={id}
+                            value={title}
                             onChange={handleChange}
                             required
                         />

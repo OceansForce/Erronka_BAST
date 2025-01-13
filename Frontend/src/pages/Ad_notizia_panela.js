@@ -81,7 +81,7 @@ function Ad_notizia_panela() {
                         <div  className='flex flex-row dark:bg-primary bg-dark p-2 mb-5 rounded-3xl justify-between'>
                                 <p className='text-white dark:text-black text-left'>Izena</p>
                                 <div className='flex flex-row text-right'>
-                                    <Link to={"/Ad_notiziak_aditatu"}>
+                                    <Link  to="/Ad_notiziak_aditatu" state={{id: 1, title: "izena"}}>
                                         <img src='./img/icons/profil/pen_white.svg' className='size-7 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
                                         <img src='./img/icons/profil/pen_Black.svg' className='size-7 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
                                     </Link>
@@ -94,7 +94,7 @@ function Ad_notizia_panela() {
                             <div key={item.id} className='flex flex-row dark:bg-primary bg-dark p-2 mb-5 rounded-3xl justify-between'>
                                 <p className='text-white dark:text-black text-left'>{item.title} ---- {item.date}</p>
                                 <div className='flex flex-row text-right'>
-                                    <Link to={{ pathname:"/Ad_notiziak_aditatu", state:{id: item.id, title: item.title}}}>
+                                    <Link to="/Ad_notiziak_aditatu" state={{id: item.id, title: item.title}}>
                                         <img src='./img/icons/profil/pen_white.svg' className='size-7 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
                                         <img src='./img/icons/profil/pen_Black.svg' className='size-7 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
                                     </Link>

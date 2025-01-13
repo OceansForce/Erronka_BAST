@@ -31,7 +31,7 @@ class AnimalController extends Controller
         // Intentar obtener los animales del caché
         $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $idProtektora, $type) {
             // Query para obtener animales que cumplan con las condiciones
-            $query = Animal::with('user:idProtektora') // Cargar la relación del usuario con el campo idProtektora
+            $query = Animals::with('user:idProtektora') // Cargar la relación del usuario con el campo idProtektora
                 ->whereHas('user', function($query) use ($idProtektora) {
                     // Filtrar animales cuyos usuarios tengan un idProtektora mayor a 1
                     $query->where('idProtektora', '>', 1)
@@ -91,7 +91,7 @@ class AnimalController extends Controller
         // Intentar obtener los animales del caché
         $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $userId, $type) {
             // Query para obtener los animales del usuario autenticado
-            $query = Animal::where('user_id', $userId); // Filtramos por el user_id del usuario autenticado
+            $query = Animals::where('user_id', $userId); // Filtramos por el user_id del usuario autenticado
 
             // Si se pasa el tipo de animal, filtramos también por el tipo
             if ($type) {
@@ -144,7 +144,7 @@ class AnimalController extends Controller
         $userID = $user->id;
 
         // Crear el nuevo animal
-        $animal = Animal::create([
+        $animal = Animals::create([
             'name' => $request->input('name'),
             'etxekoAnimalia' => $request->input('etxekoAnimalia'),
             'type' => $request->input('type'),
@@ -160,7 +160,7 @@ class AnimalController extends Controller
         ]);
 
         // Retornar el animal creado en formato JSON
-        return response()->json($animal, 201); // Código 201: creado correctamente
+        return response()->json($animals, 201); // Código 201: creado correctamente
     }
 
     public function editAnimal(Request $request)
@@ -189,7 +189,7 @@ class AnimalController extends Controller
         }
     
         // Obtener el animal con el ID proporcionado
-        $animal = Animal::find($request->input('id'));
+        $animal = Animals::find($request->input('id'));
     
         // Verificar si el animal existe
         if (!$animal) {

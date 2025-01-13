@@ -5,6 +5,8 @@ import BackButton from '../components/bottons/backBotom';
 import LanguageSelector from '../header-footer/header/desplegable/lenguageSelector';
 import DarkModeToggle from '../header-footer/header/dark-light/dark';
 import Animaliak from '../components/adopzioa/animaliak/animaliak.jsx'; 
+import IpAPI from "./../config/ipAPI";
+
 
 
 
@@ -22,7 +24,36 @@ const Profila = ()=>{
             setIrudia(file.name);
         }
     };
-    
+
+
+
+    const [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            const tok = localStorage.getItem('token');
+            try {
+                const response = await fetch(`${IpAPI}/api/user-data`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${tok}`,
+                    },
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    setUserData(result); // Guardamos los datos del usuario en el estado
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+                alert('Error en la solicitud. Revisa tu conexión.');
+            }
+        };
+
+        fetchUserData(); // Ejecuta la función al cargar la página
+    }, []);
+
     return (
         <>
         <div className='container flex justify-center '>
@@ -31,10 +62,11 @@ const Profila = ()=>{
                 <div className='w-full flex justify-center items-center mb-5 p-4 bg-dark rounded-lg'>
                         
                     <BackButton targetPage="/" width={24} />
-                        <div className='w-11/12 flex flex-row space-x-4 justify-end'>
-                            <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
-                            <DarkModeToggle className='w-1/2' />
-                        </div>
+                    <div className='w-11/12 flex flex-row space-x-4 justify-end'>
+                        <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
+                        <DarkModeToggle className='w-1/2' />
+                    </div>
+
                 </div>
 
                 <div className='flex flex-col w-full'>

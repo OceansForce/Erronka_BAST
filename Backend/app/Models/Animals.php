@@ -49,4 +49,9 @@ class Animals extends Model
         return $this->hasMany(Translation::class, 'keyValue', 'descripcion');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

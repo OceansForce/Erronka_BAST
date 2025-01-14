@@ -1,6 +1,12 @@
+import i18n from '../../118n/menu';
+import { useTranslation } from 'react-i18next';
+
+
+
 
 const Loading = ()=>{
-    return <div>Cargando datos...</div>;
+    const { t, i18n } = useTranslation();
+    return <div>{t('loading:loading')}</div>;
 }
 
 

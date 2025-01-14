@@ -197,13 +197,13 @@ const Profila = () => {
                                         className='size-7 hidden dark:block' 
                                         alt="Guardar" 
                                     />
-                                    <label className="dark:text-white text-black">Guardar</label>
+                                    <label className="dark:text-white text-black">{t('userProfile:guardar')}</label>
                                 </div>
                             </div>
 
                             <div className="flex flex-col items-center py-2 border-2 rounded-l-lg rounded-br-lg border-black dark:border-white bg-primary dark:bg-dark">
                                 <div className="flex flex-col text-left w-4/5">
-                                    <label className="text-black dark:text-white">Izena</label>
+                                    <label className="text-black dark:text-white">{t('userProfile:nombre')}</label>
                                     <input 
                                         type="text" 
                                         className="rounded-lg" 
@@ -213,7 +213,7 @@ const Profila = () => {
                                     />
                                 </div>
                                 <div className="flex flex-col text-left w-4/5">
-                                    <label className="text-black dark:text-white">Abizenak</label>
+                                    <label className="text-black dark:text-white">{t('userProfile:apellido')}</label>
                                     <input 
                                         type="text" 
                                         className="rounded-lg" 
@@ -224,7 +224,7 @@ const Profila = () => {
                                 </div>
 
                                 <div className="flex flex-col text-left w-4/5">
-                                    <label className="text-black dark:text-white">Gmail</label>
+                                    <label className="text-black dark:text-white">{t('userProfile:gmail')}</label>
                                     <input 
                                         type="email" 
                                         className="rounded-lg" 
@@ -235,7 +235,7 @@ const Profila = () => {
                                 </div>
 
                                 <div className="flex flex-col text-left w-4/5">
-                                    <label className="text-black dark:text-white">Pasahitza</label>
+                                    <label className="text-black dark:text-white">{t('userProfile:password')}</label>
                                     <input 
                                         type="password" 
                                         className="rounded-lg" 
@@ -246,7 +246,7 @@ const Profila = () => {
                                 </div>
                             </div>
 
-                            <h3 className="pt-10 text-left dark:text-white text-2xl font-ubuntu">Nire animaliak:</h3>
+                            <h3 className="pt-10 text-left dark:text-white text-2xl font-ubuntu">{t('userProfile:animals')}</h3>
                             <div className="w-full flex flex-row flex-wrap items-center justify-center py-2 border-2 rounded-l-lg rounded-br-lg border-black dark:border-white bg-primary dark:bg-dark">
                                 <Animaliak img="image" izena="Lur" kokapena="" mota="profila" />
                                 <Animaliak img="image" izena="Lur" kokapena="" mota="profila" />

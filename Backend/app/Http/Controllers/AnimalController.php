@@ -77,8 +77,13 @@ class AnimalController extends Controller
             'type' => 'nullable|string|in:txakurra,txakurra ppp,katua,besteak', // El tipo de animal es opcional
         ]);
 
-        // Obtener el id del usuario autenticado
-        $userId = auth()->id(); // Obtiene el id del usuario autenticado
+	$user = auth()->user();
+	if (!$user) {
+	    return response()->json(['message' => 'Usuario no autenticado'], 401);
+	}
+
+	$userId = $user->id;
+
 
         // Verificar si el usuario está autenticado
         if (!$userId) {
@@ -119,14 +124,14 @@ class AnimalController extends Controller
     // Create animals to adopt
     public function createAnimal(Request $request)
     {
-//        dd($request->all());
+//        dd($request);
         // Validación de los parámetros
 
         $user = auth()->user();
 
         // Si no hay usuario autenticado, devolver un error
         if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
+            return response()->json(['error' => 'usuario no autenticado'], 401); // 401 Unauthorized
         }
         
 try {
@@ -136,7 +141,7 @@ try {
             'type' => 'required|string|in:txakurra,txakurra ppp,katua,besteak',
             'animalType' => 'nullable|string|max:255',
             'img' => 'nullable|url',
-            'bakuna' => 'required|integer|min:0',
+            'bakuna' => 'nullable|integer|min:0',
             'gender' => 'required|integer|in:0,1',
             'descripcion' => 'nullable|string|max:255',
             'year' => 'nullable|date',
@@ -151,7 +156,7 @@ try {
 
     // Aquí intenta imprimir el contenido del request para confirmar que los datos llegan correctamente
     \Log::info('Datos recibidos: ', $request->all());
-	return response()->json(['error' => 'Usuario no autenticado'], 401); 
+	//return response()->json(['error' => 'Usuario no autenticado'], 401); 
 
 
         // Obtener el usuario autenticado

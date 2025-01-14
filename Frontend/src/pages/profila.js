@@ -9,6 +9,8 @@ import IpAPI from "./../config/ipAPI";
 import Loading from '../components/loading/loading.jsx';
 
 import Alert from '../components/alert/alert.jsx';
+import UserAnimals from '../components/profila/animals.jsx';
+import SaveIcon from '../components/profila/saveIcon.jsx';
 
 const Profila = () => {
     const [irudia, setIrudia] = useState("user-dog.jpg");
@@ -47,7 +49,7 @@ const Profila = () => {
                 if (response.ok) {
                     const result = await response.json();
                     setUserData(result); // Guardamos los datos del usuario en el estado
-                    console.log(result);
+                    //console.log(result);
                     setFormData({
                         name: result.user.name,
                         secondName: result.user.secondName || '',
@@ -85,7 +87,7 @@ const Profila = () => {
             delete filteredFormData.password;
         }
 
-        console.log(JSON.stringify(filteredFormData));
+        //console.log(JSON.stringify(filteredFormData));
         const tok = localStorage.getItem('token');
 
         fetch(`${IpAPI}/api/user-data-edit`, {
@@ -186,19 +188,7 @@ const Profila = () => {
 
                         <div className="lg:w-2/4 w-full flex flex-col">
                             <div className="flex flex-row justify-end " onClick={handleSave}>
-                                <div className="flex flex-row border-t-2 cursor-pointer border-x-2 rounded-tl-lg p-1 bg-primary dark:bg-dark border-black dark:border-white">
-                                    <img 
-                                        src='./img/icons/profil/save-white.svg' 
-                                        className='size-7 dark:hidden' 
-                                        alt="Guardar" 
-                                    />
-                                    <img 
-                                        src='./img/icons/profil/save-black.svg' 
-                                        className='size-7 hidden dark:block' 
-                                        alt="Guardar" 
-                                    />
-                                    <label className="dark:text-white text-black">{t('userProfile:guardar')}</label>
-                                </div>
+                                <SaveIcon darkIMG='./img/icons/profil/save-black.svg' lightIMG='./img/icons/profil/save-white.svg' text={t('userProfile:guardar')} />
                             </div>
 
                             <div className="flex flex-col items-center py-2 border-2 rounded-l-lg rounded-br-lg border-black dark:border-white bg-primary dark:bg-dark">
@@ -246,15 +236,8 @@ const Profila = () => {
                                 </div>
                             </div>
 
-                            <h3 className="pt-10 text-left dark:text-white text-2xl font-ubuntu">{t('userProfile:animals')}</h3>
-                            <div className="w-full flex flex-row flex-wrap items-center justify-center py-2 border-2 rounded-l-lg rounded-br-lg border-black dark:border-white bg-primary dark:bg-dark">
-                                <Animaliak img="image" izena="Lur" kokapena="" mota="profila" />
-                                <Animaliak img="image" izena="Lur" kokapena="" mota="profila" />
-                                <Animaliak img="image" izena="Lur" kokapena="" mota="profila" />
-                                <Animaliak img="image" izena="Lur" kokapena="" mota="profila" />
-                                <Animaliak img="image" izena="Lur" kokapena="" mota="profila" />
-                                <Animaliak img="image" izena="Lur" kokapena="" mota="profila" />
-                            </div>
+
+                            <UserAnimals userData={userData.animals} />
                         </div>
                     </div>
                 </div>

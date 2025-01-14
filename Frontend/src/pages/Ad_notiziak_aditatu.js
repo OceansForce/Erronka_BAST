@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 function Ad_notiziak() {
-    const [news, setNews] = useState([]);
 
     const [aktibatuta, setAktibatuta]= useState(true);
     const aldatu=()=>{
@@ -21,42 +20,51 @@ function Ad_notiziak() {
 
     const { t, i18 } = useTranslation();
     
-    const [newsData, setNewsData] = useState(null);
+    const [newsData, setNewsData] = useState();
+    const [parrafoak, setParrafoak]= useState(null);
+
     const navigate = useNavigate();
     const location = useLocation();
     const { id } = location.state || {}; // Obtener `id` desde la navegación
 
     useEffect(() => {
+        
+        let parrafoak_Array;
+
+        const fetchSingleNews = async (newsId) => {
+            try {
+                const response = await fetch(`${IpAPI}/api/new-obtein/${newsId}`, {
+                    method:'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error fetching news with id ${newsId}`);
+                }else{
+                    const data = await response.json();
+                    parrafoak_Array= [data.text_translations[0].value, data.text_translations[1].value];
+                    console.log(parrafoak_Array);
+                    console.log(data);
+                    setNewsData(data);
+                    
+                }
+                
+
+            } catch (error) {
+                console.error('Error fetching single news:', error);
+                alert('Error al obtener los datos de la noticia.');
+            }
+        };
+
         if (id) {
             fetchSingleNews(id); // Llamar a la API cuando `id` esté disponible
+
         }
     }, [id]);
 
-    const fetchSingleNews = async (newsId) => {
-        try {
-            const response = await fetch(`${IpAPI}/api/new-obtein/${newsId}`);
-            if (!response.ok) {
-                throw new Error(`Error fetching news with id ${newsId}`);
-            }
-            const data = await response.json();
-
-            // Mapear datos si es necesario
-            const mappedData = {
-                id: data.id,
-                titleEUS: data.title_translations?.[0]?.value || '',
-                titleES: data.title_translations?.[1]?.value || '',
-                descriptionEUS: data.text_translations?.[0]?.value || '',
-                descriptionES: data.text_translations?.[1]?.value || '',
-                date: new Date(data.created_at).toLocaleDateString(),
-                img: data.img,
-            };
-
-            setNewsData(mappedData);
-        } catch (error) {
-            console.error('Error fetching single news:', error);
-            alert('Error al obtener los datos de la noticia.');
-        }
-    };
+    
 
     // Función para cambiar el idioma
     const changeLanguage = (lang) => {
@@ -65,8 +73,8 @@ function Ad_notiziak() {
 
     // Estado para manejar los datos del formulario
     const [formData, setFormData] = useState({
-        titleES: '',
-        titleEU: '',
+        titleES: "newsData.title_translations[0].value",
+        titleEU: "newsData.title_translations[1].value",
         paragraphES1: '',
         paragraphES2: '',
         paragraphEU1: '',
@@ -165,7 +173,7 @@ function Ad_notiziak() {
                                 className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                 type='text'
                                 name='titleES'
-                                value={""}
+                                value={newsData.title_translations[0].value}
                                 onChange={handleChange}
                                 required
                             />
@@ -174,7 +182,7 @@ function Ad_notiziak() {
                                 className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                 type='text'
                                 name='titleEU'
-                                value={formData.titleES}
+                                value={newsData.title_translations[1].value}
                                 onChange={handleChange}
                                 required
                             />
@@ -185,7 +193,7 @@ function Ad_notiziak() {
                                     type='file'
                                     disabled={aktibatuta}
                                     name='img'
-                                    value={formData.img}
+                                    
                                     onChange={handleChange}
                                     required
                                 />
@@ -199,7 +207,7 @@ function Ad_notiziak() {
                                         className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                         rows={6}
                                         name='paragraphES1'
-                                        value={formData.paragraphES1}
+                                        value={newsData.text_translations[0].value}
                                         onChange={handleChange}
                                         required
                                     ></textarea>
@@ -219,7 +227,7 @@ function Ad_notiziak() {
                                         className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                         rows={6}
                                         name='paragraphEU1'
-                                        value={formData.paragraphEU1}
+                                        value={newsData.text_translations[1].value}
                                         onChange={handleChange}
                                         required
                                     ></textarea>

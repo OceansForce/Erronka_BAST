@@ -11,7 +11,7 @@ class AnimalMiddleware
     {
         // Verificar si el usuario está autenticado
         if (!auth()->check()) {
-            return response()->json(['message' => 'No autenticado'], 401);
+            return response()->json(['message' => 'No autenticado que pollas'], 401);
         }
 
         // Obtener el usuario autenticado

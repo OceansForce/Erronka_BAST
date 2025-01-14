@@ -94,9 +94,11 @@ class UserCreateController extends Controller
 
     public function edit(Request $request)
     {
+	//return response()->json(['error'=>'que pollas']);
         // Obtener el usuario autenticado
         $user = auth()->user();
-        if (!$user) {
+	//return response()->json(['error' => $user]);
+	if (!$user) {
             return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
         }
 

@@ -12,8 +12,9 @@ class BasicUserAuth
         if (auth()->check()) {
             return $next($request);
         }
+	return response()->json(['algo pasa' => $request],406);
 
         // Si no está autenticado, devolver un error 401 (No autenticado)
-        return response()->json(['message' => 'No autenticado'], 401);
+        return response()->json(['message' => 'No autenticado que pasa'], 401);
     }
 }

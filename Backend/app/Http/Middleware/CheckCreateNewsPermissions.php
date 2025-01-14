@@ -21,7 +21,7 @@ class CheckCreateNewsPermissions
         $protektora_id = $user->idProtektora;
 
         // Verificar si el usuario es administrador
-        if ($user->idProtektora === 0) {
+        if ($user->idProtektora === 1) {
             // Si es administrador, permitir la acción
             return $next($request);
         }

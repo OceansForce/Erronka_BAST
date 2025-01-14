@@ -102,12 +102,12 @@ class UserCreateController extends Controller
 
         // Validación de los datos recibidos
         $validator = \Validator::make($request->all(), [
-            'DNI' => 'required|string|max:10|unique:users,DNI,' . $user->id, // Validar solo si el DNI ha cambiado
+            'DNI' => 'nullable|string|max:10|unique:users,DNI,' . $user->id, // Validar solo si el DNI ha cambiado
             'name' => 'required|string|max:255',
             'secondName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id, // Validar solo si el email ha cambiado
-            'password' => 'required|string|min:8|confirmed', // La contraseña es opcional al editar, pero si se proporciona debe cumplir con las reglas
-            'year' => 'required|date',
+            'password' => 'nullable|string|min:8|confirmed', // La contraseña es opcional al editar, pero si se proporciona debe cumplir con las reglas
+            'year' => 'nullable|date',
             'img' => 'nullable|url', // Validación para URL de la imagen
         ]);
 
@@ -122,7 +122,6 @@ class UserCreateController extends Controller
         // Actualizar los datos del usuario
         try {
             // Actualizamos los campos proporcionados por el usuario
-            $user->DNI = $request->DNI;
             $user->name = $request->name;
             $user->secondName = $request->secondName;
             $user->email = $request->email;
@@ -132,8 +131,8 @@ class UserCreateController extends Controller
                 $user->password = Hash::make($request->password);
             }
             
-            $user->year = $request->year ? $request->year : null;
-            $user->img = $request->img;
+            //$user->year = $request->year ? $request->year : null;
+            //$user->img = $request->img;
 
             // Guardar los cambios en la base de datos
             $user->save();

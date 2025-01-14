@@ -119,7 +119,7 @@ class AnimalController extends Controller
     // Create animals to adopt
     public function createAnimal(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         // Validación de los parámetros
 
         $user = auth()->user();
@@ -129,25 +129,29 @@ class AnimalController extends Controller
             return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
         }
         
-        try {
-            $request->validate([
-                'name' => 'required|string|max:255', // Nombre del animal
-                'etxekoAnimalia' => 'required|boolean', // Es un animal de casa (booleano)
-                'type' => 'required|string|in:txakurra,txakurra ppp,katua,besteak', // Tipo de animal
-                'animalType' => 'nullable|string|max:255', // Subtipo del animal (opcional)
-                'img' => 'nullable|url', // Imagen del animal (opcional)
-                'bakuna' => 'required|integer|min:0', // 0 = no vacunado, otros numeros, el id de la bakuna
-                'gender' => 'required|integer|in:0,1', // Género del animal, 0 = hembra, 1 = macho
-                'descripcion' => 'nullable|string|max:255', // Descripción del animal (opcional)
-                'year' => 'nullable|date', // Año de nacimiento o ingreso (opcional)
-            ]);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json([
-                'message' => 'Error de validación',
-                'errors' => $e->errors(),
-            ], 422);
-        }  
-        //return response()->json(['error' => 'Usuario no autenticado'], 401); 
+try {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'etxekoAnimalia' => 'required|boolean',
+            'type' => 'required|string|in:txakurra,txakurra ppp,katua,besteak',
+            'animalType' => 'nullable|string|max:255',
+            'img' => 'nullable|url',
+            'bakuna' => 'required|integer|min:0',
+            'gender' => 'required|integer|in:0,1',
+            'descripcion' => 'nullable|string|max:255',
+            'year' => 'nullable|date',
+        ]);
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        \Log::error("Validation Exception: " . $e->getMessage());
+        return response()->json([
+            'message' => 'Error de validación',
+            'errors' => $e->errors(),
+        ], 422);
+    }
+
+    // Aquí intenta imprimir el contenido del request para confirmar que los datos llegan correctamente
+    \Log::info('Datos recibidos: ', $request->all());
+	return response()->json(['error' => 'Usuario no autenticado'], 401); 
 
 
         // Obtener el usuario autenticado

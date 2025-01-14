@@ -61,7 +61,7 @@ function Ad_notiziak() {
             titleEU: formData.titleEU,
             textES: textES,
             textEU: textEU,
-            img: formData.img,
+            //img: formData.img,
         };
 
         try {
@@ -72,7 +72,9 @@ function Ad_notiziak() {
                     Authorization: `Bearer ${tok}`,
                 },
                 body: JSON.stringify(body),
+                
             });
+            console.log(body);
 
             if (response.ok) {
                 const result = await response.json();
@@ -141,8 +143,8 @@ function Ad_notiziak() {
                         />
                         <label className='font-semibold dark:text-white'>IMG URL</label>
                         <input
-                            className='mb-2 dark:border-primary border-black border-2 rounded-lg'
-                            type='text'
+                            className='mb-2 text-black dark:text-white mr-4  font-ubuntu rounded-lg'
+                            type='file'
                             name='img'
                             value={formData.img}
                             onChange={handleChange}

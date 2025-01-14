@@ -13,6 +13,7 @@ import Ad_galduta from './pages/Ad_galduta';
 import Ad_adoptatu from './pages/Ad_adoptatu';
 import Profila from './pages/profila';
 import Ad_notiziak_aditatu from './pages/Ad_notiziak_aditatu';
+import Ad_erabiltzaileak from './pages/Ad_erabiltzaileak';
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Cambié Switch por Routes
@@ -34,6 +35,7 @@ function App() {
           <Route path="/Ad_notiziak_aditatu" element={<Ad_notiziak_aditatu/>}/>
           <Route path="/Ad_galduta" element={<Ad_galduta />} /> {/* Lo mismo aquí */}
           <Route path="/Ad_adoptatu" element={<Ad_adoptatu />} /> {/* Lo mismo aquí */}
+          <Route path='/Ad_erabiltzaileak' element={<Ad_erabiltzaileak/>}/>
           <Route path="/Profila" element={<Profila/>}/>
           {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} /> */}

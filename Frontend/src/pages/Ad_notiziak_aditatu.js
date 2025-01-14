@@ -19,42 +19,52 @@ function Ad_notiziak() {
     }
 
     const { t, i18 } = useTranslation();
-    const navigate = useNavigate();
+    
+    const [newsData, setNewsData] = useState();
+    const [parrafoak, setParrafoak]= useState(null);
 
+    const navigate = useNavigate();
     const location = useLocation();
-    const { id, title } = location.state || {};
-    
-    useEffect(()=>{
-        console.log("ID= "+id);
-    },[location.state,id]);
-    
-    const fetchNews = async (count, offset) => {
-        try {
-          const response = await fetch(`${IpAPI}/api/new-obtein/${id}`);
-          const data = await response.json();
-    
-          // Preparar las claves de traducción necesarias
-          const keysToFetch = data.map(item => item.text).concat(data.map(item => item.title));
-          await i18n.loadMissingTranslations(i18n.language, keysToFetch); // Cargar traducciones faltantes
-    
-          // Mapear los datos recibidos para ajustarlos al formato requerido por el carrusel
-          return data.map(item => ({
-            id: item.id,
-            title: t(item.title), // Traducir el título recibido de la API
-            description: t(item.text).split(" ").slice(0, 20).join(" ") + (t(item.text).split(" ").length > 20 ? "..." : ""),
-            date: new Date(item.created_at).toLocaleDateString(),
-            img: item.img
-          }));
-        } catch (error) {
-          console.error("Error fetching news:", error);
-          return []; // Retornar un arreglo vacío en caso de error
-        }
-    };
+    const { id } = location.state || {}; // Obtener `id` desde la navegación
 
     useEffect(() => {
-        // Llamar a checkProtektora dentro del useEffect
-        checkProtektora(navigate);
-    }, [navigate]);
+        
+        let parrafoak_Array;
+
+        const fetchSingleNews = async (newsId) => {
+            try {
+                const response = await fetch(`${IpAPI}/api/new-obtein/${newsId}`, {
+                    method:'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error fetching news with id ${newsId}`);
+                }else{
+                    const data = await response.json();
+                    parrafoak_Array= [data.text_translations[0].value, data.text_translations[1].value];
+                    console.log(parrafoak_Array);
+                    console.log(data);
+                    setNewsData(data);
+                    
+                }
+                
+
+            } catch (error) {
+                console.error('Error fetching single news:', error);
+                alert('Error al obtener los datos de la noticia.');
+            }
+        };
+
+        if (id) {
+            fetchSingleNews(id); // Llamar a la API cuando `id` esté disponible
+
+        }
+    }, [id]);
+
+    
 
     // Función para cambiar el idioma
     const changeLanguage = (lang) => {
@@ -63,8 +73,8 @@ function Ad_notiziak() {
 
     // Estado para manejar los datos del formulario
     const [formData, setFormData] = useState({
-        titleES: '',
-        titleEU: '',
+        titleES: "newsData.title_translations[0].value",
+        titleEU: "newsData.title_translations[1].value",
         paragraphES1: '',
         paragraphES2: '',
         paragraphEU1: '',
@@ -139,104 +149,106 @@ function Ad_notiziak() {
     };
 
     return (
-        <>
-            <div className='container flex justify-center erdian'>
-                <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-full rounded-lg text-center border-black dark:border-transparent border-2'>
-                    <div className='w-full flex'>
-                        
-                        <BackButton targetPage="/Ad_notizia_panela" width={20}/>
-                        <div className='w-11/12 flex flex-row space-x-4 justify-end'>
-                            <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
-                            <DarkModeToggle className='w-1/2' />
+        <> 
+            {newsData ? (
+                <div className='container flex justify-center erdian'>
+                    <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-full rounded-lg text-center border-black dark:border-transparent border-2'>
+                        <div className='w-full flex'>
+                            
+                            <BackButton targetPage="/Ad_notizia_panela" width={20}/>
+                            <div className='w-11/12 flex flex-row space-x-4 justify-end'>
+                                <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
+                                <DarkModeToggle className='w-1/2' />
+                            </div>
                         </div>
-                    </div>
-                    <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>
-                        {t('ad_notiziak:tituloa_D')}
-                    </p>
+                        <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>
+                            {t('ad_notiziak:tituloa_D')}
+                        </p>
 
-                    {/* Mostrar mensaje de éxito si se creó la noticia */}
-                    {successMessage && <p className='text-green-500 font-semibold mb-4'>{successMessage}</p>}
+                        {successMessage && <p className='text-green-500 font-semibold mb-4'>{successMessage}</p>}
 
-                    <form className='flex flex-col text-left' onSubmit={handleSubmit}>
-                        <label className='font-semibold dark:text-white'>{t('ad_notiziak:tituloa')} (ES)</label>
-                        <input
-                            className='mb-2 dark:border-primary border-black border-2 rounded-lg'
-                            type='text'
-                            name='titleES'
-                            value={title}
-                            onChange={handleChange}
-                            required
-                        />
-                        <label className='font-semibold dark:text-white'>{t('ad_notiziak:tituloa')} (EU)</label>
-                        <input
-                            className='mb-2 dark:border-primary border-black border-2 rounded-lg'
-                            type='text'
-                            name='titleEU'
-                            value={formData.titleEU}
-                            onChange={handleChange}
-                            required
-                        />
-                        <label className='font-semibold dark:text-white'>IMG URL</label>
-                        <div>
+                        <form className='flex flex-col text-left' onSubmit={handleSubmit}>
+                            <label className='font-semibold dark:text-white'>{t('ad_notiziak:tituloa')} (ES)</label>
                             <input
-                                className='mb-2 text-black dark:text-white mr-4  font-ubuntu rounded-lg'
-                                type='file'
-                                disabled={aktibatuta}
-                                name='img'
-                                value={formData.img}
+                                className='mb-2 dark:border-primary border-black border-2 rounded-lg'
+                                type='text'
+                                name='titleES'
+                                value={newsData.title_translations[0].value}
                                 onChange={handleChange}
                                 required
                             />
-                            <input type="checkbox"  checked={!aktibatuta}  onChange={aldatu} />
-                        </div>
-                       
-                        <div className='flex flex-row w-auto'>
-                            <div className='flex flex-col w-1/2 mr-5'>
-                                <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:Paragrafoa')} 1</label>
-                                <textarea
-                                    className='mb-2 dark:border-primary border-black border-2 rounded-lg'
-                                    rows={6}
-                                    name='paragraphES1'
-                                    value={formData.paragraphES1}
+                            <label className='font-semibold dark:text-white'>{t('ad_notiziak:tituloa')} (EU)</label>
+                            <input
+                                className='mb-2 dark:border-primary border-black border-2 rounded-lg'
+                                type='text'
+                                name='titleEU'
+                                value={newsData.title_translations[1].value}
+                                onChange={handleChange}
+                                required
+                            />
+                            <label className='font-semibold dark:text-white'>IMG URL</label>
+                            <div>
+                                <input
+                                    className='mb-2 text-black dark:text-white mr-4  font-ubuntu rounded-lg'
+                                    type='file'
+                                    disabled={aktibatuta}
+                                    name='img'
+                                    
                                     onChange={handleChange}
                                     required
-                                ></textarea>
-                                <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:Paragrafoa')} 2</label>
-                                <textarea
-                                    className='mb-2 dark:border-primary border-black border-2 rounded-lg'
-                                    rows={6}
-                                    name='paragraphES2'
-                                    value={formData.paragraphES2}
-                                    onChange={handleChange}
-                                    required
-                                ></textarea>
+                                />
+                                <input type="checkbox"  checked={!aktibatuta}  onChange={aldatu} />
                             </div>
-                            <div className='flex flex-col w-1/2'>
-                                <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:Paragrafoa')} 1</label>
-                                <textarea
-                                    className='mb-2 dark:border-primary border-black border-2 rounded-lg'
-                                    rows={6}
-                                    name='paragraphEU1'
-                                    value={formData.paragraphEU1}
-                                    onChange={handleChange}
-                                    required
-                                ></textarea>
-                                <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:Paragrafoa')} 2</label>
-                                <textarea
-                                    className='mb-2 dark:border-primary border-black border-2 rounded-lg'
-                                    rows={6}
-                                    name='paragraphEU2'
-                                    value={formData.paragraphEU2}
-                                    onChange={handleChange}
-                                    required
-                                ></textarea>
-                            </div>
-                        </div>
                         
-                        <SendButom value={t('saioa_sortu:input')} />
-                    </form>
+                            <div className='flex flex-row w-auto'>
+                                <div className='flex flex-col w-1/2 mr-5'>
+                                    <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:Paragrafoa')} 1</label>
+                                    <textarea
+                                        className='mb-2 dark:border-primary border-black border-2 rounded-lg'
+                                        rows={6}
+                                        name='paragraphES1'
+                                        value={newsData.text_translations[0].value}
+                                        onChange={handleChange}
+                                        required
+                                    ></textarea>
+                                    <label className='font-semibold dark:text-white'>ES-{t('ad_notiziak:Paragrafoa')} 2</label>
+                                    <textarea
+                                        className='mb-2 dark:border-primary border-black border-2 rounded-lg'
+                                        rows={6}
+                                        name='paragraphES2'
+                                        value={formData.paragraphES2}
+                                        onChange={handleChange}
+                                        required
+                                    ></textarea>
+                                </div>
+                                <div className='flex flex-col w-1/2'>
+                                    <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:Paragrafoa')} 1</label>
+                                    <textarea
+                                        className='mb-2 dark:border-primary border-black border-2 rounded-lg'
+                                        rows={6}
+                                        name='paragraphEU1'
+                                        value={newsData.text_translations[1].value}
+                                        onChange={handleChange}
+                                        required
+                                    ></textarea>
+                                    <label className='font-semibold dark:text-white'>EUS-{t('ad_notiziak:Paragrafoa')} 2</label>
+                                    <textarea
+                                        className='mb-2 dark:border-primary border-black border-2 rounded-lg'
+                                        rows={6}
+                                        name='paragraphEU2'
+                                        value={formData.paragraphEU2}
+                                        onChange={handleChange}
+                                        required
+                                    ></textarea>
+                                </div>
+                            </div>
+                            
+                            <SendButom value={t('saioa_sortu:input')} />
+                        </form>
+                    </div>
                 </div>
-            </div>
+            ):(<p>ERROREA id= {id}</p>)}
+            
         </>
     );
 }

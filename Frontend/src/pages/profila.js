@@ -8,6 +8,8 @@ import Animaliak from '../components/adopzioa/animaliak/animaliak.jsx';
 import IpAPI from "./../config/ipAPI";
 import Loading from '../components/loading/loading.jsx';
 
+import Alert from '../components/alert/alert.jsx';
+
 const Profila = () => {
     const [irudia, setIrudia] = useState("user-dog.jpg");
     const { t, i18n } = useTranslation();
@@ -70,6 +72,8 @@ const Profila = () => {
         }));
     };
 
+
+    const [alertVisible, setAlertVisible] = useState(false);
     const handleSave = (e) => {
         e.preventDefault();
     
@@ -104,6 +108,13 @@ const Profila = () => {
             })
             .then(data => {
                 console.log('Datos actualizados:', data);
+                // Mostrar el mensaje de éxito
+                setAlertVisible(true);
+
+                // Ocultar el mensaje después de 3 segundos
+                setTimeout(() => {
+                    setAlertVisible(false);
+                }, 8000);
             })
             .catch(error => {
                 console.error('Error guardando los datos:', error);
@@ -117,6 +128,13 @@ const Profila = () => {
 
     return (
         <>
+        {alertVisible && (
+                <Alert 
+                    title="¡Éxito!" 
+                    text="Los datos se han guardado correctamente." 
+                    onClose={() => setAlertVisible(false)} 
+                />
+        )}
         <div className="container flex justify-center">
             <div className="flex flex-col p-6 m-10 w-full rounded-lg text-center">
                 <div className="w-full flex justify-center items-center mb-5 p-4 bg-dark rounded-lg">

@@ -21,17 +21,16 @@ function Ad_notiziak() {
     const { t, i18 } = useTranslation();
     
     const [newsData, setNewsData] = useState();
-    const [parrafoak, setParrafoak]= useState(null);
 
-    const navigate = useNavigate();
     const location = useLocation();
-    const { id } = location.state || {}; // Obtener `id` desde la navegación
+    const { id } = location.state || {}; //Link etiketatik id-a lortzeko
 
     useEffect(() => {
         
-        let parrafoak_Array;
 
         const fetchSingleNews = async (newsId) => {
+            let par_ES;
+            let par_EUS;
             try {
                 const response = await fetch(`${IpAPI}/api/new-obtein/${newsId}`, {
                     method:'GET',
@@ -44,8 +43,24 @@ function Ad_notiziak() {
                     throw new Error(`Error fetching news with id ${newsId}`);
                 }else{
                     const data = await response.json();
-                    parrafoak_Array= [data.text_translations[0].value, data.text_translations[1].value];
-                    console.log(parrafoak_Array);
+                    
+                    par_ES= data.text_translations[0].value.split("|||");
+                    par_EUS= data.text_translations[1].value.split("|||");
+
+
+                    console.log("parrafoak_Array");
+
+                    // Inicializar formData con los datos recibidos
+                    setFormData({
+                        titleES: data.title_translations[0].value,
+                        titleEU: data.title_translations[1].value,
+                        paragraphES1: par_ES[0] || '',
+                        paragraphES2: par_ES[1] || '',
+                        paragraphEU1: par_EUS[0] || '',
+                        paragraphEU2: par_EUS[1] || '',
+                        img: '', // Suponiendo que la URL de la imagen viene por separado
+                    });
+
                     console.log(data);
                     setNewsData(data);
                     
@@ -73,8 +88,8 @@ function Ad_notiziak() {
 
     // Estado para manejar los datos del formulario
     const [formData, setFormData] = useState({
-        titleES: "newsData.title_translations[0].value",
-        titleEU: "newsData.title_translations[1].value",
+        titleES: '',
+        titleEU: '',
         paragraphES1: '',
         paragraphES2: '',
         paragraphEU1: '',
@@ -173,7 +188,7 @@ function Ad_notiziak() {
                                 className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                 type='text'
                                 name='titleES'
-                                value={newsData.title_translations[0].value}
+                                value={formData.titleES}
                                 onChange={handleChange}
                                 required
                             />
@@ -182,7 +197,7 @@ function Ad_notiziak() {
                                 className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                 type='text'
                                 name='titleEU'
-                                value={newsData.title_translations[1].value}
+                                value={formData.titleEU}
                                 onChange={handleChange}
                                 required
                             />
@@ -207,7 +222,7 @@ function Ad_notiziak() {
                                         className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                         rows={6}
                                         name='paragraphES1'
-                                        value={newsData.text_translations[0].value}
+                                        value={formData.paragraphES1}
                                         onChange={handleChange}
                                         required
                                     ></textarea>
@@ -227,7 +242,7 @@ function Ad_notiziak() {
                                         className='mb-2 dark:border-primary border-black border-2 rounded-lg'
                                         rows={6}
                                         name='paragraphEU1'
-                                        value={newsData.text_translations[1].value}
+                                        value={formData.paragraphEU1}
                                         onChange={handleChange}
                                         required
                                     ></textarea>

@@ -78,8 +78,6 @@ function Ad_notiziak() {
 
             if (response.ok) {
                 const result = await response.json();
-                // Mostrar mensaje de éxito
-                setSuccessMessage(t('ad_notiziak:noticia_creada_exitosamente'));
 
                 // Limpiar los campos del formulario
                 setFormData({

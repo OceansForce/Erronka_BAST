@@ -75,6 +75,7 @@ class UserCreateController extends Controller
             ], 500); // 500 Internal Server Error
         }
     }
+    
     public function verifyEmail($token)
     {
         $user = User::where('email_verification_token', $token)->first();
@@ -94,11 +95,11 @@ class UserCreateController extends Controller
 
     public function edit(Request $request)
     {
-	//return response()->json(['error'=>'que pollas']);
+	    //return response()->json(['error'=>'que pollas']);
         // Obtener el usuario autenticado
         $user = auth()->user();
-	//return response()->json(['error' => $user]);
-	if (!$user) {
+	    //return response()->json(['error' => $user]);
+	    if (!$user) {
             return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
         }
 
@@ -150,6 +151,40 @@ class UserCreateController extends Controller
             // En caso de error inesperado (ej. problemas con la base de datos)
             return response()->json([
                 'message' => 'Ocurrió un error al actualizar los datos del usuario.',
+                'error' => $e->getMessage(),
+            ], 500); // 500 Internal Server Error
+        }
+    }
+
+    public function delete(Request $request)
+    {
+	    //return response()->json(['error'=>'que pollas']);
+        // Obtener el usuario autenticado
+        $user = auth()->user();
+    	//return response()->json(['error' => $user]);
+	    if (!$user) {
+            return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
+        }
+
+        // Borrar los datos del usuario
+        try {
+            // Borramos el usuario
+            $user->email_verified = false;
+            
+            // Guardar los cambios en la base de datos
+            $user->save();
+
+            Log::info('Usuario borrado exitosamente', ['user' => $user]);
+
+            return response()->json([
+                'message' => 'Usuario borrato exitosamente',
+                'user' => $user,
+            ], 200); // 200 OK
+
+        } catch (\Exception $e) {
+            // En caso de error inesperado (ej. problemas con la base de datos)
+            return response()->json([
+                'message' => 'Ocurrió un error al borrar el usuario.',
                 'error' => $e->getMessage(),
             ], 500); // 500 Internal Server Error
         }

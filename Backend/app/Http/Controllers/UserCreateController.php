@@ -169,7 +169,7 @@ class UserCreateController extends Controller
         // Borrar los datos del usuario
         try {
             // Borramos el usuario
-            $user->email_verified = false;
+            $user->email_verified = 0;
             
             // Guardar los cambios en la base de datos
             $user->save();

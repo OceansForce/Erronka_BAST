@@ -100,7 +100,7 @@ class NewsController extends Controller
             'titleEU' => 'required|string',
             'textES' => 'required|string',
             'textEU' => 'required|string',
-            'img' => 'required|url',
+            'img' => 'nullable|url',
         ]);
 
         // Actualizamos la imagen de la noticia

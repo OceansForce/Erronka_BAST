@@ -12,7 +12,20 @@ import Alert from '../components/alert/alert.jsx';
 import UserAnimals from '../components/profila/animals.jsx';
 import SaveIcon from '../components/profila/saveIcon.jsx';
 
+import DeleteButtom from '../components/profila/deleteButtom.jsx';
+
+import { useNavigate } from 'react-router-dom';
+import { checkToken } from '../components/security/securityToken';
+
 const Profila = () => {
+
+    const navigate = useNavigate();
+        useEffect(() => {
+            // Llamar a checkProtektora dentro del useEffect
+            checkToken(navigate);
+        }, [navigate]);
+
+
     const [irudia, setIrudia] = useState("user-dog.jpg");
     const { t, i18n } = useTranslation();
     const [userData, setUserData] = useState(null);
@@ -98,29 +111,29 @@ const Profila = () => {
             },
             body: JSON.stringify(filteredFormData),
         })
-            .then(response => {
-                // Verificar si la respuesta fue exitosa (código de estado 2xx)
-                if (!response.ok) {
-                    // Si la respuesta no fue exitosa, lanza un error con el estado y el mensaje del backend
-                    return response.text().then(text => { 
-                        throw new Error(`Error ${response.status}: ${text}`);
-                    });
-                }
-                return response.json(); // Si la respuesta es exitosa, parsear como JSON
-            })
-            .then(data => {
-                console.log('Datos actualizados:', data);
-                // Mostrar el mensaje de éxito
-                setAlertVisible(true);
+        .then(response => {
+            // Verificar si la respuesta fue exitosa (código de estado 2xx)
+            if (!response.ok) {
+                // Si la respuesta no fue exitosa, lanza un error con el estado y el mensaje del backend
+                return response.text().then(text => { 
+                    throw new Error(`Error ${response.status}: ${text}`);
+                });
+            }
+            return response.json(); // Si la respuesta es exitosa, parsear como JSON
+        })
+        .then(data => {
+            console.log('Datos actualizados:', data);
+            // Mostrar el mensaje de éxito
+            setAlertVisible(true);
 
-                // Ocultar el mensaje después de 3 segundos
-                setTimeout(() => {
-                    setAlertVisible(false);
-                }, 8000);
-            })
-            .catch(error => {
-                console.error('Error guardando los datos:', error);
-            });
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(() => {
+                setAlertVisible(false);
+            }, 8000);
+        })
+        .catch(error => {
+            console.error('Error guardando los datos:', error);
+        });
         
     };
 
@@ -139,7 +152,7 @@ const Profila = () => {
         )}
         <div className="container flex justify-center">
             <div className="flex flex-col p-6 m-10 w-full rounded-lg text-center">
-                <div className="w-full flex justify-center items-center mb-5 p-4 bg-dark rounded-lg">
+                <div className="w-full flex justify-center items-center mb-5 p-4 bg-primary dark:bg-dark rounded-lg">
                     <BackButton targetPage="/" width={24} />
                     <div className="w-11/12 flex flex-row space-x-4 justify-end">
                         <LanguageSelector className="w-1/2" changeLanguage={changeLanguage} />
@@ -238,6 +251,8 @@ const Profila = () => {
 
 
                             <UserAnimals userData={userData.animals} />
+
+                            <DeleteButtom />
                         </div>
                     </div>
                 </div>

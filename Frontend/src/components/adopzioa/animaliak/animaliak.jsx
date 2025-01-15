@@ -1,4 +1,4 @@
-const Animaliak= ({img, izena, kokapena, mota})=>{
+const Animaliak= ({ img, izena, kokapena, mota})=>{
     let link=`/img/${img}.png`;
 
     if(mota==="adopzio"){

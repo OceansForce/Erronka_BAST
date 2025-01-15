@@ -35,6 +35,15 @@ import esAd_adoptatu from './locales/es/admin/adoptatu.json';
 import IpAPI from '../config/ipAPI';
 import Ad_adoptatu from '../pages/Ad_adoptatu';
 
+import esUserProfile from './locales/es/user/userProfile.json';
+import euUserProfile from './locales/eu/user/userProfile.json';
+
+
+import esLoading from './locales/es/loading/loading.json';
+import euLoading from './locales/eu/loading/loading.json';
+
+
+
 // Función para cargar traducciones desde la API
 const loadTranslationsFromAPI = async (language, keys) => {
   console.log("API: "+`${IpAPI}/api/translations/keys`);
@@ -115,6 +124,9 @@ i18n
         ad_menua: esAd_menua,
         ad_galduta: esAd_galduta,
         Ad_adoptatu: esAd_adoptatu,
+        userProfile: esUserProfile,
+        loading: esLoading,
+
       },
       eu: {
         menu: euMenu,
@@ -129,6 +141,9 @@ i18n
         ad_menua: euAd_menua,
         ad_galduta: euAd_galduta,
         Ad_adoptatu: euAd_adoptatu,
+        userProfile: euUserProfile,
+        loading: euLoading,
+
       },
     },
     fallbackLng: 'eu', // Idioma de respaldo

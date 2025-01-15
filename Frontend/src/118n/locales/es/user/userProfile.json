@@ -1,0 +1,15 @@
+{
+    "guardar": "Guardar",
+    "nombre": "Nombre",
+    "apellido": "Apellido",
+    "gmail": "Gmail",
+    "password": "Contraseña",
+    "animals": "Mis Animales:",
+    "edit": "Editar",
+    "add": "Añadir",
+    "deleteButtom": "Borrar usuario",
+    "delete": "Estas seguro que quieres borrar tu usuario?",
+    "cancel": "No, cancelar",
+    "confirmar": "Si, estoy seguro"
+  }
+    

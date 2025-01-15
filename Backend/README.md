@@ -4,7 +4,7 @@
 
 Link: 
 ```
-http://3.87.235.201:8000/api/translations/keys
+http://bastbackend.ddns.net:8000/api/translations/keys
 ```
 Header:
 ```
@@ -47,7 +47,7 @@ Response Error:
   
 Link: 
 ```
-http://3.87.235.201:8000/api/register
+http://bastbackend.ddns.net:8000/api/register
 ```
 Header:
 ```
@@ -105,7 +105,7 @@ Response Error:
   
 Link: 
 ```
-http://3.87.235.201:8000/api/login
+http://bastbackend.ddns.net:8000/api/login
 ```
 Header:
 ```
@@ -147,7 +147,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/api/user-data
+http://bastbackend.ddns.net:8000/api/user-data
 ```
 Header:
 ```
@@ -214,7 +214,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/api/user-data-edit
+http://bastbackend.ddns.net:8000/api/user-data-edit
 ```
 Header:
 ```
@@ -266,6 +266,37 @@ Response Error:
 ```
 </details>
 
+<summary> <h2> Delete User </h2> </summary>
+<p> **Delete** bitartez egin behar da</p>
+Link: 
+ 
+```
+http://bastbackend.ddns.net:8000/api/user-delete
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Body:
+```
+
+```
+Response:
+```
+{
+    "message": "Usuario borrato exitosamente",
+}
+```
+Response Error:
+```
+{
+    "error": "Usuario no autenticado"
+}
+
+```
+</details>
+
 <details>
     
 <summary> <h2> Add protectora to user </h2> </summary>
@@ -273,7 +304,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/api/user-add-protectora
+http://bastbackend.ddns.net:8000/api/user-add-protectora
 ```
 Header:
 ```
@@ -323,7 +354,7 @@ Response Error:
   
 Link: 
 ```
-http://3.87.235.201:8000/api/news
+http://bastbackend.ddns.net:8000/api/news
 ```
 Header:
 ```
@@ -370,7 +401,7 @@ Link:
 <p>Protektora_id is optional</p>
     
 ```
-http://3.87.235.201:8000/api/latest-news?count=5&offset=10&protektora_id=1
+http://bastbackend.ddns.net:8000/api/latest-news?count=5&offset=10&protektora_id=1
 ```
 Header:
 ```
@@ -414,7 +445,7 @@ Link:
 <p>Protektora_id is optional</p>
     
 ```
-http://54.157.236.145:8000/api/new-obtein/45
+http://bastbackend.ddns.net:8000/api/new-obtein/45
 ```
 Header:
 ```
@@ -469,7 +500,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/api/news/50
+http://bastbackend.ddns.net:8000/api/news/50
 ```
 Header:
 ```
@@ -517,7 +548,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/api/animals-adopt?limit=5&offset=0&protektora_id=123&type=txakurra
+http://bastbackend.ddns.net:8000/api/animals-adopt?limit=5&offset=0&protektora_id=123&type=txakurra
 ```
 Header:
 ```
@@ -576,7 +607,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/api/animals-personal?limit=5&offset=0&protektora_id=123&type=txakurra
+http://bastbackend.ddns.net:8000/api/animals-personal?limit=5&offset=0&protektora_id=123&type=txakurra
 ```
 Header:
 ```
@@ -637,7 +668,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/api/animals-create
+http://bastbackend.ddns.net:8000/api/animals-create
 ```
 Header:
 ```
@@ -685,7 +716,7 @@ Response Error:
 Link: 
  
 ```
-http://54.209.224.251:8000/api/animals-edit
+http://bastbackend.ddns.net:8000/api/animals-edit
 ```
 Header:
 ```

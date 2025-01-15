@@ -5,6 +5,8 @@ import "./Carousel.css";
 import IpAPI from "../../config/ipAPI";
 
 import Loading from "../loading/loading";
+import { Link } from "react-router-dom";
+
 
 const Carrusel = () => {
   const { t, i18n } = useTranslation(); // Hook para traducir textos
@@ -94,16 +96,22 @@ const Carrusel = () => {
       <div className="carousel-wrapper p-2 sm:justify-items-center">
         <div className="carousel-content">
           {currentItems.map((item) => (
-            <div key={item.id} className="carousel-item dark:bg-dark_body bg-white hover:scale-110 active:scale-95 duration-300">
-              <img src={item.img} alt={item.title} className="carousel-img rounded-t-lg w-96 h-64" />
-              <div className="carousel-text">
-                <h3 className="text-center font-bold text-slate-600 dark:text-white limit_h">{item.title}</h3>
-                <p className="text-left data dark:text-white h-5">{item.date}</p>
-                <div className="full_w">
-                  <p className="text-justify text-slate-600 dark:text-white h-24 limit">{item.description}</p>
+
+            <Link to={`/news/${item.id}`}>
+
+              <div key={item.id} className="carousel-item dark:bg-dark_body bg-white hover:scale-110 active:scale-95 duration-300">
+                <img src={item.img} alt={item.title} className="carousel-img rounded-t-lg w-96 h-64" />
+                <div className="carousel-text">
+                  <h3 className="text-center font-bold text-slate-600 dark:text-white limit_h">{item.title}</h3>
+                  <p className="text-left data dark:text-white h-5">{item.date}</p>
+                  <div className="full_w">
+                    <p className="text-justify text-slate-600 dark:text-white h-24 limit">{item.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
+
+            
           ))}
         </div>
       </div>

@@ -27,6 +27,7 @@ function Ad_menua() {
       i18n.changeLanguage(lang);  // Cambia el idioma
     };
 
+    const protektoraID =localStorage.getItem('protektora');
 
     
 
@@ -39,11 +40,14 @@ function Ad_menua() {
                 <DarkModeToggle className='w-1/2' />  
             </div>
             <div className="w-full flex flex-row flex-wrap bg-red erdian text-center space-x-14">
-                <AdminPanelButtom 
+                {protektoraID ===1 && (
+                    <AdminPanelButtom 
                     to="/Ad_notizia_panela" 
                     imageSrc="./img/newspaper-svgrepo-com.svg" 
                     text={t('ad_menua:notiziak')} 
-                />
+                    />
+                )}
+                
                 
                 <AdminPanelButtom 
                     to="/Ad_galduta" 
@@ -57,11 +61,15 @@ function Ad_menua() {
                     text={t('ad_menua:adoptatu')} 
                 />
 
-                <AdminPanelButtom 
-                    to="/Ad_erabiltzaileak" 
-                    imageSrc="./img/icons/admin/user-circle-1-svgrepo-com.svg" 
-                    text={t('ad_menua:Erabiltzaileak')} 
-                />
+
+                {protektoraID === 1 && (
+                    <AdminPanelButtom 
+                        to="/Ad_erabiltzaileak" 
+                        imageSrc="./img/icons/admin/user-circle-1-svgrepo-com.svg" 
+                        text={t('ad_menua:Erabiltzaileak')} 
+                    />
+                )}
+
 
             </div>
         </>

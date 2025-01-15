@@ -2,6 +2,9 @@ import Animaliak from './animaliak/animaliak.jsx';
 import Filtroak from './filtroak/filtroak.jsx'; 
 
 function Adopzioak() {
+
+
+  
     return (
       <>
         <div className='container mx-auto flex flex-row justify-evenly border-b-2 pb-8 dark:border-white border-black mt-6'>

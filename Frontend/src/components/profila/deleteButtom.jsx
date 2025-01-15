@@ -18,7 +18,7 @@ const DeleteButtom = ({ userData }) => {
     const tok = localStorage.getItem('token');
 
         fetch(`${IpAPI}/api/user-delete`, {
-            method: 'PUT',
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${tok}`,

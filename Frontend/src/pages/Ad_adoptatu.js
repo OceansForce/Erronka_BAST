@@ -8,22 +8,10 @@ import BackButton from '../components/bottons/backBotom';
 import SendButom from '../components/bottons/sendBotton';
 import IpAPI from '../config/ipAPI';
 import { checkProtektora } from '../components/security/security';
+import Irudiak_input from './../components/notiziak/IrudiakInput.js';
 import { json, useNavigate } from 'react-router-dom';
 
 function Ad_adoptatu(){
-
-  const [aktibatuta1, setAktibatuta1]= useState(true);
-  const aldatu1=()=>{
-    setAktibatuta1(!aktibatuta1);
-  }
-  const [aktibatuta2, setAktibatuta2]= useState(true);
-  const aldatu2=()=>{
-    setAktibatuta2(!aktibatuta2);
-  }
-  const [aktibatuta3, setAktibatuta3]= useState(true);
-  const aldatu3=()=>{
-    setAktibatuta3(!aktibatuta3);
-  }
   
   const [mota, setMota]= useState("");
   const [arraza, setArraza]= useState("");
@@ -247,41 +235,36 @@ function Ad_adoptatu(){
                   </div>
                 </div>
 
-                <div className=' w-1/2 flex flex-col mr-5'>
-                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Profil')}</label>
-                  <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' required/>
-                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Beste')}</label>
-                  <div>
-                    <input
-                      className='mb-2 dark:border-primary rounded-lg dark:text-white'
-                      type='file'
-                      disabled={aktibatuta1}
-                      name='img'
-                      onChange={handleChange}
-                    />
-                    <input type="checkbox" checked={!aktibatuta1} onChange={aldatu1} />
-                  </div>
-                  <div>
-                    <input
-                      className='mb-2 dark:border-primary rounded-lg dark:text-white'
-                      type='file'
-                      disabled={aktibatuta2}
-                      name='img'
-                      onChange={handleChange}
-                    />
-                    <input type="checkbox" checked={!aktibatuta2} onChange={aldatu2} />
-                  </div>
-                  <div>
-                    <input
-                      className='mb-2 dark:border-primary rounded-lg dark:text-white'
-                      type='file'
-                      disabled={aktibatuta3}
-                      name='img'
-                      onChange={handleChange}
-                    />
-                    <input type="checkbox" checked={!aktibatuta3} onChange={aldatu3} />
-                  </div>
+                <div className='ml-3'>
+                  <input type='radio' name='Esterilizatua' value={2} onChange={(e)=> setEsterilizado(parseInt(e.target.value))}/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
                 </div>
+
+              </div>
+                  
+            </div>
+
+            <div className='flex flex-row mt-2'>
+
+              <div className=' w-1/2 flex flex-col mr-10'>
+                <label className='font-semibold dark:text-white'>{t('Ad_adoptatu:Etxekoa')}</label>
+                <div className='ml-3'>
+                  <input type='radio' name='Etxekoa' onChange={(e)=> setEtxekoa(true)} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
+                </div>
+
+                <div className='ml-3'>
+                  <input type='radio' name='Etxekoa'  onChange={(e)=> setEtxekoa(false)} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
+                </div>
+
+              </div>
+
+              <div className=' w-1/2 flex flex-col mr-5'>
+                <label className='font-semibold dark:text-white'>{t('ad_galduta:Profil')}</label>
+                <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' required/>
+
+                <label className='font-semibold dark:text-white'>{t('ad_galduta:Beste')}</label>
+                <Irudiak_input handleChange={handleChange}/>
+                <Irudiak_input handleChange={handleChange}/>
+                <Irudiak_input handleChange={handleChange}/>
               </div>
 
               <div className='flex flex-row mt-2'>

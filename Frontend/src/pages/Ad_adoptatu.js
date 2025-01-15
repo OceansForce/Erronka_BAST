@@ -158,6 +158,7 @@ function Ad_adoptatu(){
                     <DarkModeToggle className='w-1/2' />
                 </div>
               </div>
+
               <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('Ad_adoptatu:Titulo')}</p>
               <form className='flex flex-col text-left' onSubmit={handleSubmit}>
 
@@ -221,61 +222,43 @@ function Ad_adoptatu(){
                       <input type='radio' name='Esterilizatua' value={2} onChange={(e)=> setEsterilizado(parseInt(e.target.value))}/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
                     </div>
                   </div>
-              </div>
+                </div>
 
-              <div className='flex flex-row mt-2'>
-                <div className=' w-1/2 flex flex-col mr-10'>
-                  <label className='font-semibold dark:text-white'>{t('Ad_adoptatu:Etxekoa')}</label>
-                  <div className='ml-3'>
-                    <input type='radio' name='Etxekoa' onChange={(e)=> setEtxekoa(true)} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
+                <div className='flex flex-row mt-2'>
+                  <div className=' w-1/2 flex flex-col mr-10'>
+                    <label className='font-semibold dark:text-white'>{t('Ad_adoptatu:Etxekoa')}</label>
+                    <div className='ml-3'>
+                      <input type='radio' name='Etxekoa' onChange={(e)=> setEtxekoa(true)} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
+                    </div>
+
+                    <div className='ml-3'>
+                      <input type='radio' name='Etxekoa' onChange={(e)=> setEtxekoa(false)} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
+                    </div>
                   </div>
+                  <div className=' w-1/2 flex flex-col mr-5'>
+                    <label className='font-semibold dark:text-white'>{t('ad_galduta:Profil')}</label>
+                    <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' required/>
 
-                  <div className='ml-3'>
-                    <input type='radio' name='Etxekoa' onChange={(e)=> setEtxekoa(false)} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
+                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Beste')}</label>
+                  <Irudiak_input handleChange={handleChange}/>
+                  <Irudiak_input handleChange={handleChange}/>
+                  <Irudiak_input handleChange={handleChange}/>
+                </div>
+                </div>
+                    
+              
+
+              
+                <div className='flex flex-row mt-2'>
+                  <div className=' w-full flex flex-col'>
+                    <label className='font-semibold dark:text-white'>{t('ad_galduta:Deskribapena')}</label>
+                    <textarea className='dark:border-primary border-black border-2 rounded-lg' rows={6} name='descripcion' value={formData.descripcion} onChange={handleChange} required></textarea>
                   </div>
                 </div>
-
-                <div className='ml-3'>
-                  <input type='radio' name='Esterilizatua' value={2} onChange={(e)=> setEsterilizado(parseInt(e.target.value))}/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
-                </div>
-
-              </div>
-                  
-            </div>
-
-            <div className='flex flex-row mt-2'>
-
-              <div className=' w-1/2 flex flex-col mr-10'>
-                <label className='font-semibold dark:text-white'>{t('Ad_adoptatu:Etxekoa')}</label>
-                <div className='ml-3'>
-                  <input type='radio' name='Etxekoa' onChange={(e)=> setEtxekoa(true)} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
-                </div>
-
-                <div className='ml-3'>
-                  <input type='radio' name='Etxekoa'  onChange={(e)=> setEtxekoa(false)} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
-                </div>
-
-              </div>
-
-              <div className=' w-1/2 flex flex-col mr-5'>
-                <label className='font-semibold dark:text-white'>{t('ad_galduta:Profil')}</label>
-                <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' required/>
-
-                <label className='font-semibold dark:text-white'>{t('ad_galduta:Beste')}</label>
-                <Irudiak_input handleChange={handleChange}/>
-                <Irudiak_input handleChange={handleChange}/>
-                <Irudiak_input handleChange={handleChange}/>
-              </div>
-
-              <div className='flex flex-row mt-2'>
-                <div className=' w-full flex flex-col'>
-                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Deskribapena')}</label>
-                  <textarea className='dark:border-primary border-black border-2 rounded-lg' rows={6} name='descripcion' value={formData.descripcion} onChange={handleChange} required></textarea>
-                </div>
-              </div>
-
-              <SendButom value={t('saioa_sortu:input')} />
+            
+                <SendButom value={t('saioa_sortu:input')} />
             </form>
+
           </div>
         </div>
       </>

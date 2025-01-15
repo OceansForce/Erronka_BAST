@@ -8,92 +8,104 @@ use App\Models\News;
 use App\Models\Protektora;
 use Illuminate\Http\Request;
 use App\Models\Translation;
+use App\Http\Controllers\ImageController;
 
 class NewsController extends Controller
 {
     // Crear una noticia
     public function store(Request $request)
     {
-	if (!auth()->check()) {
-	        return response()->json(['message' => 'No autenticado'], 401);
-	}
-	if (auth()->user()->idProtektora !=1){
-		return response()->json(['message' => 'No tienes permisos'],401);
-	}
-
-        // Validación de los campos de texto y título en ambos idiomas
-        try {
-            $request->validate([
-                'titleES' => 'required|string',
-                'titleEU' => 'required|string',
-                'textES' => 'required|string',
-                'textEU' => 'required|string',
-                'img' => 'nullable|url',
-		//'img' => 'nullable|string'->default('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
-            ]);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json([
-                'message' => 'Error de validación',
-                'errors' => $e->errors(),
-            ], 422);
+        if (!auth()->check()) {
+                return response()->json(['message' => 'No autenticado'], 401);
+        }
+        if (auth()->user()->idProtektora !=1){
+            return response()->json(['message' => 'No tienes permisos'],401);
         }
 
-        // Crear la noticia
-        $news = new News();
-        $news->protektora = auth()->user()->idProtektora;  // El middleware ya validó que el usuario tenga un 'protektora_id'
-        $news->img = $request->input('img');
-        $news->save(); // Guardamos la noticia en la base de datos, para obtener el ID
+            // Validación de los campos de texto y título en ambos idiomas
+            try {
+                $request->validate([
+                    'titleES' => 'required|string',
+                    'titleEU' => 'required|string',
+                    'textES' => 'required|string',
+                    'textEU' => 'required|string',
+                    'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            //'img' => 'nullable|string'->default('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+                ]);
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                return response()->json([
+                    'message' => 'Error de validación',
+                    'errors' => $e->errors(),
+                ], 422);
+            }
 
-        // Obtener el ID de la noticia recién creada
-        $news_id = $news->id;
+            $imageUrl = null;
+            if ($request->hasFile('image')) {
+                $imageController = new ImageController();
+                $imageResponse = $imageController->upload($request);
+    
+                // Comprobamos si la subida fue exitosa
+                if ($imageResponse->status() == 201) {
+                    $imageUrl = $imageResponse->getData()->url;  // Extraemos la URL de la imagen subida
+                }
+            }
 
-        // Crear las traducciones para el título
-        // En español
-        $title_es = Translation::create([
-            'keyValue' => 'title' . $news_id,
-            'language' => 'es',
-            'value' => $request->input('titleES'),
-        ]);
+            // Crear la noticia
+            $news = new News();
+            $news->protektora = auth()->user()->idProtektora;  // El middleware ya validó que el usuario tenga un 'protektora_id'
+            $news->img = $imageUrl;
+            $news->save(); // Guardamos la noticia en la base de datos, para obtener el ID
 
-        // En euskera
-        $title_eu = Translation::create([
-            'keyValue' => 'title' . $news_id,
-            'language' => 'eu',
-            'value' => $request->input('titleEU'),
-        ]);
+            // Obtener el ID de la noticia recién creada
+            $news_id = $news->id;
 
-        // Crear las traducciones para el texto
-        // En español
-        $text_es = Translation::create([
-            'keyValue' => 'news' . $news_id,
-            'language' => 'es',
-            'value' => $request->input('textES'),
-        ]);
+            // Crear las traducciones para el título
+            // En español
+            $title_es = Translation::create([
+                'keyValue' => 'title' . $news_id,
+                'language' => 'es',
+                'value' => $request->input('titleES'),
+            ]);
 
-        // En euskera
-        $text_eu = Translation::create([
-            'keyValue' => 'news' . $news_id,
-            'language' => 'eu',
-            'value' => $request->input('textEU'),
-        ]);
+            // En euskera
+            $title_eu = Translation::create([
+                'keyValue' => 'title' . $news_id,
+                'language' => 'eu',
+                'value' => $request->input('titleEU'),
+            ]);
 
-        // Actualizamos los campos en la tabla `news` con las claves de traducción
-        $news->title = $title_es->keyValue;  // Clave que apunta al título en español
-        $news->text = $text_es->keyValue;    // Clave que apunta al texto en español
-        $news->save();  // Guardamos nuevamente la noticia con las claves
+            // Crear las traducciones para el texto
+            // En español
+            $text_es = Translation::create([
+                'keyValue' => 'news' . $news_id,
+                'language' => 'es',
+                'value' => $request->input('textES'),
+            ]);
 
-        // Retornar la respuesta
-        return response()->json([
-            'message' => 'Noticia creada con éxito',
-            'news' => $news
-        ], 201);
+            // En euskera
+            $text_eu = Translation::create([
+                'keyValue' => 'news' . $news_id,
+                'language' => 'eu',
+                'value' => $request->input('textEU'),
+            ]);
+
+            // Actualizamos los campos en la tabla `news` con las claves de traducción
+            $news->title = $title_es->keyValue;  // Clave que apunta al título en español
+            $news->text = $text_es->keyValue;    // Clave que apunta al texto en español
+            $news->save();  // Guardamos nuevamente la noticia con las claves
+
+            // Retornar la respuesta
+            return response()->json([
+                'message' => 'Noticia creada con éxito',
+                'news' => $news
+            ], 201);
     }
     // Actualizar una noticia
     public function update(Request $request, News $news)
     {
-	if (auth()->user()->idProtektora !=1){
-		return response()->json(['message' => 'No tienes permisos'],401);
-	}
+        if (auth()->user()->idProtektora !=1){
+            return response()->json(['message' => 'No tienes permisos'],401);
+        }
         // Validación de los campos de texto y título en ambos idiomas
         $request->validate([
             'titleES' => 'required|string',

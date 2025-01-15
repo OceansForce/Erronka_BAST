@@ -12,11 +12,6 @@ const UserAnimals = ({userData}) => {
     const { t, i18n } = useTranslation();
     //console.log(JSON.stringify(userData, null, 2)); // El segundo parámetro `null, 2` es para darle formato y hacerlo legible
    
-    
-
-    
-
-
     return (
         <>
         

@@ -9,6 +9,7 @@ return array(
     'App\\Http\\Controllers\\AnimalController' => $baseDir . '/app/Http/Controllers/AnimalController.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\ImageController' => $baseDir . '/app/Http/Controllers/ImageController.php',
     'App\\Http\\Controllers\\NewsController' => $baseDir . '/app/Http/Controllers/NewsController.php',
     'App\\Http\\Controllers\\ObtainNewsController' => $baseDir . '/app/Http/Controllers/ObtainNewsController.php',
     'App\\Http\\Controllers\\TranslationController' => $baseDir . '/app/Http/Controllers/TranslationController.php',

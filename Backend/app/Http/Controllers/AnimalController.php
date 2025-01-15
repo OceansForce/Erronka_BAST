@@ -142,7 +142,7 @@ try {
             'animalType' => 'nullable|string|max:255',
             'img' => 'nullable|url',
             'bakuna' => 'nullable|integer|min:0',
-            'gender' => 'required|integer|in:0,1',
+            'gender' => 'required|integer|in:1,2',
             'descripcion' => 'nullable|string|max:255',
             'year' => 'nullable|date',
         ]);

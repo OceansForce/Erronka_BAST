@@ -63,6 +63,8 @@ class ObtainNewsController extends Controller
             'created_at' => $news->created_at,
             'updated_at' => $news->updated_at,
             'img' => $news->img,
+	    'textID' => $news->textTranslations,
+	    'titleID' => $news->titleTranslations,
             'text_translations' => $news->textTranslations->map(function ($translation) {
                 return [
                     'keyValue' => $translation->keyValue,

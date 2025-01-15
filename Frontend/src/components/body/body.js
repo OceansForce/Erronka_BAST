@@ -22,13 +22,17 @@ const Carrusel = () => {
       await i18n.loadMissingTranslations(i18n.language, keysToFetch); // Cargar traducciones faltantes
 
       // Mapear los datos recibidos para ajustarlos al formato requerido por el carrusel
-      return data.map(item => ({
-        id: item.id,
-        title: t(item.title), // Traducir el título recibido de la API
-        description: t(item.text).split(" ").slice(0, 20).join(" ") + (t(item.text).split(" ").length > 20 ? "..." : ""),
-        date: new Date(item.created_at).toLocaleDateString(),
-        img: item.img
-      }));
+      return data.map(item => {
+        console.log(data);
+        return {
+          id: item.id,
+          title: t(item.title), // Traducir el título recibido de la API
+          description: (t(item.text).split("|||"))[0].split(" ").slice(0, 20).join(" ") + ((t(item.text).split("|||"))[0].split(" ").length > 20 ? "..." : ""),
+          date: new Date(item.created_at).toLocaleDateString(),
+          img: item.img
+        }
+        
+      });
     } catch (error) {
       console.error("Error fetching news:", error);
       return []; // Retornar un arreglo vacío en caso de error

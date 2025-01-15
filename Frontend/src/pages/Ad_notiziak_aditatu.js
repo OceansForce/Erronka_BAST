@@ -108,7 +108,7 @@ function Ad_notiziak() {
     };
 
     // Manejador del envío del formulario
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e, newsId) => {
         e.preventDefault();
 
         // Combinar los párrafos con "|||"
@@ -123,12 +123,12 @@ function Ad_notiziak() {
             titleEU: formData.titleEU,
             textES: textES,
             textEU: textEU,
-            img: formData.img,
+            //img: formData.img,
         };
 
         try {
-            const response = await fetch(`${IpAPI}/api/news`, {
-                method: 'POST',
+            const response = await fetch(`${IpAPI}/api/news/${id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${tok}`,
@@ -139,7 +139,7 @@ function Ad_notiziak() {
             if (response.ok) {
                 const result = await response.json();
                 // Mostrar mensaje de éxito
-                setSuccessMessage(t('ad_notiziak:noticia_creada_exitosamente'));
+                setSuccessMessage(t('ad_notiziak:noticia_editada_exitosamente'));
 
                 // Limpiar los campos del formulario
                 setFormData({
@@ -208,7 +208,6 @@ function Ad_notiziak() {
                                     type='file'
                                     disabled={aktibatuta}
                                     name='img'
-                                    
                                     onChange={handleChange}
                                     required
                                 />

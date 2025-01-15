@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from '../118n/menu';
 import { Link } from 'react-router-dom';
 import AdminPanelButtom from '../components/bottons/adminPanel';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import BackButtonLittle from '../components/bottons/backButtomLittle';
 
@@ -27,7 +27,13 @@ function Ad_menua() {
       i18n.changeLanguage(lang);  // Cambia el idioma
     };
 
-    const protektoraID =localStorage.getItem('protektora');
+    const [protektoraID, setProtektoraID] = useState(null);
+    useEffect(() => {
+        
+        const id = localStorage.getItem('protektora');
+        setProtektoraID(Number(id));
+    }, []);
+    console.log(protektoraID);
 
     
 

@@ -72,9 +72,9 @@ Route::get('/animals-personal', [AnimalController::class, 'getPersonalAnimals'])
 
 
 // UP images
-use App\Http\Controllers\ImageController;
+/*use App\Http\Controllers\ImageController;
 Route::post('/upload-image', [ImageController::class, 'upload'])->middleware('auth:sanctum');
-Route::get('/images/{filename}', [ImageController::class, 'getImage']);
+Route::get('/images/{filename}', [ImageController::class, 'getImage']);*/
 
 Route::get('/verify-email/{token}', [UserCreateController::class, 'verifyEmail']);
 

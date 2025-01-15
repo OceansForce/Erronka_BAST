@@ -40,7 +40,9 @@ class NewsController extends Controller
             }
 
             $imageUrl = null;
-            if ($request->hasFile('image')) {
+//		dd($request);
+            if ($request->hasFile('img')) {
+
                 $imageController = new ImageController();
                 $imageResponse = $imageController->upload($request);
     

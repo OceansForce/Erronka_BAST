@@ -13,10 +13,10 @@ class ImageController extends Controller
     
 	public function upload(Request $request)
     {
-        $user = auth()->user();
+        /*$user = auth()->user();
         if (!$user) {
             return response()->json(['message' => 'Usuario no autenticado'], 401);
-        }
+        }*/
 
         try {
             // Validar la solicitud
@@ -24,8 +24,8 @@ class ImageController extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
-            $filename = Str::random(40) . '.' . $request->file('image')->getClientOriginalExtension();
-            $path = $request->file('image')->move(storage_path('app/public/images'), $filename);
+            $filename = Str::random(40) . '.' . $request->file('img')->getClientOriginalExtension();
+            $path = $request->file('img')->move(storage_path('app/public/images'), $filename);
             //dd($path);
             if ($path === false) {
                 return response()->json(['error' => 'No se pudo guardar la imagen.'], 500);
@@ -35,8 +35,8 @@ class ImageController extends Controller
             $filename = basename($path);
 
             return response()->json([
-                'message' => 'Imagen subida correctamente',
-                'filename' => $filename,
+                //'message' => 'Imagen subida correctamente',
+                //'filename' => $filename,
                 'url' => url('/storage/images/' . $filename),
             ], 201);
 

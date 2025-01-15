@@ -4,6 +4,8 @@ import i18n from '../../118n/menu'; // Importar configuración de i18n
 import "./Carousel.css";
 import IpAPI from "../../config/ipAPI";
 
+import Loading from "../loading/loading";
+
 const Carrusel = () => {
   const { t, i18n } = useTranslation(); // Hook para traducir textos
   const [loading, setLoading] = useState(true); // Estado para manejar la carga inicial
@@ -69,7 +71,7 @@ const Carrusel = () => {
   const currentItems = news.slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage);
 
   if (loading) {
-    return <div>Loading translations...</div>;
+    return <Loading />;
   }
 
   // Lógica para ocultar las flechas si están desactivadas

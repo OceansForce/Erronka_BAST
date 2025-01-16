@@ -174,6 +174,12 @@ class NewsController extends Controller
 		return response()->json(['error' => $news],401);
 	}
 
+//	$cacheKey = 'news_list_' . $idProte . '_' . $news->id; // Clave única relacionada con las noticias
+
+	// Borrar el caché correspondiente
+//	Cache::forget($cacheKey);
+//	Cache::flush();
+
         $news->delete();
 
         return response()->json(['message' => 'Noticia eliminada con éxito.']);

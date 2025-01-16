@@ -15,6 +15,36 @@ function Ad_erabiltzaileak() {
         console.log(aukera);
     }, [aukera])
 
+    useEffect(() => {
+        fetchAdopAnimals();
+    }, []);
+
+    const [userList, setUserList] = useState([]);
+
+
+    const fetchAdopAnimals = async () => {
+        try {
+            const tok = localStorage.getItem('token');
+            const response = await fetch(`${IpAPI}/api/get-all-user`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${tok}`,
+                },
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                setUserList(result);
+                
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
+            alert('Error en la solicitud. Revisa tu conexión.');
+        }
+    };
+
+    console.log(userList);
     
 
     const { t, i18n } = useTranslation();

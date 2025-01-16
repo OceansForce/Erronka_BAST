@@ -16,29 +16,27 @@ import Ad_notiziak_aditatu from './pages/Ad_notiziak_aditatu';
 import Ad_erabiltzaileak from './pages/Ad_erabiltzaileak';
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Cambié Switch por Routes
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  
 
 function App() {
   return (
     <Router>
-      <Routes> {/* Usa Routes en lugar de Switch */}
-          <Route path="/" element={<Index />} /> {/* Usa el prop 'element' en lugar de 'component' */}
-          <Route path="/adopzio" element={<Adopzioa />} /> {/* Lo mismo aquí */}
-          <Route path="/denda" element={<Denda />} /> {/* Lo mismo aquí */}
-          <Route path="/galduta" element={<Galduta />} /> {/* Lo mismo aquí */}
-          <Route path="/mapa" element={<Mapa />} /> {/* Lo mismo aquí */}
-          <Route path="/saioa_sortu" element={<Saioa_sortu />} /> {/* Lo mismo aquí */}
-          <Route path="/login" element={<Login />} /> {/* Lo mismo aquí */}
-          <Route path="/Ad_menu" element={<Ad_menua />} /> {/* Lo mismo aquí */}
-          <Route path="/Ad_notizia_panela" element={<Ad_notizia_panela />} /> {/* Lo mismo aquí */}
-          <Route path="/Ad_notiziak" element={<Ad_notiziak />} /> {/* Lo mismo aquí */}
+      <Routes> 
+          <Route path="/" element={<Index />} /> 
+          <Route path="/adopzio" element={<Adopzioa />} /> 
+          <Route path="/denda" element={<Denda />} /> 
+          <Route path="/galduta" element={<Galduta />} /> 
+          <Route path="/mapa" element={<Mapa />} /> 
+          <Route path="/saioa_sortu" element={<Saioa_sortu />} /> 
+          <Route path="/login" element={<Login />} /> 
+          <Route path="/Ad_menu" element={<Ad_menua />} />
+          <Route path="/Ad_notizia_panela" element={<Ad_notizia_panela />} /> 
+          <Route path="/Ad_notiziak" element={<Ad_notiziak />} /> 
           <Route path="/Ad_notiziak_aditatu" element={<Ad_notiziak_aditatu/>}/>
-          <Route path="/Ad_galduta" element={<Ad_galduta />} /> {/* Lo mismo aquí */}
-          <Route path="/Ad_adoptatu" element={<Ad_adoptatu />} /> {/* Lo mismo aquí */}
+          <Route path="/Ad_galduta" element={<Ad_galduta />} /> 
+          <Route path="/Ad_adoptatu" element={<Ad_adoptatu />} /> 
           <Route path='/Ad_erabiltzaileak' element={<Ad_erabiltzaileak/>}/>
           <Route path="/Profila" element={<Profila/>}/>
-          {/* <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} /> */}
       </Routes>
     </Router>
   );

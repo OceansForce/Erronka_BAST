@@ -35,7 +35,7 @@ import esAd_adoptatu from './locales/es/admin/adoptatu.json';
 import IpAPI from '../config/ipAPI';
 import Ad_adoptatu from '../pages/Ad_adoptatu';
 
-// Función para cargar traducciones desde la API
+// Tradukzioak API-tik kargatzeko
 const loadTranslationsFromAPI = async (language, keys) => {
   console.log("API: "+`${IpAPI}/api/translations/keys`);
   try {
@@ -54,14 +54,14 @@ const loadTranslationsFromAPI = async (language, keys) => {
 
     const data = await response.json();
 
-    // Imprimir la respuesta para inspección
-    console.log('Response Data:', data);
+    
+    console.log('Data:', data);
 
     // Verificar si la respuesta tiene la propiedad 'translations' y es un objeto
     if (data && data.translations && typeof data.translations === 'object') {
       return data.translations;
     } else {
-      console.error('Invalid response structure: translations not found.');
+      console.error('Tradukzioa ez da aurkitu');
       return {};
     }
   } catch (error) {
@@ -70,8 +70,9 @@ const loadTranslationsFromAPI = async (language, keys) => {
   }
 };
 
-// Función para cargar las traducciones dinámicamente al cambiar el idioma
-const loadDynamicTranslations = async (language) => {
+
+
+const loadDynamicTranslations = async (language) => {// Izkuntza dinamikoki kargatzeko izkutza aldatzerakoan
   const keys = ['descripcion2', 'title1', 'title2']; // Añade más claves si es necesario
 
   const translations = await loadTranslationsFromAPI(language, keys);

@@ -1,0 +1,13 @@
+0 verbose cli D:\Program Files\node.exe D:\Program Files\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.8.2
+2 info using node@v20.18.0
+3 silly config load:file:D:\Program Files\node_modules\npm\npmrc
+4 silly config load:file:F:\Goi Maila 2 (Web)\Erronka_BAST\Erronka\Frontend\.npmrc
+5 silly config load:file:C:\Users\julen\.npmrc
+6 silly config load:file:F:\Goi Maila 2 (Web)\Erronka_BAST\Erronka\Frontend\npm\etc\npmrc
+7 verbose title npm start
+8 verbose argv "start"
+9 verbose logfile logs-max:10 dir:F:\Goi Maila 2 (Web)\Erronka_BAST\Erronka\Frontend\npm-cache\_logs\2025-01-15T16_56_26_401Z-
+10 verbose logfile F:\Goi Maila 2 (Web)\Erronka_BAST\Erronka\Frontend\npm-cache\_logs\2025-01-15T16_56_26_401Z-debug-0.log
+11 silly logfile done cleaning log files
+12 http fetch GET 200 https://registry.npmjs.org/npm 477ms

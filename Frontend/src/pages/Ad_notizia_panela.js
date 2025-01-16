@@ -5,7 +5,8 @@ import i18n from '../118n/menu';
 import React, { useState, useEffect } from "react";
 import BackButton from '../components/bottons/backBotom';
 import { Link } from 'react-router-dom';
-import IpAPI from "./../config/ipAPI";
+import IpAPI from "./../config/ipAPI"
+import Trash from '../components/admin/trash';
 
 function Ad_notizia_panela() {
     const { t, i18n } = useTranslation();
@@ -78,17 +79,17 @@ function Ad_notizia_panela() {
                             <p className='font-bold font-ubuntu'>Sortu Iragarki bat</p>
                         </Link>
 
-                        <div  className='flex flex-row dark:bg-primary bg-dark p-2 mb-5 rounded-3xl justify-between'>
-                                <p className='text-white dark:text-black text-left'>Izena</p>
-                                <div className='flex flex-row text-right'>
-                                    <Link  to="/Ad_notiziak_aditatu" state={{id: 1, title: "izena"}}>
-                                        <img src='./img/icons/profil/pen_white.svg' className='size-7 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
-                                        <img src='./img/icons/profil/pen_Black.svg' className='size-7 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
-                                    </Link>
-                                    <img src='./img/icons/notizia/trash_white.svg' className='size-7 mr-3 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-red-500 rounded-full' />
-                                    <img src='./img/icons/notizia/trash_black.svg' className='size-7 mr-3 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-red-500 rounded-full' />
-                                </div>
+                        {/* <div  className='flex flex-row dark:bg-primary bg-dark p-2 mb-5 rounded-3xl justify-between'>
+                            <p className='text-white dark:text-black text-left'>Izena</p>
+                            <div className='flex flex-row text-right'>
+                                <Link  to="/Ad_notiziak_aditatu" state={{id: 1, title: "izena"}}>
+                                    <img src='./img/icons/profil/pen_white.svg' className='size-7 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
+                                    <img src='./img/icons/profil/pen_Black.svg' className='size-7 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
+                                </Link>
+                                <img src='./img/icons/notizia/trash_white.svg' className='size-7 mr-3 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-red-500 rounded-full' />
+                                <img src='./img/icons/notizia/trash_black.svg' className='size-7 mr-3 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-red-500 rounded-full' />
                             </div>
+                        </div> */}
 
                         {news.map((item) => (
                             <div key={item.id} className='flex flex-row dark:bg-primary bg-dark p-2 mb-5 rounded-3xl justify-between'>
@@ -98,8 +99,8 @@ function Ad_notizia_panela() {
                                         <img src='./img/icons/profil/pen_white.svg' className='size-7 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
                                         <img src='./img/icons/profil/pen_Black.svg' className='size-7 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
                                     </Link>
-                                    <img src='./img/icons/notizia/trash_white.svg' className='size-7 mr-3 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-red-500 rounded-full' />
-                                    <img src='./img/icons/notizia/trash_black.svg' className='size-7 mr-3 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-red-500 rounded-full' />
+                                    <Trash id={item.id} />
+
                                 </div>
                             </div>
                         ))}

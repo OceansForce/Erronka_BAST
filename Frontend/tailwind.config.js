@@ -17,8 +17,11 @@ module.exports = {
         text_green: '#52C763',
         border_green:'#72E70F',
         hover: '#767676',
+        dark_button: '#3c663c',
         'dark-bg': '#1a202c',     // Color personalizado para fondos oscuros
         'light-bg': '#f7fafc',    // Color personalizado para fondos claros
+        aukeratuta: '#8AE690',
+
         
       }
     }

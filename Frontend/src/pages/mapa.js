@@ -1,21 +1,20 @@
 import adopzioak from "../components/adopzioa/adopzio";
 import Header from '../header-footer/header';
 import Footer from '../header-footer/footer';
+import Mapa from '../components/mapa/mapa';
+import Wallpaper from '../components/body/wallpaper.js';
 
-function mapa() {
+function mapa_orria() {
     return (
       <>
-       <div className="App">
-          <Header />
-        </div>
-        <div className="App w-full">
-          Mapa
-        </div>        
-        <div className="App">
-          <Footer />
-        </div>
+      
+        <Header />
+        <Wallpaper img="mapa_header.png" darck="mapa_header.png" />
+        <Mapa/>
+        <Footer />
+        
       </>
     );
   }
   
-export default mapa;
+export default mapa_orria;

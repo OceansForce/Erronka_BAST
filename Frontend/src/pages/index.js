@@ -14,7 +14,7 @@ function Index() {
         <Header />
         
         
-        <Wallpaper />
+        <Wallpaper img="d4pci99-e6fcca49-048a-4b42-a951-e246eecc9062.png" darck="d4pci99-e6fcca49-048a-4b42-a951-e246eecc9062_darck.png" />
         
        
           

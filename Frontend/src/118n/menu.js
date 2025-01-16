@@ -2,23 +2,30 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Importar archivos de traducción locales
 import esMenu from './locales/es/menu/menu.json';
 import euMenu from './locales/eu/menu/menu.json';
+
 import euUser from './locales/eu/menu/user.json';
 import esUser from './locales/es/menu/user.json';
+
 import euDenda from './locales/eu/menu/denda.json';
 import esDenda from './locales/es/menu/denda.json';
+
 import euAdopzio from './locales/eu/menu/adopzio.json';
 import esAdopzio from './locales/es/menu/adopzio.json';
+
 import euBerriak from './locales/eu/index/body/berriak.json';
 import esBerriak from './locales/es/index/body/berriak.json';
+
 import euDatos from './locales/eu/footer/datos.json';
 import esDatos from './locales/es/footer/datos.json';
+
 import euFormulario from './locales/eu/footer/formulario.json';
 import esFormulario from './locales/es/footer/formulario.json';
+
 import euSaioaSortu from './locales/eu/menu/saioa_sortu.json';
 import esSaioaSortu from './locales/es/menu/saioa_sortu.json';
+
 import euNotiziak from './locales/eu/admin/notiziak.json';
 import esNotiziak from './locales/es/admin/notiziak.json';
 
@@ -31,11 +38,25 @@ import esAd_galduta from './locales/es/admin/galduta.json';
 import euAd_adoptatu from './locales/eu/admin/adoptatu.json';
 import esAd_adoptatu from './locales/es/admin/adoptatu.json';
 
+import esEraPanela from './locales/es/admin/erabiltzaile_panela.json';
+import euEraPanela from './locales/eu/admin/erabiltzaile_panela.json'
 
 import IpAPI from '../config/ipAPI';
-import Ad_adoptatu from '../pages/Ad_adoptatu';
 
-// Función para cargar traducciones desde la API
+import esUserProfile from './locales/es/user/userProfile.json';
+import euUserProfile from './locales/eu/user/userProfile.json';
+
+import esLoading from './locales/es/loading/loading.json';
+import euLoading from './locales/eu/loading/loading.json';
+
+import es_galdu_animalia from './locales/es/menu/galduta_animalia.json';
+import eu_galdu_animalia from './locales/eu/menu/galduta_animalia.json';
+
+import es_adoptatu_animalia from './locales/es/menu/adoptatu_animalia.json';
+import eu_adoptatu_animalia from './locales/eu/menu/adoptatu_animalia.json';
+
+
+// Tradukzioak API-tik kargatzeko
 const loadTranslationsFromAPI = async (language, keys) => {
   console.log("API: "+`${IpAPI}/api/translations/keys`);
   try {
@@ -54,14 +75,14 @@ const loadTranslationsFromAPI = async (language, keys) => {
 
     const data = await response.json();
 
-    // Imprimir la respuesta para inspección
-    console.log('Response Data:', data);
+    
+    console.log('Data:', data);
 
     // Verificar si la respuesta tiene la propiedad 'translations' y es un objeto
     if (data && data.translations && typeof data.translations === 'object') {
       return data.translations;
     } else {
-      console.error('Invalid response structure: translations not found.');
+      console.error('Tradukzioa ez da aurkitu');
       return {};
     }
   } catch (error) {
@@ -70,8 +91,9 @@ const loadTranslationsFromAPI = async (language, keys) => {
   }
 };
 
-// Función para cargar las traducciones dinámicamente al cambiar el idioma
-const loadDynamicTranslations = async (language) => {
+
+
+const loadDynamicTranslations = async (language) => {// Izkuntza dinamikoki kargatzeko izkutza aldatzerakoan
   const keys = ['descripcion2', 'title1', 'title2']; // Añade más claves si es necesario
 
   const translations = await loadTranslationsFromAPI(language, keys);
@@ -115,6 +137,11 @@ i18n
         ad_menua: esAd_menua,
         ad_galduta: esAd_galduta,
         Ad_adoptatu: esAd_adoptatu,
+        userProfile: esUserProfile,
+        loading: esLoading,
+        EraPanela: esEraPanela,
+        Gal_Anim: es_galdu_animalia,
+        Adop_Anim: es_adoptatu_animalia,
       },
       eu: {
         menu: euMenu,
@@ -129,6 +156,11 @@ i18n
         ad_menua: euAd_menua,
         ad_galduta: euAd_galduta,
         Ad_adoptatu: euAd_adoptatu,
+        userProfile: euUserProfile,
+        loading: euLoading,
+        EraPanela: euEraPanela,
+        Gal_Anim: eu_galdu_animalia,
+        Adop_Anim: eu_adoptatu_animalia,
       },
     },
     fallbackLng: 'eu', // Idioma de respaldo

@@ -4,6 +4,10 @@ import i18n from '../../118n/menu'; // Importar configuración de i18n
 import "./Carousel.css";
 import IpAPI from "../../config/ipAPI";
 
+import Loading from "../loading/loading";
+import { Link } from "react-router-dom";
+
+
 const Carrusel = () => {
   const { t, i18n } = useTranslation(); // Hook para traducir textos
   const [loading, setLoading] = useState(true); // Estado para manejar la carga inicial
@@ -22,13 +26,17 @@ const Carrusel = () => {
       await i18n.loadMissingTranslations(i18n.language, keysToFetch); // Cargar traducciones faltantes
 
       // Mapear los datos recibidos para ajustarlos al formato requerido por el carrusel
-      return data.map(item => ({
-        id: item.id,
-        title: t(item.title), // Traducir el título recibido de la API
-        description: t(item.text).split(" ").slice(0, 20).join(" ") + (t(item.text).split(" ").length > 20 ? "..." : ""),
-        date: new Date(item.created_at).toLocaleDateString(),
-        img: item.img
-      }));
+      return data.map(item => {
+        console.log(data);
+        return {
+          id: item.id,
+          title: t(item.title), // Traducir el título recibido de la API
+          description: (t(item.text).split("|||"))[0].split(" ").slice(0, 20).join(" ") + ((t(item.text).split("|||"))[0].split(" ").length > 20 ? "..." : ""),
+          date: new Date(item.created_at).toLocaleDateString(),
+          img: item.img
+        }
+        
+      });
     } catch (error) {
       console.error("Error fetching news:", error);
       return []; // Retornar un arreglo vacío en caso de error
@@ -69,7 +77,7 @@ const Carrusel = () => {
   const currentItems = news.slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage);
 
   if (loading) {
-    return <div>Loading translations...</div>;
+    return <Loading />;
   }
 
   // Lógica para ocultar las flechas si están desactivadas
@@ -92,16 +100,22 @@ const Carrusel = () => {
       <div className="carousel-wrapper p-2 sm:justify-items-center">
         <div className="carousel-content">
           {currentItems.map((item) => (
-            <div key={item.id} className="carousel-item dark:bg-dark_body bg-white hover:scale-110 active:scale-95 duration-300">
-              <img src={item.img} alt={item.title} className="carousel-img rounded-t-lg w-96 h-64" />
-              <div className="carousel-text">
-                <h3 className="text-center font-bold text-slate-600 dark:text-white limit_h">{item.title}</h3>
-                <p className="text-left data dark:text-white h-5">{item.date}</p>
-                <div className="full_w">
-                  <p className="text-justify text-slate-600 dark:text-white h-24 limit">{item.description}</p>
+
+            <Link to={`/news/${item.id}`}>
+
+              <div key={item.id} className="carousel-item dark:bg-dark_body bg-white hover:scale-110 active:scale-95 duration-300">
+                <img src={item.img} alt={item.title} className="carousel-img rounded-t-lg w-96 h-64" />
+                <div className="carousel-text">
+                  <h3 className="text-center font-bold text-slate-600 dark:text-white limit_h">{item.title}</h3>
+                  <p className="text-left data dark:text-white h-5">{item.date}</p>
+                  <div className="full_w">
+                    <p className="text-justify text-slate-600 dark:text-white h-24 limit">{item.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
+
+            
           ))}
         </div>
       </div>

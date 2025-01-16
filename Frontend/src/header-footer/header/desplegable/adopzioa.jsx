@@ -20,11 +20,11 @@ const Adopzioa = () => {
 
   return (
     <div 
-      className="relative language-selector"
+      className="relative language-selector z-20"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <li className='flex items-center justify-center'>
+      <li className='flex items-center justify-center z-10'>
         <div className='flex items-center font-semibold text-xl text-center'>
           <Link to="/adopzio" className="text-black dark:text-white">
             {t('menu:adopzio')}

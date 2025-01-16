@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from '../118n/menu';
 import { Link } from 'react-router-dom';
 import AdminPanelButtom from '../components/bottons/adminPanel';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import BackButtonLittle from '../components/bottons/backButtomLittle';
 
@@ -27,6 +27,13 @@ function Ad_menua() {
       i18n.changeLanguage(lang);  // Cambia el idioma
     };
 
+    const [protektoraID, setProtektoraID] = useState(null);
+    useEffect(() => {
+        
+        const id = localStorage.getItem('protektora');
+        setProtektoraID(Number(id));
+    }, []);
+    console.log(protektoraID);
 
     
 
@@ -38,12 +45,15 @@ function Ad_menua() {
                 <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
                 <DarkModeToggle className='w-1/2' />  
             </div>
-            <div className="w-full flex flex-row bg-red erdian text-center space-x-14">
-                <AdminPanelButtom 
-                    to="/Ad_notiziak" 
+            <div className="w-full flex flex-row flex-wrap bg-red erdian text-center space-x-14">
+                {protektoraID ===1 && (
+                    <AdminPanelButtom 
+                    to="/Ad_notizia_panela" 
                     imageSrc="./img/newspaper-svgrepo-com.svg" 
                     text={t('ad_menua:notiziak')} 
-                />
+                    />
+                )}
+                
                 
                 <AdminPanelButtom 
                     to="/Ad_galduta" 
@@ -56,6 +66,16 @@ function Ad_menua() {
                     imageSrc="./img/animal-approve-cat-svgrepo-com.svg" 
                     text={t('ad_menua:adoptatu')} 
                 />
+
+
+                {protektoraID === 1 && (
+                    <AdminPanelButtom 
+                        to="/Ad_erabiltzaileak" 
+                        imageSrc="./img/icons/admin/user-circle-1-svgrepo-com.svg" 
+                        text={t('ad_menua:Erabiltzaileak')} 
+                    />
+                )}
+
 
             </div>
         </>

@@ -140,7 +140,7 @@ try {
             'etxekoAnimalia' => 'required|boolean',
             'type' => 'required|string|in:txakurra,txakurra ppp,katua,besteak',
             'animalType' => 'nullable|string|max:255',
-            'img' => 'nullable|url',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'bakuna' => 'nullable|integer|min:0',
             'gender' => 'required|integer|in:1,2',
             'descripcion' => 'nullable|string|max:255',
@@ -161,6 +161,15 @@ try {
 
         // Obtener el usuario autenticado
         
+	$imageUrl = null;
+        if ($request->hasFile('img')) {
+            $imageController = new ImageController();
+            $imageResponse = $imageController->upload($request);
+            // Comprobamos si la subida fue exitosa
+            if ($imageResponse->status() == 201) {
+                  $imageUrl = $imageResponse->getData()->url;  // Extraemos la URL de la imagen subida
+            }
+        }
 
         // Obtener el userID del usuario autenticado
         $userID = $user->id;
@@ -171,7 +180,7 @@ try {
             'etxekoAnimalia' => $request->input('etxekoAnimalia'),
             'type' => $request->input('type'),
             'animalType' => $request->input('animalType', null), // Si no se pasa, se guarda como null
-            'img' => $request->input('img', null), // Si no se pasa, se guarda como null
+            'img' => $imageUrl, // Si no se pasa, se guarda como null
             'bakuna' => $request->input('bakuna'),
             'gender' => $request->input('gender'),
             'descripcion' => $request->input('descripcion', null), // Si no se pasa, se guarda como null

@@ -42,10 +42,10 @@ class NewsController extends Controller
             $imageUrl = null;
 //		dd($request);
             if ($request->hasFile('img')) {
-
-                $imageController = new ImageController();
+//		dd($request);
+	        $imageController = new ImageController();
                 $imageResponse = $imageController->upload($request);
-    
+//    		return response()->json(['status' => $imageResponse->status()],201);
                 // Comprobamos si la subida fue exitosa
                 if ($imageResponse->status() == 201) {
                     $imageUrl = $imageResponse->getData()->url;  // Extraemos la URL de la imagen subida

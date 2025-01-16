@@ -6,13 +6,22 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Http\\Controllers\\AnimalController' => $baseDir . '/app/Http/Controllers/AnimalController.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\ImageController' => $baseDir . '/app/Http/Controllers/ImageController.php',
     'App\\Http\\Controllers\\NewsController' => $baseDir . '/app/Http/Controllers/NewsController.php',
     'App\\Http\\Controllers\\ObtainNewsController' => $baseDir . '/app/Http/Controllers/ObtainNewsController.php',
     'App\\Http\\Controllers\\TranslationController' => $baseDir . '/app/Http/Controllers/TranslationController.php',
+    'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Controllers\\UserCreateController' => $baseDir . '/app/Http/Controllers/UserCreateController.php',
-    'App\\Http\\Middleware\\CheckProtektoraAccess' => $baseDir . '/app/Http/Middleware/CheckProtektoraAccess.php',
+    'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
+    'App\\Http\\Middleware\\AnimalMiddleware' => $baseDir . '/app/Http/Middleware/AnimalMiddleware.php',
+    'App\\Http\\Middleware\\BasicUserAuth' => $baseDir . '/app/Http/Middleware/BasicUserAuth.php',
+    'App\\Http\\Middleware\\CheckCreateNewsPermissions' => $baseDir . '/app/Http/Middleware/CheckCreateNewsPermissions.php',
+    'App\\Http\\Middleware\\CheckUpdateNewsPermissions' => $baseDir . '/app/Http/Middleware/CheckUpdateNewsPermissions.php',
+    'App\\Http\\Middleware\\CorsMiddleware' => $baseDir . '/app/Http/Middleware/CorsMiddleware.php',
+    'App\\Models\\Animals' => $baseDir . '/app/Models/Animals.php',
     'App\\Models\\News' => $baseDir . '/app/Models/News.php',
     'App\\Models\\Protektora' => $baseDir . '/app/Models/Protektora.php',
     'App\\Models\\Translation' => $baseDir . '/app/Models/Translation.php',

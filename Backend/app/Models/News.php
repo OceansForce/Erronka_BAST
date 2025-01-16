@@ -18,5 +18,18 @@ class News extends Model
     {
         return $this->belongsTo(Protektora::class, 'protektora');
     }
+
+
+    // Relación con las traducciones del texto
+    public function textTranslations()
+    {
+        return $this->hasMany(Translation::class, 'keyValue', 'text');
+    }
+
+    // Relación con las traducciones del título
+    public function titleTranslations()
+    {
+        return $this->hasMany(Translation::class, 'keyValue', 'title');
+    }
 }
 

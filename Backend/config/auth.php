@@ -42,7 +42,7 @@ return [
         //],
      	'api' => [
             'driver' => 'sanctum',  // Asegúrate de que esté usando el driver 'sanctum'
-	    'provider' => 'users',
+	        'provider' => 'users',
 	],
     ],
 

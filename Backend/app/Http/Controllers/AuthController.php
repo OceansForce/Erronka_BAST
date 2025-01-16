@@ -19,6 +19,11 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
+        if ($user->email_verified === 0) {
+            return response()->json([
+                'error' => 'El usuario no ha verificado su correo electrónico.',
+            ], 401);
+        }
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
@@ -27,7 +32,7 @@ class AuthController extends Controller
         }
 
 
-	$abilities = [];
+	    $abilities = [];
         if ($user->role === 'admin') {
             // Los administradores tienen todos los permisos
             $abilities = ['*'];
@@ -41,7 +46,7 @@ class AuthController extends Controller
 
 
         // Generar el token de acceso
-        $token = $user->createToken('Bast', $abilities, Carbon::now()->addDays(5))->plainTextToken;
+        $token = $user->createToken('Bast', $abilities, Carbon::now()->addDays(90))->plainTextToken;
 
         return response()->json([
 	    'user' => $user,

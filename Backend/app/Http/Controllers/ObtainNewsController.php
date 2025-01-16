@@ -12,27 +12,81 @@ class ObtainNewsController extends Controller
     {
         // Validar los parámetros
         $request->validate([
-            'count' => 'required|integer|min:1',
+            'count' => 'required|integer|min:1|max:25',
             'offset' => 'required|integer|min:0',
+            'protektora_id' => 'nullable|integer|exists:protekctoras,id', // Validamos que el ID de la protectora sea válido si se pasa
         ]);
 
         // Obtener los parámetros
         $count = $request->input('count');
         $offset = $request->input('offset');
+        $protektoraId = $request->input('protektora_id'); // Este parámetro es opcional
 
-        // Crear una clave única para almacenar en caché, usando 'count' y 'offset'
-        $cacheKey = "latest_news_{$count}_{$offset}";
+        // Asignar un valor predeterminado a 'protektora_id' si no se pasa
+        $protektoraIdCache = $protektoraId ? $protektoraId : 'no_protektora';
+
+        // Crear una clave única para almacenar en caché, usando 'count', 'offset' y 'protektora_id'
+        $cacheKey = "latest_news_{$count}_{$offset}_{$protektoraIdCache}";
 
         // Intentar obtener las noticias del caché
-        $news = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($count, $offset) {
+        $news = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($count, $offset, $protektoraId) {
             // Si no están en caché, consultar la base de datos
-            return News::orderBy('created_at', 'desc')
-                ->skip($offset)
-                ->take($count)
-                ->get();
+            $query = News::orderBy('created_at', 'desc')
+                        ->skip($offset)
+                        ->take($count);
+
+            // Si se proporciona el ID de la protectora, filtrar por ello
+            if ($protektoraId) {
+                $query->where('protektora_id', $protektoraId);
+            }
+
+            return $query->get();
         });
 
         // Devolver el resultado en JSON
         return response()->json($news);
     }
+
+    public function getNew($id)
+    {
+        // Buscar la noticia con todas las traducciones relacionadas usando el ID de la URL
+        $news = News::with(['textTranslations', 'titleTranslations'])->find($id);
+
+        // Verificar si la noticia existe
+        if (!$news) {
+            return response()->json(['error' => 'Noticia no encontrada'], 404);
+        }
+
+        // Preparar los datos de la respuesta
+        $response = [
+            'id' => $news->id,
+            'created_at' => $news->created_at,
+            'updated_at' => $news->updated_at,
+            'img' => $news->img,
+	    'textID' => $news->textTranslations,
+	    'titleID' => $news->titleTranslations,
+            'text_translations' => $news->textTranslations->map(function ($translation) {
+                return [
+                    'keyValue' => $translation->keyValue,
+                    'language' => $translation->language,
+                    'value' => $translation->value,
+                ];
+            }),
+            'title_translations' => $news->titleTranslations->map(function ($translation) {
+                return [
+                    'keyValue' => $translation->keyValue,
+                    'language' => $translation->language,
+                    'value' => $translation->value,
+                ];
+            }),
+        ];
+
+        // Devolver la noticia encontrada junto con sus traducciones
+        return response()->json($response);
+    }
+
+
+
+
+
 }

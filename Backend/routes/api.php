@@ -45,6 +45,8 @@ use App\Http\Controllers\AuthController;
 Route::post('login', [AuthController::class, 'login']);
 
 
+Route::get('/get-all-user', [UserController::class, 'getAllUserDate'])->middleware('auth:sanctum');
+
 // NEWS API
 // routes/api.php
 use App\Http\Controllers\NewsController;

@@ -1,5 +1,5 @@
 const Animaliak= ({ img, izena, kokapena, mota})=>{
-    let link=`/img/${img}.png`;
+    let link=`${img}`;
 
     if(mota==="adopzio"){
       return <div className="max-w-80  mb-8 mx-5">

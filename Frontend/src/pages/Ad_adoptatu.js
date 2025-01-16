@@ -75,7 +75,7 @@ function Ad_adoptatu(){
     gender:"",
     descripcion:"",
     year:"",
-    img:"",
+    img:''
   });
 
   // Estado para manejar el mensaje de éxito
@@ -88,62 +88,69 @@ function Ad_adoptatu(){
   };
 
   // Manejador del envío del formulario
-  const handleSubmit = async (e, newsId) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Asegúrate de que los valores estén correctamente establecidos
+    if (!formData.name || !mota || !arraza || !sexo || !etxekoa || !formData.descripcion || !formData.year) {
+      alert("Por favor, completa todos los campos requeridos.");
+      return;
+    }
+  
     const tok = localStorage.getItem('token');
+    const formDataToSend = new FormData();
+  
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('etxekoAnimalia', etxekoa);
+    formDataToSend.append('type', mota);
+    formDataToSend.append('animalType', arraza);
+    formDataToSend.append('bakuna', esterilizado);
+    formDataToSend.append('gender', sexo);
+    formDataToSend.append('descripcion', formData.descripcion);
+    formDataToSend.append('year', formData.year);
+  
+    // Si hay imagen, agregarla al FormData
+    if (formData.img) {
+      formDataToSend.append('img', formData.img);
+    }
 
-    // Crear el cuerpo de la solicitud
-    const body = {
-      name:formData.name,
-      etxekoAnimalia: etxekoa,
-      type: mota,
-      animalType: arraza,
-      bakuna: esterilizado,
-      gender: sexo,
-      descripcion: formData.descripcion,
-      year: formData.year,
-      img: null,
-    };
-    console.log(JSON.stringify(body).trim());
-    const bidaltzeko = JSON.stringify(body).trim();
-    //body = JSON.stringify(body);
-    //body = jsonString.trim();
+    console.log(formDataToSend);
+  
     try {
       const response = await fetch(`${IpAPI}/api/animals-create`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${tok}`,
+          'Authorization': `Bearer ${tok}`,
         },
-        body: bidaltzeko,
+        body: formDataToSend, // FormData ya maneja la codificación de archivos
       });
-
+  
       if (response.ok) {
         const result = await response.json();
         setSuccessMessage(t('ad_notiziak:Animalia adoptatua sortuta'));
-
-        // Limpiar los campos del formulario
         setFormData({
-          name:"",
-          etxekoAnimalia:"",
-          type:"",
+          name: "",
+          etxekoAnimalia: "",
+          type: "",
           animalType: "",
-          bakuna:"",
-          gender:"",
-          descripcion:"",
-          year:"",
-          img:""
+          bakuna: "",
+          gender: "",
+          descripcion: "",
+          year: "",
+          img: null, // Resetear la imagen
         });
       } else {
         const error = await response.json();
-        console.error('Error al crear la noticia:', error);
-        alert('Error al crear la noticia. Revisa los datos.');
+        alert('Error: ' + error.message);
       }
     } catch (error) {
-      console.error('Error en la solicitud:', error);
-      alert('Error en la solicitud. Revisa tu conexión.');
+      alert('Error en la solicitud: ' + error.message);
     }
+  };
+  
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, img: e.target.files[0] }); // Guardar el archivo directamente
   };
 
   return(
@@ -228,21 +235,27 @@ function Ad_adoptatu(){
                   <div className=' w-1/2 flex flex-col mr-10'>
                     <label className='font-semibold dark:text-white'>{t('Ad_adoptatu:Etxekoa')}</label>
                     <div className='ml-3'>
-                      <input type='radio' name='Etxekoa' onChange={(e)=> setEtxekoa(true)} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
+                      <input type='radio' name='Etxekoa' value={1} onChange={(e)=> setEtxekoa(parseInt(e.target.value))} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
                     </div>
 
                     <div className='ml-3'>
-                      <input type='radio' name='Etxekoa' onChange={(e)=> setEtxekoa(false)} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
+                      <input type='radio' name='Etxekoa' value={2} onChange={(e)=> setEtxekoa(parseInt(e.target.value))} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
                     </div>
                   </div>
                   <div className=' w-1/2 flex flex-col mr-5'>
                     <label className='font-semibold dark:text-white'>{t('ad_galduta:Profil')}</label>
-                    <input className='mb-2 dark:border-primary rounded-lg dark:text-white' type='file' required/>
+                    <input 
+                        className='mb-2 dark:border-primary rounded-lg dark:text-white' 
+                        type='file'
+                        name='img'
+                        // value={formData.img}
+                        onChange={(e) => setFormData({ ...formData, img: e.target.files[0] })}  // Cambiar aquí
+                        required/>
 
                   <label className='font-semibold dark:text-white'>{t('ad_galduta:Beste')}</label>
+                  {/* <Irudiak_input handleChange={handleChange}/>
                   <Irudiak_input handleChange={handleChange}/>
-                  <Irudiak_input handleChange={handleChange}/>
-                  <Irudiak_input handleChange={handleChange}/>
+                  <Irudiak_input handleChange={handleChange}/> */}
                 </div>
                 </div>
                     

@@ -10,7 +10,7 @@ const User = ({ name, secondName, email, DNI, cumple, protektora, activado }) =>
         day: '2-digit',
         month: 'long',
         year: 'numeric',
-      });
+    });
     
     // Condicional para mostrar la celda de 'protektora' solo si no es null
     const protektoraCell = protektora !== null ? (

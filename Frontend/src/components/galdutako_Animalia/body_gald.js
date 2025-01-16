@@ -1,10 +1,43 @@
 import i18n from './../../118n/menu';
 import { useTranslation } from 'react-i18next';
+import IpAPI from '../../config/ipAPI';
+import { useEffect, useState } from 'react';
 
-function Anim_Gald_BODY() {
+function Anim_Gald_BODY(id) {
     
     const { t, i18n } = useTranslation();
+
+      const [animalData, setAnimalData] = useState(null);
     
+    useEffect(() => {
+        const fetchSingleNews = async () => {
+          try {
+            const response = await fetch(`${IpAPI}/api/animal-adopt/${id}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+    
+            if (!response.ok) {
+              throw new Error(`Error fetching news with id ${id}`);
+            }
+    
+            const data = await response.json();
+            
+            setAnimalData(data);
+          } catch (error) {
+            console.error('Error fetching single news:', error);
+            alert('Error al obtener los datos del animal.');
+          }
+        };
+    
+        if (id) {
+          fetchSingleNews(); // Llamar a la API cuando `id` esté disponible
+        }
+    }, [id]);
+    
+    console.log("Animal data: ", animalData);
     // Función para cambiar el idioma
     const changeLanguage = (lang) => {
       i18n.changeLanguage(lang);  // Cambia el idioma

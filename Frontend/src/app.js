@@ -42,8 +42,8 @@ function App() {
           <Route path='/Ad_erabiltzaileak' element={<Ad_erabiltzaileak/>}/>
           <Route path="/Profila" element={<Profila/>}/>
           <Route path="/news/:id" element={<NewsDetail />} />
-          <Route path='/Animalia_adoptatu' element={<Animalia_adoptatu/>}/>
-          <Route path='/Animalia_galduta' element={<Animalia_galduta/>}/>
+          <Route path='/Animalia_adoptatu/:id' element={<Animalia_adoptatu/>}/>
+          <Route path='/Animalia_galduta/:id' element={<Animalia_galduta/>}/>
       </Routes>
     </Router>
   );

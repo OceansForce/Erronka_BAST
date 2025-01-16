@@ -85,6 +85,7 @@ function Adopzioak() {
               <div className="flex flex-row justify-evenly mt-10 flex-wrap">
                 {filteredAnimals.map((item) => (
                   <Animaliak 
+                      id={item.id}
                       name={item.name}
                       etxe={item.etxekoAnimalia}
                       type={item.type}

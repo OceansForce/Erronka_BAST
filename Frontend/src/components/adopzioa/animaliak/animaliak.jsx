@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Animaliak= ({name, kokapena, etxe, type, arraza, img, bakuna, sexo, year, deskribapena, mota})=>{
+const Animaliak= ({id,name, kokapena, etxe, type, arraza, img, bakuna, sexo, year, deskribapena, mota})=>{
     let link=`${img}`;
 
     const datuak = { izena: name, etxekoa: etxe, mota: type, raza: arraza, irudia: img, bakunatuta: bakuna, genero: sexo, urtebetetzea: year, descrip: deskribapena };
@@ -8,7 +8,7 @@ const Animaliak= ({name, kokapena, etxe, type, arraza, img, bakuna, sexo, year, 
 
     if(mota==="adopzio"){
 
-      return <Link to="/Animalia_adoptatu" state={{datuak}} className="w-1/4 max-w-80  mb-8 mx-5"> 
+      return <Link to={`/Animalia_adoptatu/${id}`} className="w-1/4 max-w-80 mb-8 mx-5">
         
           <img src={link} alt={name} className="rounded-t-3xl"/>
           <div className="dark:bg-dark  bg-primary p-2 rounded-b-2xl text-center">

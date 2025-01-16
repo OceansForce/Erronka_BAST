@@ -11,8 +11,13 @@ class Protektora extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
-
+    protected $fillable = [
+        'name',
+        'location',
+        'telefono',
+        'email',
+        'logo'
+    ];
     // Relación con los usuarios
     public function users()
     {

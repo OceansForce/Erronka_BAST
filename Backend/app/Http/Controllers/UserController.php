@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Animals;
+// use App\Models\Protektora;
     
 
 class UserController extends Controller
@@ -57,15 +58,15 @@ class UserController extends Controller
         // Obtener los animales y la protectora de cada usuario
         $response = $users->map(function ($user) {
             // Buscar la protectora si el usuario tiene una asignada
-            $protektoraName = null;
-            if ($user->idProtektora) {
-                $protektora = Protektora::find($user->idProtektora);
-                $protektoraName = $protektora ? $protektora->name : null;
-            }
+            // $protektoraName = null;
+            // if ($user->idProtektora) {
+            //     $protektora = Protektora::find($user->idProtektora);
+            //     $protektoraName = $protektora ? $protektora->name : null;
+            // }
 
             return [
                 'user' => $user,
-                'protektora_name' => $protektoraName, // Nombre de la protectora si existe
+                // 'protektora_name' => $protektoraName, // Nombre de la protectora si existe
                 'animals' => Animals::where('userID', $user->id)->get()
             ];
         });

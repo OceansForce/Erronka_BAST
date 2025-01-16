@@ -34,5 +34,33 @@ class UserController extends Controller
         return response()->json($response);
     }
 
+
+    public function getAllUserDate(Request $request)
+    {
+        // Obtener el usuario autenticado
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['error' => $request->header('Authorization')], 401); // 401 Unauthorized
+        }
+
+        if($user->idProtektora !=1){
+            return response()->json(['error' => 'No tienes permisos para acceder a esta información'], 401); // 401 Unauthorized
+        }
+
+        // Obtener el userID del usuario autenticado
+        $users = User::where('idProtektora', '!=', 1)->get();
+
+        // Obtener los animales asociados a esos usuarios
+        $response = $users->map(function ($user) {
+            return [
+                'user' => $user,
+                'animals' => Animals::where('userID', $user->id)->get()
+            ];
+        });
+    
+        // Retornar la respuesta con los datos
+        return response()->json($response);
+    }
+
     
 }

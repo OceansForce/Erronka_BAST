@@ -162,8 +162,18 @@ class NewsController extends Controller
         ], 200);
     }
     // Eliminar una noticia
-    public function destroy(News $news)
+    public function destroy(Request $request,News $news)
     {
+
+	if (auth()->user()->idProtektora !=1){
+            return response()->json(['message' => 'No tienes permisos'],401);
+        }
+	$idProte = auth()->user()->idProtektora;
+
+	if($news->protektora != $idProte){
+		return response()->json(['error' => $news],401);
+	}
+
         $news->delete();
 
         return response()->json(['message' => 'Noticia eliminada con éxito.']);

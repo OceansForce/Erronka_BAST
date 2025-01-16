@@ -26,28 +26,28 @@ function Anim_Gald_BODY() {
                     </div>
 
                     <div className="flex flex-col w-full">
-                        <p className="ml-5 mt-10 text-base font-ubuntu text-black dark:text-white" >Jabea:</p>
+                        <p className="ml-5 mt-10 text-base font-ubuntu text-black dark:text-white" >{t("Gal_Anim:Jabea")}:</p>
 
                         <div className="flex flex-col w-full mt-5 ">
                             <div className="flex flex-row w-full justify-between mt-3">
-                                <p className="w-full ml-5  text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">Non galdu da: X</p>
+                                <p className="w-full ml-5  text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">{t("Gal_Anim:Non")}: X</p>
                             </div>
 
                             <div className="flex flex-row w-full justify-between mt-3">
-                                <p className="w-2/4 ml-5 text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">Sexua: X</p>
-                                <p className="w-2/4 ml-5 text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">Arraza: X</p>
+                                <p className="w-2/4 ml-5 text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">{t("Gal_Anim:Sexua")}: X</p>
+                                <p className="w-2/4 ml-5 text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">{t("Gal_Anim:Arraza")}: X</p>
                             </div>
                             <div className="flex flex-row w-full justify-between mt-3">
-                                <p className="w-2/4 ml-5  text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">Jaiotze data: X</p>
-                                <p className="w-2/4 ml-5  text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">Sexua: X</p>
+                                <p className="w-2/4 ml-5  text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">{t("Gal_Anim:Jaiotze_data")}: X</p>
+                                <p className="w-2/4 ml-5  text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">{t("Gal_Anim:Esterilizatua")}: X</p>
                             </div>
                             <div className="flex flex-row w-full justify-between mt-3">
-                                <p className="w-full ml-5  text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">Sexua: X</p>
+                                <p className="w-full ml-5  text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">{t("Gal_Anim:Etxekoa")}: X</p>
                             </div>
 
                             <div className="flex flex-row w-full justify-between mt-3">
                                 <p className="w-full ml-5 text-base font-ubuntu text-black dark:text-white bg-primary dark:bg-dark p-4 rounded-2xl">
-                                Sexua: <br/>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) 
+                                {t("Gal_Anim:Deskribapena*")}: <br/>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) 
                                 </p>
                             </div>
                         </div>

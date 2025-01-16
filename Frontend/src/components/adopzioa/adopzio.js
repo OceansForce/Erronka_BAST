@@ -43,6 +43,7 @@ function Adopzioak() {
                 // Incrementar el offset para la próxima solicitud
                 setOffset((prevOffset) => prevOffset + limit);
             }
+            
         } catch (error) {
             console.error('Error en la solicitud:', error);
             alert('Error en la solicitud. Revisa tu conexión.');
@@ -57,6 +58,8 @@ function Adopzioak() {
                 adopAnimals.filter((animal) => animal.category === selectedFilter)
             );
         }
+        console.log("Datos");
+        console.log(filteredAnimals);
     };
 
     const handleFilterClick = (filter) => {
@@ -64,7 +67,7 @@ function Adopzioak() {
     };
 
     if (adopAnimals.length === 0) {
-        return <Loading />;
+      return <Loading />;
     }
 
     return (
@@ -82,13 +85,20 @@ function Adopzioak() {
               <div className="flex flex-row justify-evenly mt-10 flex-wrap">
                 {filteredAnimals.map((item) => (
                   <Animaliak 
-                      key={item.id}
+                      name={item.name}
+                      etxe={item.etxekoAnimalia}
+                      type={item.type}
+                      arraza={item.animalType}
                       img={item.img}        
-                      izena={item.name}
-                      kokapena={item.etxekoAnimalia}
+                      bakuna={item.bakuna}
+                      sexo={item.gender}
+                      year={item.year}
+                      deskribapena={item.descripcion}
+
                       mota='adopzio'
                   />
-                ))}
+                  
+                ) )}
               </div>
               {hasMore && (
                 <div className="flex justify-center mt-10">

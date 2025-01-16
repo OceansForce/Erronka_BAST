@@ -72,29 +72,30 @@ function NewsDetail() {
   return (
     <>
       <Header />
-      <div className='grid grid-rows-2 pt-8'>
-        <div className='grid lg:grid-cols-2 sm:grid-cols-1'>
-            <div className='lg:pr-24'>
-                <img 
-                src={img || defaultImg} 
-                alt={title} 
-                style={{ width: '400px', height: 'auto' }} 
-                />
-            </div>
-            <div>
-                <h1 className='font-ubuntu text-2xl text-black dark:text-white'>{title}</h1>
-                <h3 className='font-ubuntu text-lg text-black dark:text-white pt-4'>
-                    {formattedDate}
-                </h3>
-                <p className='font-ubuntu text-base text-black dark:text-white pt-4 text-justify'>{contentPart1}</p>
-            </div>
-        
+      <div className='w-full grid grid-rows-2 pt-8 justify-items-center justify-center'>
+        <div className='w-1/2 grid lg:grid-cols-2 sm:grid-cols-1'>
+          <div className='lg:pr-24 flex justify-end'>
+            <img 
+              src={img || defaultImg} 
+              alt={title} 
+              style={{ width: '100%', height: 'auto', maxWidth: '400px' }} 
+              className='rounded-t-lg'
+            />
+          </div>
+          <div className='w-10/12'>
+            <h1 className='font-ubuntu text-2xl text-black dark:text-white'>{title}</h1>
+            <h3 className='font-ubuntu text-lg text-black dark:text-white pt-4'>
+              {formattedDate}
+            </h3>
+            <p className='font-ubuntu text-base text-black dark:text-white pt-4 text-justify'>{contentPart1}</p>
+          </div>
         </div>
-        <div className='pt-8'>
-          
+        
+        <div className='pt-8 w-10/12 flex justify-center text-center'>
           {contentPart2 && <p className='font-ubuntu text-base text-black dark:text-white text-justify'>{contentPart2}</p>}
         </div>
       </div>
+
       <Footer />
     </>
   );

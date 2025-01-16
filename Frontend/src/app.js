@@ -14,6 +14,7 @@ import Ad_adoptatu from './pages/Ad_adoptatu';
 import Profila from './pages/profila';
 import Ad_notiziak_aditatu from './pages/Ad_notiziak_aditatu';
 import Ad_erabiltzaileak from './pages/Ad_erabiltzaileak';
+import Animalia_adoptatu from './pages/animalia_adoptatu';
 
 import NewsDetail from './pages/NewsDetail';
 
@@ -40,6 +41,7 @@ function App() {
           <Route path='/Ad_erabiltzaileak' element={<Ad_erabiltzaileak/>}/>
           <Route path="/Profila" element={<Profila/>}/>
           <Route path="/news/:id" element={<NewsDetail />} />
+          <Route path='/Animalia_adoptatu' element={<Animalia_adoptatu/>}/>
       </Routes>
     </Router>
   );

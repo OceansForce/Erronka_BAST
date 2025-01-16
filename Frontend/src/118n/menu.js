@@ -2,23 +2,30 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Importar archivos de traducción locales
 import esMenu from './locales/es/menu/menu.json';
 import euMenu from './locales/eu/menu/menu.json';
+
 import euUser from './locales/eu/menu/user.json';
 import esUser from './locales/es/menu/user.json';
+
 import euDenda from './locales/eu/menu/denda.json';
 import esDenda from './locales/es/menu/denda.json';
+
 import euAdopzio from './locales/eu/menu/adopzio.json';
 import esAdopzio from './locales/es/menu/adopzio.json';
+
 import euBerriak from './locales/eu/index/body/berriak.json';
 import esBerriak from './locales/es/index/body/berriak.json';
+
 import euDatos from './locales/eu/footer/datos.json';
 import esDatos from './locales/es/footer/datos.json';
+
 import euFormulario from './locales/eu/footer/formulario.json';
 import esFormulario from './locales/es/footer/formulario.json';
+
 import euSaioaSortu from './locales/eu/menu/saioa_sortu.json';
 import esSaioaSortu from './locales/es/menu/saioa_sortu.json';
+
 import euNotiziak from './locales/eu/admin/notiziak.json';
 import esNotiziak from './locales/es/admin/notiziak.json';
 
@@ -31,14 +38,19 @@ import esAd_galduta from './locales/es/admin/galduta.json';
 import euAd_adoptatu from './locales/eu/admin/adoptatu.json';
 import esAd_adoptatu from './locales/es/admin/adoptatu.json';
 
+import esEraPanela from './locales/es/admin/erabiltzaile_panela.json';
+import euEraPanela from './locales/eu/admin/erabiltzaile_panela.json'
 
 import IpAPI from '../config/ipAPI';
-import Ad_adoptatu from '../pages/Ad_adoptatu';
 
 import esUserProfile from './locales/es/user/userProfile.json';
 import euUserProfile from './locales/eu/user/userProfile.json';
+
 import esLoading from './locales/es/loading/loading.json';
 import euLoading from './locales/eu/loading/loading.json';
+
+
+
 // Tradukzioak API-tik kargatzeko
 const loadTranslationsFromAPI = async (language, keys) => {
   console.log("API: "+`${IpAPI}/api/translations/keys`);
@@ -122,6 +134,7 @@ i18n
         Ad_adoptatu: esAd_adoptatu,
         userProfile: esUserProfile,
         loading: esLoading,
+        EraPanela: esEraPanela,
 
       },
       eu: {
@@ -139,6 +152,7 @@ i18n
         Ad_adoptatu: euAd_adoptatu,
         userProfile: euUserProfile,
         loading: euLoading,
+        EraPanela: euEraPanela,
 
       },
     },

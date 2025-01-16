@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import BackButton from '../components/bottons/backBotom';
 import { Link } from 'react-router-dom';
 import IpAPI from "./../config/ipAPI";
+import User from '../components/admin/user';
 
 function Ad_erabiltzaileak() {
 
@@ -87,14 +88,20 @@ function Ad_erabiltzaileak() {
                                         <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>{t("EraPanela:Elkartea")}</td>
                                         <td className='w-1/7 text-white dark:text-black  border-lime-300'>{t("EraPanela:Aktibatuta")}</td>
                                     </tr>
-                                    <tr className='text-center w-full'>
-                                        <td className='w-1/7 text-white dark:text-black border-y-3 border-lime-300'>X</td>
-                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
-                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
-                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
-                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
-                                        <td className='w-1/7 text-white dark:text-black border-y-3 border-lime-300'>X</td>
-                                    </tr>
+                                    {userList.filter(item => item.user.idProtektora !== null).map((item) => (
+                                        <User
+                                            name={item.user.name}
+                                            secondName={item.user.secondName}
+                                            email={item.user.email}
+                                            DNI={item.user.DNI}
+                                            cumple={item.user.year}
+                                            protektora={item.user.idProtektora}
+                                            activado={item.user.email_verified}
+                                        />
+                                    ))}
+
+
+                                    
                                 </table>
                             ): (
                                 <table className='w-full  border-collapse'>
@@ -105,13 +112,17 @@ function Ad_erabiltzaileak() {
                                         <td className='w-1/6 text-white dark:text-black  border-lime-300'>{t("EraPanela:Jaio_data")}</td>
                                         <td className='w-1/6 text-white dark:text-black  border-lime-300'>{t("EraPanela:Aktibatuta")}</td>
                                     </tr>
-                                    <tr className='text-center w-full'>
-                                        <td className='w-1/6 text-white dark:text-black border-y-3 border-lime-300'>X</td>
-                                        <td className='w-1/6 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
-                                        <td className='w-1/6 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
-                                        <td className='w-1/6 text-white dark:text-black border-y-3 border-lime-300'>X</td>
-                                        <td className='w-1/6 text-white dark:text-black border-y-3 border-lime-300'>X</td>
-                                    </tr>
+                                    {userList.filter(item => item.user.idProtektora === null).map((item) => (
+                                        <User
+                                            name={item.user.name}
+                                            secondName={item.user.secondName}
+                                            email={item.user.email}
+                                            DNI={item.user.DNI}
+                                            cumple={item.user.year}
+                                            protektora={item.user.idProtektora}
+                                            activado={item.user.email_verified}
+                                        />
+                                    ))}
                                 </table>
                             )}
                             

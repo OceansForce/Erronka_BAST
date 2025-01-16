@@ -5,6 +5,12 @@ import { useTranslation } from 'react-i18next';
 const User = ({ name, secondName, email, DNI, cumple, protektora, activado }) => {
 
     const { t, i18n } = useTranslation();
+
+    const formattedDate = new Date(cumple).toLocaleDateString(i18n.language, {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+      });
     
     // Condicional para mostrar la celda de 'protektora' solo si no es null
     const protektoraCell = protektora !== null ? (
@@ -19,7 +25,7 @@ const User = ({ name, secondName, email, DNI, cumple, protektora, activado }) =>
             <td className='w-1/7 text-white dark:text-black border-y-3 border-lime-300'>{name} {secondName}</td>
             <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>{email}</td>
             <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>{DNI}</td>
-            <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>{cumple}</td>
+            <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>{formattedDate}</td>
             {protektoraCell} {/* Solo renderiza la celda de 'protektora' si no es null */}
             <td className='w-1/7 text-white dark:text-black border-y-3 border-lime-300'>{activadoText}</td>
         </tr>

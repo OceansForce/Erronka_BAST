@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import IpAPI from '../../config/ipAPI';
+import { use } from 'react';
+import { useEffect } from 'react';
 
-const LoginBotoiaPesado = ({ setIsModalOpen }) => {
+const LoginBotoiaPesado = ({ IsModalOpen }) => {
     const { t, i18n } = useTranslation();
     const [isModalOpen, setIsModalOpen] = useState(false);  // Estado para abrir/cerrar el modal
     const tok = localStorage.getItem('token'); // Obtener el token de localStorage
@@ -16,6 +18,12 @@ const LoginBotoiaPesado = ({ setIsModalOpen }) => {
             alert('No puedes eliminar tu cuenta mientras estés autenticado.');
         }
     };
+
+    useEffect(() => {
+      // Esta función se ejecuta cuando el componente se monta
+      setIsModalOpen(true);
+  
+    }, [IsModalOpen]);
 
     // Función para manejar el cierre del modal
     const handleCloseModal = () => {

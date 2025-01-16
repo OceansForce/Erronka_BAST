@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LoginBotoiaPesado from './loginBotoiaPesado';
 
 const AdopzioBotoia = ({ text }) => {
-    const tok = localStorage.getItem('token'); // Obtener el token de localStorage
     const [isModalOpen, setIsModalOpen] = useState(false); // Estado para manejar si el modal está abierto o cerrado
+    const tok = localStorage.getItem('token'); // Obtener el token de localStorage
 
-    
     const handleClick = () => {
         if (tok === null) {
             // Si el token es null, mostramos el componente LoginBotoiaPesado
             console.log("Token no encontrado. Mostrar LoginBotoiaPesado.");
-            setIsModalOpen(true)
+             // Cambiar el estado para abrir el modal
+
+            if(isModalOpen) {
+                console.log("Modal abierto.");
+                setIsModalOpen(false);
+            }else {
+                setIsModalOpen(true);
+            }
         } else {
             // Si el token existe, mostramos un mensaje en la consola
             console.log("Token encontrado. Usuario autenticado.");
@@ -26,7 +32,8 @@ const AdopzioBotoia = ({ text }) => {
                 value={text} 
                 onClick={handleClick} // Llamamos a la función handleClick al hacer clic en el botón
             />
-            {tok === null && <LoginBotoiaPesado setIsModalOpen={setIsModalOpen}/>} {/* Si el token es null, mostramos LoginBotoiaPesado */}
+            {/* Si el token es null, mostramos LoginBotoiaPesado y le pasamos setIsModalOpen */}
+            {tok === null && <LoginBotoiaPesado IsModalOpen={isModalOpen} />}
         </div>
     );
 };

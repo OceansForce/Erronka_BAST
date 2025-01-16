@@ -8,6 +8,15 @@ import { Link } from 'react-router-dom';
 import IpAPI from "./../config/ipAPI";
 
 function Ad_erabiltzaileak() {
+
+    const [aukera, setAukera]= useState(false);
+
+    useEffect(()=>{
+        console.log(aukera);
+    }, [aukera])
+
+    
+
     const { t, i18n } = useTranslation();
     // Función para cambiar el idioma
     const changeLanguage = (lang) => {
@@ -28,29 +37,51 @@ function Ad_erabiltzaileak() {
                     </div>
                     <p className='w-full font-semibold text-2xl my-5 dark:text-white uppercase'>Notiziak</p>
                     <div className='w-full flex flex-col text-left' id='notiziak'>
-                        <Link to={"/Ad_notiziak"} className='flex flex-row ml-2 w-44 p-1 mb-5 items-center bg-white rounded-full transition-all duration-300 hover:scale-110 active:scale-95'>
-                            <img src='./img/icons/profil/plus_black.svg' className='size-5 mr-3' />
-                            <p className='font-bold font-ubuntu'>Sortu Iragarki bat</p>
-                        </Link>
+                        <select className='w-52 bg-dark_body text-white p-2 mb-2 focus:border-primary  border-2 rounded-md' onChange={(e)=> setAukera(Boolean(e.target.value))}>
+                            <option>-------------------------</option>
+                            <option value={false}>Erabiltzaile Normalak</option>
+                            <option value={true}>Babes Elkarteak</option>
+                        </select>
 
                         <div  className='flex flex-row dark:bg-primary bg-dark p-2 mb-5 rounded-3xl justify-between'>
-                            <table className='w-full  border-collapse'>
-                                <tr className='text-center w-full'>
-                                    <td className='w-1/5 text-white dark:text-black border-lime-300'>Izena Abizena</td>
-                                    <td className='w-1/5 text-white dark:text-black border-x-3 border-lime-300'>Email</td>
-                                    <td className='w-1/5 text-white dark:text-black border-x-3 border-lime-300'>NAN</td>
-                                    <td className='w-1/5 text-white dark:text-black  border-lime-300'>Urtea</td>
-                                </tr>
-                                <tr className='text-center w-full'>
-                                    <td className='w-1/5 text-white dark:text-black border-y-3 border-lime-300'>X</td>
-                                    <td className='w-1/5 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
-                                    <td className='w-1/5 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
-                                    <td className='w-1/5 text-white dark:text-black border-y-3 border-lime-300'>X</td>
-                                </tr>
-
-
-                                
-                            </table>
+                            {aukera ?(
+                                <table className='w-full  border-collapse'>
+                                    <tr className='text-center w-full'>
+                                        <td className='w-1/7 text-white dark:text-black border-lime-300'>Izena Abizena</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>Email</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>NAN</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>Urtea</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>Elkartea</td>
+                                        <td className='w-1/7 text-white dark:text-black  border-lime-300'>Aktibatuta</td>
+                                    </tr>
+                                    <tr className='text-center w-full'>
+                                        <td className='w-1/7 text-white dark:text-black border-y-3 border-lime-300'>X</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
+                                        <td className='w-1/7 text-white dark:text-black border-y-3 border-lime-300'>X</td>
+                                    </tr>
+                                </table>
+                            ):(
+                                <table className='w-full  border-collapse'>
+                                    <tr className='text-center w-full'>
+                                        <td className='w-1/6 text-white dark:text-black border-lime-300'>Izena Abizena</td>
+                                        <td className='w-1/6 text-white dark:text-black border-x-3 border-lime-300'>Email</td>
+                                        <td className='w-1/6 text-white dark:text-black border-x-3 border-lime-300'>NAN</td>
+                                        <td className='w-1/6 text-white dark:text-black  border-lime-300'>Urtea</td>
+                                        <td className='w-1/6 text-white dark:text-black  border-lime-300'>Aktibatuta</td>
+                                    </tr>
+                                    <tr className='text-center w-full'>
+                                        <td className='w-1/6 text-white dark:text-black border-y-3 border-lime-300'>X</td>
+                                        <td className='w-1/6 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
+                                        <td className='w-1/6 text-white dark:text-black border-x-3 border-y-3 border-lime-300'>X</td>
+                                        <td className='w-1/6 text-white dark:text-black border-y-3 border-lime-300'>X</td>
+                                        <td className='w-1/6 text-white dark:text-black border-y-3 border-lime-300'>X</td>
+                                    </tr>
+                                </table>
+                            )}
+                            
                            
                                 
                         </div>

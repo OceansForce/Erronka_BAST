@@ -69,6 +69,8 @@ use App\Http\Controllers\AnimalController;
 Route::get('/animals-adopt', [AnimalController::class, 'getAnimals']);
 Route::post('/animals-create', [AnimalController::class, 'createAnimal'])->middleware('auth:sanctum');
 Route::post('/animals-edit', [AnimalController::class, 'editAnimal'])->middleware('auth:sanctum');
+Route::get('/animal-adopt/{id}', [AnimalController::class, 'getAnimal']);
+
 
 Route::get('/animals-personal', [AnimalController::class, 'getPersonalAnimals'])->middleware('auth:sanctum');
 

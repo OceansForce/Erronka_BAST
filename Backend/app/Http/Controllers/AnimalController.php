@@ -63,6 +63,28 @@ class AnimalController extends Controller
         return response()->json($animals);
     }
 
+    public function getAnimal(Request $request, $id)
+    {
+        // Buscar el animal por el id
+        $animal = Animals::with('user:idProtektora') // Cargar la relación con el usuario
+            ->whereHas('user', function($query) {
+                // Filtrar por el idProtektora mayor a 1 y que no sea nulo
+                $query->where('idProtektora', '>', 1)
+                    ->whereNotNull('idProtektora');
+            })
+            ->where('id', $id) // Buscar por el id del animal
+            ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']);
+
+        // Verificar si no se encontró el animal
+        if (!$animal) {
+            return response()->json(['message' => 'Animal not found or does not meet the specified criteria'], 404);
+        }
+
+        // Retornar los datos del animal
+        return response()->json($animal);
+    }
+
+
     public function getPersonalAnimals(Request $request)
     {
         // Obtener los parámetros de la solicitud
@@ -77,12 +99,12 @@ class AnimalController extends Controller
             'type' => 'nullable|string|in:txakurra,txakurra ppp,katua,besteak', // El tipo de animal es opcional
         ]);
 
-	$user = auth()->user();
-	if (!$user) {
-	    return response()->json(['message' => 'Usuario no autenticado'], 401);
-	}
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no autenticado'], 401);
+        }
 
-	$userId = $user->id;
+        $userId = $user->id;
 
 
         // Verificar si el usuario está autenticado
@@ -134,7 +156,7 @@ class AnimalController extends Controller
             return response()->json(['error' => 'usuario no autenticado'], 401); // 401 Unauthorized
         }
         
-try {
+        try {
         $request->validate([
             'name' => 'required|string|max:255',
             'etxekoAnimalia' => 'required|boolean',
@@ -145,23 +167,23 @@ try {
             'gender' => 'required|integer|in:1,2',
             'descripcion' => 'nullable|string|max:255',
             'year' => 'nullable|date',
-        ]);
-    } catch (\Illuminate\Validation\ValidationException $e) {
-        \Log::error("Validation Exception: " . $e->getMessage());
-        return response()->json([
-            'message' => 'Error de validación',
-            'errors' => $e->errors(),
-        ], 422);
-    }
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            \Log::error("Validation Exception: " . $e->getMessage());
+            return response()->json([
+                'message' => 'Error de validación',
+                'errors' => $e->errors(),
+            ], 422);
+        }
 
-    // Aquí intenta imprimir el contenido del request para confirmar que los datos llegan correctamente
-    \Log::info('Datos recibidos: ', $request->all());
-	//return response()->json(['error' => 'Usuario no autenticado'], 401); 
+        // Aquí intenta imprimir el contenido del request para confirmar que los datos llegan correctamente
+        \Log::info('Datos recibidos: ', $request->all());
+        //return response()->json(['error' => 'Usuario no autenticado'], 401); 
 
 
         // Obtener el usuario autenticado
-        
-	$imageUrl = null;
+            
+        $imageUrl = null;
         if ($request->hasFile('img')) {
             $imageController = new ImageController();
             $imageResponse = $imageController->upload($request);

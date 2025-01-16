@@ -43,26 +43,37 @@ class UserController extends Controller
             return response()->json(['error' => $request->header('Authorization')], 401); // 401 Unauthorized
         }
 
-        if($user->idProtektora !=1){
-            return response()->json(['error' => 'No tienes permisos para acceder a esta información'], 401); // 401 Unauthorized
+        // Verificar permisos (solo usuario con idProtektora = 1 puede acceder)
+        if ($user->idProtektora != 1) {
+            return response()->json(['error' => 'No tienes permisos para acceder a esta información'], 401);
         }
 
-        // Obtener el userID del usuario autenticado
+        // Obtener los usuarios que NO pertenecen a la protectora 1 o que tienen idProtektora NULL
         $users = User::where(function ($query) {
             $query->where('idProtektora', '!=', 1)
-                  ->orWhereNull('idProtektora');
+                ->orWhereNull('idProtektora');
         })->get();
-        // Obtener los animales asociados a esos usuarios
+
+        // Obtener los animales y la protectora de cada usuario
         $response = $users->map(function ($user) {
+            // Buscar la protectora si el usuario tiene una asignada
+            $protektoraName = null;
+            if ($user->idProtektora) {
+                $protektora = Protektora::find($user->idProtektora);
+                $protektoraName = $protektora ? $protektora->name : null;
+            }
+
             return [
                 'user' => $user,
+                'protektora_name' => $protektoraName, // Nombre de la protectora si existe
                 'animals' => Animals::where('userID', $user->id)->get()
             ];
         });
-    
-        // Retornar la respuesta con los datos
+
+        // Retornar la respuesta en formato JSON
         return response()->json($response);
     }
+
 
     
 }

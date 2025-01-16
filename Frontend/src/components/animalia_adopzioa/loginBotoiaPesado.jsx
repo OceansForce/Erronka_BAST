@@ -4,7 +4,11 @@ import IpAPI from '../../config/ipAPI';
 import { use } from 'react';
 import { useEffect } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 const LoginBotoiaPesado = ({ IsModalOpen }) => {
+
+  const navigate = useNavigate(); // Hook de navegación
     const { t, i18n } = useTranslation();
     const [isModalOpen, setIsModalOpen] = useState(false);  // Estado para abrir/cerrar el modal
     const tok = localStorage.getItem('token'); // Obtener el token de localStorage
@@ -30,11 +34,17 @@ const LoginBotoiaPesado = ({ IsModalOpen }) => {
         setIsModalOpen(false);
     };
 
+    const kontuaSortu = () => {
+      setIsModalOpen(false);
+      navigate('/saioa_sortu');
+  };
+
     // Función para manejar la confirmación del delete
-    const handleDelete = () => {
+    const saioaHasi = () => {
         // Aquí va el código para realizar la acción de eliminar (por ejemplo, eliminar la cuenta del usuario)
-        alert('Cuenta eliminada');
+        //alert('Cuenta eliminada');
         setIsModalOpen(false);  // Cerrar el modal después de la acción
+        navigate('/login');
     };
 
     return (
@@ -69,37 +79,36 @@ const LoginBotoiaPesado = ({ IsModalOpen }) => {
                 </svg>
                 <span className="sr-only">Close modal</span>
               </button>
-              <svg
-                className="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                  clipRule="evenodd"
-                ></path>
+              {/* basura */}
+              <svg 
+                  className="text-dark-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" 
+                  viewBox="0 0 16 16" 
+                  fill="currentColor" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z"/>
+                  <path d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z"/>
               </svg>
+
               <p className="mb-4 text-gray-500 dark:text-gray-300">
-                {t('userProfile:delete')}
+                {t("Adop_Anim:ezSaioaHasita")}
               </p>
               <div className="flex justify-center items-center space-x-4">
                 <button
                   data-modal-toggle="deleteModal"
-                  onClick={handleCloseModal}
+                  onClick={saioaHasi}
                   type="button"
                   className="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                 >
-                  {t('userProfile:cancel')}
+                  {t("Adop_Anim:saioaHasi")}
                 </button>
                 <button
-                  onClick={handleDelete}
+                  onClick={kontuaSortu}
                   type="button"
-                  className="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
+                  className="py-2 px-3 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-900"
                 >
-                  {t('userProfile:confirmar')}
+                  {t("Adop_Anim:kontuaSortu")}
+                  
                 </button>
               </div>
             </div>

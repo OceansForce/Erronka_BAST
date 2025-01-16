@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LoginBotoiaPesado from './loginBotoiaPesado';
+import i18n from './../../118n/menu';
+
 
 const AdopzioBotoia = ({ text }) => {
+    const { t, i18n } = useTranslation();
+
     const [isModalOpen, setIsModalOpen] = useState(false); // Estado para manejar si el modal está abierto o cerrado
     const tok = localStorage.getItem('token'); // Obtener el token de localStorage
 

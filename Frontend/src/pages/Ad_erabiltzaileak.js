@@ -9,7 +9,7 @@ import IpAPI from "./../config/ipAPI";
 
 function Ad_erabiltzaileak() {
 
-    const [aukera, setAukera]= useState(false);
+    const [aukera, setAukera]= useState(null);
 
     useEffect(()=>{
         console.log(aukera);
@@ -35,24 +35,27 @@ function Ad_erabiltzaileak() {
                             <DarkModeToggle className='w-1/2' />
                         </div>
                     </div>
-                    <p className='w-full font-semibold text-2xl my-5 dark:text-white uppercase'>Notiziak</p>
+                    <p className='w-full font-semibold text-2xl my-5 dark:text-white uppercase'>{t("EraPanela:Erabiltzaileak")}</p>
                     <div className='w-full flex flex-col text-left' id='notiziak'>
-                        <select className='w-52 bg-dark_body text-white p-2 mb-2 focus:border-primary  border-2 rounded-md' onChange={(e)=> setAukera(Boolean(e.target.value))}>
-                            <option>-------------------------</option>
-                            <option value={false}>Erabiltzaile Normalak</option>
-                            <option value={true}>Babes Elkarteak</option>
+                        <select className='w-52 bg-gray-50 text-dark_body dark:bg-dark_body dark:text-white p-2 mb-2 focus:border-dark dark:focus:border-primary  border-2 rounded-md'  onChange={(e) => {
+                                const value = e.target.value === "true";
+                                setAukera(value);
+                            }}>
+                            <option value="">-------------------------</option>
+                            <option value="false">{t("EraPanela:Erabiltzaile_N")}</option>
+                            <option value="true">{t("EraPanela:Babes_elkarte")}</option>
                         </select>
 
                         <div  className='flex flex-row dark:bg-primary bg-dark p-2 mb-5 rounded-3xl justify-between'>
-                            {aukera ?(
+                            {aukera === true ?(
                                 <table className='w-full  border-collapse'>
                                     <tr className='text-center w-full'>
-                                        <td className='w-1/7 text-white dark:text-black border-lime-300'>Izena Abizena</td>
-                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>Email</td>
-                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>NAN</td>
-                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>Urtea</td>
-                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>Elkartea</td>
-                                        <td className='w-1/7 text-white dark:text-black  border-lime-300'>Aktibatuta</td>
+                                        <td className='w-1/7 text-white dark:text-black border-lime-300'>{t("EraPanela:IzenAbiz")}</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>{t("EraPanela:Email")}</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>{t("EraPanela:NAN")}</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>{t("EraPanela:Jaio_data")}</td>
+                                        <td className='w-1/7 text-white dark:text-black border-x-3 border-lime-300'>{t("EraPanela:Elkartea")}</td>
+                                        <td className='w-1/7 text-white dark:text-black  border-lime-300'>{t("EraPanela:Aktibatuta")}</td>
                                     </tr>
                                     <tr className='text-center w-full'>
                                         <td className='w-1/7 text-white dark:text-black border-y-3 border-lime-300'>X</td>
@@ -63,14 +66,14 @@ function Ad_erabiltzaileak() {
                                         <td className='w-1/7 text-white dark:text-black border-y-3 border-lime-300'>X</td>
                                     </tr>
                                 </table>
-                            ):(
+                            ): (
                                 <table className='w-full  border-collapse'>
                                     <tr className='text-center w-full'>
-                                        <td className='w-1/6 text-white dark:text-black border-lime-300'>Izena Abizena</td>
-                                        <td className='w-1/6 text-white dark:text-black border-x-3 border-lime-300'>Email</td>
-                                        <td className='w-1/6 text-white dark:text-black border-x-3 border-lime-300'>NAN</td>
-                                        <td className='w-1/6 text-white dark:text-black  border-lime-300'>Urtea</td>
-                                        <td className='w-1/6 text-white dark:text-black  border-lime-300'>Aktibatuta</td>
+                                        <td className='w-1/6 text-white dark:text-black border-lime-300'>{t("EraPanela:IzenAbiz")}</td>
+                                        <td className='w-1/6 text-white dark:text-black border-x-3 border-lime-300'>{t("EraPanela:Email")}</td>
+                                        <td className='w-1/6 text-white dark:text-black border-x-3 border-lime-300'>{t("EraPanela:NAN")}</td>
+                                        <td className='w-1/6 text-white dark:text-black  border-lime-300'>{t("EraPanela:Jaio_data")}</td>
+                                        <td className='w-1/6 text-white dark:text-black  border-lime-300'>{t("EraPanela:Aktibatuta")}</td>
                                     </tr>
                                     <tr className='text-center w-full'>
                                         <td className='w-1/6 text-white dark:text-black border-y-3 border-lime-300'>X</td>

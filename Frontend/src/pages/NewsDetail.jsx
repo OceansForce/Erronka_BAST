@@ -78,8 +78,8 @@ function NewsDetail() {
             <img 
               src={img || defaultImg} 
               alt={title} 
-              style={{ width: '100%', height: 'auto', maxWidth: '400px' }} 
-              className='rounded-t-lg'
+              style={{ width: '100%', height: 'auto', minWidth: '400px', maxWidth: '400px' }} 
+              className='rounded-lg'
             />
           </div>
           <div className='w-10/12'>

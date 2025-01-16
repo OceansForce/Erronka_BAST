@@ -13,6 +13,7 @@ const LanguageSelector = ({ changeLanguage }) => {
     const handleClickOutside = (event) => {
       if (event.target.closest('.language-selector') === null) {
         setIsOpen(false);
+        
       }
     };
 

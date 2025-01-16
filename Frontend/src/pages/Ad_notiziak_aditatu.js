@@ -8,15 +8,11 @@ import IpAPI from '../config/ipAPI';
 import BackButton from '../components/bottons/backBotom';
 import SendButom from '../components/bottons/sendBotton';
 import { checkProtektora } from '../components/security/security';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import Irudiak_input from './../components/notiziak/IrudiakInput.js';
 
 function Ad_notiziak() {
-
-    const [aktibatuta, setAktibatuta]= useState(true);
-    const aldatu=()=>{
-        setAktibatuta(!aktibatuta);
-    }
 
     const { t, i18 } = useTranslation();
     
@@ -202,17 +198,7 @@ function Ad_notiziak() {
                                 required
                             />
                             <label className='font-semibold dark:text-white'>IMG URL</label>
-                            <div>
-                                <input
-                                    className='mb-2 text-black dark:text-white mr-4  font-ubuntu rounded-lg'
-                                    type='file'
-                                    disabled={aktibatuta}
-                                    name='img'
-                                    onChange={handleChange}
-                                    required
-                                />
-                                <input type="checkbox"  checked={!aktibatuta}  onChange={aldatu} />
-                            </div>
+                            <Irudiak_input handleChange={handleChange}/>
                         
                             <div className='flex flex-row w-auto'>
                                 <div className='flex flex-col w-1/2 mr-5'>
@@ -257,7 +243,7 @@ function Ad_notiziak() {
                                 </div>
                             </div>
                             
-                            <SendButom value={t('saioa_sortu:input')} />
+                            <Link to={"/Ad_notizia_panela"}><SendButom value={t('saioa_sortu:input')} /></Link>
                         </form>
                     </div>
                 </div>

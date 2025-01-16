@@ -48,8 +48,10 @@ class UserController extends Controller
         }
 
         // Obtener el userID del usuario autenticado
-        $users = User::where('idProtektora', '!=', 1)->get();
-
+        $users = User::where(function ($query) {
+            $query->where('idProtektora', '!=', 1)
+                  ->orWhereNull('idProtektora');
+        })->get();
         // Obtener los animales asociados a esos usuarios
         $response = $users->map(function ($user) {
             return [

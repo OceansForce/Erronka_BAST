@@ -49,6 +49,11 @@ import euUserProfile from './locales/eu/user/userProfile.json';
 import esLoading from './locales/es/loading/loading.json';
 import euLoading from './locales/eu/loading/loading.json';
 
+import es_galdu_animalia from './locales/es/menu/galduta_animalia.json';
+import eu_galdu_animalia from './locales/eu/menu/galduta_animalia.json';
+
+import es_adoptatu_animalia from './locales/es/menu/adoptatu_animalia.json';
+import eu_adoptatu_animalia from './locales/eu/menu/adoptatu_animalia.json';
 
 
 // Tradukzioak API-tik kargatzeko
@@ -135,7 +140,8 @@ i18n
         userProfile: esUserProfile,
         loading: esLoading,
         EraPanela: esEraPanela,
-
+        Gal_Anim: es_galdu_animalia,
+        Adop_Anim: es_adoptatu_animalia,
       },
       eu: {
         menu: euMenu,
@@ -153,7 +159,8 @@ i18n
         userProfile: euUserProfile,
         loading: euLoading,
         EraPanela: euEraPanela,
-
+        Gal_Anim: eu_galdu_animalia,
+        Adop_Anim: eu_adoptatu_animalia,
       },
     },
     fallbackLng: 'eu', // Idioma de respaldo

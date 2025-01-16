@@ -1,7 +1,7 @@
 import Adopzioak from "../components/adopzioa/adopzio";
 import Header from '../header-footer/header';
 import Footer from '../header-footer/footer';
-import Anim_Adopt_BODY from "../components/animalia_adopzioa/body_adop";
+import Anim_Adop_BODY from "../components/galdutako_Animalia/body_gald.js"
 
 function Animalia_adoptatu() {
   
@@ -10,7 +10,7 @@ function Animalia_adoptatu() {
       <>
         <Header />
 
-        <Anim_Adopt_BODY/>
+        <Anim_Adop_BODY/>
 
         <Footer />
       </>

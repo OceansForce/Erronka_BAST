@@ -17,13 +17,13 @@ const Animaliak= ({ img, izena, kokapena, mota})=>{
     }
     else if(mota==="galduta"){
       
-      return <div className="w-1/4 max-w-96  mb-8 mx-5">
+      return <Link to="/Animalia_galduta" className="w-1/4 max-w-96  mb-8 mx-5">
           <img src={link} alt={izena} className="rounded-t-3xl"/>
           <div className="dark:bg-dark  bg-primary p-2 rounded-b-2xl text-center">
             <p className="dark:text-white font-semibold fonts_ubutu">{izena}</p>
             <p className="dark:text-white font-semibold fonts_ubutu">{kokapena}</p>
           </div>
-        </div>
+        </Link>
      
     }
     else if(mota==="profila"){

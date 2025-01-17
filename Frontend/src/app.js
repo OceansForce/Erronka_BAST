@@ -1,7 +1,6 @@
 import './index.css';
 import Index from './pages/index';
 import Adopzioa from './pages/adopzio';
-import Denda from './pages/denda';
 import Galduta from './pages/galduta';
 import Mapa from './pages/mapa';
 import Saioa_sortu from './pages/saioa_sortu';
@@ -28,7 +27,6 @@ function App() {
       <Routes> 
           <Route path="/" element={<Index />} /> 
           <Route path="/adopzio" element={<Adopzioa />} /> 
-          <Route path="/denda" element={<Denda />} /> 
           <Route path="/galduta" element={<Galduta />} /> 
           <Route path="/mapa" element={<Mapa />} /> 
           <Route path="/saioa_sortu" element={<Saioa_sortu />} /> 

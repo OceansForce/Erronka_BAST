@@ -63,7 +63,7 @@ Body:
     "password": "123maite",
     "password_confirmation": "123maite",
     "year": "2005-01-10",
-    "img": "https://proba.com"
+    "img": img->Object
 }
 
 ```
@@ -77,7 +77,8 @@ Response:
     "secondName": "Alcon",
     "email": "Casca@example.com",
     "year": "2010-10-10T00:00:00.000000Z",
-    "id": 3
+    "id": 3,
+    "img": "www.bastbackend.ddns.net/public/storage/profile.jpg"
   }
 }
 ```
@@ -95,6 +96,34 @@ Response Error:
   }
 }
 ```
+</details>
+
+<details>
+<summary> <h2> Verify Email </h2> </summary>
+Emaila Verifikatzeko erabiltzen da
+Link: 
+```
+http://bastbackend.ddns.net:8000/api/verity-email/34298df983hfdkd
+```
+Header:
+```
+Content-Type:application/json
+```
+
+
+Response:
+```
+{
+  "msg":"Email Verificado"
+}
+```
+Response Error:
+```
+{
+  "message": "Datos incorrectos o incompletos.",
+}
+```
+
 </details>
 
 
@@ -128,8 +157,9 @@ Response:
     "email": "manex@zubiri.com",
     "year": "2005-01-10T00:00:00.000000Z",
     "rola": "erabiltzaile",
-    "idProtektora": null
-  },
+    "idProtektora": null,
+    "img":"img": "www.bastbackend.ddns.net/public/storage/profile.jpg"
+  }
   "token": "16|kFjHTrpajMNzVl3mFdxyolREya60S9Jr766ip9y0d582b690"
 }
 ```
@@ -148,6 +178,73 @@ Link:
  
 ```
 http://bastbackend.ddns.net:8000/api/user-data
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Response:
+```
+{
+    "user": {
+        "id": 1,
+        "DNI": "123456789A",
+        "name": "Juan",
+        "secondName": "Pérez",
+        "email": "juan.perez@ejemplo.com",
+        "year": "1990-05-20",
+        "img": "http://urlimagen.com/imagen.jpg"
+    },
+    "animals": [
+        {
+            "id": 1,
+            "name": "Fido",
+            "type": "txakurra",
+            "animalType": "Perro",
+            "img": "http://urlimagen.com/fido.jpg",
+            "bakuna": true,
+            "gender": "Macho",
+            "descripcion": "Perro muy amigable",
+            "year": "2020",
+            "losted": false,
+            "noiztik": "2023-01-01",
+            "userID": 1
+        },
+        {
+            "id": 2,
+            "name": "Mimi",
+            "type": "katua",
+            "animalType": "Gato",
+            "img": "http://urlimagen.com/mimi.jpg",
+            "bakuna": true,
+            "gender": "Hembra",
+            "descripcion": "Gato tranquilo",
+            "year": "2019",
+            "losted": false,
+            "noiztik": "2022-12-01",
+            "userID": 1
+        }
+    ]
+}
+
+```
+Response Error:
+```
+{
+        "error": "Usuario no autenticado"
+}
+```
+</details>
+
+
+<details>
+<summary> <h2> Get User Data Admin</h2> </summary>
+Lortzen dira erabiltzaile guztien datuak
+Link: 
+ 
+```
+http://bastbackend.ddns.net:8000/api/get-all-user
 ```
 Header:
 ```
@@ -230,7 +327,7 @@ Body:
     "email": "juan.garcia@ejemplo.com",
     "password": "nuevaContraseña123",
     "year": "1991-06-15",
-    "img": "http://urlimagen.com/nueva-imagen.jpg"
+    "img": img->Object
 }
 ```
 Response:
@@ -265,6 +362,8 @@ Response Error:
 
 ```
 </details>
+
+<details>
 
 <summary> <h2> Delete User </h2> </summary>
 <p> **Delete** bitartez egin behar da</p>
@@ -368,7 +467,7 @@ Body:
   "titleEU": "Titulua euskaraz",
   "textES": "Este es el texto de la noticia en Español",
   "textEU": "Hau da euskarazko albistearen testua",
-  "img": https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg
+  "img": img->object
 }
 ```
 Response:
@@ -514,7 +613,7 @@ Body:
    "titleEU": "Berriaren izenburua euskaraz",
    "textES": "Texto de la noticia en español.",
    "textEU": "Albistearen testua euskaraz111.",
-   "img": "https://ejemplo.com/imagen.jpg"
+   "img": img->object
  }
 ```
 Response:
@@ -530,6 +629,34 @@ Response:
     "title": "title50",
     "img": "https:\/\/ejemplo.com\/imagen.jpg"
   }
+}
+```
+Response Error:
+```
+{
+  "error": "Las credenciales proporcionadas son incorrectas."
+}
+```
+</details>
+
+<details>
+    
+<summary> <h2> Delete News </h2> </summary>
+<p> **delete** bitartez egin behar da</p>
+Link: 
+ 
+```
+http://bastbackend.ddns.net:8000/api/news/50
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Response:
+```
+{
+  "msg":"New Deleted"
 }
 ```
 Response Error:
@@ -683,7 +810,7 @@ Body:
     "etxekoAnimalia": true,
     "type": "txakurra",
     "animalType": "Pastor Alemán",
-    "img": "http://url_del_imagen.com/fido.jpg",
+    "img": img->object,
     "bakuna": 1,
     "gender": 1,
     "descripcion": "Perro amigable y enérgico",
@@ -731,7 +858,7 @@ Body:
   "etxekoAnimalia": true,
   "type": "txakurra",
   "animalType": "Pastor Alemán",
-  "img": "http://urlimagen.com/nueva-imagen.jpg",
+  "img": img->object,
   "bakuna": 2,
   "gender": 1,
   "descripcion": "Animal amigable y activo.",
@@ -769,6 +896,56 @@ Response Error:
 }
 {
   "error": "No tienes permisos para editar este animal"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>
+
+
+<details>
+    
+<summary> <h2> Get adop animal information</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+http://bastbackend.ddns.net:8000/api/animal-adopt/33
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+{
+  "id": 1,
+  "name": "Max",
+  "etxekoAnimalia": true,
+  "type": "txakurra",
+  "animalType": "Pastor Alemán",
+  "img": "http://urlimagen.com/nueva-imagen.jpg",
+  "bakuna": 2,
+  "gender": 1,
+  "descripcion": "Animal amigable y activo.",
+  "year": "2020-05-10",
+  "losted": null,
+  "noiztik": null,
+  "userID": 2,
+  "protektora_id": 5
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
 }
 {
   "message": "Datos incorrectos o incompletos.",

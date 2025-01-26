@@ -25,34 +25,59 @@ class AnimalController extends Controller
             'type' => 'nullable|string|in:txakurra,txakurra ppp,katua,besteak', // El tipo de animal es opcional
         ]);
 
-        // Generar una clave única para el caché basada en los parámetros de la solicitud
-        $cacheKey = "animals_{$limit}_{$offset}_{$idProtektora}_{$type}";
+        // // Generar una clave única para el caché basada en los parámetros de la solicitud
+        // $cacheKey = "animals_{$limit}_{$offset}_{$idProtektora}_{$type}";
 
-        // Intentar obtener los animales del caché
-        $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $idProtektora, $type) {
-            // Query para obtener animales que cumplan con las condiciones
-            $query = Animals::with('user:idProtektora') // Cargar la relación del usuario con el campo idProtektora
-                ->whereHas('user', function($query) use ($idProtektora) {
-                    // Filtrar animales cuyos usuarios tengan un idProtektora mayor a 1
-                    $query->where('idProtektora', '>', 1)
-                        ->whereNotNull('idProtektora');
+        // // Intentar obtener los animales del caché
+        // $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $idProtektora, $type) {
+        //     // Query para obtener animales que cumplan con las condiciones
+        //     $query = Animals::with('user:idProtektora') // Cargar la relación del usuario con el campo idProtektora
+        //         ->whereHas('user', function($query) use ($idProtektora) {
+        //             // Filtrar animales cuyos usuarios tengan un idProtektora mayor a 1
+        //             $query->where('idProtektora', '>', 1)
+        //                 ->whereNotNull('idProtektora');
                     
-                    // Si se pasa el idProtektora, filtrar también por este valor
-                    if ($idProtektora) {
-                        $query->where('idProtektora', $idProtektora);
-                    }
-                });
+        //             // Si se pasa el idProtektora, filtrar también por este valor
+        //             if ($idProtektora) {
+        //                 $query->where('idProtektora', $idProtektora);
+        //             }
+        //         });
 
-            // Si se pasa el tipo de animal, filtramos también por el tipo
-            if ($type) {
-                $query->where('type', $type);
+        //     // Si se pasa el tipo de animal, filtramos también por el tipo
+        //     if ($type) {
+        //         $query->where('type', $type);
+        //     }
+
+        //     // Aplicar paginación y obtener los resultados
+        //     return $query->offset($offset)
+        //                 ->limit($limit)
+        //                 ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']); // Selecciona solo los campos necesarios
+        // });
+
+
+        // Query para obtener animales que cumplan con las condiciones
+        $query = Animals::with('user:idProtektora') // Cargar la relación del usuario con el campo idProtektora
+        ->whereHas('user', function($query) use ($idProtektora) {
+            // Filtrar animales cuyos usuarios tengan un idProtektora mayor a 1
+            $query->where('idProtektora', '>', 1)
+                ->whereNotNull('idProtektora');
+            
+            // Si se pasa el idProtektora, filtrar también por este valor
+            if ($idProtektora) {
+                $query->where('idProtektora', $idProtektora);
             }
-
-            // Aplicar paginación y obtener los resultados
-            return $query->offset($offset)
-                        ->limit($limit)
-                        ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']); // Selecciona solo los campos necesarios
         });
+
+        // Si se pasa el tipo de animal, filtramos también por el tipo
+        if ($type) {
+        $query->where('type', $type);
+        }
+
+        // Aplicar paginación y obtener los resultados
+        $animals = $query->offset($offset)
+            ->limit($limit)
+            ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']); // Selecciona solo los campos necesarios
+
 
         // Verificar si no se encontraron resultados
         if ($animals->isEmpty()) {
@@ -112,24 +137,39 @@ class AnimalController extends Controller
             return response()->json(['message' => 'Usuario no autenticado'], 403);
         }
 
-        // Generar una clave única para el caché basada en los parámetros de la solicitud
-        $cacheKey = "personal_animals_{$userId}_{$limit}_{$offset}_{$type}";
+        // // Generar una clave única para el caché basada en los parámetros de la solicitud
+        // $cacheKey = "personal_animals_{$userId}_{$limit}_{$offset}_{$type}";
 
-        // Intentar obtener los animales del caché
-        $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $userId, $type) {
-            // Query para obtener los animales del usuario autenticado
-            $query = Animals::where('userID', $userId); // Filtramos por el user_id del usuario autenticado
+        // // Intentar obtener los animales del caché
+        // $animals = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($limit, $offset, $userId, $type) {
+        //     // Query para obtener los animales del usuario autenticado
+        //     $query = Animals::where('userID', $userId); // Filtramos por el user_id del usuario autenticado
 
-            // Si se pasa el tipo de animal, filtramos también por el tipo
-            if ($type) {
-                $query->where('type', $type);
-            }
+        //     // Si se pasa el tipo de animal, filtramos también por el tipo
+        //     if ($type) {
+        //         $query->where('type', $type);
+        //     }
 
-            // Aplicar paginación y obtener los resultados
-            return $query->offset($offset)
-                        ->limit($limit)
-                        ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']); // Selecciona solo los campos necesarios
-        });
+        //     // Aplicar paginación y obtener los resultados
+        //     return $query->offset($offset)
+        //                 ->limit($limit)
+        //                 ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']); // Selecciona solo los campos necesarios
+        // });
+
+
+        // Query para obtener los animales del usuario autenticado
+        $query = Animals::where('userID', $userId); // Filtramos por el user_id del usuario autenticado
+
+        // Si se pasa el tipo de animal, filtramos también por el tipo
+        if ($type) {
+            $query->where('type', $type);
+        }
+
+        // Aplicar paginación y obtener los resultados
+        $animals = $query->offset($offset)
+                ->limit($limit)
+                ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']); // Selecciona solo los campos necesarios
+
 
         // Verificar si no se encontraron resultados
         if ($animals->isEmpty()) {

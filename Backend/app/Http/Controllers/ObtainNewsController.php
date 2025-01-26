@@ -25,23 +25,19 @@ class ObtainNewsController extends Controller
         // Asignar un valor predeterminado a 'protektora_id' si no se pasa
         $protektoraIdCache = $protektoraId ? $protektoraId : 'no_protektora';
 
-        // Crear una clave única para almacenar en caché, usando 'count', 'offset' y 'protektora_id'
-        $cacheKey = "latest_news_{$count}_{$offset}_{$protektoraIdCache}";
+        // Query para obtener las noticias más recientes
+        $query = News::orderBy('created_at', 'desc')
+        ->skip($offset)
+        ->take($count);
 
-        // Intentar obtener las noticias del caché
-        $news = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($count, $offset, $protektoraId) {
-            // Si no están en caché, consultar la base de datos
-            $query = News::orderBy('created_at', 'desc')
-                        ->skip($offset)
-                        ->take($count);
+        // Si se proporciona el ID de la protectora, filtrar por ello
+        if ($protektoraId) {
+        $query->where('protektora_id', $protektoraId);
+        }
 
-            // Si se proporciona el ID de la protectora, filtrar por ello
-            if ($protektoraId) {
-                $query->where('protektora_id', $protektoraId);
-            }
+        // Obtener las noticias directamente de la base de datos
+        $news = $query->get();
 
-            return $query->get();
-        });
 
         // Devolver el resultado en JSON
         return response()->json($news);

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 
 
-const Trash = (id) => {
+const Trash = ({id, onDelete }) => {
     const [value, setValue] = useState("");
     const [successMessage, setSuccessMessage] = useState('');
     const { t, i18n } = useTranslation();
@@ -32,6 +32,7 @@ const Trash = (id) => {
             if (response.ok) {
                 const result = await response.json();
                 setSuccessMessage(t('News delete susefully'));
+                onDelete(id);
                 
             } else {
             const error = await response.json();

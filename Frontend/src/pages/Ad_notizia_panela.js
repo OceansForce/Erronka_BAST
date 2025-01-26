@@ -61,6 +61,11 @@ function Ad_notizia_panela() {
         loadInitialNews();
     }, [i18n.language]);
 
+
+    const handleDelete = (id) => {
+        setNews(news.filter(item => item.id !== id));  // Esto elimina la noticia de la lista localmente
+    };
+
     return (
         <>
             <div className='w-full container flex justify-center'>
@@ -99,7 +104,7 @@ function Ad_notizia_panela() {
                                         <img src='./img/icons/profil/pen_white.svg' className='size-7 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
                                         <img src='./img/icons/profil/pen_Black.svg' className='size-7 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
                                     </Link>
-                                    <Trash id={item.id} />
+                                    <Trash id={item.id} onDelete={handleDelete} />
 
                                 </div>
                             </div>

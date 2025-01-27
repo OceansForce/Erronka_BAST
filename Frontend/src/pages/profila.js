@@ -9,7 +9,7 @@ import IpAPI from "./../config/ipAPI";
 import Loading from '../components/loading/loading.jsx';
 
 import Alert from '../components/alert/alert.jsx';
-import UserAnimals from '../components/profila/animals.jsx';
+import ProfilAnimals from '../components/profila/profilAnimals.jsx';
 import SaveIcon from '../components/profila/saveIcon.jsx';
 
 import DeleteButtom from '../components/profila/deleteButtom.jsx';
@@ -250,7 +250,7 @@ const Profila = () => {
                             </div>
 
 
-                            <UserAnimals userData={userData.animals} />
+                            <ProfilAnimals userData={userData.animals} />
 
                             <DeleteButtom />
                         </div>

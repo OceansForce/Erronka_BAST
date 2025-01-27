@@ -90,8 +90,7 @@ function Ad_adoptatu(){
   // Manejador del envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Asegúrate de que los valores estén correctamente establecidos
+
     if (!formData.name || !mota || !arraza || !sexo || !etxekoa || !formData.descripcion || !formData.year) {
       alert("Por favor, completa todos los campos requeridos.");
       return;

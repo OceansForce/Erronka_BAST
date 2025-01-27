@@ -3,8 +3,8 @@ import i18n from '../118n/menu';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './header/desplegable/lenguageSelector';
 import DarkModeToggle from './header/dark-light/dark';
-import User from './header/user/user';
-import { Link } from 'react-router-dom';  // Asegúrate de importar Link
+import User from './header/user/desplegable/userOptions';
+import { Link } from 'react-router-dom';  
 
 
 import Adopzioa  from './header/desplegable/adopzioa';
@@ -76,7 +76,6 @@ const Header = () => {
         </>
       ) : (
         <div>
-          {/* Aquí va el contenido de usuario, como un saludo o el nombre del usuario */}
           <User />
         </div>
       )}

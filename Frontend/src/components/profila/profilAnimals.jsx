@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
-import i18n from '../../118n/menu';
-import Animaliak from '../../components/adopzioa/animaliak/animaliak.jsx'; 
+import i18n from '../../118n/menu.js';
+import Animaliak from '../adopzioa/animaliak/animaliak.jsx'; 
 
 
 import SaveIcon from './saveIcon.jsx';

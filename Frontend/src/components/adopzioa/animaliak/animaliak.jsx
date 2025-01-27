@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const Animaliak= ({id,name, kokapena, etxe, type, arraza, img, bakuna, sexo, year, deskribapena, mota})=>{
+const Animaliak= ({id,name, kokapena, img, mota})=>{
     let link=`${img}`;
 
-    const datuak = { izena: name, etxekoa: etxe, mota: type, raza: arraza, irudia: img, bakunatuta: bakuna, genero: sexo, urtebetetzea: year, descrip: deskribapena };
+    
 
 
     if(mota==="adopzio"){

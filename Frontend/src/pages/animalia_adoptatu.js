@@ -1,4 +1,4 @@
-import Adopzioak from "../components/adopzioa/adopzio";
+import Adopzioak from "../components/adopzioa/adopzio_body";
 import Header from '../header-footer/header';
 import Footer from '../header-footer/footer';
 import Anim_Adopt_BODY from "../components/animalia_adopzioa/body_adop";

@@ -1,5 +1,5 @@
 import Animaliak from './animaliak/animaliak.jsx'; 
-import Filtroak from './filtroak/filtroak.jsx';
+import Filtroak_animalia from './filtroak/filtroak_animaliak.jsx';
 import { useEffect, useState } from 'react';
 import IpAPI from '../../config/ipAPI.js';
 import Loading from '../loading/loading.jsx';
@@ -73,10 +73,10 @@ function Adopzioak() {
     return (
       <>
         <div className='container mx-auto flex flex-row justify-evenly border-b-2 pb-8 dark:border-white border-black mt-6'>
-          <Filtroak img="adopta_perro" text="TXAKURRAK" onClick={() => handleFilterClick('txakurra')}/>
-          <Filtroak img="adopta_ppp" text="TXAKURRAK PPP" onClick={() => handleFilterClick('txakurra_ppp')}/>
-          <Filtroak img="adopta_gato-1" text="KATUAK" onClick={() => handleFilterClick('katua')}/>
-          <Filtroak img="adopta_otros" text="BESTEAK" onClick={() => handleFilterClick('besteak')}/>
+          <Filtroak_animalia img="adopta_perro" text="TXAKURRAK" onClick={() => handleFilterClick('txakurra')}/>
+          <Filtroak_animalia img="adopta_ppp" text="TXAKURRAK PPP" onClick={() => handleFilterClick('txakurra_ppp')}/>
+          <Filtroak_animalia img="adopta_gato-1" text="KATUAK" onClick={() => handleFilterClick('katua')}/>
+          <Filtroak_animalia img="adopta_otros" text="BESTEAK" onClick={() => handleFilterClick('besteak')}/>
         </div>
         <div className="container mx-auto">
           <div className="mx-auto">
@@ -85,15 +85,8 @@ function Adopzioak() {
               <div className="flex flex-row justify-evenly mt-10 flex-wrap">
                 {filteredAnimals.map((item) => (
                   <Animaliak 
-                      id={item.id}
                       name={item.name}
-                      etxe={item.etxekoAnimalia}
-                      type={item.type}
-                      arraza={item.animalType}
-                      img={item.img}        
-                      bakuna={item.bakuna}
-                      sexo={item.gender}
-                      year={item.year}
+                      id={item.id}
                       deskribapena={item.descripcion}
 
                       mota='adopzio'

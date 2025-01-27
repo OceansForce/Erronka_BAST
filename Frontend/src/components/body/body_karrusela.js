@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
-import i18n from '../../118n/menu'; // Importar configuración de i18n
+import i18n from '../../118n/menu'; 
 import "./Carousel.css";
 import IpAPI from "../../config/ipAPI";
 
@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 
 const Carrusel = () => {
-  const { t, i18n } = useTranslation(); // Hook para traducir textos
+  const { t, i18n } = useTranslation(); 
   const [loading, setLoading] = useState(true); // Estado para manejar la carga inicial
   const [news, setNews] = useState([]); // Estado que almacena las noticias obtenidas
   const [currentIndex, setCurrentIndex] = useState(0); // Índice actual del carrusel

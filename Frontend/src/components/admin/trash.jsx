@@ -21,7 +21,7 @@ const Trash = ({id, onDelete }) => {
         const tok = localStorage.getItem('token');
 
         try {
-            const response = await fetch(`${IpAPI}/api/news/${id.id}`, {
+            const response = await fetch(`${IpAPI}/api/news/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${tok}`,
@@ -31,7 +31,7 @@ const Trash = ({id, onDelete }) => {
         
             if (response.ok) {
                 const result = await response.json();
-                setSuccessMessage(t('News delete susefully'));
+                //alert(t('News delete susefully'));
                 onDelete(id);
                 
             } else {

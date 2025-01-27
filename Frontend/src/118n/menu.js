@@ -55,6 +55,10 @@ import eu_galdu_animalia from './locales/eu/menu/galduta_animalia.json';
 import es_adoptatu_animalia from './locales/es/menu/adoptatu_animalia.json';
 import eu_adoptatu_animalia from './locales/eu/menu/adoptatu_animalia.json';
 
+import es_error from './locales/es/error/error.json';
+import eu_error from './locales/eu/error/error.json';
+
+
 
 // Tradukzioak API-tik kargatzeko
 const loadTranslationsFromAPI = async (language, keys) => {
@@ -142,6 +146,7 @@ i18n
         EraPanela: esEraPanela,
         Gal_Anim: es_galdu_animalia,
         Adop_Anim: es_adoptatu_animalia,
+        error: es_error,
       },
       eu: {
         menu: euMenu,
@@ -161,6 +166,8 @@ i18n
         EraPanela: euEraPanela,
         Gal_Anim: eu_galdu_animalia,
         Adop_Anim: eu_adoptatu_animalia,
+        error: eu_error,
+
       },
     },
     fallbackLng: 'eu', // Idioma de respaldo

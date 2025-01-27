@@ -23,7 +23,7 @@ function Saioa_sortu() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [year, setYear] = useState('');
-  const [img, setImg] = useState('');
+  const [img, setImg] = useState(null);
 
 
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -45,22 +45,25 @@ function Saioa_sortu() {
     }
 
     // Crear un objeto con los datos del formulario
-    const formData = {
-      DNI: dni,
-      name,
-      secondName: surname,
-      email,
-      password,
-      password_confirmation: confirmPassword,
-      year,
-      img,
-    };
+    const formData = new FormData();
+    formData.append('DNI', dni);
+    formData.append('name', name);
+    formData.append('secondName', surname);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('password_confirmation', confirmPassword);
+    formData.append('year', year);
+    if (img) formData.append('img', img);
+    //console.log(formData);
+    // for (let pair of formData.entries()) {
+    //   console.log(pair[0]+ ': ' + pair[1]);
+    // }
 
     // Aquí puedes enviar los datos a un servidor, por ejemplo:
     fetch(`${IpAPI}/api/register`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        //'Content-Type': 'multipart/form-data',
       },
       body: JSON.stringify(formData),
     })
@@ -168,11 +171,12 @@ function Saioa_sortu() {
             />
             <label className="font-semibold hidden dark:text-white">{t('saioa_sortu:imagen')}</label>
             <input
-              className="mb-2 hidden dark:border-primary border-black border-2 rounded-lg"
-              type="url"
-              value={img}
-              onChange={(e) => setImg('/public/img/animal-approve-cat-svgrepo-com.svg')}
+              className="mb-2 dark:border-primary border-black border-2 rounded-lg"
+              type="file"
+              //value={img}
+              onChange={(e) => setImg(e.target.files[0])}
               placeholder="URL de la imagen"
+              accept="image/*"
             />
             {/* <input
               className="bg-black text-white mt-2 p-2 rounded-lg"

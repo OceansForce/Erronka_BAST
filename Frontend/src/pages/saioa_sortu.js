@@ -8,6 +8,8 @@ import DarkModeToggle from '../header-footer/header/dark-light/dark';
 import SendButom from '../components/bottons/sendBotton';
 import BackButtonLittle from '../components/bottons/backButtomLittle';
 
+import ErrorMenu from '../components/errors/ErrorMenu';
+
 import IpAPI from '../config/ipAPI';
 
 function Saioa_sortu() {
@@ -22,6 +24,10 @@ function Saioa_sortu() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [year, setYear] = useState('');
   const [img, setImg] = useState('');
+
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorText, setErrorText] = useState('');
 
   // Función para cambiar el idioma
   const changeLanguage = (lang) => {
@@ -62,14 +68,34 @@ function Saioa_sortu() {
       .then((data) => {
         console.log('Formulario enviado correctamente:', data);
         // Realizar alguna acción después de enviar (e.g., redirigir al usuario)
+        if(data.errors.DNI){
+          setErrorText(t('error:DNIErabilita'));
+          setShowErrorModal(true);  // Mostrar el modal
+        }
+        if(data.errors.email){
+          setErrorText(t('error:emailErabilita'));
+          setShowErrorModal(true);  // Mostrar el modal
+        }
+
       })
       .catch((error) => {
         console.error('Error al enviar el formulario:', error);
+        setErrorText(t('error:generalError'));
+        setShowErrorModal(true);  // Mostrar el modal
       });
   };
 
   return (
     <>
+
+        {showErrorModal && (
+            <ErrorMenu 
+                text={errorText} 
+                buttonText={t('error:close')} 
+                openError = {showErrorModal}
+                closeError = {setShowErrorModal}
+            />
+          )}
       <div className="container flex justify-center erdian">
         <div className="flex flex-col dark:bg-dark bg-primary p-6 m-10 w-96 rounded-lg text-center border-black dark:border-transparent border-2">
           <div className="w-full flex">

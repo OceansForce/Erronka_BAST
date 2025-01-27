@@ -46,7 +46,11 @@ function Anim_Adop_BODY() {
         }
       }, [id]);
 
-      console.log(animalData);
+      
+
+      useEffect(()=>{
+        console.log("Animalia ",animalData);
+      },[animalData]);
 
     // const [etxe, setEtxe]= useState(null);
     // useEffect(()=>{
@@ -76,7 +80,21 @@ function Anim_Adop_BODY() {
     const bakuna = animalData.bakuna === 1 ? t("EraPanela:Bai") : t("EraPanela:Ez");
     const etxekoAnimali = animalData.etxekoAnimalia === 1 ? t("EraPanela:Bai") : t("EraPanela:Ez");
 
+    const typeSwitch= ()=>{
+      switch (animalData.type) {
+        case "besteak": 
+          return <img src="/img/icons/animals/adopta_otros.gif" className="dark:invert "/>;
 
+        case "txakurra":
+          return <img src="/img/icons/animals/adopta_perro.gif" className="dark:invert "/>;
+
+        case "txakurra PPP":
+          return <img src="/img/icons/animals/adopta_ppp.gif" className="dark:invert "/>;
+
+        default:
+          return <img src="/img/icons/animals/adopta_gato-1.gif" className="dark:invert "/>;
+      }
+    }
 
     return (
       <>
@@ -89,7 +107,9 @@ function Anim_Adop_BODY() {
                 <div className=" w-5/6 lg:w-2/4 flex flex-col ml-4">
                     <div className="w-full flex flex-col lg:flex-row items-center">
                         <div className="w-full lg:w-1/3 flex flex-row items-center">
-                            <img src="/img/icons/animals/adopta_perro.gif" className="dark:invert "/>
+                            {
+                              typeSwitch()
+                            }
                             <p className="mr-2 text-5xl font-ubuntu text-black dark:text-white">{animalData.name}</p>
                         </div>
 

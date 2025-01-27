@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 
-const Filtroak=({img , text})=>{
+const Filtroak=({img , text, aktibatuta})=>{
     let gif= `/img/icons/animals/${img}.gif`;
 
     const [aldatu, setAldatu]= useState(false);
     
     const aldatuKlik = () => {
         setAldatu((prev) => !prev); 
+        aktibatuta((prev) => !prev);
     };
 
     return <div className="max-w-32 flex flex-col items-center justify-center z-9">

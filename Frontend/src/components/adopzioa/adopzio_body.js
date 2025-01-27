@@ -7,18 +7,25 @@ import Loading from '../loading/loading.jsx';
 function Adopzioak() {
     const [adopAnimals, setAdopAnimals] = useState([]);
     const [filteredAnimals, setFilteredAnimals] = useState([]);
+    const [filtro_aktibatu, setfiltro_aktibatu]= useState(false);
+
     const [offset, setOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [selectedFilter, setSelectedFilter] = useState(null);
     const limit = 9; // Número de animales a pedir por solicitud
 
-    useEffect(() => {
-        fetchAdopAnimals();
-    }, []);
+    const [botoiTxakurra, setbotoiTxakurra]=useState(false);
+    const [botoiPPP, setbotoiPPP]=useState(false);
+    const [botoiKatuak, setbotoiKatuak]=useState(false);
+    const [botoiBesteak, setbotoiBesteak]=useState(false);
 
     useEffect(() => {
-        applyFilter();
-    }, [adopAnimals, selectedFilter]);
+      fetchAdopAnimals();
+    }, []);
+    
+    useEffect(()=>{
+      console.log("Adoptatzeko animaliak", adopAnimals);
+    },[adopAnimals]);
 
     const fetchAdopAnimals = async () => {
         try {
@@ -39,10 +46,11 @@ function Adopzioak() {
 
                 // Agregar nuevos animales a la lista existente
                 setAdopAnimals((prevAnimals) => [...prevAnimals, ...result]);
+                adopAnimals.sort((a, b) => a[12] - b[12]);
 
                 // Incrementar el offset para la próxima solicitud
                 setOffset((prevOffset) => prevOffset + limit);
-            }
+          }
             
         } catch (error) {
             console.error('Error en la solicitud:', error);
@@ -50,49 +58,102 @@ function Adopzioak() {
         }
     };
 
-    const applyFilter = () => {
-        if (!selectedFilter) {
-            setFilteredAnimals(adopAnimals);
-        } else {
-            setFilteredAnimals(
-                adopAnimals.filter((animal) => animal.category === selectedFilter)
-            );
-        }
-        console.log("Datos");
-        console.log(filteredAnimals);
-    };
+    
 
-    const handleFilterClick = (filter) => {
-        setSelectedFilter((prevFilter) => (prevFilter === filter ? null : filter));
-    };
+    useEffect(()=>{
+      console.log("Datos Filtro",filteredAnimals);
+    },[filteredAnimals]);
+
+    useEffect(()=>{
+     if(botoiBesteak || botoiKatuak || botoiPPP || botoiTxakurra){
+      setfiltro_aktibatu(true);
+
+      let lista=[];
+
+      if(botoiTxakurra){
+
+        adopAnimals.forEach(animalia => {
+          if(animalia.type==="txakurra"){
+            console.log(animalia);
+            lista.push(animalia);
+          }
+        });
+      }else{
+        lista= lista.filter((animalia)=> animalia.type!=="txakurra");
+      }
+
+      if(botoiPPP){
+
+        adopAnimals.forEach(animalia => {
+          if(animalia.type==="txakurra ppp"){
+            console.log(animalia);
+            lista.push(animalia);
+          }
+        });
+      }else{
+        lista= lista.filter((animalia)=> animalia.type!=="txakurra ppp");
+      }
+
+      if(botoiKatuak){
+
+        adopAnimals.forEach(animalia => {
+          if(animalia.type==="katua"){
+            console.log(animalia);
+            lista.push(animalia);
+          }
+        });
+
+      }else{
+        lista= lista.filter((animalia)=> animalia.type!=="katua");
+      }
+
+      if(botoiBesteak){
+
+        adopAnimals.forEach(animalia => {
+          if(animalia.type==="besteak"){
+            console.log(animalia);
+            lista.push(animalia);
+          }
+        });
+
+      }else{
+        lista= lista.filter((animalia)=> animalia.type!=="besteak");
+      }
+
+      setFilteredAnimals(lista);
+     }else if (!(botoiBesteak && botoiKatuak && botoiPPP && botoiTxakurra)){
+        setfiltro_aktibatu(false);
+     }
+     filteredAnimals.sort((a, b) => a[12] - b[12]);
+    },[botoiTxakurra, botoiPPP, botoiKatuak, botoiBesteak]);
 
     if (adopAnimals.length === 0) {
       return <Loading />;
     }
-
+    
     return (
       <>
         <div className='container mx-auto flex flex-row justify-evenly border-b-2 pb-8 dark:border-white border-black mt-6'>
-          <Filtroak_animalia img="adopta_perro" text="TXAKURRAK" onClick={() => handleFilterClick('txakurra')}/>
-          <Filtroak_animalia img="adopta_ppp" text="TXAKURRAK PPP" onClick={() => handleFilterClick('txakurra_ppp')}/>
-          <Filtroak_animalia img="adopta_gato-1" text="KATUAK" onClick={() => handleFilterClick('katua')}/>
-          <Filtroak_animalia img="adopta_otros" text="BESTEAK" onClick={() => handleFilterClick('besteak')}/>
+          <Filtroak_animalia img="adopta_perro" text="TXAKURRAK" aktibatuta={(egoera)=>setbotoiTxakurra(egoera)}/>
+          <Filtroak_animalia img="adopta_ppp" text="TXAKURRAK PPP" aktibatuta={(egoera)=>setbotoiPPP(egoera)}/>
+          <Filtroak_animalia img="adopta_gato-1" text="KATUAK" aktibatuta={(egoera)=>setbotoiKatuak(egoera)}/>
+          <Filtroak_animalia img="adopta_otros" text="BESTEAK" aktibatuta={(egoera)=>setbotoiBesteak(egoera)}/>
         </div>
         <div className="container mx-auto">
           <div className="mx-auto">
             <div className="flex flex-col ">
               <h1 className='mt-10 fonts_ubutu_Bold text-xl text-text_green'>Premiazkoak</h1>
               <div className="flex flex-row justify-evenly mt-10 flex-wrap">
-                {filteredAnimals.map((item) => (
-                  <Animaliak 
-                      name={item.name}
-                      id={item.id}
-                      deskribapena={item.descripcion}
-
-                      mota='adopzio'
-                  />
-                  
-                ) )}
+              {(filtro_aktibatu ? filteredAnimals : adopAnimals).map((item) => (
+                <Animaliak 
+                  key={item.id}
+                  name={item.name}
+                  id={item.id}
+                  img={item.img}
+                  deskribapena={item.descripcion}
+                  mota="adopzio"
+                />
+              ))}
               </div>
               {hasMore && (
                 <div className="flex justify-center mt-10">

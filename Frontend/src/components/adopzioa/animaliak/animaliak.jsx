@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Animaliak= ({id,name, kokapena, img, mota})=>{
+const Animaliak= ({id,name, kokapena, img, mota, animaliType})=>{
     let link=`${img}`;
 
     

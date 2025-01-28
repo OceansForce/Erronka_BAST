@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Animals extends Model
 {
     use HasFactory;
@@ -52,6 +53,12 @@ class Animals extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'userID'); // Aquí le indicas el nombre correcto de la columna
+    }
+
+
+    public function galduta()
+    {
+        return $this->belongsTo(Galduta::class, 'losted'); // Aquí le indicas el nombre correcto de la columna
     }
 
 }

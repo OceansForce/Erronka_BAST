@@ -12,7 +12,7 @@ function Adopzioak() {
     const [offset, setOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [selectedFilter, setSelectedFilter] = useState(null);
-    const limit = 9; // Número de animales a pedir por solicitud
+    const limit = 8; // Número de animales a pedir por solicitud
 
     const [botoiTxakurra, setbotoiTxakurra]=useState(false);
     const [botoiPPP, setbotoiPPP]=useState(false);
@@ -28,37 +28,48 @@ function Adopzioak() {
     },[adopAnimals]);
 
     const fetchAdopAnimals = async () => {
-        try {
-            const response = await fetch(`${IpAPI}/api/animals-adopt?limit=${limit}&offset=${offset}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+      try {
+        const response = await fetch(`${IpAPI}/api/animals-adopt?limit=${limit}&offset=${offset}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-            if (response.ok) {
-                const result = await response.json();
+        if (response.ok) {
+          const result = await response.json();
 
-                // Si se reciben menos animales de los esperados, no hay más datos
-                if (result.length < limit) {
-                    setHasMore(false);
-                }
-
-                // Agregar nuevos animales a la lista existente
-                setAdopAnimals((prevAnimals) => [...prevAnimals, ...result]);
-                adopAnimals.sort((a, b) => a[12] - b[12]);
-
-                // Incrementar el offset para la próxima solicitud
-                setOffset((prevOffset) => prevOffset + limit);
+          // Si se reciben menos animales de los esperados, no hay más datos
+          if (result.length < limit) {
+              setHasMore(false);
           }
-            
-        } catch (error) {
-            console.error('Error en la solicitud:', error);
-            alert('Error en la solicitud. Revisa tu conexión.');
+          
+          
+          //Animaliak gehitu useState batera
+          let lista= result;
+          //console.log("Lista", lista);
+          lista.sort((a, b) => new Date(a.year) - new Date(b.year));
+          //console.log("Lista ordenada", lista);
+          setAdopAnimals(lista);
+
+          setAdopAnimals((prevAnimals) => [...prevAnimals, result]);
+         // setAdopAnimals((animaliak) => [...prevAnimals].sort((a, b) => new Date(a.year) - new Date(b.year)));
+
+          // Incrementar el offset para la próxima solicitud
+          setOffset((prevOffset) => prevOffset + limit);
         }
+            
+      } 
+      catch (error) {
+        console.error('Error en la solicitud:', error);
+        alert('Error en la solicitud. Revisa tu conexión.');
+      }
     };
 
     
+    useEffect(()=>{
+      console.log("Datos Animaliak",adopAnimals);
+    },[adopAnimals]);
 
     useEffect(()=>{
       console.log("Datos Filtro",filteredAnimals);
@@ -120,11 +131,14 @@ function Adopzioak() {
         lista= lista.filter((animalia)=> animalia.type!=="besteak");
       }
 
+      lista.sort((a, b) => new Date(a.year) - new Date(b.year));
       setFilteredAnimals(lista);
      }else if (!(botoiBesteak && botoiKatuak && botoiPPP && botoiTxakurra)){
         setfiltro_aktibatu(false);
      }
-     filteredAnimals.sort((a, b) => a[12] - b[12]);
+     
+
+
     },[botoiTxakurra, botoiPPP, botoiKatuak, botoiBesteak]);
 
     if (adopAnimals.length === 0) {
@@ -156,7 +170,7 @@ function Adopzioak() {
               ))}
               </div>
               {hasMore && (
-                <div className="flex justify-center mt-10">
+                <div className="flex justify-center mb-8">
                   <button 
                     onClick={fetchAdopAnimals} 
                     className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-700">

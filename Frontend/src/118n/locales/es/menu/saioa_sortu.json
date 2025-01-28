@@ -2,7 +2,7 @@
     "izena":"Nombre",
     "abizena":"Apellido",
     "nan":"DNI",
-    "email":"Gmail",
+    "email":"Email",
     "pasahitza":"Contraseña",
     "pasahitza_ber": "Confirmar Contraseña",
     "input": "Enviar",

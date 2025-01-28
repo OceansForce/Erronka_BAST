@@ -1,16 +1,6 @@
 <?php
 
 
-// añadir al .env
-// despues crear las columas en la base de datos, la del token (string) y el bolean que esta verificado
-// MAIL_MAILER=smtp
-// MAIL_HOST=smtp.gmail.com
-// MAIL_PORT=587
-// MAIL_USERNAME=bastanimalsenterpise@gmail.com
-// MAIL_PASSWORD=qbhh ohlw ghfi sjfl
-// MAIL_ENCRYPTION=tls
-// MAIL_FROM_ADDRESS=bastanimalsenterpise@gmail.com
-// MAIL_FROM_NAME="${APP_NAME}"
 
 
 

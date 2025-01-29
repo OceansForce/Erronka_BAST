@@ -18,10 +18,59 @@ import Animalia_galduta from './pages/animalia_galduta'
 
 import NewsDetail from './pages/NewsDetail';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  
 
 function App() {
+
+  const [address, setAddress] = useState(null);
+
+  useEffect(() => {
+    // Función de geolocalización
+    const getGeolocation = () => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+
+            // Reemplaza con tu API Key de OpenCage
+            const apiKey = '7e9f7bd5d8c2404686f0cc4e12c4ba86';
+
+            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`)
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.results.length > 0) {
+                  const city = data.results[0].components.city || 'Ciudad no encontrada';
+                  //console.log(data.results[0].components);
+                  const province = data.results[0].components.province || 'Provincia no encontrada';
+                  const newAddress = { city, province };
+                  setAddress(JSON.stringify(newAddress));
+                  localStorage.setItem('address', JSON.stringify(newAddress)); // Guardar en localStorage
+                  const address = localStorage.getItem('address');
+                  console.log("address: "+address);
+                } else {
+                  setAddress({ city: 'Ciudad no encontrada', province: 'Provincia no encontrada' });
+                  localStorage.setItem('address', null); // Guardar en localStorage
+                }
+              })
+              .catch((error) => {
+                console.error('Error al obtener la información de la ubicación:', error);
+              });
+          },
+          (error) => {
+            console.error('Error al obtener la geolocalización:', error);
+          }
+        );
+      } else {
+        console.log("Geolocalización no soportada en este navegador.");
+      }
+    };
+
+    getGeolocation(); // Ejecutar la función de geolocalización
+
+  }, []);
+
+
   return (
     <Router>
       <Routes> 

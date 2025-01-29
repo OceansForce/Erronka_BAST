@@ -58,6 +58,9 @@ import eu_adoptatu_animalia from './locales/eu/menu/adoptatu_animalia.json';
 import es_error from './locales/es/error/error.json';
 import eu_error from './locales/eu/error/error.json';
 
+import es_create_protektora from './locales/es/createProtektora/createProtektora.json';
+import eu_create_protektora from './locales/eu/createProtektora/createProtektora.json';
+
 
 
 // Tradukzioak API-tik kargatzeko
@@ -147,6 +150,7 @@ i18n
         Gal_Anim: es_galdu_animalia,
         Adop_Anim: es_adoptatu_animalia,
         error: es_error,
+        createProtektora: es_create_protektora,
       },
       eu: {
         menu: euMenu,
@@ -167,6 +171,8 @@ i18n
         Gal_Anim: eu_galdu_animalia,
         Adop_Anim: eu_adoptatu_animalia,
         error: eu_error,
+        createProtektora: eu_create_protektora,
+
 
       },
     },

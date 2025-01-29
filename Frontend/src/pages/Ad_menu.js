@@ -69,11 +69,20 @@ function Ad_menua() {
 
 
                 {protektoraID === 1 && (
-                    <AdminPanelButtom 
-                        to="/Ad_erabiltzaileak" 
-                        imageSrc="./img/icons/admin/user-circle-1-svgrepo-com.svg" 
-                        text={t('ad_menua:Erabiltzaileak')} 
-                    />
+                    <>
+                        <AdminPanelButtom 
+                            to="/Ad_erabiltzaileak" 
+                            imageSrc="./img/icons/admin/user-circle-1-svgrepo-com.svg" 
+                            text={t('ad_menua:Erabiltzaileak')} 
+                        />
+
+                        <AdminPanelButtom 
+                            to="/Create_protektora" 
+                            imageSrc="/img/icons/protektora/protectora_white.svg" 
+                            text={t('ad_menua:Protektora')} 
+                        />
+                    </>
+                    
                 )}
 
 

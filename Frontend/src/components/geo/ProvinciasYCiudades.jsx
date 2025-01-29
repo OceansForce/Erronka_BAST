@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import i18n from '../../118n/menu.js';
+import { useTranslation } from 'react-i18next';
+
 
 const ProvinciasYCiudades = () => {
+
+  const { t, i18n } = useTranslation();
+
   const [provincias, setProvincias] = useState([]);
   const [pueblos, setPueblos] = useState([]);
   const [selectedProvincia, setSelectedProvincia] = useState('');
@@ -65,9 +71,9 @@ const ProvinciasYCiudades = () => {
       {/* <h2>Selecciona una provincia y pueblo de Euskadi</h2> */}
 
       {/* Selector de Provincias */}
-      <p className='font-semibold dark:text-white'>Probintzia</p>
+      <p className='font-semibold dark:text-white'>{t('createProtektora:Probintzia')}</p>
       <select value={selectedProvincia} onChange={handleProvinciaChange}>
-        <option value="">Selecciona una provincia</option>
+        <option value="">{t('createProtektora:ProbintziaAukeratu')}</option>
         {provincias.map((provincia, index) => (
           <option key={index} value={provincia}>
             {provincia}
@@ -78,9 +84,9 @@ const ProvinciasYCiudades = () => {
       {/* Si se ha seleccionado una provincia, mostramos el slider de pueblos */}
       {selectedProvincia && (
         <>
-        <p className='font-semibold dark:text-white'>Probintzia</p>
+        <p className='font-semibold dark:text-white'>{t('createProtektora:Hiria')}</p>
         <select value={selectedPueblo} onChange={handlePuebloChange}>
-            <option value="">Selecciona un pueblo</option>
+            <option value="">{t('createProtektora:HiriaAukeratu')}</option>
             {pueblos.map((pueblo, index) => (
               <option key={index} value={pueblo}>
                 {pueblo}

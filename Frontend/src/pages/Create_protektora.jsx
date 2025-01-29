@@ -109,19 +109,19 @@ function Create_protektora(){
             </div>
           </div>
 
-          <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('Crear protektora')}</p>
+          <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('createProtektora:titulua')}</p>
           <form className='flex flex-col text-left' onSubmit={handleSubmit}>
             <div className='flex flex-row'>
               <div className='flex flex-col w-1/2 mr-10'>
-                <label className='font-semibold dark:text-white'>{t('Nombre')}</label>
+                <label className='font-semibold dark:text-white'>{t('createProtektora:izena')}</label>
                 <input className='mb-2 dark:border-primary rounded-lg' type='text' name='name' value={formData.name} onChange={handleChange} required />
 
-                <label className='mt-2 font-semibold dark:text-white'>{t('Teléfono')}</label>
+                <label className='mt-2 font-semibold dark:text-white'>{t('createProtektora:Telefono')}</label>
                 <input type='text' className='mb-2 dark:border-primary rounded-lg' name='telefono' value={formData.telefono} onChange={handleChange} required />
               </div>
 
               <div className='flex flex-col w-1/2'>
-                <label className='font-semibold dark:text-white'>{t('Email')}</label>
+                <label className='font-semibold dark:text-white'>{t('createProtektora:Email')}</label>
                 <input type='email' className='mb-2 dark:border-primary rounded-lg' name='email' value={formData.email} onChange={handleChange} required />
 
                 {/* Usamos ProvinciasYCiudades para manejar la provincia y la ciudad */}
@@ -136,12 +136,12 @@ function Create_protektora(){
 
             <div className='flex flex-row mt-2'>
               <div className='w-full flex flex-col'>
-                <label className='font-semibold dark:text-white'>{t('Logo')}</label>
+                <label className='font-semibold dark:text-white'>{t('createProtektora:Logo')}</label>
                 <input className='mb-2 dark:border-primary rounded-lg' type='file' name='logo' onChange={handleFileChange} required />
               </div>
             </div>
 
-            <SendButom value={t('Crear protektora')} />
+            <SendButom value={t('createProtektora:Sortu')} />
           </form>
         </div>
       </div>

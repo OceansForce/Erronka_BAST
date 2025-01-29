@@ -76,8 +76,8 @@ class LostedController extends Controller
     {
         // Buscar el animal por el id y verificar si está marcado como perdido
         $animal = Animals::where('id', $id) // Buscar por el id del animal
-        ->whereNotNull('losted') // Verificar que esté marcado como perdido (si 'losted' no es nulo)
-        ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']);
+            ->whereNotNull('losted') // Verificar que esté marcado como perdido (si 'losted' no es nulo)
+            ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']);
 
         // Verificar si no se encontró el animal
         if (!$animal) {

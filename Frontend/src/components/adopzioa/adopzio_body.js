@@ -3,8 +3,18 @@ import Filtroak_animalia from './filtroak/filtroak_animaliak.jsx';
 import { useEffect, useState } from 'react';
 import IpAPI from '../../config/ipAPI.js';
 import Loading from '../loading/loading.jsx';
+import i18n from './../../118n/menu.js';
+import { useTranslation } from 'react-i18next';
 
 function Adopzioak() {
+
+    const { t, i18n } = useTranslation();
+  
+    // Función para cambiar el idioma
+    const changeLanguage = (lang) => {
+      i18n.changeLanguage(lang);  // Cambia el idioma
+    };
+  
     const [adopAnimals, setAdopAnimals] = useState([]);
     const [filteredAnimals, setFilteredAnimals] = useState([]);
     const [filtro_aktibatu, setfiltro_aktibatu]= useState(false);
@@ -46,16 +56,9 @@ function Adopzioak() {
           
           
           //Animaliak gehitu useState batera
-          let lista= result;
-          //console.log("Lista", lista);
-          lista.sort((a, b) => new Date(a.year) - new Date(b.year));
-          //console.log("Lista ordenada", lista);
-          setAdopAnimals(lista);
+          setAdopAnimals(prevAnimals => [...prevAnimals, ...result].sort((a, b) => new Date(a.year) - new Date(b.year)));
 
-          setAdopAnimals((prevAnimals) => [...prevAnimals, result]);
-         // setAdopAnimals((animaliak) => [...prevAnimals].sort((a, b) => new Date(a.year) - new Date(b.year)));
-
-          // Incrementar el offset para la próxima solicitud
+          //  offset-na haunditu 
           setOffset((prevOffset) => prevOffset + limit);
         }
             
@@ -148,15 +151,15 @@ function Adopzioak() {
     return (
       <>
         <div className='container mx-auto flex flex-row justify-evenly border-b-2 pb-8 dark:border-white border-black mt-6'>
-          <Filtroak_animalia img="adopta_perro" text="TXAKURRAK" aktibatuta={(egoera)=>setbotoiTxakurra(egoera)}/>
-          <Filtroak_animalia img="adopta_ppp" text="TXAKURRAK PPP" aktibatuta={(egoera)=>setbotoiPPP(egoera)}/>
-          <Filtroak_animalia img="adopta_gato-1" text="KATUAK" aktibatuta={(egoera)=>setbotoiKatuak(egoera)}/>
-          <Filtroak_animalia img="adopta_otros" text="BESTEAK" aktibatuta={(egoera)=>setbotoiBesteak(egoera)}/>
+          <Filtroak_animalia img="adopta_perro" text={t("Adop_Anim:Txakurrak")} aktibatuta={(egoera)=>setbotoiTxakurra(egoera)}/>
+          <Filtroak_animalia img="adopta_ppp" text={t("Adop_Anim:ppp")} aktibatuta={(egoera)=>setbotoiPPP(egoera)}/>
+          <Filtroak_animalia img="adopta_gato-1" text={t("Adop_Anim:Katuak")}aktibatuta={(egoera)=>setbotoiKatuak(egoera)}/>
+          <Filtroak_animalia img="adopta_otros" text={t("Adop_Anim:Besteak")} aktibatuta={(egoera)=>setbotoiBesteak(egoera)}/>
         </div>
         <div className="container mx-auto">
           <div className="mx-auto">
             <div className="flex flex-col ">
-              <h1 className='mt-10 fonts_ubutu_Bold text-xl text-text_green'>Premiazkoak</h1>
+              <h1 className='mt-10 fonts_ubutu_Bold text-xl text-text_green'>{t("Adop_Anim:Premiazkoak")}</h1>
               <div className="flex flex-row justify-evenly mt-10 flex-wrap">
               {(filtro_aktibatu ? filteredAnimals : adopAnimals).map((item) => (
                 <Animaliak 
@@ -174,7 +177,7 @@ function Adopzioak() {
                   <button 
                     onClick={fetchAdopAnimals} 
                     className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-700">
-                    Mostrar más
+                    {t("Adop_Anim:gehiago")}
                   </button>
                 </div>
               )}

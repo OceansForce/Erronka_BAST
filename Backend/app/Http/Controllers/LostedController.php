@@ -15,14 +15,21 @@ class LostedController extends Controller
         $limit = $request->input('limit', 10); // Valor por defecto de 10
         $offset = $request->input('offset', 0); // Valor por defecto de 0
         $idProtektora = $request->input('protektora_id', null); // El id de la protektora, si se pasa
-        $type = $request->input('type', null); // El tipo de animal, si se pasa
+        $types = $request->input('type', []); // Ahora se espera un array de tipos
+        $herria = $request->input('herria', null); // Ahorra pasamos el herria
+        $herria = $request->input('lurraldea', null); // Ahorra pasamos el lurraldea
+
+
 
         // Validación de los parámetros
         $request->validate([
             'limit' => 'integer|min:1|max:25', // Limitar el valor de limit a entre 1 y 25
             'offset' => 'integer|min:0',
             'protektora_id' => 'nullable|integer|min:1', // El id de la protektora es opcional
-            'type' => 'nullable|string|in:txakurra,txakurra ppp,katua,besteak', // El tipo de animal es opcional
+            'type' => 'nullable|array', // El tipo ahora es un array opcional
+            'type.*' => 'string|in:txakurra,txakurra ppp,katua,besteak', // Cada elemento del array debe ser uno de los tipos válidos
+            'herria '=> 'nullable|string',
+            'lurraldea '=> 'nullable|string',
         ]);
 
 
@@ -33,15 +40,27 @@ class LostedController extends Controller
         });
         
 
-        // Si se pasa el tipo de animal, filtramos también por el tipo
-        if ($type) {
-        $query->where('type', $type);
+        
+        // Si se pasa el array de tipos de animal, filtramos también por estos tipos
+        if (!empty($types)) {
+            $query->whereIn('type', $types);
         }
 
         // Aplicar paginación y obtener los resultados
-        $animals = $query->offset($offset)
-            ->limit($limit)
-            ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']); // Selecciona solo los campos necesarios
+        $animals = $query->with('galduta');
+
+        // Si `$herria` tiene valor, ordenamos por `hiria` primero y luego por `fecha`
+        if ($herria) {
+            $animals = $animals->orderByRaw("hiria = ? DESC", [$herria]) // Los registros con 'hiria' igual a $herria van primero
+                                ->orderBy('fecha', 'asc'); // Luego ordenamos por 'fecha' en orden ascendente
+        } else {
+            // Si no hay `$herria`, solo ordenamos por `fecha`
+            $animals = $animals->orderBy('fecha', 'asc');
+        }
+
+        $animals = $animals->offset($offset)
+                        ->limit($limit)
+                        ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'hiria', 'probintzia', 'fecha']);
 
 
         // Verificar si no se encontraron resultados

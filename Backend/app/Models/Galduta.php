@@ -22,7 +22,8 @@ class Galduta extends Model
     // Campos asignables en operaciones de asignación masiva
     protected $fillable = [
         'id',
-        'donde',
+        'hiria',
+        'probintzia',
         'fecha',
         'descripcion',
         'moreInformation',

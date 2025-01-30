@@ -80,13 +80,26 @@ class LostedController extends Controller
             ->with('losted')
             ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'hiria', 'probintzia', 'fecha', 'moreInformation']);
 
+        $userEmail = User::where('id', $animal->userID)->value('email');
+        $idProtektora = User::where('id', $animal->idProtektora)->value('idProtektora');
+        
+        $protektoraEmail = null;
+        if ($idProtektora) {
+            $protektoraEmail = Protektora::where('id', $idProtektora)->value('email');
+        }
+            
         // Verificar si no se encontró el animal
         if (!$animal) {
         return response()->json(['message' => 'Animal not found or does not meet the specified criteria'], 404);
         }
 
+        $contactEmail = $protektoraEmail ?? $userEmail;
+
         // Retornar los datos del animal
-        return response()->json($animal);
+        return response()->json([
+            'animal' => $animal,
+            'contactEmail' => $contactEmail
+        ]);
 
     }
 

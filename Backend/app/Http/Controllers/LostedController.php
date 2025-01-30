@@ -126,8 +126,6 @@ class LostedController extends Controller
         return response()->json([
             'animal' => $animal,
             'contactEmail' => $contactEmail,
-            "protektoraEmail" => $protektoraEmail,
-            "userEmail" => $userEmail
         ]);
 
     }

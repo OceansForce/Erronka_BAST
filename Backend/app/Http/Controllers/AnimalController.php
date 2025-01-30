@@ -15,7 +15,7 @@ class AnimalController extends Controller
         $limit = $request->input('limit', 10); // Valor por defecto de 10
         $offset = $request->input('offset', 0); // Valor por defecto de 0
         $idProtektora = $request->input('protektora_id', null); // El id de la protektora, si se pasa
-        $types = $request->input('type', []); // Ahora se espera un array de tipos
+        $types = $request->input('type', [], null); // Ahora se espera un array de tipos
 
         // Validación de los parámetros
         $request->validate([
@@ -23,7 +23,7 @@ class AnimalController extends Controller
             'offset' => 'integer|min:0',
             'protektora_id' => 'nullable|integer|min:1', // El id de la protektora es opcional
             'type' => 'nullable|array', // El tipo ahora es un array opcional
-            'type.*' => 'string|in:txakurra,txakurra ppp,katua,besteak', // Cada elemento del array debe ser uno de los tipos válidos
+            'type.*' => 'nullable|string|in:txakurra,txakurra ppp,katua,besteak', // Cada elemento del array debe ser uno de los tipos válidos
         ]);
 
         // Query para obtener animales que cumplan con las condiciones
@@ -47,6 +47,7 @@ class AnimalController extends Controller
         // Aplicar paginación y obtener los resultados
         $animals = $query->offset($offset)
             ->limit($limit)
+            ->orderBy('year', 'asc')
             ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']); // Selecciona solo los campos necesarios
 
         // Verificar si no se encontraron resultados

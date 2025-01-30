@@ -93,7 +93,7 @@ class LostedController extends Controller
         $animal = Animals::where('id', $id) // Buscar por el id del animal
             ->whereNotNull('losted') // Verificar que esté marcado como perdido (si 'losted' no es nulo)
             ->with('galduta') // Cargar la relación 'galduta' (con datos de la tabla 'losted')
-            ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'userID', 'idProtektora']);
+            ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'userID']);
 
         // Verificar si el animal existe
         if (!$animal) {
@@ -106,8 +106,9 @@ class LostedController extends Controller
         $animal->fecha = $animal->galduta->fecha ?? null; // Obtener 'fecha' de 'losted'
         $animal->moreInformation = $animal->galduta->moreInformation ?? null; // Obtener 'moreInformation' de 'losted'
 
-        $userEmail = User::where('id', $animal->userID);
-        $idProtektora = User::where('id', $animal->idProtektora)->value('idProtektora');
+        $user = User::where('id', $animal->userID)->first();
+        $userEmail = $user->email;
+        $idProtektora =  $user->idProtektora;
         
         $protektoraEmail = null;
         if ($idProtektora) {
@@ -125,8 +126,6 @@ class LostedController extends Controller
         return response()->json([
             'animal' => $animal,
             'contactEmail' => $contactEmail,
-            "protektoraEmail" => $protektoraEmail,
-            "userEmail" => $userEmail
         ]);
 
     }

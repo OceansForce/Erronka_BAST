@@ -13,7 +13,8 @@ class Protektora extends Model
 
     protected $fillable = [
         'name',
-        'location',
+        'provintzia',
+        'hiria',
         'telefono',
         'email',
         'logo'

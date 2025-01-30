@@ -16,7 +16,7 @@ class UserCreateController extends Controller
 	public function store(Request $request)
     {
         Log::info('Recibida solicitud de registro', $request->all());
-
+//	dd($request);
         // Validación de los datos recibidos
         $validator = \Validator::make($request->all(), [
             'DNI' => 'required|string|max:10|unique:users,DNI',
@@ -25,7 +25,7 @@ class UserCreateController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
             'year' => 'required|date',
-            'img' => 'nullable|url', // Validación para URL de la imagen
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Si la validación falla, devolver un 400 Bad Request
@@ -39,6 +39,15 @@ class UserCreateController extends Controller
         Log::info('Datos validados correctamente');
 
         $verificationToken = Str::random(32);
+	$imageUrl = null;
+        if ($request->hasFile('img')) {
+            $imageController = new ImageController();
+            $imageResponse = $imageController->upload($request);
+            // Comprobamos si la subida fue exitosa
+            if ($imageResponse->status() == 201) {
+                  $imageUrl = $imageResponse->getData()->url;  // Extraemos la URL de la imagen subida
+            }
+        }
 
         // Crear el usuario
         try {
@@ -49,7 +58,7 @@ class UserCreateController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'year' => $request->year ? $request->year : null,
-                'img' => $request->img, // Guardar la URL de la imagen
+                'img' => $imageUrl, // Guardar la URL de la imagen
                 'email_verification_token' => $verificationToken,
             ]);
 

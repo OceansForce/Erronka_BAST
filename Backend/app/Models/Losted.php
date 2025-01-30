@@ -21,7 +21,6 @@ class Losted extends Model
 
     // Campos asignables en operaciones de asignación masiva
     protected $fillable = [
-        'id',
         'hiria',
         'probintzia',
         'fecha',

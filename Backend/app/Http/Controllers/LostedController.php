@@ -138,16 +138,13 @@ class LostedController extends Controller
             'descripcion' => $request->descripcion,
             'probintzia' => $request->probintzia,
             'hiria' => $request->hiria,
+            'moreInformation' => $request->moreInformation,
         ]);
     
         // Comprobar si el animal pertenece al usuario autenticado
         if ($animal->userID == $user->id) {
             // Si el animal pertenece al usuario autenticado, se pueden editar sus datos
-            $animal->update($request->only([
-                'losted' => $losted->id
-            ]));
-    
-            // Guardar cambios (incluido userID si se actualizó)
+            $animal->losted = $losted->id; // Asignar directamente el ID del Losted
             $animal->save();
     
             return response()->json($animal, 200); // 200 OK

@@ -64,7 +64,7 @@ class LostedController extends Controller
         $animals = $query->with('galduta') // Cargar la relación 'galduta' con los datos de la tabla 'losted'
             ->offset($offset)
             ->limit($limit)
-            ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'fecha']);
+            ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted']);
 
         // Agregar 'hiria', 'probintzia', 'fecha', y 'moreInformation' desde la relación 'galduta' en la respuesta
         $animals->transform(function ($animal) {

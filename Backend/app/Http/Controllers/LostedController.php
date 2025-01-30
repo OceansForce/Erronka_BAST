@@ -59,10 +59,21 @@ class LostedController extends Controller
             $animals = $animals->orderBy('fecha', 'asc');
         }
 
-        $animals = $animals->offset($offset)
-                        ->limit($limit)
-                        ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'hiria', 'probintzia', 'fecha', 'moreInformation']);
+        $animals = $query->with('galduta') // Cargar la relación 'galduta' con los datos de la tabla 'losted'
+            ->offset($offset)
+            ->limit($limit)
+            ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'probintzia', 'fecha']);
 
+        // Agregar 'hiria', 'probintzia', 'fecha', y 'moreInformation' desde la relación 'galduta' en la respuesta
+        $animals->transform(function ($animal) {
+            // Acceder a los datos de la relación 'galduta' (tabla 'losted')
+            $animal->hiria = $animal->galduta->hiria ?? null; 
+            $animal->probintzia = $animal->galduta->probintzia ?? null;
+            $animal->fecha = $animal->galduta->fecha ?? null;
+            $animal->moreInformation = $animal->galduta->moreInformation ?? null;
+
+            return $animal;
+        });
 
         // Verificar si no se encontraron resultados
         if ($animals->isEmpty()) {

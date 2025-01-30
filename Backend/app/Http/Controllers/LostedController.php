@@ -88,11 +88,21 @@ class LostedController extends Controller
 
     public function getAnimal(Request $request, $id)
     {
-        // Buscar el animal por el id y verificar si está marcado como perdido
         $animal = Animals::where('id', $id) // Buscar por el id del animal
             ->whereNotNull('losted') // Verificar que esté marcado como perdido (si 'losted' no es nulo)
-            ->with('losted')
-            ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'hiria', 'probintzia', 'fecha', 'moreInformation']);
+            ->with('galduta') // Cargar la relación 'galduta' (con datos de la tabla 'losted')
+            ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted']);
+
+        // Verificar si el animal existe
+        if (!$animal) {
+            return response()->json(['message' => 'Animal not found or does not meet the specified criteria'], 404);
+        }
+
+        // Agregar los campos de 'losted' (relación 'galduta') a la respuesta
+        $animal->hiria = $animal->galduta->hiria ?? null; // Obtener 'hiria' de 'losted'
+        $animal->probintzia = $animal->galduta->probintzia ?? null; // Obtener 'probintzia' de 'losted'
+        $animal->fecha = $animal->galduta->fecha ?? null; // Obtener 'fecha' de 'losted'
+        $animal->moreInformation = $animal->galduta->moreInformation ?? null; // Obtener 'moreInformation' de 'losted'
 
         $userEmail = User::where('id', $animal->userID)->value('email');
         $idProtektora = User::where('id', $animal->idProtektora)->value('idProtektora');

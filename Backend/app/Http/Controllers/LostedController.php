@@ -6,6 +6,8 @@ use App\Models\Animals;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Losted;
+use App\Models\User;
+use App\Models\Protektora;
 
 
 class LostedController extends Controller

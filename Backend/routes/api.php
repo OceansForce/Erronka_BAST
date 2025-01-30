@@ -63,6 +63,16 @@ Route::post('/animals-edit', [AnimalController::class, 'editAnimal'])->middlewar
 Route::get('/animal-adopt/{id}', [AnimalController::class, 'getAnimal']);
 
 
+// Animali galduen atala
+use App\Http\Controllers\LostedController;
+Route::get('/animals-losted', [LostedController::class, 'getAnimals']);
+Route::get('/animal-losted/{id}', [LostedController::class, 'getAnimal']);
+Route::post('/set-losted', [LostedController::class, 'setLosted'])->middleware('auth:sanctum');
+Route::post('/set-Not-Losted', [LostedController::class, 'setNotLosted'])->middleware('auth:sanctum');
+
+
+
+
 Route::get('/animals-personal', [AnimalController::class, 'getPersonalAnimals'])->middleware('auth:sanctum');
 
 

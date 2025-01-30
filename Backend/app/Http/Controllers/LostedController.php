@@ -106,8 +106,9 @@ class LostedController extends Controller
         $animal->fecha = $animal->galduta->fecha ?? null; // Obtener 'fecha' de 'losted'
         $animal->moreInformation = $animal->galduta->moreInformation ?? null; // Obtener 'moreInformation' de 'losted'
 
-        $userEmail = User::where('id', $animal->userID)->first();
-        $idProtektora = User::where('id', $animal->idProtektora)->value('idProtektora');
+        $user = User::where('id', $animal->userID)->first();
+        $userEmail = $user->email;
+        $idProtektora =  $user->idProtektora;
         
         $protektoraEmail = null;
         if ($idProtektora) {

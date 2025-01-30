@@ -126,7 +126,7 @@ class LostedController extends Controller
             'animal' => $animal,
             'contactEmail' => $contactEmail,
             "protektoraEmail" => $protektoraEmail,
-            "userEmail" => $userEmail
+            "userEmail" => $animal->userID
         ]);
 
     }

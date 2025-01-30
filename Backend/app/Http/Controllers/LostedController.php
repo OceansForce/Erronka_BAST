@@ -60,7 +60,7 @@ class LostedController extends Controller
 
         $animals = $animals->offset($offset)
                         ->limit($limit)
-                        ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'hiria', 'probintzia', 'fecha']);
+                        ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'hiria', 'probintzia', 'fecha', 'moreInformation']);
 
 
         // Verificar si no se encontraron resultados
@@ -78,7 +78,7 @@ class LostedController extends Controller
         $animal = Animals::where('id', $id) // Buscar por el id del animal
             ->whereNotNull('losted') // Verificar que esté marcado como perdido (si 'losted' no es nulo)
             ->with('losted')
-            ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'hiria', 'probintzia', 'fecha']);
+            ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'hiria', 'probintzia', 'fecha', 'moreInformation']);
 
         // Verificar si no se encontró el animal
         if (!$animal) {

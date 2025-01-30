@@ -224,9 +224,8 @@ class LostedController extends Controller
         // Comprobar si el animal pertenece al usuario autenticado
         if ($animal->userID == $user->id) {
             // Si el animal pertenece al usuario autenticado, se pueden editar sus datos
-            $animal->update($request->only([
-                'losted' => null
-            ]));
+            $animal->update(['losted' => null]);
+
     
             // Guardar cambios (incluido userID si se actualizó)
             $animal->save();
@@ -239,9 +238,8 @@ class LostedController extends Controller
             // Verificar si el ID de la protektora del animal coincide con el ID de la protektora del usuario
             if ($user->protektora_id == $animal->protektora_id) {
                 // Si la protektora es la misma, permitir la edición
-                $animal->update($request->only([
-                    'losted' => null
-                ]));
+                $animal->update(['losted' => null]);
+
     
                 // Guardar cambios (incluido userID si se actualizó)
                 $animal->save();

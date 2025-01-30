@@ -158,6 +158,64 @@ class LostedController extends Controller
         // Si no se cumple ninguna de las condiciones anteriores, devolver un error de autorización
         return response()->json(['error' => 'No tienes permisos para editar este animal'], 403); // 403 Forbidden
     }
+
+    public function setNotLosted(Request $request)
+    {
+        // Validación de los parámetros
+        $request->validate([
+            'id' => 'required|integer|exists:animals,id', // Verifica que el id del animal exista en la base de datos
+        ]);
+    
+        // Obtener el usuario autenticado
+        $user = auth()->user();
+    
+        // Si no hay usuario autenticado, devolver un error
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
+        }
+    
+        // Obtener el animal con el ID proporcionado
+        $animal = Animals::find($request->input('id'));
+    
+        // Verificar si el animal existe
+        if (!$animal) {
+            return response()->json(['error' => 'Animal no encontrado'], 404); // 404 Not Found
+        }
+    
+       
+    
+        // Comprobar si el animal pertenece al usuario autenticado
+        if ($animal->userID == $user->id) {
+            // Si el animal pertenece al usuario autenticado, se pueden editar sus datos
+            $animal->update($request->only([
+                'losted' => null
+            ]));
+    
+            // Guardar cambios (incluido userID si se actualizó)
+            $animal->save();
+    
+            return response()->json($animal, 200); // 200 OK
+        }
+    
+        // Si el animal no pertenece al usuario autenticado, verificar si tiene una protektora
+        if ($animal->protektora_id) {
+            // Verificar si el ID de la protektora del animal coincide con el ID de la protektora del usuario
+            if ($user->protektora_id == $animal->protektora_id) {
+                // Si la protektora es la misma, permitir la edición
+                $animal->update($request->only([
+                    'losted' => null
+                ]));
+    
+                // Guardar cambios (incluido userID si se actualizó)
+                $animal->save();
+    
+                return response()->json($animal, 200); // 200 OK
+            }
+        }
+    
+        // Si no se cumple ninguna de las condiciones anteriores, devolver un error de autorización
+        return response()->json(['error' => 'No tienes permisos para editar este animal'], 403); // 403 Forbidden
+    }
     
 
 }

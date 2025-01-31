@@ -6,8 +6,9 @@ const Filtroak=({img , text, aktibatuta})=>{
     const [aldatu, setAldatu]= useState(false);
     
     const aldatuKlik = () => {
-        setAldatu((prev) => !prev); 
-        aktibatuta((prev) => !prev);
+        setAldatu(!aldatu); 
+        aktibatuta(!aldatu);
+        console.log("Aktibatu",aktibatuta);
     };
 
     return <div className="max-w-32 flex flex-col items-center justify-center z-9">

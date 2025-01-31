@@ -20,7 +20,7 @@ class LostedController extends Controller
         $idProtektora = $request->input('protektora_id', null); // El id de la protektora, si se pasa
         $types = $request->input('type', []); // Ahora se espera un array de tipos
         $herria = $request->input('herria', null); // Ahorra pasamos el herria
-        $herria = $request->input('lurraldea', null); // Ahorra pasamos el lurraldea
+        $lurraldea = $request->input('lurraldea', null); // Ahorra pasamos el lurraldea
 
 
 

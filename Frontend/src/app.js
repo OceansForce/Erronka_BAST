@@ -20,11 +20,29 @@ import Create_protektora from './pages/Create_protektora.jsx';
 import NewsDetail from './pages/NewsDetail';
 
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  
+import { BrowserRouter as Router, Route, Routes, useLocation  } from 'react-router-dom';  
+
+import { initGA, logPageView } from './analytics/analytics';
+
 
 function App() {
 
   const [address, setAddress] = useState(null);
+  const location = useLocation();  // Obtén la ubicación actual
+
+  useEffect(() => {
+    // Inicializar Google Analytics solo una vez cuando la app se carga
+    initGA();
+
+    // Registrar la vista de la página cuando se cargue la aplicación
+    logPageView();
+
+  }, []);
+
+  useEffect(() => {
+    // Cada vez que la ubicación (ruta) cambie, registra la vista de la página
+    logPageView();
+  }, [location]);  
 
   useEffect(() => {
     // Función de geolocalización

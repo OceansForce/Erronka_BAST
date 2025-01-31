@@ -5,6 +5,7 @@ const TRACKING_ID = "G-GF672S3L6R";  // Sustituye con tu propio ID de seguimient
 
 // Inicializa Google Analytics
 export const initGA = () => {
+    console.log("kaixo");
   ReactGA.initialize(TRACKING_ID);
 };
 

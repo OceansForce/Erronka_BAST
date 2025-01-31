@@ -20,11 +20,15 @@ import Create_protektora from './pages/Create_protektora.jsx';
 import NewsDetail from './pages/NewsDetail';
 
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  
+import { BrowserRouter as Router, Route, Routes, useLocation  } from 'react-router-dom';  
+
 import { initGA, logPageView } from './analytics/analytics';
 
+
 function App() {
+
   const [address, setAddress] = useState(null);
+  const location = useLocation();  // Obtén la ubicación actual
 
   useEffect(() => {
     // Inicializar Google Analytics solo una vez cuando la app se carga
@@ -32,7 +36,13 @@ function App() {
 
     // Registrar la vista de la página cuando se cargue la aplicación
     logPageView();
+
   }, []);
+
+  useEffect(() => {
+    // Cada vez que la ubicación (ruta) cambie, registra la vista de la página
+    logPageView();
+  }, [location]);  
 
   useEffect(() => {
     // Función de geolocalización
@@ -50,10 +60,13 @@ function App() {
               .then((data) => {
                 if (data.results.length > 0) {
                   const city = data.results[0].components.city || 'Ciudad no encontrada';
+                  //console.log(data.results[0].components);
                   const province = data.results[0].components.province || 'Provincia no encontrada';
                   const newAddress = { city, province };
                   setAddress(JSON.stringify(newAddress));
                   localStorage.setItem('address', JSON.stringify(newAddress)); // Guardar en localStorage
+                  const address = localStorage.getItem('address');
+                  console.log("address: "+address);
                 } else {
                   setAddress({ city: 'Ciudad no encontrada', province: 'Provincia no encontrada' });
                   localStorage.setItem('address', null); // Guardar en localStorage

@@ -21,6 +21,8 @@ services:
       - "443:443" # Puerto HTTPS
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/your-certificate.crt:/etc/ssl/certs/your-certificate.crt
+      - ./docker/nginx/your-certificate.key:/etc/ssl/private/your-certificate.key
       - .:/var/www/html
     depends_on:
       - laravel-app

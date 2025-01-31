@@ -29,15 +29,17 @@ function App() {
 
   const [address, setAddress] = useState(null);
   const location = useLocation();  // Obtén la ubicación actual
+  console.log(location);
 
   useEffect(() => {
-    // Inicializar Google Analytics solo una vez cuando la app se carga
-    initGA();
-
-    // Registrar la vista de la página cuando se cargue la aplicación
-    logPageView();
-
+    try {
+      initGA();  // Inicializa Google Analytics
+      logPageView();  // Registra la vista de la página
+    } catch (error) {
+      console.error("Error al inicializar GA o registrar la vista de la página:", error);
+    }
   }, []);
+  
 
   useEffect(() => {
     // Cada vez que la ubicación (ruta) cambie, registra la vista de la página
@@ -90,28 +92,28 @@ function App() {
 
 
   return (
-    <Router>
-      <Routes> 
-        <Route path="/" element={<Index />} /> 
-        <Route path="/adopzio" element={<Adopzioa />} /> 
-        <Route path="/galduta" element={<Galduta />} /> 
-        <Route path="/mapa" element={<Mapa />} /> 
-        <Route path="/saioa_sortu" element={<Saioa_sortu />} /> 
-        <Route path="/login" element={<Login />} /> 
-        <Route path="/Ad_menu" element={<Ad_menua />} />
-        <Route path="/Ad_notizia_panela" element={<Ad_notizia_panela />} /> 
-        <Route path="/Ad_notiziak" element={<Ad_notiziak />} /> 
-        <Route path="/Ad_notiziak_aditatu" element={<Ad_notiziak_aditatu/>}/>
-        <Route path="/Ad_galduta" element={<Ad_galduta />} /> 
-        <Route path="/Ad_adoptatu" element={<Ad_adoptatu />} /> 
-        <Route path='/Ad_erabiltzaileak' element={<Ad_erabiltzaileak/>}/>
-        <Route path="/Profila" element={<Profila/>}/>
-        <Route path="/news/:id" element={<NewsDetail />} />
-        <Route path='/Animalia_adoptatu/:id' element={<Animalia_adoptatu/>}/>
-        <Route path='/Animalia_galduta/:id' element={<Animalia_galduta/>}/>
-        <Route path='/Create_protektora' element={<Create_protektora/>}/>
-      </Routes>
-    </Router>
+    
+    <Routes> 
+      <Route path="/" element={<Index />} /> 
+      <Route path="/adopzio" element={<Adopzioa />} /> 
+      <Route path="/galduta" element={<Galduta />} /> 
+      <Route path="/mapa" element={<Mapa />} /> 
+      <Route path="/saioa_sortu" element={<Saioa_sortu />} /> 
+      <Route path="/login" element={<Login />} /> 
+      <Route path="/Ad_menu" element={<Ad_menua />} />
+      <Route path="/Ad_notizia_panela" element={<Ad_notizia_panela />} /> 
+      <Route path="/Ad_notiziak" element={<Ad_notiziak />} /> 
+      <Route path="/Ad_notiziak_aditatu" element={<Ad_notiziak_aditatu/>}/>
+      <Route path="/Ad_galduta" element={<Ad_galduta />} /> 
+      <Route path="/Ad_adoptatu" element={<Ad_adoptatu />} /> 
+      <Route path='/Ad_erabiltzaileak' element={<Ad_erabiltzaileak/>}/>
+      <Route path="/Profila" element={<Profila/>}/>
+      <Route path="/news/:id" element={<NewsDetail />} />
+      <Route path='/Animalia_adoptatu/:id' element={<Animalia_adoptatu/>}/>
+      <Route path='/Animalia_galduta/:id' element={<Animalia_galduta/>}/>
+      <Route path='/Create_protektora' element={<Create_protektora/>}/>
+    </Routes>
+    
   );
 }
 

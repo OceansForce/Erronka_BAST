@@ -39,7 +39,7 @@ class UserCreateController extends Controller
         Log::info('Datos validados correctamente');
 
         $verificationToken = Str::random(32);
-	$imageUrl = null;
+	    $imageUrl = null;
         if ($request->hasFile('img')) {
             $imageController = new ImageController();
             $imageResponse = $imageController->upload($request);
@@ -120,7 +120,7 @@ class UserCreateController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id, // Validar solo si el email ha cambiado
             'password' => 'nullable|string|min:8|confirmed', // La contraseña es opcional al editar, pero si se proporciona debe cumplir con las reglas
             'year' => 'nullable|date',
-            'img' => 'nullable|url', // Validación para URL de la imagen
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Si la validación falla, devolver un 400 Bad Request
@@ -133,10 +133,21 @@ class UserCreateController extends Controller
 
         // Actualizar los datos del usuario
         try {
+
+            $imageUrl = null;
+            if ($request->hasFile('img')) {
+                $imageController = new ImageController();
+                $imageResponse = $imageController->upload($request);
+                // Comprobamos si la subida fue exitosa
+                if ($imageResponse->status() == 201) {
+                    $imageUrl = $imageResponse->getData()->url;  // Extraemos la URL de la imagen subida
+                }
+            }
             // Actualizamos los campos proporcionados por el usuario
             $user->name = $request->name;
             $user->secondName = $request->secondName;
             $user->email = $request->email;
+            $user->img = $imageUrl;
             
             // Si la contraseña fue proporcionada, la actualizamos
             if ($request->password) {

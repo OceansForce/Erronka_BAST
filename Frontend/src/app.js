@@ -20,15 +20,11 @@ import Create_protektora from './pages/Create_protektora.jsx';
 import NewsDetail from './pages/NewsDetail';
 
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation  } from 'react-router-dom';  
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  
 import { initGA, logPageView } from './analytics/analytics';
 
-
 function App() {
-
   const [address, setAddress] = useState(null);
-  const location = useLocation();  // Obtén la ubicación actual
 
   useEffect(() => {
     // Inicializar Google Analytics solo una vez cuando la app se carga
@@ -36,13 +32,7 @@ function App() {
 
     // Registrar la vista de la página cuando se cargue la aplicación
     logPageView();
-
   }, []);
-
-  useEffect(() => {
-    // Cada vez que la ubicación (ruta) cambie, registra la vista de la página
-    logPageView();
-  }, [location]);  
 
   useEffect(() => {
     // Función de geolocalización
@@ -60,13 +50,10 @@ function App() {
               .then((data) => {
                 if (data.results.length > 0) {
                   const city = data.results[0].components.city || 'Ciudad no encontrada';
-                  //console.log(data.results[0].components);
                   const province = data.results[0].components.province || 'Provincia no encontrada';
                   const newAddress = { city, province };
                   setAddress(JSON.stringify(newAddress));
                   localStorage.setItem('address', JSON.stringify(newAddress)); // Guardar en localStorage
-                  const address = localStorage.getItem('address');
-                  console.log("address: "+address);
                 } else {
                   setAddress({ city: 'Ciudad no encontrada', province: 'Provincia no encontrada' });
                   localStorage.setItem('address', null); // Guardar en localStorage
@@ -86,32 +73,30 @@ function App() {
     };
 
     getGeolocation(); // Ejecutar la función de geolocalización
-
   }, []);
 
 
   return (
     <Router>
       <Routes> 
-          <Route path="/" element={<Index />} /> 
-          <Route path="/adopzio" element={<Adopzioa />} /> 
-          <Route path="/galduta" element={<Galduta />} /> 
-          <Route path="/mapa" element={<Mapa />} /> 
-          <Route path="/saioa_sortu" element={<Saioa_sortu />} /> 
-          <Route path="/login" element={<Login />} /> 
-          <Route path="/Ad_menu" element={<Ad_menua />} />
-          <Route path="/Ad_notizia_panela" element={<Ad_notizia_panela />} /> 
-          <Route path="/Ad_notiziak" element={<Ad_notiziak />} /> 
-          <Route path="/Ad_notiziak_aditatu" element={<Ad_notiziak_aditatu/>}/>
-          <Route path="/Ad_galduta" element={<Ad_galduta />} /> 
-          <Route path="/Ad_adoptatu" element={<Ad_adoptatu />} /> 
-          <Route path='/Ad_erabiltzaileak' element={<Ad_erabiltzaileak/>}/>
-          <Route path="/Profila" element={<Profila/>}/>
-          <Route path="/news/:id" element={<NewsDetail />} />
-          <Route path='/Animalia_adoptatu/:id' element={<Animalia_adoptatu/>}/>
-          <Route path='/Animalia_galduta/:id' element={<Animalia_galduta/>}/>
-          <Route path='/Create_protektora' element={<Create_protektora/>}/>
-
+        <Route path="/" element={<Index />} /> 
+        <Route path="/adopzio" element={<Adopzioa />} /> 
+        <Route path="/galduta" element={<Galduta />} /> 
+        <Route path="/mapa" element={<Mapa />} /> 
+        <Route path="/saioa_sortu" element={<Saioa_sortu />} /> 
+        <Route path="/login" element={<Login />} /> 
+        <Route path="/Ad_menu" element={<Ad_menua />} />
+        <Route path="/Ad_notizia_panela" element={<Ad_notizia_panela />} /> 
+        <Route path="/Ad_notiziak" element={<Ad_notiziak />} /> 
+        <Route path="/Ad_notiziak_aditatu" element={<Ad_notiziak_aditatu/>}/>
+        <Route path="/Ad_galduta" element={<Ad_galduta />} /> 
+        <Route path="/Ad_adoptatu" element={<Ad_adoptatu />} /> 
+        <Route path='/Ad_erabiltzaileak' element={<Ad_erabiltzaileak/>}/>
+        <Route path="/Profila" element={<Profila/>}/>
+        <Route path="/news/:id" element={<NewsDetail />} />
+        <Route path='/Animalia_adoptatu/:id' element={<Animalia_adoptatu/>}/>
+        <Route path='/Animalia_galduta/:id' element={<Animalia_galduta/>}/>
+        <Route path='/Create_protektora' element={<Create_protektora/>}/>
       </Routes>
     </Router>
   );

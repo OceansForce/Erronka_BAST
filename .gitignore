@@ -1,1 +1,3 @@
 .DS_Store
+Backend/docker/nginx/your-certificate.crt
+Backend/docker/nginx/your-certificate.key

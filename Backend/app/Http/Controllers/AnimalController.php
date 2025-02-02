@@ -237,7 +237,7 @@ class AnimalController extends Controller
             'etxekoAnimalia' => 'nullable|boolean', // Es un animal de casa (booleano)
             'type' => 'nullable|string|in:txakurra,txakurra ppp,katua,besteak', // Tipo de animal
             'animalType' => 'nullable|string|max:255', // Subtipo del animal (opcional)
-            'img' => 'nullable|url', // Imagen del animal (opcional)
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'bakuna' => 'nullable|integer|min:0', // 0 = no vacunado, otros números, el id de la vacuna
             'gender' => 'nullable|integer|in:0,1', // Género del animal, 0 = hembra, 1 = macho
             'descripcion' => 'nullable|string|max:255', // Descripción del animal (opcional)
@@ -273,6 +273,16 @@ class AnimalController extends Controller
             $animal->userID = $newUser->id;
         }
     
+        $imageUrl = null;
+        if ($request->hasFile('img')) {
+            $imageController = new ImageController();
+            $imageResponse = $imageController->upload($request);
+            // Comprobamos si la subida fue exitosa
+            if ($imageResponse->status() == 201) {
+                  $imageUrl = $imageResponse->getData()->url;  // Extraemos la URL de la imagen subida
+            }
+        }
+
         // Comprobar si el animal pertenece al usuario autenticado
         if ($animal->userID == $user->id) {
             // Si el animal pertenece al usuario autenticado, se pueden editar sus datos
@@ -281,12 +291,13 @@ class AnimalController extends Controller
                 'etxekoAnimalia',
                 'type',
                 'animalType',
-                'img',
                 'bakuna',
                 'gender',
                 'descripcion',
                 'year',
             ]));
+            
+            $animal -> img = $imageUrl;
     
             // Guardar cambios (incluido userID si se actualizó)
             $animal->save();
@@ -304,13 +315,13 @@ class AnimalController extends Controller
                     'etxekoAnimalia',
                     'type',
                     'animalType',
-                    'img',
                     'bakuna',
                     'gender',
                     'descripcion',
                     'year',
                 ]));
     
+                $animal -> img = $imageUrl;
                 // Guardar cambios (incluido userID si se actualizó)
                 $animal->save();
     

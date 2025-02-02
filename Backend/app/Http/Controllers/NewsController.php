@@ -114,11 +114,24 @@ class NewsController extends Controller
             'titleEU' => 'required|string',
             'textES' => 'required|string',
             'textEU' => 'required|string',
-            'img' => 'nullable|url',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $imageUrl = null;
+//		dd($request);
+            if ($request->hasFile('img')) {
+//		dd($request);
+	        $imageController = new ImageController();
+                $imageResponse = $imageController->upload($request);
+//    		return response()->json(['status' => $imageResponse->status()],201);
+                // Comprobamos si la subida fue exitosa
+                if ($imageResponse->status() == 201) {
+                    $imageUrl = $imageResponse->getData()->url;  // Extraemos la URL de la imagen subida
+                }
+            }
+
         // Actualizamos la imagen de la noticia
-        $news->img = $request->input('img');
+        $news->img = $imageUrl;
         
         // Actualizar las traducciones para el título
         // En español

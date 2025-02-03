@@ -111,6 +111,7 @@ class UserCreateController extends Controller
 	    if (!$user) {
             return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
         }
+        dd($request);
 
         // Validación de los datos recibidos
         $validator = \Validator::make($request->all(), [

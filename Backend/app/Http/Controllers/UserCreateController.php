@@ -109,9 +109,12 @@ class UserCreateController extends Controller
         $user = auth()->user();
 	    //return response()->json(['error' => $user]);
 	    if (!$user) {
-            return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
+            return response()->json([
+		'error' => 'Usuario no autenticado'
+		], 401); // 401 Unauthorized
         }
-
+//	return response()->json(['datuak'=>$request-all(),
+//				'user'=>$user],401);
         // Validación de los datos recibidos
         $validator = \Validator::make($request->all(), [
             'DNI' => 'nullable|string|max:10|unique:users,DNI,' . $user->id, // Validar solo si el DNI ha cambiado

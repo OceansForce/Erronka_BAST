@@ -19,7 +19,7 @@ const Galduta= ()=>{
 
   const fetchGaldutakoAnimalia = async () => {
     try {
-        const response = await fetch(`${IpAPI}/api/animals-adopt?limit=${limit}&offset=${offset}`, {
+        const response = await fetch(`${IpAPI}/api/animals-loasted?limit=${limit}&offset=${offset}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

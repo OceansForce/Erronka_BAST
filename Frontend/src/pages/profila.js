@@ -34,6 +34,7 @@ const Profila = () => {
         secondName: '',
         email: '',
         password: '',
+        img: '',
     });
 
     const changeLanguage = (lang) => {
@@ -43,9 +44,18 @@ const Profila = () => {
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setIrudia(URL.createObjectURL(file)); // Para mostrar la imagen inmediatamente
+            //setIrudia(URL.createObjectURL(file)); // Para mostrar la imagen inmediatamente
+            setFormData(a=>({
+                ...a,
+                img:URL.createObjectURL(file),
+            }))
+            
         }
     };
+
+    useEffect(()=>{
+        console.log("IMG: ",formData.img);
+    },[formData.img]);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -68,6 +78,7 @@ const Profila = () => {
                         secondName: result.user.secondName || '',
                         email: result.user.email,
                         password: '',
+                        img: result.user.img,
                     });
                 }
             } catch (error) {
@@ -102,6 +113,16 @@ const Profila = () => {
 
         //console.log(JSON.stringify(filteredFormData));
         const tok = localStorage.getItem('token');
+        let formDataToSend = new FormData();
+
+        formDataToSend.append('name', formData.name);
+        formDataToSend.append('secondName', formData.secondName);
+        formDataToSend.append('email', formData.email);
+        formDataToSend.append('password', formData.password);
+        formDataToSend.append('img', formData.img);
+
+        console.log(formData.name);
+        console.log(formDataToSend);
 
         fetch(`${IpAPI}/api/user-data-edit`, {
             method: 'PUT',
@@ -109,8 +130,9 @@ const Profila = () => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${tok}`,
             },
-            body: JSON.stringify(filteredFormData),
+            body: formDataToSend,
         })
+
         .then(response => {
             // Verificar si la respuesta fue exitosa (código de estado 2xx)
             if (!response.ok) {
@@ -164,9 +186,9 @@ const Profila = () => {
                     <div className="flex flex-col lg:flex-row w-full justify-center">
                         <div className="lg:w-1/4 w-full relative">
                             <label htmlFor="image-upload" className="cursor-pointer">
-                            {irudia ? (
+                            {formData.img ? (
                                 <img 
-                                    src={irudia} 
+                                    src={formData.img} 
                                     className="size-40 cursor-pointer rounded-full z-10 border-white border-2 absolute posicion" 
                                     alt="Imagen de perfil" 
                                 />

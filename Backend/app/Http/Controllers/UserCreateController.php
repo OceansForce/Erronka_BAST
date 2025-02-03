@@ -112,7 +112,8 @@ class UserCreateController extends Controller
             return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
         }
         //dd($request);
-
+	//dd($request->all());
+	dd($request->input());  // Para obtener todos los datos del cuerpo de la solicitud
         // Validación de los datos recibidos
         $validator = \Validator::make($request->all(), [
             'DNI' => 'nullable|string|max:10|unique:users,DNI,' . $user->id, // Validar solo si el DNI ha cambiado

@@ -20,10 +20,11 @@ import { checkToken } from '../components/security/securityToken';
 const Profila = () => {
 
     const navigate = useNavigate();
-        useEffect(() => {
-            // Llamar a checkProtektora dentro del useEffect
-            checkToken(navigate);
-        }, [navigate]);
+
+    useEffect(() => {
+        // Llamar a checkProtektora dentro del useEffect
+        checkToken(navigate);
+    }, [navigate]);
 
 
     const [irudia, setIrudia] = useState("user-dog.jpg");
@@ -41,21 +42,6 @@ const Profila = () => {
         i18n.changeLanguage(lang);  // Cambia el idioma
     };
 
-    const handleImageUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            //setIrudia(URL.createObjectURL(file)); // Para mostrar la imagen inmediatamente
-            setFormData(a=>({
-                ...a,
-                img:URL.createObjectURL(file),
-            }))
-            
-        }
-    };
-
-    useEffect(()=>{
-        console.log("IMG: ",formData.img);
-    },[formData.img]);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -72,7 +58,10 @@ const Profila = () => {
                 if (response.ok) {
                     const result = await response.json();
                     setUserData(result); // Guardamos los datos del usuario en el estado
-                    //console.log(result);
+                    console.log("datos Recibidos",result);
+                    if(result.user.img){
+                        setIrudia(formData.img);
+                    }
                     setFormData({
                         name: result.user.name,
                         secondName: result.user.secondName || '',
@@ -80,6 +69,8 @@ const Profila = () => {
                         password: '',
                         img: result.user.img,
                     });
+
+                    
                 }
             } catch (error) {
                 console.error('Error en la solicitud:', error);
@@ -92,6 +83,14 @@ const Profila = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        const file = e.target.files[0];
+        
+        if (file) {
+            setFormData((prevData) => ({
+                ...prevData,
+                img: file, 
+            }));
+        }
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -113,24 +112,33 @@ const Profila = () => {
 
         //console.log(JSON.stringify(filteredFormData));
         const tok = localStorage.getItem('token');
-        let formDataToSend = new FormData();
+
+        const formDataToSend = new FormData();
 
         formDataToSend.append('name', formData.name);
         formDataToSend.append('secondName', formData.secondName);
         formDataToSend.append('email', formData.email);
         formDataToSend.append('password', formData.password);
-        formDataToSend.append('img', formData.img);
 
-        console.log(formData.name);
-        console.log(formDataToSend);
+        if (formData.img) {
+            formDataToSend.append('img', formData.img);
+        }
 
+        //console.log(formData.name);
+        for (let [key, value] of formDataToSend.entries()) {
+            console.log(key, value);
+        }
+
+        console.log("Datos enviados",filteredFormData);
         fetch(`${IpAPI}/api/user-data-edit`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${tok}`,
             },
+
             body: formDataToSend,
+            
         })
 
         .then(response => {
@@ -217,7 +225,7 @@ const Profila = () => {
                                 type="file" 
                                 id="image-upload" 
                                 className="hidden"  
-                                onChange={handleImageUpload} 
+                                onChange={(e) => setFormData({ ...formData, img: e.target.files[0] })}
                             />
                         </div>
 

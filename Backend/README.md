@@ -957,3 +957,207 @@ Response Error:
 
 ```
 </details>
+
+
+
+
+
+<details>
+    
+<summary> <h2> Get Animals Losted </h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/animals-losted?limit=5&offset=0&protektora_id=123&type=txakurra
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+[
+    {
+        "id": 1,
+        "name": "Fido",
+        "etxekoAnimalia": true,
+        "type": "txakurra",
+        "animalType": "Dog",
+        "img": null,
+        "bakuna": 1,
+        "gender": 1,
+        "descripcion": "Friendly dog",
+        "year": "2020-05-01 00:00:00",
+        "losted": 0,
+        "noiztik": "2025-01-01 00:00:00",
+        "userID": 2,
+        "protektora_id": 123,
+        "losted":3
+    },
+    {
+        "id": 2,
+        "name": "Luna",
+        "etxekoAnimalia": true,
+        "type": "katua",
+        "animalType": "Cat",
+        "img": null,
+        "bakuna": 1,
+        "gender": 0,
+        "descripcion": "Playful cat",
+        "year": "2021-03-15 00:00:00",
+        "losted": 0,
+        "noiztik": "2025-01-01 00:00:00",
+        "userID": 3,
+        "protektora_id": 123,
+        "losted":4
+    }
+]
+
+```
+Response Error:
+```
+{
+    "message": "No animals found for the given criteria"
+}
+```
+</details>
+
+
+
+<details>
+    
+<summary> <h2> Get losted animal information</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/animal-losted/{id}
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+{
+  "id": 1,
+  "name": "Max",
+  "etxekoAnimalia": true,
+  "type": "txakurra",
+  "animalType": "Pastor Alemán",
+  "img": "http://urlimagen.com/nueva-imagen.jpg",
+  "bakuna": 2,
+  "gender": 1,
+  "descripcion": "Animal amigable y activo.",
+  "year": "2020-05-10",
+  "losted": null,
+  "noiztik": null,
+  "userID": 2,
+  "protektora_id": 5
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>
+
+<details>
+    
+<summary> <h2> Set losted</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/set-losted
+```
+Header:
+```
+Content-Type:application/json
+```
+Body:
+```
+{
+  "id": 1,
+  "hiria": "Donostia",
+  "probintzia": "Guipuzkoa",
+  "fecha": "2022-01-01",
+  "moreInformation": "text text"
+}
+```
+Response:
+```
+{
+  "mesagge":"losted"
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>
+
+<details>
+    
+<summary> <h2> Set Not losted</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/set-not-losted
+```
+Header:
+```
+Content-Type:application/json
+```
+Body:
+```
+{
+  "id": 1  
+}
+```
+Response:
+```
+{
+  "mesagge":"not losted"
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>

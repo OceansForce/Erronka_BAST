@@ -78,8 +78,7 @@ function Animali_Form({tituloa, atras}){
     img:''
   });
 
-  // Estado para manejar el mensaje de éxito
-  const [successMessage, setSuccessMessage] = useState('');
+
 
   // Manejador de cambios en los campos del formulario
   const handleChange = (e) => {
@@ -126,7 +125,6 @@ function Animali_Form({tituloa, atras}){
   
       if (response.ok) {
         const result = await response.json();
-        setSuccessMessage(t('ad_notiziak:Animalia adoptatua sortuta'));
         setFormData({
           name: "",
           etxekoAnimalia: "",
@@ -148,9 +146,6 @@ function Animali_Form({tituloa, atras}){
   };
   
 
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, img: e.target.files[0] }); // Guardar el archivo directamente
-  };
 
   return(
       <>

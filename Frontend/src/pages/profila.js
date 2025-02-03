@@ -120,7 +120,7 @@ const Profila = () => {
         formDataToSend.append('email', formData.email);
         formDataToSend.append('password', formData.password);
 
-        if (formData.img) {
+        if (formData.img instanceof File) {
             formDataToSend.append('img', formData.img);
         }
 

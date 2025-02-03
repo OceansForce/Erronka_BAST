@@ -30,12 +30,12 @@ const Animaliak= ({id,name, kokapena, img, mota, animaliType})=>{
      
     }
     else if(mota==="profila"){
-      return <div className="w-1/4 max-w-96  mb-8 mt-8 mx-5">
-      <img src={link} alt={name} className="rounded-t-3xl h-[119.86px] w-[180px]"/>
-      <div className="bg-dark  dark:bg-primary p-2 rounded-b-2xl text-center">
-        <p className="text-white dark:text-black font-semibold fonts_ubutu">{name}</p>
-      </div>
-    </div>
+      return <Link to="/Edit_animalia" state={{id: id}} className="w-1/4 max-w-96  mb-8 mt-8 mx-5">
+          <img src={link} alt={name} className="rounded-t-3xl h-[119.86px] w-[180px]"/>
+          <div className="bg-dark  dark:bg-primary p-2 rounded-b-2xl text-center">
+            <p className="text-white dark:text-black font-semibold fonts_ubutu">{name}</p>
+          </div>
+      </Link>
     }
     
 }

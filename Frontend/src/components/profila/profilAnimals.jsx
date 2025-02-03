@@ -28,13 +28,16 @@ const UserAnimals = ({userData}) => {
             
             <div className="w-full flex flex-row flex-wrap items-center justify-center py-2 border-2 rounded-l-lg rounded-br-lg border-black dark:border-white bg-primary dark:bg-dark">
             {userData.map((item) => (
-                <Animaliak 
+               
+                    <Animaliak 
                     key={item.id}
+                    id={item.id}
+                    name={item.name}
+                    kokapena={item.etxekoAnimalia}    
                     img={item.img}        
-                    izena={item.name}
-                    kokapena={item.etxekoAnimalia}
                     mota='profila'
-                />
+                    />
+               
             ))}
 
 

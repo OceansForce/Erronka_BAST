@@ -175,6 +175,7 @@ const Profila = () => {
             }));
     
             const imgURL = URL.createObjectURL(file);
+            localStorage.setItem('img', imgURL);
             setIrudia(imgURL); // Actualiza la imagen mostrada
         }
     }

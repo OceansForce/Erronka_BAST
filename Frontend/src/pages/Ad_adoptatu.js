@@ -13,7 +13,7 @@ function Ad_adoptatu(){
  
   return(
       <>
-          <Animali_Form tituloa={t('Ad_adoptatu:Titulo1')} atras={"/Ad_menu"}/>
+          <Animali_Form tituloa={t('Ad_adoptatu:Titulo1')} atras={"/Ad_menu"} ruta={"/Ad_menu"}/>
       </>
   );
 }

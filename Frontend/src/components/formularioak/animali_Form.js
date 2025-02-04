@@ -11,7 +11,7 @@ import { checkProtektora } from '../../components/security/security';
 import Irudiak_input from './..//../components/notiziak/IrudiakInput.js';
 import { json, useNavigate } from 'react-router-dom';
 
-function Animali_Form({tituloa, atras}){
+function Animali_Form({tituloa, atras, ruta}){
   
   const [mota, setMota]= useState("");
   const [arraza, setArraza]= useState("");
@@ -136,6 +136,7 @@ function Animali_Form({tituloa, atras}){
           year: "",
           img: null, // Resetear la imagen
         });
+        navigate(ruta);
       } else {
         const error = await response.json();
         alert('Error: ' + error.message);

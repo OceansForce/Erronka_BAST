@@ -1,5 +1,5 @@
 // src/config/config.js
-const IpAPI = 'http://bastbackend.ddns.net:8000';
+const IpAPI = 'https://bastbackend.ddns.net';
   
 export default IpAPI;
   

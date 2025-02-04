@@ -13,6 +13,7 @@ const UserOptions = () => {
 
   const izena = localStorage.getItem('izena');
   const protektora = localStorage.getItem('protektora') || null;
+  const img = localStorage.getItem('img') || "/img/icons/users/user-dog.jpg";
   //console.log("Protektora: "+protektora)
 
 
@@ -39,7 +40,7 @@ const UserOptions = () => {
   return (
     <div className="relative language-selector ">
       <img
-        src="/img/icons/users/user-dog.jpg"
+        src={img}
         className="size-12 cursor-pointer rounded-full"
         alt="Seleccionar idioma"
         onClick={toggleDropdown}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../118n/menu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LanguageSelector from '../header-footer/header/desplegable/lenguageSelector';
 import DarkModeToggle from '../header-footer/header/dark-light/dark';
 
@@ -28,6 +28,7 @@ function Saioa_sortu() {
 
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorText, setErrorText] = useState('');
+  const navigate = useNavigate();
 
   // Función para cambiar el idioma
   const changeLanguage = (lang) => {
@@ -65,19 +66,26 @@ function Saioa_sortu() {
       headers: {
         //'Content-Type': 'multipart/form-data',
       },
-      body: JSON.stringify(formData),
+      body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
         console.log('Formulario enviado correctamente:', data);
         // Realizar alguna acción después de enviar (e.g., redirigir al usuario)
-        if(data.errors.DNI){
-          setErrorText(t('error:DNIErabilita'));
-          setShowErrorModal(true);  // Mostrar el modal
-        }
-        if(data.errors.email){
-          setErrorText(t('error:emailErabilita'));
-          setShowErrorModal(true);  // Mostrar el modal
+        if (data.errors) {
+          if (data.errors.DNI) {
+            setErrorText(t('error:DNIErabilita'));
+            setShowErrorModal(true);  // Mostrar el modal
+          }
+          if (data.errors.email) {
+            setErrorText(t('error:emailErabilita'));
+            setShowErrorModal(true);  // Mostrar el modal
+          }
+        } else {
+          // Si no hay errores, puedes realizar otras acciones aquí
+          console.log('Usuario registrado correctamente');
+          navigate('/');
+          // Redirigir o mostrar un mensaje de éxito
         }
 
       })

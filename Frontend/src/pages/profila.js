@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { checkToken } from '../components/security/securityToken';
 
 const Profila = () => {
-
+    let solo_una_vez=true;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -59,9 +59,7 @@ const Profila = () => {
                     const result = await response.json();
                     setUserData(result); // Guardamos los datos del usuario en el estado
                     console.log("datos Recibidos",result);
-                    if(result.user.img){
-                        setIrudia(formData.img);
-                    }
+                    
                     setFormData({
                         name: result.user.name,
                         secondName: result.user.secondName || '',
@@ -69,6 +67,7 @@ const Profila = () => {
                         password: '',
                         img: result.user.img,
                     });
+                   
 
                     
                 }
@@ -131,9 +130,9 @@ const Profila = () => {
 
         console.log("Datos enviados",filteredFormData);
         fetch(`${IpAPI}/api/user-data-edit`, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
-                // 'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${tok}`,
             },
 
@@ -167,6 +166,33 @@ const Profila = () => {
         
     };
 
+    const irudia_Aldatu=(e)=>{
+        const file= e.target.files[0];
+        if (file) {
+            setFormData(prevData => ({
+                ...prevData,
+                img: file
+            }));
+    
+            const imgURL = URL.createObjectURL(file);
+            setIrudia(imgURL); // Actualiza la imagen mostrada
+        }
+    }
+
+    useEffect(() => {
+        if (formData.img && formData.img instanceof File) {
+            const imgURL = URL.createObjectURL(formData.img);
+            setIrudia(imgURL);
+        } else if (formData.img && typeof formData.img === "string") {
+            setIrudia(formData.img);
+        }
+    }, [formData.img]);
+
+    useEffect(()=>{
+        console.log("imagen",irudia);
+        console.log("FormData", formData.img);
+    },[irudia]);
+
     if (!userData) {
         return <Loading />;
     }
@@ -196,9 +222,11 @@ const Profila = () => {
                             <label htmlFor="image-upload" className="cursor-pointer">
                             {formData.img ? (
                                 <img 
-                                    src={formData.img} 
+                                    src={irudia} 
                                     className="size-40 cursor-pointer rounded-full z-10 border-white border-2 absolute posicion" 
                                     alt="Imagen de perfil" 
+                                    
+                                   
                                 />
                             ) : (
                                 <img 
@@ -225,7 +253,7 @@ const Profila = () => {
                                 type="file" 
                                 id="image-upload" 
                                 className="hidden"  
-                                onChange={(e) => setFormData({ ...formData, img: e.target.files[0] })}
+                                onChange={irudia_Aldatu}
                             />
                         </div>
 

@@ -104,7 +104,7 @@ class UserCreateController extends Controller
 
     public function edit(Request $request)
     {
-	//dd($request->all());
+	    //dd($request->all());
 	    //return response()->json(['error'=>'que pollas']);
         // Obtener el usuario autenticado
         $user = auth()->user();
@@ -112,10 +112,10 @@ class UserCreateController extends Controller
 	    if (!$user) {
             return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
         }
-	//return response()->json(['error' => $request->name], 401); // 401 Unauthorized
-        //dd($request);
-	//dd($request->all());
-	//dd($request->input());  // Para obtener todos los datos del cuerpo de la solicitud
+        //return response()->json(['error' => $request->name], 401); // 401 Unauthorized
+            //dd($request);
+        //dd($request->all());
+        //dd($request->input());  // Para obtener todos los datos del cuerpo de la solicitud
         // Validación de los datos recibidos
         $validator = \Validator::make($request->all(), [
             'DNI' => 'nullable|string|max:10|unique:users,DNI,' . $user->id, // Validar solo si el DNI ha cambiado
@@ -157,6 +157,65 @@ class UserCreateController extends Controller
             if ($request->password) {
                 $user->password = Hash::make($request->password);
             }
+            
+            //$user->year = $request->year ? $request->year : null;
+            //$user->img = $request->img;
+
+            // Guardar los cambios en la base de datos
+            $user->save();
+
+            Log::info('Usuario actualizado exitosamente', ['user' => $user]);
+
+            return response()->json([
+                'message' => 'Usuario actualizado exitosamente',
+                'user' => $user,
+            ], 200); // 200 OK
+
+        } catch (\Exception $e) {
+            // En caso de error inesperado (ej. problemas con la base de datos)
+            return response()->json([
+                'message' => 'Ocurrió un error al actualizar los datos del usuario.',
+                'error' => $e->getMessage(),
+            ], 500); // 500 Internal Server Error
+        }
+    }
+
+    public function editUserImage(Request $request)
+    {
+	    
+        $user = auth()->user();
+	    
+	    if (!$user) {
+            return response()->json(['error' => 'Usuario no autenticado'], 401); // 401 Unauthorized
+        }
+        
+        $validator = \Validator::make($request->all(), [
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Si la validación falla, devolver un 400 Bad Request
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Datos incorrectos o incompletos.',
+                'errors' => $validator->errors()
+            ], 400); // 400 Bad Request
+        }
+
+        // Actualizar los datos del usuario
+        try {
+
+            $imageUrl = null;
+            if ($request->hasFile('img')) {
+                $imageController = new ImageController();
+                $imageResponse = $imageController->upload($request);
+                // Comprobamos si la subida fue exitosa
+                if ($imageResponse->status() == 201) {
+                    $imageUrl = $imageResponse->getData()->url;  // Extraemos la URL de la imagen subida
+                }
+            }
+            // Actualizamos los campos proporcionados por el usuario
+            $user->img = $imageUrl;
+            
             
             //$user->year = $request->year ? $request->year : null;
             //$user->img = $request->img;

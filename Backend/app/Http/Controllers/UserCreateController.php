@@ -104,6 +104,7 @@ class UserCreateController extends Controller
 
     public function edit(Request $request)
     {
+	//dd($request->all());
 	    //return response()->json(['error'=>'que pollas']);
         // Obtener el usuario autenticado
         $user = auth()->user();

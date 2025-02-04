@@ -182,7 +182,7 @@ class UserCreateController extends Controller
 
     public function editUserImage(Request $request)
     {
-	    
+	dd($request->files->all());
         $user = auth()->user();
 	    
 	    if (!$user) {

@@ -1086,6 +1086,7 @@ https://bastbackend.ddns.net/api/set-losted
 Header:
 ```
 Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
 ```
 Body:
 ```
@@ -1132,6 +1133,7 @@ https://bastbackend.ddns.net/api/set-not-losted
 Header:
 ```
 Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
 ```
 Body:
 ```
@@ -1157,6 +1159,123 @@ Response Error:
     "name": ["El campo name es obligatorio."],
     "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
   }
+}
+
+```
+</details>
+
+
+
+
+
+<details>
+    
+<summary> <h2> Get protektorak</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/protectora-list
+```
+
+Response:
+```
+{
+    "name": "Protección Animal",
+    "provintzia": "Vizcaya",
+    "hiria": "Bilbao",
+    "telefono": "123456789",
+    "email": "contacto@proteccionanimal.org",
+    "logo": "https://example.com/images/logo.jpg"
+}
+{
+    "name": "Protección Animal",
+    "provintzia": "Vizcaya",
+    "hiria": "Bilbao",
+    "telefono": "123456789",
+    "email": "contacto@proteccionanimal.org",
+    "logo": "https://example.com/images/logo.jpg"
+}
+
+
+```
+Response Error:
+```
+{
+  "error": "Protectora no encontrado"
+}
+
+```
+</details>
+
+<details>
+    
+<summary> <h2> Create protektora</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/protectora-create
+```
+Header:
+```
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+body:
+```
+{
+    "name": "Protección Animal",
+    "provintzia": "Vizcaya",
+    "hiria": "Bilbao",
+    "telefono": "123456789",
+    "email": "contacto@proteccionanimal.org",
+    "logo": img ➡️ object
+}
+
+
+```
+Response Error:
+```
+{
+  "perfe": "Protectora sortuta"
+}
+
+```
+</details>
+
+
+
+<details>
+    
+<summary> <h2> Edit protektora</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/protectora-edit
+```
+Header:
+```
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+body:
+```
+{
+    "id":1,
+    "name": "Protección Animal",
+    "provintzia": "Vizcaya",
+    "hiria": "Bilbao",
+    "telefono": "123456789",
+    "email": "contacto@proteccionanimal.org",
+    "logo": img ➡️ object
+}
+
+
+```
+Response Error:
+```
+{
+  "perfe": "Protectora editatuta"
 }
 
 ```

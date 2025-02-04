@@ -18,12 +18,13 @@ import { useNavigate } from 'react-router-dom';
 import { checkToken } from '../components/security/securityToken';
 
 const Profila = () => {
-
+    let solo_una_vez=true;
     const navigate = useNavigate();
-        useEffect(() => {
-            // Llamar a checkProtektora dentro del useEffect
-            checkToken(navigate);
-        }, [navigate]);
+
+    useEffect(() => {
+        // Llamar a checkProtektora dentro del useEffect
+        checkToken(navigate);
+    }, [navigate]);
 
 
     const [irudia, setIrudia] = useState("user-dog.jpg");
@@ -34,18 +35,13 @@ const Profila = () => {
         secondName: '',
         email: '',
         password: '',
+        img: '',
     });
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang);  // Cambia el idioma
     };
 
-    const handleImageUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setIrudia(URL.createObjectURL(file)); // Para mostrar la imagen inmediatamente
-        }
-    };
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -62,13 +58,18 @@ const Profila = () => {
                 if (response.ok) {
                     const result = await response.json();
                     setUserData(result); // Guardamos los datos del usuario en el estado
-                    //console.log(result);
+                    console.log("datos Recibidos",result);
+                    
                     setFormData({
                         name: result.user.name,
                         secondName: result.user.secondName || '',
                         email: result.user.email,
                         password: '',
+                        img: result.user.img,
                     });
+                   
+
+                    
                 }
             } catch (error) {
                 console.error('Error en la solicitud:', error);
@@ -81,6 +82,14 @@ const Profila = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        const file = e.target.files[0];
+        
+        if (file) {
+            setFormData((prevData) => ({
+                ...prevData,
+                img: file, 
+            }));
+        }
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -103,14 +112,34 @@ const Profila = () => {
         //console.log(JSON.stringify(filteredFormData));
         const tok = localStorage.getItem('token');
 
+        const formDataToSend = new FormData();
+
+        formDataToSend.append('name', formData.name);
+        formDataToSend.append('secondName', formData.secondName);
+        formDataToSend.append('email', formData.email);
+        formDataToSend.append('password', formData.password);
+
+        if (formData.img instanceof File) {
+            formDataToSend.append('img', formData.img);
+        }
+
+        //console.log(formData.name);
+        for (let [key, value] of formDataToSend.entries()) {
+            console.log(key, value);
+        }
+
+        console.log("Datos enviados",filteredFormData);
         fetch(`${IpAPI}/api/user-data-edit`, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                //'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${tok}`,
             },
-            body: JSON.stringify(filteredFormData),
+
+            body: formDataToSend,
+            
         })
+
         .then(response => {
             // Verificar si la respuesta fue exitosa (código de estado 2xx)
             if (!response.ok) {
@@ -136,6 +165,31 @@ const Profila = () => {
         });
         
     };
+
+    const irudia_Aldatu=(e)=>{
+        const file= e.target.files[0];
+        if (file) {
+            setFormData(prevData => ({
+                ...prevData,
+                img: file
+            }));
+    
+            const imgURL = URL.createObjectURL(file);
+            localStorage.setItem('img', imgURL);
+            setIrudia(imgURL); // Actualiza la imagen mostrada
+        }
+    }
+
+    useEffect(() => {
+        if (typeof formData.img === "string") {
+            setIrudia(formData.img);
+        }
+    }, [formData.img]);
+
+    useEffect(()=>{
+        console.log("imagen",irudia);
+        console.log("FormData", formData.img);
+    },[irudia]);
 
     if (!userData) {
         return <Loading />;
@@ -164,11 +218,13 @@ const Profila = () => {
                     <div className="flex flex-col lg:flex-row w-full justify-center">
                         <div className="lg:w-1/4 w-full relative">
                             <label htmlFor="image-upload" className="cursor-pointer">
-                            {irudia ? (
+                            {formData.img ? (
                                 <img 
                                     src={irudia} 
                                     className="size-40 cursor-pointer rounded-full z-10 border-white border-2 absolute posicion" 
                                     alt="Imagen de perfil" 
+                                    
+                                   
                                 />
                             ) : (
                                 <img 
@@ -195,7 +251,7 @@ const Profila = () => {
                                 type="file" 
                                 id="image-upload" 
                                 className="hidden"  
-                                onChange={handleImageUpload} 
+                                onChange={irudia_Aldatu}
                             />
                         </div>
 

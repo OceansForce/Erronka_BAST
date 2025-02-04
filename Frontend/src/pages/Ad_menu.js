@@ -61,6 +61,7 @@ function Ad_menua() {
                     text={t('ad_menua:galduta')} 
                 />
 
+                
                 <AdminPanelButtom 
                     to="/Ad_adoptatu" 
                     imageSrc="./img/animal-approve-cat-svgrepo-com.svg" 

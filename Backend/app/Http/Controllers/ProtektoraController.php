@@ -62,6 +62,16 @@ class ProtektoraController extends Controller
 
     public function createProtektora(Request $request)
     {
+        $user = auth()->user();
+
+        // Si no hay usuario autenticado, devolver un error
+        if (!$user) {
+            return response()->json(['error' => 'usuario no autenticado'], 401); // 401 Unauthorized
+        }
+
+        if($user->id != 1){
+            return response()->json(['error' => 'usuario no tiene protectora'], 401); // 401 Unauthorized
+        }
         // Validación de los datos recibidos
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -109,6 +119,13 @@ class ProtektoraController extends Controller
 
     public function updateProtektora(Request $request)
     {
+        $user = auth()->user();
+
+        // Si no hay usuario autenticado, devolver un error
+        if (!$user) {
+            return response()->json(['error' => 'usuario no autenticado'], 401); // 401 Unauthorized
+        }
+
         // Validación de los datos recibidos
         $validated = $request->validate([
             'id' => 'required|exists:protektoras,id', // Verificar que la protectora exista
@@ -119,6 +136,10 @@ class ProtektoraController extends Controller
             'email' => 'required|email|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // El logo es opcional en la actualización
         ]);
+
+        if($user->id != $validated['id'] || $user->id !=1){
+            return response()->json(['error' => 'usuario no tiene protectora'], 401); // 401 Unauthorized
+        }
 
         // Buscar la protectora por el id
         $protektora = Protektora::find($validated['id']);

@@ -190,7 +190,7 @@ class UserCreateController extends Controller
         }
         
         $validator = \Validator::make($request->all(), [
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Si la validación falla, devolver un 400 Bad Request

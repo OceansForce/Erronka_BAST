@@ -132,7 +132,7 @@ const Profila = () => {
         fetch(`${IpAPI}/api/user-data-edit`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data',
+                //'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${tok}`,
             },
 
@@ -180,10 +180,7 @@ const Profila = () => {
     }
 
     useEffect(() => {
-        if (formData.img && formData.img instanceof File) {
-            const imgURL = URL.createObjectURL(formData.img);
-            setIrudia(imgURL);
-        } else if (formData.img && typeof formData.img === "string") {
+        if (typeof formData.img === "string") {
             setIrudia(formData.img);
         }
     }, [formData.img]);

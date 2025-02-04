@@ -77,6 +77,16 @@ Route::post('/set-not-losted', [LostedController::class, 'setNotLosted'])->middl
 Route::get('/animals-personal', [AnimalController::class, 'getPersonalAnimals'])->middleware('auth:sanctum');
 
 
+// Protectoras
+use App\Http\Controllers\ProtektoraController;
+Route::get('/protectora-list', [ProtektoraController::class, 'getAllProtektoras']);
+Route::get('/protectora-list/{id}', [ProtektoraController::class, 'getProtektora']);
+Route::get('/protectora-create', [ProtektoraController::class, 'createProtektora'])->middleware('auth:sanctum');;
+Route::get('/protectora-edit', [ProtektoraController::class, 'editProtektora'])->middleware('auth:sanctum');;
+
+
+
+
 // UP images
 /*use App\Http\Controllers\ImageController;
 Route::post('/upload-image', [ImageController::class, 'upload'])->middleware('auth:sanctum');

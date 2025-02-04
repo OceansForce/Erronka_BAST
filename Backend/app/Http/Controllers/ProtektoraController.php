@@ -117,7 +117,7 @@ class ProtektoraController extends Controller
         }
     }
 
-    public function updateProtektora(Request $request)
+    public function editProtektora(Request $request)
     {
         $user = auth()->user();
 

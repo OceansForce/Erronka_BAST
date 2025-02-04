@@ -65,19 +65,25 @@ function Saioa_sortu() {
       headers: {
         //'Content-Type': 'multipart/form-data',
       },
-      body: JSON.stringify(formData),
+      body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
         console.log('Formulario enviado correctamente:', data);
         // Realizar alguna acción después de enviar (e.g., redirigir al usuario)
-        if(data.errors.DNI){
-          setErrorText(t('error:DNIErabilita'));
-          setShowErrorModal(true);  // Mostrar el modal
-        }
-        if(data.errors.email){
-          setErrorText(t('error:emailErabilita'));
-          setShowErrorModal(true);  // Mostrar el modal
+        if (data.errors) {
+          if (data.errors.DNI) {
+            setErrorText(t('error:DNIErabilita'));
+            setShowErrorModal(true);  // Mostrar el modal
+          }
+          if (data.errors.email) {
+            setErrorText(t('error:emailErabilita'));
+            setShowErrorModal(true);  // Mostrar el modal
+          }
+        } else {
+          // Si no hay errores, puedes realizar otras acciones aquí
+          console.log('Usuario registrado correctamente');
+          // Redirigir o mostrar un mensaje de éxito
         }
 
       })

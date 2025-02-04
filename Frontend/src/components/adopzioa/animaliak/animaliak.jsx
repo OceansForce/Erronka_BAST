@@ -20,7 +20,7 @@ const Animaliak= ({id,name, kokapena, img, mota, animaliType})=>{
     }
     else if(mota==="galduta"){
       
-      return <Link to="/Animalia_galduta" className="w-1/4  max-w-80 mb-8 mx-5">
+      return <Link to={`/Animalia_galduta/${id}`} className="w-1/4  max-w-80 mb-8 mx-5">
           <img src={link} alt={name} className="rounded-t-3xl h-[218.2px] w-[320px]"/>
           <div className="dark:bg-dark  bg-primary p-2 rounded-b-2xl text-center h-[70px] w-full">
             <p className="dark:text-white font-semibold fonts_ubutu">{name}</p>

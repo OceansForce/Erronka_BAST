@@ -2,9 +2,10 @@ import i18n from './../../118n/menu';
 import { useTranslation } from 'react-i18next';
 import IpAPI from '../../config/ipAPI';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-function Anim_Gald_BODY(id) {
-    
+function Anim_Gald_BODY() {
+    const { id } = useParams();
     const { t, i18n } = useTranslation();
 
       const [animalData, setAnimalData] = useState(null);
@@ -12,7 +13,7 @@ function Anim_Gald_BODY(id) {
     useEffect(() => {
         const fetchSingleNews = async () => {
           try {
-            const response = await fetch(`${IpAPI}/api/animal-adopt/${id}`, {
+            const response = await fetch(`${IpAPI}/api/animal-losted/${id}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',

@@ -44,6 +44,7 @@ function Login() {
             if (data.token) {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('izena', data.user.name);
+                localStorage.setItem('img', data.user.img);
                 if(data.user.idProtektora !=null){
                   localStorage.setItem('protektora', data.user.idProtektora);
                 }

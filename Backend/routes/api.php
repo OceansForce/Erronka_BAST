@@ -26,8 +26,9 @@ Route::get('user-data', [UserController::class, 'getUserDate'])
 
 
 // ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
-Route::put('user-data-edit', [UserCreateController::class, 'edit'])->middleware('auth:sanctum');  // Ruta para editar un usuario
+Route::post('user-data-edit', [UserCreateController::class, 'edit'])->middleware('auth:sanctum');  // Ruta para editar un usuario
 Route::delete('user-delete', [UserCreateController::class, 'delete'])->middleware('auth:sanctum');  // Ruta para editar un usuario
+
 
 // ERABILTZAILE bateri ezarri protektora bat
 Route::put('user-add-protectora', [UserCreateController::class, 'addProtectora'])->middleware('auth:sanctum');  // Ruta para asignar una protectora a un usuario

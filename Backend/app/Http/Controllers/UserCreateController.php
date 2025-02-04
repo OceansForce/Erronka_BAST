@@ -104,17 +104,15 @@ class UserCreateController extends Controller
 
     public function edit(Request $request)
     {
-	    //return response()->json(['error'=>'que pollas']);
-        // Obtener el usuario autenticado
+
         $user = auth()->user();
-	    //return response()->json(['error' => $user]);
+
 	    if (!$user) {
             return response()->json([
 		'error' => 'Usuario no autenticado'
 		], 401); // 401 Unauthorized
         }
-//	return response()->json(['datuak'=>$request-all(),
-//				'user'=>$user],401);
+
         // Validación de los datos recibidos
         $validator = \Validator::make($request->all(), [
             'DNI' => 'nullable|string|max:10|unique:users,DNI,' . $user->id, // Validar solo si el DNI ha cambiado
@@ -179,8 +177,8 @@ class UserCreateController extends Controller
         }
     }
 
-    public function delete(Request $request)
-    {
+	public function delete(Request $request)
+    	{
 	    //return response()->json(['error'=>'que pollas']);
         // Obtener el usuario autenticado
         $user = auth()->user();

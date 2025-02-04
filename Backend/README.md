@@ -4,7 +4,7 @@
 
 Link: 
 ```
-http://bastbackend.ddns.net:8000/api/translations/keys
+https://bastbackend.ddns.net/api/translations/keys
 ```
 Header:
 ```
@@ -47,7 +47,7 @@ Response Error:
   
 Link: 
 ```
-http://bastbackend.ddns.net:8000/api/register
+https://bastbackend.ddns.net/api/register
 ```
 Header:
 ```
@@ -103,7 +103,7 @@ Response Error:
 Emaila Verifikatzeko erabiltzen da
 Link: 
 ```
-http://bastbackend.ddns.net:8000/api/verity-email/34298df983hfdkd
+https://bastbackend.ddns.net/api/verity-email/34298df983hfdkd
 ```
 Header:
 ```
@@ -134,7 +134,7 @@ Response Error:
   
 Link: 
 ```
-http://bastbackend.ddns.net:8000/api/login
+https://bastbackend.ddns.net/api/login
 ```
 Header:
 ```
@@ -177,7 +177,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/user-data
+https://bastbackend.ddns.net/api/user-data
 ```
 Header:
 ```
@@ -244,7 +244,7 @@ Lortzen dira erabiltzaile guztien datuak
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/get-all-user
+https://bastbackend.ddns.net/api/get-all-user
 ```
 Header:
 ```
@@ -311,7 +311,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/user-data-edit
+https://bastbackend.ddns.net/api/user-data-edit
 ```
 Header:
 ```
@@ -370,7 +370,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/user-delete
+https://bastbackend.ddns.net/api/user-delete
 ```
 Header:
 ```
@@ -403,7 +403,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/user-add-protectora
+https://bastbackend.ddns.net/api/user-add-protectora
 ```
 Header:
 ```
@@ -453,7 +453,7 @@ Response Error:
   
 Link: 
 ```
-http://bastbackend.ddns.net:8000/api/news
+https://bastbackend.ddns.net/api/news
 ```
 Header:
 ```
@@ -500,7 +500,7 @@ Link:
 <p>Protektora_id is optional</p>
     
 ```
-http://bastbackend.ddns.net:8000/api/latest-news?count=5&offset=10&protektora_id=1
+https://bastbackend.ddns.net/api/latest-news?count=5&offset=10&protektora_id=1
 ```
 Header:
 ```
@@ -544,7 +544,7 @@ Link:
 <p>Protektora_id is optional</p>
     
 ```
-http://bastbackend.ddns.net:8000/api/new-obtein/45
+https://bastbackend.ddns.net/api/new-obtein/45
 ```
 Header:
 ```
@@ -599,7 +599,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/news/50
+https://bastbackend.ddns.net/api/news/50
 ```
 Header:
 ```
@@ -646,7 +646,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/news/50
+https://bastbackend.ddns.net/api/news/50
 ```
 Header:
 ```
@@ -675,7 +675,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/animals-adopt?limit=5&offset=0&protektora_id=123&type=txakurra
+https://bastbackend.ddns.net/api/animals-adopt?limit=5&offset=0&protektora_id=123&type=txakurra
 ```
 Header:
 ```
@@ -734,7 +734,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/animals-personal?limit=5&offset=0&protektora_id=123&type=txakurra
+https://bastbackend.ddns.net/api/animals-personal?limit=5&offset=0&protektora_id=123&type=txakurra
 ```
 Header:
 ```
@@ -795,7 +795,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/animals-create
+https://bastbackend.ddns.net/api/animals-create
 ```
 Header:
 ```
@@ -843,7 +843,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/animals-edit
+https://bastbackend.ddns.net/api/animals-edit
 ```
 Header:
 ```
@@ -916,7 +916,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/animal-adopt/33
+https://bastbackend.ddns.net/api/animal-adopt/33
 ```
 Header:
 ```
@@ -939,6 +939,210 @@ Response:
   "noiztik": null,
   "userID": 2,
   "protektora_id": 5
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>
+
+
+
+
+
+<details>
+    
+<summary> <h2> Get Animals Losted </h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/animals-losted?limit=5&offset=0&protektora_id=123&type=txakurra
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+[
+    {
+        "id": 1,
+        "name": "Fido",
+        "etxekoAnimalia": true,
+        "type": "txakurra",
+        "animalType": "Dog",
+        "img": null,
+        "bakuna": 1,
+        "gender": 1,
+        "descripcion": "Friendly dog",
+        "year": "2020-05-01 00:00:00",
+        "losted": 0,
+        "noiztik": "2025-01-01 00:00:00",
+        "userID": 2,
+        "protektora_id": 123,
+        "losted":3
+    },
+    {
+        "id": 2,
+        "name": "Luna",
+        "etxekoAnimalia": true,
+        "type": "katua",
+        "animalType": "Cat",
+        "img": null,
+        "bakuna": 1,
+        "gender": 0,
+        "descripcion": "Playful cat",
+        "year": "2021-03-15 00:00:00",
+        "losted": 0,
+        "noiztik": "2025-01-01 00:00:00",
+        "userID": 3,
+        "protektora_id": 123,
+        "losted":4
+    }
+]
+
+```
+Response Error:
+```
+{
+    "message": "No animals found for the given criteria"
+}
+```
+</details>
+
+
+
+<details>
+    
+<summary> <h2> Get losted animal information</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/animal-losted/{id}
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+{
+  "id": 1,
+  "name": "Max",
+  "etxekoAnimalia": true,
+  "type": "txakurra",
+  "animalType": "Pastor Alemán",
+  "img": "http://urlimagen.com/nueva-imagen.jpg",
+  "bakuna": 2,
+  "gender": 1,
+  "descripcion": "Animal amigable y activo.",
+  "year": "2020-05-10",
+  "losted": null,
+  "noiztik": null,
+  "userID": 2,
+  "protektora_id": 5
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>
+
+<details>
+    
+<summary> <h2> Set losted</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/set-losted
+```
+Header:
+```
+Content-Type:application/json
+```
+Body:
+```
+{
+  "id": 1,
+  "hiria": "Donostia",
+  "probintzia": "Guipuzkoa",
+  "fecha": "2022-01-01",
+  "moreInformation": "text text"
+}
+```
+Response:
+```
+{
+  "mesagge":"losted"
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>
+
+<details>
+    
+<summary> <h2> Set Not losted</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/set-not-losted
+```
+Header:
+```
+Content-Type:application/json
+```
+Body:
+```
+{
+  "id": 1  
+}
+```
+Response:
+```
+{
+  "mesagge":"not losted"
 }
 
 ```

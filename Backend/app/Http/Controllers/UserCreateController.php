@@ -121,7 +121,7 @@ class UserCreateController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id, // Validar solo si el email ha cambiado
             'password' => 'nullable|string|min:8|confirmed', // La contraseña es opcional al editar, pero si se proporciona debe cumplir con las reglas
             'year' => 'nullable|date',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4048',
         ]);
 
         // Si la validación falla, devolver un 400 Bad Request

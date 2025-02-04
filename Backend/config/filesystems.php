@@ -36,6 +36,13 @@ return [
             'serve' => true,
             'throw' => false,
         ],
+	'uploads' => [
+	    'driver' => 'local',
+	    'root' => storage_path('app/public/uploads'),
+	    'visibility' => 'public',
+	    'max_size' => 10240, // Tamaño en KB (10MB)
+	],
+
 
         'public' => [
             'driver' => 'local',

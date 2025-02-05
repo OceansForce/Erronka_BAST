@@ -258,10 +258,7 @@ class LostedController extends Controller
         // Crear una consulta inicial para obtener todos los animales con el campo 'losted' no nulo
         $query = Animals::whereNotNull('losted');
 
-        // Si $herria tiene valor, ordenamos solo por la ciudad 'hiria'
-        if ($herria) {
-            $query->orderByRaw("galduta.hiria = ? DESC", [$herria]);
-        }
+        
 
         // Obtener los resultados con la relación 'galduta' cargada
         $animals = $query->with('galduta')->get();

@@ -2,7 +2,7 @@ import Animali_Form from '../components/formularioak/animali_Form.js';
 import { useTranslation } from 'react-i18next';
 import i18n from './../118n/menu.js';
 
-function Ad_adoptatu(){
+function Animalia_sortu(){
 
   const { t, i18n } = useTranslation();
     
@@ -10,12 +10,12 @@ function Ad_adoptatu(){
   const changeLanguage = (lang) => {
       i18n.changeLanguage(lang);  // Cambia el idioma
   };
- 
+
   return(
       <>
-          <Animali_Form tituloa={t('Ad_adoptatu:Titulo1')} atras={"/Ad_menu"} ruta={"/Ad_menu"}/>
+          <Animali_Form tituloa={t('Ad_adoptatu:Titulo2')} atras={"/Profila"} ruta={"/Profila"}/>
       </>
   );
 }
 
-export default Ad_adoptatu;
+export default Animalia_sortu;

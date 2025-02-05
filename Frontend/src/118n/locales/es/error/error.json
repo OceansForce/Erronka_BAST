@@ -1,0 +1,8 @@
+{
+    "loginFailed":"El email o contraseña estan mal",
+    "close":"Cerrar",
+    "DNIErabilita":"El DNI ya se esta utilizando",
+    "emailErabilita":"El Email ya se esta utilizando",
+    "generalError":"Ha ocurrido un error, vuelve a intentarlo mas tarde"
+    
+}

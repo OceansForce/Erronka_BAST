@@ -11,6 +11,8 @@ class Protektora extends Model
 {
     use HasFactory;
 
+    protected $table = 'protektora';
+
     protected $fillable = [
         'name',
         'provintzia',

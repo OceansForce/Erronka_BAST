@@ -969,7 +969,7 @@ Response Error:
 Link: 
  
 ```
-https://bastbackend.ddns.net/api/animals-losted?limit=5&offset=0&protektora_id=123&type=txakurra&herria=Donostia&lurraldea=Euskadi
+https://bastbackend.ddns.net/api/animals-losted?limit=5&offset=0&protektora_id=123&type=txakurra&herria=Donostia&lurraldea=Guipuzkoa
 ```
 Header:
 ```

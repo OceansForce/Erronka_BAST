@@ -21,7 +21,7 @@ class LostedController extends Controller
         $types = $request->input('type', []); // Ahora se espera un array de tipos
         $herria = $request->input('herria', null); // Ahora pasamos el `herria`
         $lurraldea = $request->input('lurraldea', null); // Ahora pasamos el `lurraldea`
-
+    
         // Validación de los parámetros
         $request->validate([
             'limit' => 'integer|min:1|max:25', // Limitar el valor de limit a entre 1 y 25
@@ -32,30 +32,27 @@ class LostedController extends Controller
             'herria' => 'nullable|string',
             'lurraldea' => 'nullable|string',
         ]);
-
+    
         // Iniciamos la consulta base
         $query = Animals::where(function ($query) {
             // Verificar si el campo losted tiene algún valor y contiene al menos un número
             $query->whereNotNull('losted')
                 ->where('losted', 'REGEXP', '[0-9]'); // Contiene al menos un número
         });
-
+    
         // Si se pasa el array de tipos de animal, filtramos también por estos tipos
         if (!empty($types)) {
             $query->whereIn('type', $types);
         }
-
-        // Si `$herria` tiene valor, unimos la tabla 'losted' y ordenamos por 'hiria'
+    
+        // Si `$herria` tiene valor, filtrar solo los animales que están relacionados con 'losted' y que 'losted.hiria' sea igual a `$herria`
         if ($herria) {
-            // Unimos la tabla 'losted' para poder ordenar por 'hiria'
-            $query->join('losted', 'animals.losted', '=', 'losted.id')
-                ->orderByRaw("losted.hiria = ? DESC", [$herria]) // Ordenar por 'hiria' de 'losted'
-                ->orderBy('animals.year', 'asc'); // Luego ordenar por 'year' de 'animals'
-        } else {
-            // Si no hay `$herria`, solo ordenar por 'year'
-            $query->orderBy('animals.year', 'asc');
+            // Filtrar por la relación con 'losted' y 'hiria' igual a `$herria`
+            $query->whereHas('galduta', function ($query) use ($herria) {
+                $query->where('hiria', $herria); // Filtrar por 'hiria' de la tabla 'losted'
+            });
         }
-
+    
         // Aplicar paginación y obtener los resultados
         $animals = $query->with('galduta') // Cargar la relación 'galduta' con los datos de la tabla 'losted'
             ->offset($offset)
@@ -73,7 +70,7 @@ class LostedController extends Controller
                 'animals.year',
                 'animals.losted'
             ]);
-
+    
         // Agregar 'hiria', 'probintzia', 'fecha', y 'moreInformation' desde la relación 'galduta' en la respuesta
         $animals->transform(function ($animal) {
             // Acceder a los datos de la relación 'galduta' (tabla 'losted')
@@ -81,19 +78,19 @@ class LostedController extends Controller
             $animal->probintzia = $animal->galduta->probintzia ?? null;
             $animal->fecha = $animal->galduta->fecha ?? null;
             $animal->moreInformation = $animal->galduta->moreInformation ?? null;
-
+    
             return $animal;
         });
-
+    
         // Verificar si no se encontraron resultados
         if ($animals->isEmpty()) {
             return response()->json(['message' => 'No animals found for the given criteria'], 404);
         }
-
+    
         // Retornar la respuesta como JSON
         return response()->json($animals);
     }
-
+    
 
 
     public function getAnimal(Request $request, $id)

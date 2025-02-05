@@ -15,97 +15,50 @@ import { document } from 'postcss';
 
 
 function Edit_animal() {
-   
-    const [etxekoa, setEtxekoa]= useState(0);
-    const [esterilizado, setEsterilizado]= useState(0);
+
+
+    const location = useLocation(); // Asegúrate de obtener location después de la inicialización
+    const [etxekoa, setEtxekoa] = useState(1); // Valor inicial predeterminado
+    const [esterilizado, setEsterilizado]= useState(1);
+
+    // console.log(etxekoa);
+
+    const { item } = location.state || {}; // Acceder a item desde location.state
+    console.log(item);
+    // Efecto para actualizar el estado de etxekoa cuando item esté disponible
+    useEffect(() => {
+        if (item) {
+            setEtxekoa(item.etxekoAnimalia ? 1 : 2); // Establece el valor según `item.etxekoAnimalia`
+        }
+    }, [item]);
+
+    useEffect(() => {
+        if (item) {
+            setEsterilizado(item.bakuna ? 1 : 2); // Establece el valor según `item.etxekoAnimalia`
+        }
+    }, [item]);
+
    
     const { t, i18n } = useTranslation();
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang); 
     };
+    const id=1;
 
-    const location = useLocation();
-    const { id } = location.state || {}; //Link etiketatik id-a lortzeko
+    
 
     // Estado para manejar los datos del formulario
     const [formData, setFormData] = useState({
-        name:"",
-        etxekoAnimalia:"",
-        bakuna:"",
-        descripcion:"",
+        id:item.id,
+        name:item.name,
+        etxekoAnimalia:etxekoa,
+        bakuna:esterilizado,
+        descripcion:item.descripcion,
         img:''
     });
 
-    useEffect(() => {
-        
-
-        const fetchSingleNews = async (newsId) => {
-            try {
-                const response = await fetch(`${IpAPI}/api/animal-adopt/${newsId}`, {
-                    method:'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                
-
-                if (!response.ok) {
-                    throw new Error(`Error fetching news with id ${newsId}`);
-                }else{
-                    const data = await response.json();
-                    console.log("Animal",data);
-                    // Inicializar formData con los datos recibidos
-                    setFormData({
-                        name: data.name,
-                        etxekoAnimalia: data.etxekoAnimalia,
-                        bakuna: data.bakuna,
-                        descripcion: data.descripcion,
-                        img: data.img
-                    });
-
-                    
-                    
-                    
-                }
-                
-
-            } catch (error) {
-                console.error('Error fetching single news:', error);
-                alert('Error al obtener los datos de la noticia.');
-            }
-        };
-        console.log("ID",id);
-        if (id) {
-            fetchSingleNews(id); // Llamar a la API cuando `id` esté disponible
-
-        }
-    }, [id]);
-
-    const radioak_aldatu=()=>{
-
-        let radio_esterilizatua1=  document.getElementById("esterilizatua1");
-        let radio_esterilizatua2=  document.getElementById("esterilizatua2");
-
-        let radio_etxe1=  document.getElementById("etxekoa1");
-        let radio_etxe2=  document.getElementById("etxekoa2");
-
-        if(formData.etxekoAnimalia){
-            radio_etxe1.disabled=true;
-            radio_etxe2.disabled=false;
-        }else{
-            radio_etxe1.disabled=false;
-            radio_etxe2.disabled=true; 
-        }
-
-        if(formData.bakuna){
-            radio_esterilizatua1.disabled=true;
-            radio_esterilizatua2.disabled=false;
-        }else{
-            radio_esterilizatua1.disabled=false;
-            radio_esterilizatua2.disabled=true;
-        }
-    }
-    radioak_aldatu();
+    
+    
 
     // Datuak aldatzeko
     const handleChange = (e) => {
@@ -120,6 +73,8 @@ function Edit_animal() {
         const tok = localStorage.getItem('token');
         const formDataToSend = new FormData();
     
+
+        formDataToSend.append('id', formData.id);
         formDataToSend.append('name', formData.name);
         formDataToSend.append('etxekoAnimalia', etxekoa);
         formDataToSend.append('bakuna', esterilizado);
@@ -134,16 +89,17 @@ function Edit_animal() {
     
         try {
         const response = await fetch(`${IpAPI}/api/animals-edit`, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
-                'Content-Type':'application/json',
                 'Authorization': `Bearer ${tok}`,
             },
             body: formDataToSend, // FormData ya maneja la codificación de archivos
         });
     
         if (response.ok) {
+            console.log(response);
             const result = await response.json();
+            // console.log(result);
             setFormData({
             name: "",
             etxekoAnimalia: "",
@@ -151,7 +107,9 @@ function Edit_animal() {
             descripcion: "",
             img: null, // Resetear la imagen
             });
+            navigator("/Profila");
         } else {
+            console.log(response);
             const error = await response.json();
             alert('Error: ' + error.message);
         }
@@ -174,7 +132,7 @@ function Edit_animal() {
                 </div>
               </div>
 
-              <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>Animalia Editatu</p>
+              <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('ad_galduta:animalEdit')}</p>
               <form className='flex flex-col text-left' onSubmit={handleSubmit}>
 
                 <div className='flex flex-row'>
@@ -189,27 +147,63 @@ function Edit_animal() {
                             name='img'
                             // value={formData.img}
                             onChange={(e) => setFormData({ ...formData, img: e.target.files[0] })}  // Cambiar aquí
-                            required/>
+                            />
                     </div>
                     <div className='flex flex-col w-1/2'>
                         <div className=' w-1/2'>
                             <label className='mt-2 font-semibold dark:text-white'>{t("ad_galduta:Esterilizatua")}</label> 
                             <div className='ml-3'>
-                                <input type='radio' name='Esterilizatua' id='esterilizatua1' value={1} onChange={(e)=> setEsterilizado(parseInt(e.target.value))}/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
-                            </div>
+                            <input
+                                type='radio'
+                                name='Esterilizatua'
+                                id='esterilizatua1'
+                                value={1}
+                                onChange={(e) => setEsterilizado(parseInt(e.target.value))}
+                                checked={esterilizado === 1}
+                            />
+                            <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
+                        </div>
 
-                            <div className='ml-3'>
-                                <input type='radio' name='Esterilizatua' id='esterilizatua2' value={2} onChange={(e)=> setEsterilizado(parseInt(e.target.value))}/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
-                            </div>
+                        <div className='ml-3 mt-2'>
+                            <input
+                                type='radio'
+                                name='Esterilizatua'
+                                id='esterilizatua2'
+                                value={2}
+                                onChange={(e) => setEsterilizado(parseInt(e.target.value))}
+                                checked={esterilizado === 2}
+                            />
+                            <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
+                        </div>
+
                         </div>
                         <label className='font-semibold dark:text-white'>{t('Ad_adoptatu:Etxekoa')}</label>
                         <div className='ml-3'>
-                            <input type='radio' name='Etxekoa' id='etxekoa1' value={1} onChange={(e)=> setEtxekoa(parseInt(e.target.value))} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
+                            <input
+                                type='radio'
+                                name='Etxekoa'
+                                id='etxekoa1'
+                                value={1}
+                                onChange={(e) => setEtxekoa(parseInt(e.target.value))}
+                                checked={etxekoa === 1} // Si etxekoAnimalia es 1, el primer botón se selecciona
+                                required
+                            />
+                            <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
                         </div>
 
                         <div className='ml-3'>
-                            <input type='radio' name='Etxekoa' id='etxekoa2' value={2} onChange={(e)=> setEtxekoa(parseInt(e.target.value))} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
+                            <input
+                                type='radio'
+                                name='Etxekoa'
+                                id='etxekoa2'
+                                value={2}
+                                onChange={(e) => setEtxekoa(parseInt(e.target.value))}
+                                checked={etxekoa === 2} // Si etxekoAnimalia es 2, el segundo botón se selecciona
+                                required
+                            />
+                            <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
                         </div>
+
                     </div>
                   
                 </div>

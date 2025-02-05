@@ -1280,3 +1280,27 @@ Response Error:
 
 ```
 </details>
+
+
+
+<details>
+    
+<summary> <h2> Get losted place</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/losted-place
+```
+
+Response:
+```
+{
+    "Araba": ["Vitoria-Gasteiz"],
+    "Bizkaia": ["Barakaldo", "Bilbao", "Getxo"],
+    "Gipuzkoa": ["Donostia", "Irun", "Tolosa"]
+}
+
+
+```
+</details>

@@ -251,6 +251,59 @@ class LostedController extends Controller
         // Si no se cumple ninguna de las condiciones anteriores, devolver un error de autorización
         return response()->json(['error' => 'No tienes permisos para editar este animal'], 403); // 403 Forbidden
     }
+
+
+    public function getLekuak(Request $request)
+    {
+        // Crear una consulta inicial para obtener todos los animales con el campo 'losted' no nulo
+        $query = Animals::whereNotNull('losted');
+
+        // Si $herria tiene valor, ordenamos solo por la ciudad 'hiria'
+        if ($herria) {
+            $query->orderByRaw("galduta.hiria = ? DESC", [$herria]);
+        }
+
+        // Obtener los resultados con la relación 'galduta' cargada
+        $animals = $query->with('galduta')->get();
+
+        // Crear un arreglo para almacenar las provincias y las ciudades correspondientes
+        $result = [];
+
+        // Iterar sobre los animales y agrupar por provincias
+        foreach ($animals as $animal) {
+            $probintzia = $animal->galduta->probintzia ?? null;
+            $hiria = $animal->galduta->hiria ?? null;
+
+            if ($probintzia && $hiria) {
+                // Si la provincia no está en el resultado, agregarla
+                if (!isset($result[$probintzia])) {
+                    $result[$probintzia] = [];
+                }
+
+                // Agregar la ciudad solo si no está duplicada
+                if (!in_array($hiria, $result[$probintzia])) {
+                    $result[$probintzia][] = $hiria;
+                }
+            }
+        }
+
+        // Ordenar las provincias por nombre
+        ksort($result);
+
+        // Ordenar las ciudades dentro de cada provincia por nombre
+        foreach ($result as $probintzia => $cities) {
+            sort($result[$probintzia]);
+        }
+
+        // Verificar si se encontró alguna provincia
+        if (empty($result)) {
+            return response()->json(['message' => 'No places found for the given criteria'], 404);
+        }
+
+        // Retornar la respuesta como JSON con las provincias y sus ciudades
+        return response()->json($result);
+    }
+
     
 
 }

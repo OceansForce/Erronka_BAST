@@ -235,14 +235,9 @@ class AnimalController extends Controller
             'id' => 'required|integer|exists:animals,id', // Verifica que el id del animal exista en la base de datos
             'name' => 'nullable|string|max:255', // Nombre del animal
             'etxekoAnimalia' => 'nullable|boolean', // Es un animal de casa (booleano)
-            'type' => 'nullable|string|in:txakurra,txakurra ppp,katua,besteak', // Tipo de animal
-            'animalType' => 'nullable|string|max:255', // Subtipo del animal (opcional)
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'img' => 'null|image|mimes:jpeg,png,jpg,gif|max:2048',
             'bakuna' => 'nullable|integer|min:0', // 0 = no vacunado, otros números, el id de la vacuna
-            'gender' => 'nullable|integer|in:0,1', // Género del animal, 0 = hembra, 1 = macho
             'descripcion' => 'nullable|string|max:255', // Descripción del animal (opcional)
-            'year' => 'nullable|date', // Año de nacimiento o ingreso (opcional)
-            'userEmail' => 'nullable|string|email|max:255', // Email del usuario al que pertenece el animal
         ]);
     
         // Obtener el usuario autenticado
@@ -286,7 +281,7 @@ class AnimalController extends Controller
         // Comprobar si el animal pertenece al usuario autenticado
         if ($animal->userID == $user->id) {
             // Si el animal pertenece al usuario autenticado, se pueden editar sus datos
-            $animal->update($request->only([
+            $updatedData = $request->only([
                 'name',
                 'etxekoAnimalia',
                 'type',
@@ -295,12 +290,14 @@ class AnimalController extends Controller
                 'gender',
                 'descripcion',
                 'year',
-            ]));
+            ]);
             
-            $animal -> img = $imageUrl;
+            if ($imageUrl) {
+                $updatedData['img'] = $imageUrl;
+            }
     
-            // Guardar cambios (incluido userID si se actualizó)
-            $animal->save();
+            // Actualizamos los datos solo con los campos que se han enviado
+            $animal->update($updatedData);
     
             return response()->json($animal, 200); // 200 OK
         }
@@ -310,7 +307,7 @@ class AnimalController extends Controller
             // Verificar si el ID de la protektora del animal coincide con el ID de la protektora del usuario
             if ($user->protektora_id == $animal->protektora_id) {
                 // Si la protektora es la misma, permitir la edición
-                $animal->update($request->only([
+                $updatedData = $request->only([
                     'name',
                     'etxekoAnimalia',
                     'type',
@@ -319,10 +316,17 @@ class AnimalController extends Controller
                     'gender',
                     'descripcion',
                     'year',
-                ]));
+                ]);
     
-                $animal -> img = $imageUrl;
-                // Guardar cambios (incluido userID si se actualizó)
+                // Solo actualizamos si hay un valor nuevo en 'img'
+                if ($imageUrl) {
+                    $updatedData['img'] = $imageUrl;
+                }
+
+                // Actualizamos los datos solo con los campos que se han enviado
+                $animal->update($updatedData);
+
+                // Guardar cambios
                 $animal->save();
     
                 return response()->json($animal, 200); // 200 OK

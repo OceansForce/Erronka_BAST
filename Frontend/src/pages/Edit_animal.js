@@ -14,9 +14,10 @@ import Irudiak_input from './../components/notiziak/IrudiakInput.js';
 import { document } from 'postcss';
 
 
+
 function Edit_animal() {
 
-
+    const navigate = useNavigate();  // Hook para la navegación
     const location = useLocation(); // Asegúrate de obtener location después de la inicialización
     const [etxekoa, setEtxekoa] = useState(1); // Valor inicial predeterminado
     const [esterilizado, setEsterilizado]= useState(1);
@@ -28,7 +29,7 @@ function Edit_animal() {
     // Efecto para actualizar el estado de etxekoa cuando item esté disponible
     useEffect(() => {
         if (item) {
-            setEtxekoa(item.etxekoAnimalia ? 1 : 2); // Establece el valor según `item.etxekoAnimalia`
+            setEtxekoa(item.etxekoAnimalia ? 1 : 0); // Establece el valor según `item.etxekoAnimalia`
         }
     }, [item]);
 
@@ -54,7 +55,7 @@ function Edit_animal() {
         etxekoAnimalia:etxekoa,
         bakuna:esterilizado,
         descripcion:item.descripcion,
-        img:''
+        img:null
     });
 
     
@@ -69,7 +70,7 @@ function Edit_animal() {
     // Manejador del envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+        //console.log("Image to be uploaded:", formData.img);
         const tok = localStorage.getItem('token');
         const formDataToSend = new FormData();
     
@@ -80,42 +81,49 @@ function Edit_animal() {
         formDataToSend.append('bakuna', esterilizado);
         formDataToSend.append('descripcion', formData.descripcion);
     
-        // Si hay imagen, agregarla al FormData
-        if (formData.img) {
-        formDataToSend.append('img', formData.img);
+        if (formData.img && formData.img instanceof File) {
+            console.log("Image to be uploaded:", formData.img);
+            formDataToSend.append('img', formData.img);
         }
+        
+        // console.log("form:data", formDataToSend.get('img'));
 
-        console.log(formDataToSend);
+        // console.log(formDataToSend);
     
         try {
-        const response = await fetch(`${IpAPI}/api/animals-edit`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${tok}`,
-            },
-            body: formDataToSend, // FormData ya maneja la codificación de archivos
-        });
-    
-        if (response.ok) {
-            console.log(response);
-            const result = await response.json();
-            // console.log(result);
-            setFormData({
-            name: "",
-            etxekoAnimalia: "",
-            bakuna: "",
-            descripcion: "",
-            img: null, // Resetear la imagen
+            const response = await fetch(`${IpAPI}/api/animals-edit`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${tok}`,
+                },
+                body: formDataToSend,
             });
-            navigator("/Profila");
-        } else {
-            console.log(response);
-            const error = await response.json();
-            alert('Error: ' + error.message);
-        }
+        
+            if (!response.ok) {
+                const errorText = await response.text(); // Obtener el cuerpo de la respuesta
+                console.error("Error response:", errorText);
+                alert(`Error: ${errorText}`);
+                return;
+            }
+        
+            const result = await response.json();
+            console.log("Server response:", result);
+        
+            // Si la respuesta es exitosa
+            setFormData({
+                name: "",
+                etxekoAnimalia: "",
+                bakuna: "",
+                descripcion: "",
+                img: null, // Resetear la imagen
+            });
+            navigate("/Profila");
+        
         } catch (error) {
-        alert('Error en la solicitud: ' + error.message);
+            console.error("Request failed:", error);
+            alert('Error en la solicitud: ' + error.message);
         }
+        
     };
 
 
@@ -145,8 +153,12 @@ function Edit_animal() {
                             className='mb-2 dark:border-primary rounded-lg dark:text-white' 
                             type='file'
                             name='img'
-                            // value={formData.img}
-                            onChange={(e) => setFormData({ ...formData, img: e.target.files[0] })}  // Cambiar aquí
+                            //value={formData.img}
+                            onChange={(e) => {
+                                const file = e.target.files[0];
+                                console.log("File selected:", file); // Verificar si el archivo está seleccionado
+                                setFormData({ ...formData, img: file });
+                            }}
                             />
                     </div>
                     <div className='flex flex-col w-1/2'>
@@ -196,9 +208,9 @@ function Edit_animal() {
                                 type='radio'
                                 name='Etxekoa'
                                 id='etxekoa2'
-                                value={2}
+                                value={0}
                                 onChange={(e) => setEtxekoa(parseInt(e.target.value))}
-                                checked={etxekoa === 2} // Si etxekoAnimalia es 2, el segundo botón se selecciona
+                                checked={etxekoa === 0} // Si etxekoAnimalia es 2, el segundo botón se selecciona
                                 required
                             />
                             <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>

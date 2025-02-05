@@ -235,7 +235,7 @@ class AnimalController extends Controller
             'id' => 'required|integer|exists:animals,id', // Verifica que el id del animal exista en la base de datos
             'name' => 'nullable|string|max:255', // Nombre del animal
             'etxekoAnimalia' => 'nullable|boolean', // Es un animal de casa (booleano)
-            'img' => 'null|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'bakuna' => 'nullable|integer|min:0', // 0 = no vacunado, otros números, el id de la vacuna
             'descripcion' => 'nullable|string|max:255', // Descripción del animal (opcional)
         ]);

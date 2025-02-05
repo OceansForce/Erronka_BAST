@@ -74,18 +74,6 @@ const UserOptions = () => {
               </Link>
             </li>
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
-              <a href='#' className='flex items-center'>
-                <img className='size-8 rounded-full' src='/img/icons/users/chat.svg'/>
-                <h4 className='ml-3'>{t('user:chat')}</h4>
-              </a>
-            </li>
-            <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
-              <a href='#' className='flex items-center'>
-                <img className='size-8 rounded-full' src='/img/icons/users/config.svg'/>
-                <h4 className='ml-3'>{t('user:konfig')}</h4>
-              </a>
-            </li>
-            <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
               <a href='#' className='flex items-center' onClick={(e) => {
                 e.preventDefault();  // Evita el comportamiento por defecto del enlace
                 borrarLocalStorage();

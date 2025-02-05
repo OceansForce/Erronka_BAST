@@ -15,15 +15,21 @@ function Animali_Form({tituloa, atras, ruta}){
   
   const [mota, setMota]= useState("");
   const [arraza, setArraza]= useState("");
-  const [sexo, setSexo]= useState(0);
-  const [etxekoa, setEtxekoa]= useState(0);
-  const [esterilizado, setEsterilizado]= useState(0);
+  const [sexo, setSexo]= useState('');
+  const [etxekoa, setEtxekoa]= useState('');
+  const [esterilizado, setEsterilizado]= useState('');
 
   const navigate = useNavigate();
   useEffect(() => {
     // Llamar a checkProtektora dentro del useEffect
     checkProtektora(navigate);
   }, [navigate]);
+
+  useEffect(() => {
+    // Llamar a checkProtektora dentro del useEffect
+    console.log(etxekoa);
+  }, [etxekoa]);
+  
   
   const { t, i18n } = useTranslation();
   
@@ -90,7 +96,7 @@ function Animali_Form({tituloa, atras, ruta}){
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name || !mota || !arraza || !sexo || !etxekoa || !formData.descripcion || !formData.year) {
+    if (!formData.name || !mota || !arraza || !sexo || etxekoa !='' || !formData.descripcion || !formData.year) {
       alert("Por favor, completa todos los campos requeridos.");
       return;
     }
@@ -227,16 +233,32 @@ function Animali_Form({tituloa, atras, ruta}){
                 </div>
 
                 <div className='flex flex-row mt-2'>
-                  <div className=' w-1/2 flex flex-col mr-10'>
-                    <label className='font-semibold dark:text-white'>{t('Ad_adoptatu:Etxekoa')}</label>
-                    <div className='ml-3'>
-                      <input type='radio' name='Etxekoa' value={1} onChange={(e)=> setEtxekoa(parseInt(e.target.value))} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
-                    </div>
-
-                    <div className='ml-3'>
-                      <input type='radio' name='Etxekoa' value={2} onChange={(e)=> setEtxekoa(parseInt(e.target.value))} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
-                    </div>
+                <div className=' w-1/2 flex flex-col mr-10'>
+                  <label className='font-semibold dark:text-white'>{t('ad_galduta:Etxekoa')}</label>
+                  <div className='ml-3'>
+                    <input 
+                      type='radio' 
+                      name='Etxekoa' 
+                      value={1} 
+                      onChange={(e) => setEtxekoa(parseInt(e.target.value))} 
+                      checked={etxekoa === 1} 
+                      required 
+                    />
+                    <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
                   </div>
+                  <div className='ml-3'>
+                    <input 
+                      type='radio' 
+                      name='Etxekoa' 
+                      value={0} 
+                      onChange={(e) => setEtxekoa(parseInt(e.target.value))} 
+                      checked={etxekoa === 0} 
+                      required 
+                    />
+                    <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
+                  </div>
+                </div>
+
                   <div className=' w-1/2 flex flex-col mr-5'>
                     <label className='font-semibold dark:text-white'>{t('ad_galduta:Profil')}</label>
                     <input 

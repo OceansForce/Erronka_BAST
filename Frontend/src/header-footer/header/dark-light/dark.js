@@ -28,7 +28,7 @@ const DarkModeToggle = () => {
   }, [isDarkMode]);
 
   return (
-    <div className="">
+    <div className="z-0">
       <button
         className={`relative w-20 h-8 rounded-full flex items-center px-1 ${
           isDarkMode ? "bg-gray-700" : "bg-gray-300"

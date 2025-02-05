@@ -8,7 +8,9 @@ function galduta() {
     const [hiria, setHiria]= useState("");
 
     const hiriaJaso=(datua)=>{
-      setHiria("&herria="+datua);
+      if(datua!="denak"){
+        setHiria("&herria="+datua);
+      }
       console.log("Aita: ",datua);
     }
 

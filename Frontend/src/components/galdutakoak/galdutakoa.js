@@ -16,6 +16,7 @@ const Galduta= ({jaso})=>{
   useEffect(()=>{
     if(jaso!=""){
       console.log(adopAnimals);
+      setAdopAnimals([]);
       fetchGaldutakoAnimalia();
     }
     
@@ -42,7 +43,7 @@ const Galduta= ({jaso})=>{
             setAdopAnimals((prevAnimals) => [...prevAnimals, ...result]);
 
             // Incrementar el offset para la próxima solicitud
-            setOffset((prevOffset) => prevOffset + limit);
+            // setOffset((prevOffset) => prevOffset + limit);
       }
         
     } catch (error) {

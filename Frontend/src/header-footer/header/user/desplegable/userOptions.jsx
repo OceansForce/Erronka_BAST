@@ -38,7 +38,7 @@ const UserOptions = () => {
   };
 
   return (
-    <div className="relative language-selector ">
+    <div className="relative language-selector z-0">
       <img
         src={img}
         className="size-12 cursor-pointer rounded-full border-white border-2"

@@ -34,7 +34,7 @@ const Header = () => {
         
       </div>
       
-      <div className=' justify-center flex-center p-3 capitalize'>
+      <div className=' justify-center flex-center p-3 capitalize z-10'>
         <ul className='list-none flex flex-col sm:flex-row sm:space-x-10 text-center sm:text-left'>
           <li className='transition-all duration-300
                            hover:scale-110 hover:shadow-lg
@@ -53,7 +53,7 @@ const Header = () => {
         </ul>
       </div>
 
-      <div className=' flex items-center space-x-6 '>
+      <div className=' flex items-center space-x-6 z-0'>
         {/* Componente LanguageSelector con la función changeLanguage como prop */}
         <LanguageSelector changeLanguage={changeLanguage} />
         <DarkModeToggle />
@@ -72,7 +72,7 @@ const Header = () => {
           </Link>
         </>
       ) : (
-        <div>
+        <div className='z-0'>
           <User />
         </div>
       )}

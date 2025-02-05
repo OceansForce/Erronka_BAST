@@ -51,6 +51,7 @@ const Filtroa = ({bidali}) => {
   },[]);
 
   const handleOptionSelect = (option) => {
+    console.log(option);
     setSelectedOption(option);
     setIsDropdownOpen(false);
   };
@@ -58,7 +59,7 @@ const Filtroa = ({bidali}) => {
   useEffect(()=>{
    
     if(datuak!=null){
-      //console.log("Hiria", hiria);
+      console.log("Hiria", hiria);
       bidali(hiria);
     }
    
@@ -142,7 +143,7 @@ const Filtroa = ({bidali}) => {
               className="h-10 bg-primary border  text-gray-900 text-sm rounded-e-lg  dark:border-s-gray-700 border-t-2 border-s-gray-100 border-r-2 border-b-2  block w-full p-2.5 dark:bg-gray-700  dark:placeholder-gray-400 dark:text-white z-1"
               onChange={(e)=>setHiria(e.target.value)}
             >
-              <option selected>-------</option>
+              <option value={"denak"} selected>-------</option>
 
               { datuak!=null  && datuak[selectedOption?.value] ?
                 datuak[selectedOption.value].map((hiriak)=>(

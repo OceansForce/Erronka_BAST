@@ -54,12 +54,13 @@ class LostedController extends Controller
 
         // Si `$herria` tiene valor, ordenamos por `hiria` primero y luego por `fecha`
         if ($herria) {
-            // Ordenar por 'hiria' de la relación 'galduta' (tabla 'losted')
-            $animals = $animals->orderByRaw("galduta.hiria = ? DESC", [$herria]) // Los registros con 'hiria' igual a $herria van primero
-                                ->orderBy('fecha', 'asc'); // Luego ordenamos por 'year' en orden ascendente
+            // Hacer un join explícito con la tabla 'losted'
+            $animals = $animals->join('losted', 'animals.losted', '=', 'losted.id') // Ajusta la clave foránea según sea necesario
+                ->orderByRaw("losted.hiria = ? DESC", [$herria])  // Ordenar por 'hiria' de 'losted'
+                ->orderBy('year', 'asc'); // Luego ordenar por 'year'
         } else {
-            // Si no hay `$herria`, solo ordenamos por 'year'
-            $animals = $animals->orderBy('fecha', 'asc');
+            // Si no hay $herria, solo ordenar por 'year'
+            $animals = $animals->orderBy('year', 'asc');
         }
         
 

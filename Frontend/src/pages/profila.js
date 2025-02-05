@@ -152,6 +152,8 @@ const Profila = () => {
         })
         .then(data => {
             console.log('Datos actualizados:', data);
+            localStorage.setItem('img', data.user.img);
+            setIrudia(data.user.img);
             // Mostrar el mensaje de éxito
             setAlertVisible(true);
 
@@ -175,8 +177,7 @@ const Profila = () => {
             }));
     
             const imgURL = URL.createObjectURL(file);
-            localStorage.setItem('img', imgURL);
-            setIrudia(imgURL); // Actualiza la imagen mostrada
+             // Actualiza la imagen mostrada
         }
     }
 

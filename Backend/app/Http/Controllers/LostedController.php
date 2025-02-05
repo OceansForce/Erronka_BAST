@@ -50,16 +50,16 @@ class LostedController extends Controller
         }
 
         // Aplicar paginación y obtener los resultados
-        $animals = $query->with('galduta');
+        $animals = $query->with('losted');
 
         // Si `$herria` tiene valor, ordenamos por `hiria` primero y luego por `fecha`
         if ($herria) {
             // Ordenar por 'hiria' de la relación 'galduta' (tabla 'losted')
             $animals = $animals->orderByRaw("galduta.hiria = ? DESC", [$herria]) // Los registros con 'hiria' igual a $herria van primero
-                                ->orderBy('year', 'asc'); // Luego ordenamos por 'year' en orden ascendente
+                                ->orderBy('fecha', 'asc'); // Luego ordenamos por 'year' en orden ascendente
         } else {
             // Si no hay `$herria`, solo ordenamos por 'year'
-            $animals = $animals->orderBy('year', 'asc');
+            $animals = $animals->orderBy('fecha', 'asc');
         }
         
 

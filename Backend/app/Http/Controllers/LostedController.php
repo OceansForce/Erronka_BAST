@@ -19,10 +19,8 @@ class LostedController extends Controller
         $offset = $request->input('offset', 0); // Valor por defecto de 0
         $idProtektora = $request->input('protektora_id', null); // El id de la protektora, si se pasa
         $types = $request->input('type', []); // Ahora se espera un array de tipos
-        $herria = $request->input('herria', null); // Ahorra pasamos el herria
-        $lurraldea = $request->input('lurraldea', null); // Ahorra pasamos el lurraldea
-
-
+        $herria = $request->input('herria', null); // Ahora pasamos el `herria`
+        $lurraldea = $request->input('lurraldea', null); // Ahora pasamos el `lurraldea`
 
         // Validación de los parámetros
         $request->validate([
@@ -31,39 +29,34 @@ class LostedController extends Controller
             'protektora_id' => 'nullable|integer|min:1', // El id de la protektora es opcional
             'type' => 'nullable|array', // El tipo ahora es un array opcional
             'type.*' => 'string|in:txakurra,txakurra ppp,katua,besteak', // Cada elemento del array debe ser uno de los tipos válidos
-            'herria '=> 'nullable|string',
-            'lurraldea '=> 'nullable|string',
+            'herria' => 'nullable|string',
+            'lurraldea' => 'nullable|string',
         ]);
 
-
-        $query = Animals::where(function($query) {
+        // Iniciamos la consulta base
+        $query = Animals::where(function ($query) {
             // Verificar si el campo losted tiene algún valor y contiene al menos un número
             $query->whereNotNull('losted')
                 ->where('losted', 'REGEXP', '[0-9]'); // Contiene al menos un número
         });
-        
 
-        
         // Si se pasa el array de tipos de animal, filtramos también por estos tipos
         if (!empty($types)) {
             $query->whereIn('type', $types);
         }
 
-        // Aplicar paginación y obtener los resultados
-        $animals = $query->with('losted');
-
-        // Si `$herria` tiene valor, ordenamos por `hiria` primero y luego por `fecha`
+        // Si `$herria` tiene valor, unimos la tabla 'losted' y ordenamos por 'hiria'
         if ($herria) {
-            // Hacer un join explícito con la tabla 'losted'
-            $animals = $animals->join('losted', 'animals.losted', '=', 'losted.id') // Ajusta la clave foránea según sea necesario
-                ->orderByRaw("losted.hiria = ? DESC", [$herria])  // Ordenar por 'hiria' de 'losted'
+            // Unimos la tabla 'losted' para poder ordenar por 'hiria'
+            $query->join('losted', 'animals.losted', '=', 'losted.id')
+                ->orderByRaw("losted.hiria = ? DESC", [$herria]) // Ordenar por 'hiria' de 'losted'
                 ->orderBy('year', 'asc'); // Luego ordenar por 'year'
         } else {
-            // Si no hay $herria, solo ordenar por 'year'
-            $animals = $animals->orderBy('year', 'asc');
+            // Si no hay `$herria`, solo ordenar por 'year'
+            $query->orderBy('year', 'asc');
         }
-        
 
+        // Aplicar paginación y obtener los resultados
         $animals = $query->with('galduta') // Cargar la relación 'galduta' con los datos de la tabla 'losted'
             ->offset($offset)
             ->limit($limit)
@@ -72,7 +65,7 @@ class LostedController extends Controller
         // Agregar 'hiria', 'probintzia', 'fecha', y 'moreInformation' desde la relación 'galduta' en la respuesta
         $animals->transform(function ($animal) {
             // Acceder a los datos de la relación 'galduta' (tabla 'losted')
-            $animal->hiria = $animal->galduta->hiria ?? null; 
+            $animal->hiria = $animal->galduta->hiria ?? null;
             $animal->probintzia = $animal->galduta->probintzia ?? null;
             $animal->fecha = $animal->galduta->fecha ?? null;
             $animal->moreInformation = $animal->galduta->moreInformation ?? null;
@@ -88,6 +81,7 @@ class LostedController extends Controller
         // Retornar la respuesta como JSON
         return response()->json($animals);
     }
+
 
     public function getAnimal(Request $request, $id)
     {

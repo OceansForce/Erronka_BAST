@@ -58,7 +58,8 @@ class Animals extends Model
 
     public function galduta()
     {
-        return $this->belongsTo(Losted::class, 'losted'); // Aquí le indicas el nombre correcto de la columna
+        return $this->belongsTo(Losted::class, 'losted', 'id'); // 'losted' es la columna en `animals` y 'id' es la clave primaria en `losted`
     }
+
 
 }

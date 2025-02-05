@@ -50,17 +50,29 @@ class LostedController extends Controller
             // Unimos la tabla 'losted' para poder ordenar por 'hiria'
             $query->join('losted', 'animals.losted', '=', 'losted.id')
                 ->orderByRaw("losted.hiria = ? DESC", [$herria]) // Ordenar por 'hiria' de 'losted'
-                ->orderBy('year', 'asc'); // Luego ordenar por 'year'
+                ->orderBy('animals.year', 'asc'); // Luego ordenar por 'year' de 'animals'
         } else {
             // Si no hay `$herria`, solo ordenar por 'year'
-            $query->orderBy('year', 'asc');
+            $query->orderBy('animals.year', 'asc');
         }
 
         // Aplicar paginación y obtener los resultados
         $animals = $query->with('galduta') // Cargar la relación 'galduta' con los datos de la tabla 'losted'
             ->offset($offset)
             ->limit($limit)
-            ->get(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted']);
+            ->get([
+                'animals.id', // Especificamos que queremos el id de la tabla 'animals'
+                'animals.name',
+                'animals.etxekoAnimalia',
+                'animals.type',
+                'animals.animalType',
+                'animals.img',
+                'animals.bakuna',
+                'animals.gender',
+                'animals.descripcion',
+                'animals.year',
+                'animals.losted'
+            ]);
 
         // Agregar 'hiria', 'probintzia', 'fecha', y 'moreInformation' desde la relación 'galduta' en la respuesta
         $animals->transform(function ($animal) {
@@ -81,6 +93,7 @@ class LostedController extends Controller
         // Retornar la respuesta como JSON
         return response()->json($animals);
     }
+
 
 
     public function getAnimal(Request $request, $id)

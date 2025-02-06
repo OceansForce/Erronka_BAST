@@ -50,6 +50,7 @@ function Create_protektora(){
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(formData);
     // Validar campos requeridos
     if (!formData.name || !formData.telefono || !formData.email || !formData.provintzia || !formData.hiria || !formData.logo) {
       alert("Por favor, completa todos los campos requeridos.");
@@ -127,10 +128,18 @@ function Create_protektora(){
                 {/* Usamos ProvinciasYCiudades para manejar la provincia y la ciudad */}
                 <ProvinciasYCiudades 
                   selectedProvincia={formData.provintzia}
-                  setSelectedProvincia={(value) => setFormData({...formData, provintzia: value})}
+                  setSelectedProvincia={(value) => {
+                    console.log("Provincia seleccionada en formData:", value);
+                    setFormData((prev) => ({ ...prev, provintzia: value }));
+                  }}
                   selectedPueblo={formData.hiria}
-                  setSelectedPueblo={(value) => setFormData({...formData, hiria: value})}
+                  setSelectedPueblo={(value) => {
+                    console.log("Ciudad seleccionada en formData:", value);
+                    setFormData((prev) => ({ ...prev, hiria: value }));
+                  }}
                 />
+
+
               </div>
             </div>
 

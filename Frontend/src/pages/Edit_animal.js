@@ -25,6 +25,7 @@ function Edit_animal() {
     // console.log(etxekoa);
 
     const { item } = location.state || {}; // Acceder a item desde location.state
+    const { ruta } = location.state || {};
     console.log(item);
     // Efecto para actualizar el estado de etxekoa cuando item esté disponible
     useEffect(() => {
@@ -117,7 +118,7 @@ function Edit_animal() {
                 descripcion: "",
                 img: null, // Resetear la imagen
             });
-            navigate("/Profila");
+            navigate(ruta);
         
         } catch (error) {
             console.error("Request failed:", error);
@@ -132,7 +133,7 @@ function Edit_animal() {
             <div className='container flex justify-center erdian'>
             <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-full rounded-lg text-center border-black dark:border-transparent border-2'>
               <div className='w-full flex'>
-                <BackButton targetPage={"/Profila"} width={20}/>
+                <BackButton targetPage={ruta} width={20}/>
 
                 <div className='w-11/12 flex flex-row space-x-4 justify-end'>
                     <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />

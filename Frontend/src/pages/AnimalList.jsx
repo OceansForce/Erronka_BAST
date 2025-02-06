@@ -61,7 +61,7 @@ const AnimalList = () => {
                 <DarkModeToggle className='w-1/2' />  
             </div>
             <div>
-                <ProfilAnimals userData={animaliak} />
+                <ProfilAnimals userData={animaliak} ruta='/Animal-List' />
             </div>
         </div>
     );

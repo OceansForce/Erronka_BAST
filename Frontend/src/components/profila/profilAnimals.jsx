@@ -8,7 +8,7 @@ import SaveIcon from './saveIcon.jsx';
 import { Link } from 'react-router-dom';
 
 
-const UserAnimals = ({userData}) => {
+const UserAnimals = ({userData, ruta}) => {
     
     const { t, i18n } = useTranslation();
     
@@ -38,6 +38,7 @@ const UserAnimals = ({userData}) => {
                             img={item.img}        
                             mota='profila'
                             item={item}
+                            ruta={ruta}
                             />
                     
                     ))}

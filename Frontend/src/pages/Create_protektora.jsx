@@ -71,7 +71,7 @@ function Create_protektora(){
     }
 
     try {
-      const response = await fetch(`${IpAPI}/api/protektora-create`, {
+      const response = await fetch(`${IpAPI}/api/protectora-create`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${tok}`,

@@ -85,7 +85,7 @@ const Carrusel = () => {
   const hideNextButton = (currentIndex + 1) * itemsPerPage >= news.length && currentItems.length < itemsPerPage; // Ocultar el botón "next" si no hay más noticias
 
   return (
-    <div className="carousel-container w-2/3 sm:justify-items-center">
+    <div className="carousel-container sm:justify-items-center">
       {/* Solo renderizar el botón de navegación hacia la izquierda si no está desactivado */}
       <button
         onClick={prev}
@@ -98,17 +98,17 @@ const Carrusel = () => {
 
 
       <div className="carousel-wrapper p-2 sm:justify-items-center">
-        <div className="carousel-content">
+        <div className="carousel-content flex-wrap">
           {currentItems.map((item) => (
 
             <Link to={`/news/${item.id}`}>
 
               <div key={item.id} className="carousel-item dark:bg-dark_body bg-white hover:scale-110 active:scale-95 duration-300">
-                <img src={item.img} alt={item.title} className="carousel-img rounded-t-lg w-96 h-64" />
-                <div className="carousel-text">
+                <img src={item.img} alt={item.title} className="carousel-img rounded-t-lg" />
+                <div className="carousel-text flex flex-col justify-center items-center">
                   <h3 className="text-center font-bold text-slate-600 dark:text-white limit_h">{item.title}</h3>
-                  <p className="text-left data dark:text-white h-5">{item.date}</p>
-                  <div className="full_w">
+                  <p className="text-left data dark:text-white h-5 w-full">{item.date}</p>
+                  <div className="full_w items-center">
                     <p className="text-justify text-slate-600 dark:text-white h-24 limit">{item.description}</p>
                   </div>
                 </div>

@@ -11,9 +11,9 @@ const Filtroak=({img , text, aktibatuta})=>{
         console.log("Aktibatu",aktibatuta);
     };
 
-    return <div className="max-w-32 flex flex-col items-center justify-center z-9">
+    return <div className="w-full sm:max-w-32 flex flex-col items-center justify-center z-9">
         <img className="dark:invert z-9" src={gif} alt={img}/>
-        <p className={`dark:text-white text-center rounded-full border-4 px-3 font-bold cursor-pointer ${
+        <p className={`dark:text-white w-[90%] sm:w-auto text-center rounded-full border-4 py-2 sm:px-3 font-bold cursor-pointer ${
                     aldatu 
                         ? "bg-primary dark:bg-dark_button border-border_green"
                         : "bg-white dark:bg-dark_body border-border_green"   

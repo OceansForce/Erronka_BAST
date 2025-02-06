@@ -13,7 +13,7 @@ function Animalia_sortu(){
 
   return(
       <>
-          <Animali_Form tituloa={t('Ad_adoptatu:Titulo2')} atras={"/Profila"} ruta={"/Profila"}/>
+          <Animali_Form tituloa={t('Ad_adoptatu:Titulo2')} atras={"/Profila"}/>
       </>
   );
 }

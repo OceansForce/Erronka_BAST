@@ -9,8 +9,6 @@ import SendButom from '../components/bottons/sendBotton.jsx';
 import IpAPI from '../config/ipAPI.js';
 import { checkProtektora } from '../components/security/security.jsx';
 import { json, useNavigate } from 'react-router-dom';
-
-// Importar Provincias y Ciudades
 import ProvinciasYCiudades from '../components/geo/ProvinciasYCiudades.jsx';
 
 function Create_protektora(){

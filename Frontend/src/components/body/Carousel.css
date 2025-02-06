@@ -11,7 +11,7 @@
 
 /* Contenedor del carrusel */
 .carousel-wrapper {
-  width: 100%;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,13 +39,12 @@
 }
 
 .carousel-item img {
-  width: 100%;
+  width: 389.86px;
   height: 230px;
   border-radius: 8px;
 }
 
 .carousel-text {
-  width: 100%;
   text-align: center;
   margin-top: 10px;
 }

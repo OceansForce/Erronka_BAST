@@ -5,7 +5,7 @@ import Filtroak_animalia from './filtroak/filtroak_animaliak.jsx';
 import IpAPI from '../../config/ipAPI.js';
 import Loading from '../loading/loading.jsx';
 
-function Adopzioak() {
+function Adopzioak({datua}) {
   const { t } = useTranslation();
 
   const [adopAnimals, setAdopAnimals] = useState([]);
@@ -22,6 +22,8 @@ function Adopzioak() {
     katua: false,
     besteak: false,
   });
+
+  // useEffect();
 
   // Obtener la consulta de filtros
   const getFilterParams = () => {
@@ -75,7 +77,7 @@ function Adopzioak() {
 
   return (
     <>
-      <div className='container mx-auto flex flex-row justify-evenly border-b-2 pb-8 dark:border-white border-black mt-6'>
+      <div className='container mx-auto flex flex-col  items-center sm:flex-row justify-evenly border-b-2 pb-8 dark:border-white border-black mt-6'>
         <Filtroak_animalia img="adopta_perro" text={t("Adop_Anim:Txakurrak")} aktibatuta={(estado) => setFilters((a)=> ({
           ...a,
           txakurra: estado,

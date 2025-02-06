@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import IpAPI from '../../config/ipAPI';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Loading from '../loading/loading';
 
 function Anim_Gald_BODY() {
   const { id } = useParams();
@@ -49,7 +50,8 @@ function Anim_Gald_BODY() {
         fetchSingleNews(); // Llamar a la API cuando `id` esté disponible
       }
   }, [id]);
-    
+
+  
   useEffect(()=>{
     console.log("Animal data: ", animalData);
     if(animalData!=null){
@@ -74,6 +76,7 @@ function Anim_Gald_BODY() {
         galDes:animalData.animal.moreInformation
       });
     }
+    
    // console.log(animalData.contactEmail);
   },[animalData]);
  
@@ -96,6 +99,11 @@ function Anim_Gald_BODY() {
       default:
         return <img src="/img/icons/animals/adopta_gato-1.gif" className="dark:invert "/>;
     }
+  }
+  if (animalData === null) {
+    return (
+        <Loading />
+    );
   }
 
   return (

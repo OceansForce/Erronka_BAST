@@ -177,7 +177,8 @@ const Profila = () => {
             }));
     
             const imgURL = URL.createObjectURL(file);
-             // Actualiza la imagen mostrada
+            setIrudia(imgURL); // Actualiza la imagen mostrada
+            // Actualiza la imagen mostrada
         }
     }
 

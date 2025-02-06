@@ -82,8 +82,8 @@ Route::get('/animals-personal', [AnimalController::class, 'getPersonalAnimals'])
 use App\Http\Controllers\ProtektoraController;
 Route::get('/protectora-list', [ProtektoraController::class, 'getAllProtektoras']);
 Route::get('/protectora-list/{id}', [ProtektoraController::class, 'getProtektora']);
-Route::get('/protectora-create', [ProtektoraController::class, 'createProtektora'])->middleware('auth:sanctum');;
-Route::get('/protectora-edit', [ProtektoraController::class, 'editProtektora'])->middleware('auth:sanctum');;
+Route::post('/protectora-create', [ProtektoraController::class, 'createProtektora'])->middleware('auth:sanctum');;
+Route::post('/protectora-edit', [ProtektoraController::class, 'editProtektora'])->middleware('auth:sanctum');;
 
 
 // Adoptar 

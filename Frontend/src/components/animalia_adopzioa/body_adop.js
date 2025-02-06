@@ -116,7 +116,7 @@ function Anim_Adop_BODY() {
                             <p className="mr-2 text-5xl font-ubuntu text-black dark:text-white">{animalData.name}</p>
                         </div>
 
-                        <AdopzioBotoia text={t('Adop_Anim:Adoptatu')} />
+                        <AdopzioBotoia text={t('Adop_Anim:Adoptatu')} animalID={animalData.id} />
                     </div>
 
                     <div className="flex flex-col w-full">

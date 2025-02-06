@@ -80,7 +80,7 @@ class AnimalController extends Controller
         
         $user = User::where('id', $animal->userID)->first();
         // Verificar si no se encontraron resultados
-        if ($user) {
+        if (!$user) {
             return response()->json(['message' => 'No animals found for the given criteria'], 404);
         }
 

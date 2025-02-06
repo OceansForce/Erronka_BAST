@@ -49,7 +49,7 @@ class AdoptController extends Controller
         $animal -> adoptToken = $verificationToken;
         $animal->save();
 
-        Mail::send('emails.adopt', ['token' => $verificationToken, 'user' => $user, 'animal'=> $animal], function ($message) use ($user) {
+        Mail::send('emails.adopt', ['token' => $verificationToken, 'user' => $user, 'animal' => $animal, 'protectora' => $protectora], function ($message) use ($protectora) {
             $message->to($protectora->email);
             $message->subject('Animal para adoptar');
         });

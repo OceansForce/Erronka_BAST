@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Animals;
 use App\Models\User;
+use App\Models\Protektora;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -71,16 +72,17 @@ class AnimalController extends Controller
                     ->whereNotNull('idProtektora');
             })
             ->where('id', $id) // Buscar por el id del animal
-            ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik']);
+            ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik', 'userID']);
 
         // Verificar si no se encontró el animal
         if (!$animal) {
             return response()->json(['message' => 'Animal not found or does not meet the specified criteria'], 404);
         }            
-        return response()->json(['message' => $animal], 404);
+        //return response()->json(['message' => $animal->userID], 404);
 
         
         $user = User::where('id', $animal->userID)->first();
+//	return response()->json(['message' => $user], 404);
         // Verificar si no se encontraron resultados
         if (!$user) {
             return response()->json(['message' => 'No animals found for the given criteria'], 404);

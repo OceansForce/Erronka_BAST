@@ -5,7 +5,7 @@ const AdminPanelButtom = ({ to, imageSrc, text }) => {
     return (
         <Link 
             to={to} 
-            className='w-1/5 bg-primary rounded-3xl py-20 
+            className='lg:w-1/5 w-56 bg-primary rounded-3xl py-20 
                        transition-all duration-300 
                        hover:scale-110 hover:shadow-xl'
         >

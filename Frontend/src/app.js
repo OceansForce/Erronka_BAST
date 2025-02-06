@@ -18,6 +18,7 @@ import Animalia_galduta from './pages/animalia_galduta';
 import Create_protektora from './pages/Create_protektora.jsx';
 import Animalia_sortu from './pages/Animalia_sortu.js';
 import Edit_animal from './pages/Edit_animal.js';
+import AnimalList from './pages/AnimalList.jsx';
 
 import NewsDetail from './pages/NewsDetail';
 
@@ -116,6 +117,8 @@ function App() {
       <Route path='/Create_protektora' element={<Create_protektora/>}/>
       <Route path='/Animalia_sortu' element={<Animalia_sortu/>}/>
       <Route path='/Edit_animalia/:id' element={<Edit_animal/>}/>
+      <Route path='/Animal-List' element={<AnimalList/>}/>
+
     </Routes>
     
           

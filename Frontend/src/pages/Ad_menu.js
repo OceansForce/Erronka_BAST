@@ -45,7 +45,7 @@ function Ad_menua() {
                 <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
                 <DarkModeToggle className='w-1/2' />  
             </div>
-            <div className="w-full flex flex-row flex-wrap bg-red erdian text-center space-x-14">
+            <div className="w-full flex flex-row flex-wrap bg-red erdian text-center gap-x-14 gap-y-4 mt-10">
                 {protektoraID ===1 && (
                     <AdminPanelButtom 
                     to="/Ad_notizia_panela" 
@@ -55,7 +55,7 @@ function Ad_menua() {
                 )}
                 
                 
-                <AdminPanelButtom 
+                {/* <AdminPanelButtom 
                     to="/Ad_galduta" 
                     imageSrc="./img/animal-domestic-lost-svgrepo-com.svg" 
                     text={t('ad_menua:galduta')} 
@@ -66,7 +66,13 @@ function Ad_menua() {
                     to="/Ad_adoptatu" 
                     imageSrc="./img/animal-approve-cat-svgrepo-com.svg" 
                     text={t('ad_menua:adoptatu')} 
-                />
+                /> */}
+
+                <AdminPanelButtom 
+                    to="/Animal-List" 
+                    imageSrc="./img/animal-approve-cat-svgrepo-com.svg" 
+                    text={t('ad_menua:adoptatu')} 
+                /> 
 
 
                 {protektoraID === 1 && (

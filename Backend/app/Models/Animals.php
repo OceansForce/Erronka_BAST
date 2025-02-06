@@ -33,6 +33,7 @@ class Animals extends Model
         'losted',
         'noiztik',
         'userID',
+        'adoptToken',
     ];
 
     // Si necesitas castings específicos

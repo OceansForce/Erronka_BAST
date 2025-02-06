@@ -62,7 +62,7 @@ class AdoptController extends Controller
     public function adoptConfirmation($token)
     {
 
-        $animal = Animals::where('verificationToken', $token)->first();
+        $animal = Animals::where('adoptToken', $token)->first();
 
         if (!$animal) {
             return response()->json(['message' => 'Token inválido.'], 400);
@@ -95,7 +95,7 @@ class AdoptController extends Controller
     public function adoptCancel($token)
     {
 
-        $animal = Animals::where('verificationToken', $token)->first();
+        $animal = Animals::where('adoptToken', $token)->first();
 
         if (!$animal) {
             return response()->json(['message' => 'Token inválido.'], 400);

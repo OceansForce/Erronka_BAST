@@ -26,27 +26,34 @@ const AdopzioBotoia = ({ text, animalID }) => {
                 setIsModalOpen(true);
             }
         } else {
-            const fetchSingleAnimal = async () => {
-                try {
-                  const response = await fetch(`${IpAPI}/api/animal-adopt/${id}`, {
-                    method: 'GET',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                  });
-          
-                  if (!response.ok) {
-                    throw new Error(`Error fetching news with id ${id}`);
-                  }
-          
-                  const data = await response.json();
-                  console.log('Datos de la noticia:', data);
-                  
-                } catch (error) {
-                  console.error('Error fetching single news:', error);
-                  alert('Error al obtener los datos de la noticia.');
-                }
-              };
+
+          const token = localStorage.getItem('token');
+          const fetchSingleAnimal = async () => {
+            try {
+              const response = await fetch(`${IpAPI}/api/adop`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization':`Bearer ${token}`
+                },
+                body: JSON.stringify({ id })  // Enviar el id dentro de un objeto JSON
+              });
+      
+              console.log("Response:", response);
+              if (!response.ok) {
+                console.log("Error al al adoptar.");
+                throw new Error(`Error fetching news with id ${response}`);
+              }
+      
+              const data = await response.json();
+              console.log('mensaje enviado:', data);
+              
+            } catch (error) {
+              console.error('Error', error);
+              alert('Error al adoptar.');
+            }
+          };
+          fetchSingleAnimal();
         }
     };
 

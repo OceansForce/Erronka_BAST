@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Lamentamos que no hayas podido adoptar a {{ $animal->name }}</title>
 </head>
-<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+<body style="line-height: 1.6; color: #333;">
     <h1 style="color: #cc0000;">Lamentamos que no hayas podido adoptar a {{ $animal->name }}</h1>
     
     <p>Hola {{ $user->name }},</p>

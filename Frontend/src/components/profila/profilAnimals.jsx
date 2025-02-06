@@ -36,6 +36,7 @@ const UserAnimals = ({userData}) => {
                     kokapena={item.etxekoAnimalia}    
                     img={item.img}        
                     mota='profila'
+                    item={item}
                     />
                
             ))}

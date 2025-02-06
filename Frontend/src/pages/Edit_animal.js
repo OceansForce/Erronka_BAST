@@ -14,98 +14,52 @@ import Irudiak_input from './../components/notiziak/IrudiakInput.js';
 import { document } from 'postcss';
 
 
+
 function Edit_animal() {
-   
-    const [etxekoa, setEtxekoa]= useState(0);
-    const [esterilizado, setEsterilizado]= useState(0);
+
+    const navigate = useNavigate();  // Hook para la navegación
+    const location = useLocation(); // Asegúrate de obtener location después de la inicialización
+    const [etxekoa, setEtxekoa] = useState(1); // Valor inicial predeterminado
+    const [esterilizado, setEsterilizado]= useState(1);
+
+    // console.log(etxekoa);
+
+    const { item } = location.state || {}; // Acceder a item desde location.state
+    console.log(item);
+    // Efecto para actualizar el estado de etxekoa cuando item esté disponible
+    useEffect(() => {
+        if (item) {
+            setEtxekoa(item.etxekoAnimalia ? 1 : 0); // Establece el valor según `item.etxekoAnimalia`
+        }
+    }, [item]);
+
+    useEffect(() => {
+        if (item) {
+            setEsterilizado(item.bakuna ? 1 : 2); // Establece el valor según `item.etxekoAnimalia`
+        }
+    }, [item]);
+
    
     const { t, i18n } = useTranslation();
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang); 
     };
+    const id=1;
 
-    const location = useLocation();
-    const { id } = location.state || {}; //Link etiketatik id-a lortzeko
+    
 
     // Estado para manejar los datos del formulario
     const [formData, setFormData] = useState({
-        name:"",
-        etxekoAnimalia:"",
-        bakuna:"",
-        descripcion:"",
-        img:''
+        id:item.id,
+        name:item.name,
+        etxekoAnimalia:etxekoa,
+        bakuna:esterilizado,
+        descripcion:item.descripcion,
+        img:null
     });
 
-    useEffect(() => {
-        
-
-        const fetchSingleNews = async (newsId) => {
-            try {
-                const response = await fetch(`${IpAPI}/api/animal-adopt/${newsId}`, {
-                    method:'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                
-
-                if (!response.ok) {
-                    throw new Error(`Error fetching news with id ${newsId}`);
-                }else{
-                    const data = await response.json();
-                    console.log("Animal",data);
-                    // Inicializar formData con los datos recibidos
-                    setFormData({
-                        name: data.name,
-                        etxekoAnimalia: data.etxekoAnimalia,
-                        bakuna: data.bakuna,
-                        descripcion: data.descripcion,
-                        img: data.img
-                    });
-
-                    
-                    
-                    
-                }
-                
-
-            } catch (error) {
-                console.error('Error fetching single news:', error);
-                alert('Error al obtener los datos de la noticia.');
-            }
-        };
-        console.log("ID",id);
-        if (id) {
-            fetchSingleNews(id); // Llamar a la API cuando `id` esté disponible
-
-        }
-    }, [id]);
-
-    const radioak_aldatu=()=>{
-
-        let radio_esterilizatua1=  document.getElementById("esterilizatua1");
-        let radio_esterilizatua2=  document.getElementById("esterilizatua2");
-
-        let radio_etxe1=  document.getElementById("etxekoa1");
-        let radio_etxe2=  document.getElementById("etxekoa2");
-
-        if(formData.etxekoAnimalia){
-            radio_etxe1.disabled=true;
-            radio_etxe2.disabled=false;
-        }else{
-            radio_etxe1.disabled=false;
-            radio_etxe2.disabled=true; 
-        }
-
-        if(formData.bakuna){
-            radio_esterilizatua1.disabled=true;
-            radio_esterilizatua2.disabled=false;
-        }else{
-            radio_esterilizatua1.disabled=false;
-            radio_esterilizatua2.disabled=true;
-        }
-    }
-    radioak_aldatu();
+    
+    
 
     // Datuak aldatzeko
     const handleChange = (e) => {
@@ -116,48 +70,60 @@ function Edit_animal() {
     // Manejador del envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+        //console.log("Image to be uploaded:", formData.img);
         const tok = localStorage.getItem('token');
         const formDataToSend = new FormData();
     
+
+        formDataToSend.append('id', formData.id);
         formDataToSend.append('name', formData.name);
         formDataToSend.append('etxekoAnimalia', etxekoa);
         formDataToSend.append('bakuna', esterilizado);
         formDataToSend.append('descripcion', formData.descripcion);
     
-        // Si hay imagen, agregarla al FormData
-        if (formData.img) {
-        formDataToSend.append('img', formData.img);
+        if (formData.img && formData.img instanceof File) {
+            console.log("Image to be uploaded:", formData.img);
+            formDataToSend.append('img', formData.img);
         }
+        
+        // console.log("form:data", formDataToSend.get('img'));
 
-        console.log(formDataToSend);
+        // console.log(formDataToSend);
     
         try {
-        const response = await fetch(`${IpAPI}/api/animals-edit`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type':'application/json',
-                'Authorization': `Bearer ${tok}`,
-            },
-            body: formDataToSend, // FormData ya maneja la codificación de archivos
-        });
-    
-        if (response.ok) {
-            const result = await response.json();
-            setFormData({
-            name: "",
-            etxekoAnimalia: "",
-            bakuna: "",
-            descripcion: "",
-            img: null, // Resetear la imagen
+            const response = await fetch(`${IpAPI}/api/animals-edit`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${tok}`,
+                },
+                body: formDataToSend,
             });
-        } else {
-            const error = await response.json();
-            alert('Error: ' + error.message);
-        }
+        
+            if (!response.ok) {
+                const errorText = await response.text(); // Obtener el cuerpo de la respuesta
+                console.error("Error response:", errorText);
+                alert(`Error: ${errorText}`);
+                return;
+            }
+        
+            const result = await response.json();
+            console.log("Server response:", result);
+        
+            // Si la respuesta es exitosa
+            setFormData({
+                name: "",
+                etxekoAnimalia: "",
+                bakuna: "",
+                descripcion: "",
+                img: null, // Resetear la imagen
+            });
+            navigate("/Profila");
+        
         } catch (error) {
-        alert('Error en la solicitud: ' + error.message);
+            console.error("Request failed:", error);
+            alert('Error en la solicitud: ' + error.message);
         }
+        
     };
 
 
@@ -174,7 +140,7 @@ function Edit_animal() {
                 </div>
               </div>
 
-              <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>Animalia Editatu</p>
+              <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('ad_galduta:animalEdit')}</p>
               <form className='flex flex-col text-left' onSubmit={handleSubmit}>
 
                 <div className='flex flex-row'>
@@ -187,29 +153,69 @@ function Edit_animal() {
                             className='mb-2 dark:border-primary rounded-lg dark:text-white' 
                             type='file'
                             name='img'
-                            // value={formData.img}
-                            onChange={(e) => setFormData({ ...formData, img: e.target.files[0] })}  // Cambiar aquí
-                            required/>
+                            //value={formData.img}
+                            onChange={(e) => {
+                                const file = e.target.files[0];
+                                console.log("File selected:", file); // Verificar si el archivo está seleccionado
+                                setFormData({ ...formData, img: file });
+                            }}
+                            />
                     </div>
                     <div className='flex flex-col w-1/2'>
                         <div className=' w-1/2'>
                             <label className='mt-2 font-semibold dark:text-white'>{t("ad_galduta:Esterilizatua")}</label> 
                             <div className='ml-3'>
-                                <input type='radio' name='Esterilizatua' id='esterilizatua1' value={1} onChange={(e)=> setEsterilizado(parseInt(e.target.value))}/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
-                            </div>
+                            <input
+                                type='radio'
+                                name='Esterilizatua'
+                                id='esterilizatua1'
+                                value={1}
+                                onChange={(e) => setEsterilizado(parseInt(e.target.value))}
+                                checked={esterilizado === 1}
+                            />
+                            <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
+                        </div>
 
-                            <div className='ml-3'>
-                                <input type='radio' name='Esterilizatua' id='esterilizatua2' value={2} onChange={(e)=> setEsterilizado(parseInt(e.target.value))}/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
-                            </div>
+                        <div className='ml-3 mt-2'>
+                            <input
+                                type='radio'
+                                name='Esterilizatua'
+                                id='esterilizatua2'
+                                value={2}
+                                onChange={(e) => setEsterilizado(parseInt(e.target.value))}
+                                checked={esterilizado === 2}
+                            />
+                            <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
+                        </div>
+
                         </div>
                         <label className='font-semibold dark:text-white'>{t('Ad_adoptatu:Etxekoa')}</label>
                         <div className='ml-3'>
-                            <input type='radio' name='Etxekoa' id='etxekoa1' value={1} onChange={(e)=> setEtxekoa(parseInt(e.target.value))} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
+                            <input
+                                type='radio'
+                                name='Etxekoa'
+                                id='etxekoa1'
+                                value={1}
+                                onChange={(e) => setEtxekoa(parseInt(e.target.value))}
+                                checked={etxekoa === 1} // Si etxekoAnimalia es 1, el primer botón se selecciona
+                                required
+                            />
+                            <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
                         </div>
 
                         <div className='ml-3'>
-                            <input type='radio' name='Etxekoa' id='etxekoa2' value={2} onChange={(e)=> setEtxekoa(parseInt(e.target.value))} required/><label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
+                            <input
+                                type='radio'
+                                name='Etxekoa'
+                                id='etxekoa2'
+                                value={0}
+                                onChange={(e) => setEtxekoa(parseInt(e.target.value))}
+                                checked={etxekoa === 0} // Si etxekoAnimalia es 2, el segundo botón se selecciona
+                                required
+                            />
+                            <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>
                         </div>
+
                     </div>
                   
                 </div>

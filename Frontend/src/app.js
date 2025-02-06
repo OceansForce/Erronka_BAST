@@ -115,7 +115,7 @@ function App() {
       <Route path='/Animalia_galduta/:id' element={<Animalia_galduta/>}/>
       <Route path='/Create_protektora' element={<Create_protektora/>}/>
       <Route path='/Animalia_sortu' element={<Animalia_sortu/>}/>
-      <Route path='/Edit_animalia' element={<Edit_animal/>}/>
+      <Route path='/Edit_animalia/:id' element={<Edit_animal/>}/>
     </Routes>
     
           

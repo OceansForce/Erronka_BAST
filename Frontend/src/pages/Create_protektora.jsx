@@ -58,6 +58,7 @@ function Create_protektora(){
     }
 
     const tok = localStorage.getItem('token');
+    // console.log(tok);
     const formDataToSend = new FormData();
     formDataToSend.append('name', formData.name);
     formDataToSend.append('telefono', formData.telefono);

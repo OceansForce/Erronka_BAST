@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import IpAPI from '../../config/ipAPI.js';
 import Loading from '../loading/loading.jsx';
 
-const Galduta= ()=>{
+const Galduta= ({jaso})=>{
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [adopAnimals, setAdopAnimals] = useState([]);
@@ -14,12 +14,17 @@ const Galduta= ()=>{
   },[]);
 
   useEffect(()=>{
-    console.log("Galdutuak", adopAnimals);
-  },[adopAnimals]);
+    if(jaso!=""){
+      console.log(adopAnimals);
+      setAdopAnimals([]);
+      fetchGaldutakoAnimalia();
+    }
+    
+  },[jaso]);
 
   const fetchGaldutakoAnimalia = async () => {
     try {
-        const response = await fetch(`${IpAPI}/api/animals-losted?limit=${limit}&offset=${offset}`, {
+        const response = await fetch(`${IpAPI}/api/animals-losted?limit=${limit}&offset=${offset}${jaso}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +43,7 @@ const Galduta= ()=>{
             setAdopAnimals((prevAnimals) => [...prevAnimals, ...result]);
 
             // Incrementar el offset para la próxima solicitud
-            setOffset((prevOffset) => prevOffset + limit);
+            // setOffset((prevOffset) => prevOffset + limit);
       }
         
     } catch (error) {
@@ -57,9 +62,10 @@ const Galduta= ()=>{
             adopAnimals.map((animalia)=>(
               
               <Animaliak 
+              key={animalia.id} 
               id={animalia.id} 
               name={animalia.name} 
-              kokapena="Gipuzkoa, Donosti"  
+              kokapena={animalia.probintzia+", "+animalia.hiria}
               img={animalia.img}
               mota="galduta"/>
             ))

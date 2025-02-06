@@ -5,7 +5,7 @@ import Filtroak_animalia from './filtroak/filtroak_animaliak.jsx';
 import IpAPI from '../../config/ipAPI.js';
 import Loading from '../loading/loading.jsx';
 
-function Adopzioak() {
+function Adopzioak({datua}) {
   const { t } = useTranslation();
 
   const [adopAnimals, setAdopAnimals] = useState([]);
@@ -22,6 +22,8 @@ function Adopzioak() {
     katua: false,
     besteak: false,
   });
+
+  // useEffect();
 
   // Obtener la consulta de filtros
   const getFilterParams = () => {

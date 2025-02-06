@@ -38,11 +38,11 @@ const UserOptions = () => {
   };
 
   return (
-    <div className="relative language-selector ">
+    <div className="relative language-selector z-0">
       <img
         src={img}
-        className="size-12 cursor-pointer rounded-full"
-        alt="Seleccionar idioma"
+        className="size-12 cursor-pointer rounded-full border-white border-2"
+        alt="Logoa"
         onClick={toggleDropdown}
       />
 
@@ -72,18 +72,6 @@ const UserOptions = () => {
                 <img className='size-8 rounded-full' src='/img/icons/users/user-dog.jpg'/>
                 <h4 className='ml-3'>{t('user:profila')}</h4>
               </Link>
-            </li>
-            <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
-              <a href='#' className='flex items-center'>
-                <img className='size-8 rounded-full' src='/img/icons/users/chat.svg'/>
-                <h4 className='ml-3'>{t('user:chat')}</h4>
-              </a>
-            </li>
-            <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
-              <a href='#' className='flex items-center'>
-                <img className='size-8 rounded-full' src='/img/icons/users/config.svg'/>
-                <h4 className='ml-3'>{t('user:konfig')}</h4>
-              </a>
             </li>
             <li className="cursor-pointer hover:bg-gray-100 p-2 rounded">
               <a href='#' className='flex items-center' onClick={(e) => {

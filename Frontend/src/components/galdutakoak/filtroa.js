@@ -1,25 +1,69 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import IpAPI from '../../config/ipAPI';
 
-const Filtroa = () => {
+const Filtroa = ({bidali}) => {
+
+
+
   const [selectedOption, setSelectedOption] = useState({
     value: "gui",
-    label: "Gipuzkoa",
+    label: "Guipuzkoa",
     img: "./img/Banderas/Flag_of_Guipúzcoa.svg.png",
   });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [datuak, setDatuak]= useState(null);
+  const [hiria, setHiria]= useState(null);
 
   const options = [
-    { value: "biz", label: " Bizkaia", img: "./img/Banderas/Bandera_de_Vizcaya.svg.png" },
-    { value: "gui", label: " Guipuzkoa", img: "./img/Banderas/Flag_of_Guipúzcoa.svg.png" },
-    { value: "ara", label: " Araba", img: "./img/Banderas/Flag_of_Álava.svg" },
-    { value: "na", label: "Nabarra", img: "./img/Banderas/descarga.png" },
+    { value: "Bizkaia", label: " Bizkaia", img: "./img/Banderas/Bandera_de_Vizcaya.svg.png" },
+    { value: "Guipuzkoa", label: " Guipuzkoa", img: "./img/Banderas/Flag_of_Guipúzcoa.svg.png" },
+    { value: "Araba", label: " Araba", img: "./img/Banderas/Flag_of_Álava.svg" },
+    { value: "Nabarra", label: "Nabarra", img: "./img/Banderas/descarga.png" },
   ];
 
+  useEffect(()=>{
+    const fetchSingleNews = async () => {
+      try {
+        const response = await fetch(`${IpAPI}/api/losted-place`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Kontsulta gaixki atera da`);
+        }
+
+        const data = await response.json();
+
+        setDatuak(data);
+        
+        // setAnimalData(data);
+      } catch (error) {
+        console.error('Error fetching single news:', error);
+        alert('Error al obtener los datos del animal.');
+      }
+    };
+    fetchSingleNews();
+    console.log("Ejecuta");
+  },[]);
+
   const handleOptionSelect = (option) => {
+    console.log(option);
     setSelectedOption(option);
     setIsDropdownOpen(false);
   };
+
+  useEffect(()=>{
+   
+    if(datuak!=null){
+      console.log("Hiria", hiria);
+      bidali(hiria);
+    }
+   
+  },[hiria]);
 
   const handleOutsideClick = (e) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -97,12 +141,17 @@ const Filtroa = () => {
             <select
               id="states"
               className="h-10 bg-primary border  text-gray-900 text-sm rounded-e-lg  dark:border-s-gray-700 border-t-2 border-s-gray-100 border-r-2 border-b-2  block w-full p-2.5 dark:bg-gray-700  dark:placeholder-gray-400 dark:text-white z-1"
+              onChange={(e)=>setHiria(e.target.value)}
             >
-              <option selected>-------</option>
-              <option value="Donos">Donosti</option>
-              <option value="Bilbo">Bilbao</option>
-              <option value="VG">Vitoria-Gasteiz</option>
-              <option value="Pam">Pamplona</option>
+              <option value={"denak"} selected>-------</option>
+
+              { datuak!=null  && datuak[selectedOption?.value] ?
+                datuak[selectedOption.value].map((hiriak)=>(
+                  <option key={hiriak} value={hiriak}>{hiriak}</option>
+                ))
+                : <p>...</p>
+              }
+              
             </select>
           </div>
         </div>

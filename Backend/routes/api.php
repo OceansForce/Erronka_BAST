@@ -89,8 +89,8 @@ Route::get('/protectora-edit', [ProtektoraController::class, 'editProtektora'])-
 // Adoptar 
 use App\Http\Controllers\AdoptController;
 Route::post('/adop', [AdoptController::class, 'adoptButtom']);
-Route::post('/verify-adoption/{token}', [AdoptController::class, 'adoptConfirmation']);
-Route::post('/adop-cancel/{token}', [AdoptController::class, 'adoptCancel']);
+Route::get('/verify-adoption/{token}', [AdoptController::class, 'adoptConfirmation']);
+Route::get('/adop-cancel/{token}', [AdoptController::class, 'adoptCancel']);
 
 // UP images
 /*use App\Http\Controllers\ImageController;

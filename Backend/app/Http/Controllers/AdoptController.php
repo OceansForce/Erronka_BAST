@@ -44,7 +44,7 @@ class AdoptController extends Controller
         }
 
         $protectora = Protektora::where('id', $userToAdoptIt->idProtektora)->first();
-        return response()->json(['error' => $protectora], 401); // 401 Unauthorized
+        // return response()->json(['error' => $protectora], 401); // 401 Unauthorized
 
         $animal -> adoptToken = $verificationToken;
         $animal->save();

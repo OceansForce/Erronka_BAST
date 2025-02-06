@@ -76,10 +76,20 @@ class AnimalController extends Controller
         if (!$animal) {
             return response()->json(['message' => 'Animal not found or does not meet the specified criteria'], 404);
         }
+        
+        $user = User::where('id', $animal->userID)->first();
+        $idProtektora =  $user->idProtektora;
+        
+        $protektoraEmail = null;
+        if ($idProtektora) {
+            $protektoraEmail = Protektora::where('id', $idProtektora)->value('email');
+        }
 
         // Retornar los datos del animal
-        return response()->json($animal);
-    }
+        return response()->json([
+            'animal' => $animal,
+            'contactEmail' => $protektoraEmail,
+        ]);    }
 
 
     public function getPersonalAnimals(Request $request)

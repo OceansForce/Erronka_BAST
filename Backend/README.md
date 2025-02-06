@@ -1332,13 +1332,36 @@ Response:
 
 <details>
     
-<summary> <h2>Adopt</h2> </summary>
+<summary> <h2>Adopt verify</h2> </summary>
 <p> **Get** bitartez egin behar da</p>
 <p>Korreo bat bidaltzen da erabiltzaileari esanez animalia berea dela </p>
 Link: 
  
 ```
-https://bastbackend.ddns.net/api/adop/{token}
+https://bastbackend.ddns.net/api/verify-adoption/{token}
+```
+
+Response:
+```
+{
+    "msg":"mezua bidalita"
+}
+
+
+```
+</details>
+
+
+
+<details>
+    
+<summary> <h2>Adopt cancel</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+<p>Korreo bat bidaltzen da erabiltzaileari esanez animalia berea dela </p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/adop-cancel/{token}
 ```
 
 Response:

@@ -86,7 +86,39 @@ class AdoptController extends Controller
             $message->subject('Felicidades por tu nuevo mienbro de la familia');
         });
 
-        return response()->json(['message' => 'Correo confirmado con éxito.'], 200);
+        return response()->json(['message' => 'Animal adoptar.'], 200);
+    }
+
+
+
+    public function adoptCancel($token)
+    {
+
+        $animal = Animals::where('verificationToken', $token)->first();
+
+        if (!$animal) {
+            return response()->json(['message' => 'Token inválido.'], 400);
+        }
+
+        $parts = explode('-', $token);
+        $userId = end($parts);  // Obtiene la última parte del array resultante
+
+        $user = User::where('id', $userId)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Token inválido.'], 400);
+        }
+
+        $animal->update([
+            'adoptToken' => null,
+        ]);
+
+        Mail::send('emails.adopted', ['token' => $verificationToken, 'user' => $user, 'animal'=> $animal], function ($message) use ($user) {
+            $message->to($protectora->email);
+            $message->subject("Lamentamos que no hayas podido adoptar a {$animal->name}");
+        });
+
+        return response()->json(['message' => 'Adopcion cancelada.'], 200);
     }
 
     

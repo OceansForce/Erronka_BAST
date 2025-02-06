@@ -16,5 +16,7 @@
     <p>Para proceder con la adopción, por favor confirma la solicitud haciendo clic en el siguiente botón:</p>
     
     <a href="{{ url('/api/verify-adoption/' . $adoptionToken) }}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Confirmar adopción</a>
+    <a href="{{ url('/api/adop-cancel/' . $adoptionToken) }}" style="padding: 10px 20px; background-color: #f44336; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">Denegar adopción</a>
+
 </body>
 </html>

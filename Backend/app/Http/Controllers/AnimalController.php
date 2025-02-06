@@ -76,7 +76,9 @@ class AnimalController extends Controller
         // Verificar si no se encontró el animal
         if (!$animal) {
             return response()->json(['message' => 'Animal not found or does not meet the specified criteria'], 404);
-        }
+        }            
+        return response()->json(['message' => $animal], 404);
+
         
         $user = User::where('id', $animal->userID)->first();
         // Verificar si no se encontraron resultados

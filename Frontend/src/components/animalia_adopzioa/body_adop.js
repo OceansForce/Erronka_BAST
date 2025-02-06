@@ -16,6 +16,8 @@ function Anim_Adop_BODY() {
       i18n.changeLanguage(lang);  // Cambia el idioma
     };
     const [animalData, setAnimalData] = useState(null);
+    const [contacEmail, setContactEmail] = useState(null);
+
 
 
     useEffect(() => {
@@ -34,7 +36,8 @@ function Anim_Adop_BODY() {
     
             const data = await response.json();
             console.log('Datos de la noticia:', data);
-            setAnimalData(data);
+            setAnimalData(data.animal);
+            setContactEmail(data.contactEmail);
           } catch (error) {
             console.error('Error fetching single news:', error);
             alert('Error al obtener los datos de la noticia.');
@@ -117,7 +120,7 @@ function Anim_Adop_BODY() {
                     </div>
 
                     <div className="flex flex-col w-full">
-                        <p className="ml-5 mt-10 text-base font-ubuntu text-black dark:text-white" >{t("Adop_Anim:Babes_Elk")}:</p>
+                        <p className="ml-5 mt-10 text-base font-ubuntu text-black dark:text-white" >{t("Adop_Anim:Babes_Elk")}: {contacEmail}</p>
 
                         <div className="flex flex-col w-full mt-5 ">
 

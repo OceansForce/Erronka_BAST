@@ -46,6 +46,9 @@ class AnimalController extends Controller
             $query->whereIn('type', $types);
         }
 
+        $query->whereNull('adoptToken');
+
+
         // Aplicar paginación y obtener los resultados
         $animals = $query->offset($offset)
             ->limit($limit)
@@ -71,6 +74,7 @@ class AnimalController extends Controller
                 $query->where('idProtektora', '>', 1)
                     ->whereNotNull('idProtektora');
             })
+            ->whereNull('adoptToken')
             ->where('id', $id) // Buscar por el id del animal
             ->first(['id', 'name', 'etxekoAnimalia', 'type', 'animalType', 'img', 'bakuna', 'gender', 'descripcion', 'year', 'losted', 'noiztik', 'userID']);
 

@@ -53,14 +53,16 @@ const AnimalList = () => {
     }
 
     return (
-        <div>
+        <div className='flex flex-col items-center'>
             <div className='flex flex-row w-42 space-x-5 mt-10 bg-primary dark:bg-dark p-5 rounded-3xl'>
-                <BackButtonLittle to="/" src="/img/icons/arrow-left.svg" />
+                <BackButtonLittle to="/Ad_menu" src="/img/icons/arrow-left.svg" />
                 
                 <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
                 <DarkModeToggle className='w-1/2' />  
             </div>
-            <ProfilAnimals userData={animaliak} />
+            <div>
+                <ProfilAnimals userData={animaliak} />
+            </div>
         </div>
     );
 };

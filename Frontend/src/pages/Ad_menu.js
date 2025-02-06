@@ -45,7 +45,7 @@ function Ad_menua() {
                 <LanguageSelector className='w-1/2' changeLanguage={changeLanguage} />
                 <DarkModeToggle className='w-1/2' />  
             </div>
-            <div className="w-full flex flex-row flex-wrap bg-red erdian text-center space-x-14">
+            <div className="w-full flex flex-row flex-wrap bg-red erdian text-center gap-x-14 gap-y-4 mt-10">
                 {protektoraID ===1 && (
                     <AdminPanelButtom 
                     to="/Ad_notizia_panela" 

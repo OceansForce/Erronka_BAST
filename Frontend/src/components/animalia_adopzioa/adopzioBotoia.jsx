@@ -41,8 +41,7 @@ const AdopzioBotoia = ({ text, animalID }) => {
           
                   const data = await response.json();
                   console.log('Datos de la noticia:', data);
-                  setAnimalData(data.animal);
-                  setContactEmail(data.contactEmail);
+                  
                 } catch (error) {
                   console.error('Error fetching single news:', error);
                   alert('Error al obtener los datos de la noticia.');

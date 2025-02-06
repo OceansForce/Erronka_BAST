@@ -83,7 +83,7 @@ class AdoptController extends Controller
         ]);
 
         Mail::send('emails.adopted', ['user' => $user, 'animal'=> $animal], function ($message) use ($user) {
-            $message->to($protectora->email);
+            $message->to($user->email);
             $message->subject('Felicidades por tu nuevo mienbro de la familia');
         });
 
@@ -115,7 +115,7 @@ class AdoptController extends Controller
         ]);
 
         Mail::send('emails.cancel', ['user' => $user, 'animal'=> $animal], function ($message) use ($user) {
-            $message->to($protectora->email);
+            $message->to($user->email);
             $message->subject("Lamentamos que no hayas podido adoptar a {$animal->name}");
         });
 

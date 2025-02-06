@@ -55,7 +55,7 @@ function Ad_menua() {
                 )}
                 
                 
-                <AdminPanelButtom 
+                {/* <AdminPanelButtom 
                     to="/Ad_galduta" 
                     imageSrc="./img/animal-domestic-lost-svgrepo-com.svg" 
                     text={t('ad_menua:galduta')} 
@@ -66,7 +66,13 @@ function Ad_menua() {
                     to="/Ad_adoptatu" 
                     imageSrc="./img/animal-approve-cat-svgrepo-com.svg" 
                     text={t('ad_menua:adoptatu')} 
-                />
+                /> */}
+
+                <AdminPanelButtom 
+                    to="/Animal-List" 
+                    imageSrc="./img/animal-approve-cat-svgrepo-com.svg" 
+                    text={t('ad_menua:adoptatu')} 
+                /> 
 
 
                 {protektoraID === 1 && (

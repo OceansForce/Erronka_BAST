@@ -88,9 +88,9 @@ Route::get('/protectora-edit', [ProtektoraController::class, 'editProtektora'])-
 
 // Adoptar 
 use App\Http\Controllers\AdoptController;
-Route::post('/adop', [AdoptController::class, 'adoptButtom']);
-Route::post('/verify-adoption/{token}', [AdoptController::class, 'adoptConfirmation']);
-Route::post('/adop-cancel/{token}', [AdoptController::class, 'adoptCancel']);
+Route::post('/adop', [AdoptController::class, 'adoptButtom'])->middleware('auth:sanctum');
+Route::post('/verify-adoption/{token}', [AdoptController::class, 'adoptConfirmation'])->middleware('auth:sanctum');
+Route::post('/adop-cancel/{token}', [AdoptController::class, 'adoptCancel'])->middleware('auth:sanctum');
 
 // UP images
 /*use App\Http\Controllers\ImageController;

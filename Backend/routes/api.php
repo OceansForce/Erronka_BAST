@@ -94,6 +94,14 @@ Route::get('/verify-adoption/{token}', [AdoptController::class, 'adoptConfirmati
 Route::get('/adop-cancel/{token}', [AdoptController::class, 'adoptCancel']);
 
 
+
+// Protectora
+use App\Http\Controllers\ProtektoraController;
+Route::post('/protektora-create', [ProtektoraController::class, 'createProtektora'])->middleware('auth:sanctum');
+Route::get('/all-protektora', [ProtektoraController::class, 'getAllProtektoras']);
+
+
+
 // UP images
 /*use App\Http\Controllers\ImageController;
 Route::post('/upload-image', [ImageController::class, 'upload'])->middleware('auth:sanctum');

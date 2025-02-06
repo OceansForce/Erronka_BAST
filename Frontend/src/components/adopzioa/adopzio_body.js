@@ -77,7 +77,7 @@ function Adopzioak({datua}) {
 
   return (
     <>
-      <div className='container mx-auto flex flex-row justify-evenly border-b-2 pb-8 dark:border-white border-black mt-6'>
+      <div className='container mx-auto flex flex-col  items-center sm:flex-row justify-evenly border-b-2 pb-8 dark:border-white border-black mt-6'>
         <Filtroak_animalia img="adopta_perro" text={t("Adop_Anim:Txakurrak")} aktibatuta={(estado) => setFilters((a)=> ({
           ...a,
           txakurra: estado,

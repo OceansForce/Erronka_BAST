@@ -3,8 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';  // Asegúrate de importar Link
 
 
-
-
 const Adopzioa = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();

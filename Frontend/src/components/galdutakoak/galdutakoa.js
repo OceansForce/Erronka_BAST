@@ -24,7 +24,14 @@ const Galduta= ({jaso})=>{
 
   const fetchGaldutakoAnimalia = async () => {
     try {
-        const response = await fetch(`${IpAPI}/api/animals-losted?limit=${limit}&offset=${offset}${jaso}`, {
+        let url;
+        if(jaso=="denak"){
+          url=`${IpAPI}/api/animals-losted?limit=${limit}&offset=${offset}`;
+        }else{
+          url=`${IpAPI}/api/animals-losted?limit=${limit}&offset=${offset}${jaso}`;
+        }
+
+        const response = await fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

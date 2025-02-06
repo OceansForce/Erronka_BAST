@@ -1304,3 +1304,49 @@ Response:
 
 ```
 </details>
+
+
+
+
+<details>
+    
+<summary> <h2>Adopt</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+<p>Korreo bat bidaltzen da basbesleari esanez animali hori nahi duzula adoptatu </p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/adop
+```
+
+Response:
+```
+{
+    "msg":"mezua bidalita"
+}
+
+
+```
+</details>
+
+
+<details>
+    
+<summary> <h2>Adopt</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+<p>Korreo bat bidaltzen da erabiltzaileari esanez animalia berea dela </p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/adop/{token}
+```
+
+Response:
+```
+{
+    "msg":"mezua bidalita"
+}
+
+
+```
+</details>

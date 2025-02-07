@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 
 import Adopzioa  from './header/desplegable/adopzioa';
-import Denda from './header/desplegable/denda';
 
 
 const Header = () => {

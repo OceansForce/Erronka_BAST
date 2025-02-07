@@ -22,7 +22,7 @@ function Animali_Form({tituloa, atras}){
   const navigate = useNavigate();
   useEffect(() => {
     // Llamar a checkProtektora dentro del useEffect
-    checkProtektora(navigate);
+    //checkProtektora(navigate);
   }, [navigate]);
 
   useEffect(() => {

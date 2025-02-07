@@ -55,10 +55,7 @@ function Saioa_sortu() {
     formData.append('password_confirmation', confirmPassword);
     formData.append('year', year);
     if (img) formData.append('img', img);
-    //console.log(formData);
-    // for (let pair of formData.entries()) {
-    //   console.log(pair[0]+ ': ' + pair[1]);
-    // }
+   
 
     // Aquí puedes enviar los datos a un servidor, por ejemplo:
     fetch(`${IpAPI}/api/register`, {
@@ -107,7 +104,7 @@ function Saioa_sortu() {
                 closeError = {setShowErrorModal}
             />
           )}
-      <div className="container flex justify-center erdian">
+      <div className="w-full flex justify-center">
         <div className="flex flex-col dark:bg-dark bg-primary p-6 m-10 w-96 rounded-lg text-center border-black dark:border-transparent border-2">
           <div className="w-full flex">
             <div className="w-1/2">

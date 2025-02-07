@@ -15,6 +15,7 @@ function LostedPage({ item, ruta }) {
     const location = useLocation();
     const [etxekoa, setEtxekoa] = useState(1);
     const { t, i18n } = useTranslation();
+    console.log(item);
     
     const [formData, setFormData] = useState({
         id: item.id,

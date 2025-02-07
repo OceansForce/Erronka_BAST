@@ -40,7 +40,7 @@ function Edit_animal() {
 
     return (
         <> 
-            <div className='container flex justify-center erdian'>
+            <div className='container flex justify-center'>
                 <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-full rounded-lg text-center border-black dark:border-transparent border-2'>
                     <div className='w-full flex'>
                         <BackButton targetPage={ruta} width={20}/>

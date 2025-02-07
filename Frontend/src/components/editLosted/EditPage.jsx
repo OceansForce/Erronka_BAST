@@ -135,7 +135,7 @@ function EditPage({item, ruta}) {
                     <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('ad_galduta:animalEdit')}</p>
                     <form className='flex flex-col text-left' onSubmit={handleSubmit}>
 
-                        <div className='flex flex-row'>
+                        <div className='flex flex-col md:flex-row'>
                             <div className='flex flex-col w-1/2 mr-10'>
                                 <label className='font-semibold dark:text-white'>{t('ad_galduta:Izena')}</label>
                                 <input className='mb-2 dark:border-primary rounded-lg ' type='text' name='name'  value={formData.name} onChange={handleChange} required/>

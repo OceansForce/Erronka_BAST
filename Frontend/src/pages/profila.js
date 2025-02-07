@@ -308,7 +308,7 @@ const Profila = () => {
                             </div>
 
 
-                            <ProfilAnimals userData={userData.animals} ruta='/Profila'/>
+                            <ProfilAnimals userData={userData.animals} ruta='/Profila' />
 
                             <DeleteButtom />
                         </div>

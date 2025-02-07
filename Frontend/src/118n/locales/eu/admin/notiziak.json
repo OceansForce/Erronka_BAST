@@ -1,7 +1,9 @@
 {
+    "tituloa_P":"Iragarkiak",
     "tituloa_D":"Iragarkia Editatu",
     "tituloa_N":"Iragarkia Sortu",
     "img": "Irudia",
     "tituloa": "Tituloa",
-    "Paragrafoa": "Paragrafoa"
+    "Paragrafoa": "Paragrafoa",
+    "sortu":"Sortu iragarki bat"
 }

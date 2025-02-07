@@ -4,7 +4,7 @@ import Header from '../header-footer/header';
 import Footer from '../header-footer/footer';
 import React, { useState, useEffect } from "react";
 
-function galduta() {
+function GaldutaHorria() {
     const [hiria, setHiria]= useState("");
 
     const hiriaJaso=(datua)=>{
@@ -25,4 +25,4 @@ function galduta() {
     );
   }
   
-export default galduta;
+export default GaldutaHorria;

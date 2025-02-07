@@ -4,7 +4,7 @@ import Footer from '../header-footer/footer';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from "react";
 
-function adopzio() {
+function Adopzio() {
     const location = useLocation();
     const { aukeratua } = location.state || {}; //Link etiketatik id-a lortzeko
     let aukera="";
@@ -27,4 +27,4 @@ function adopzio() {
     );
   }
   
-export default adopzio;
+export default Adopzio;

@@ -19,7 +19,6 @@ const Filtroa = ({bidali}) => {
     { value: "Bizkaia", label: " Bizkaia", img: "./img/Banderas/Bandera_de_Vizcaya.svg.png" },
     { value: "Guipuzkoa", label: " Guipuzkoa", img: "./img/Banderas/Flag_of_Guipúzcoa.svg.png" },
     { value: "Araba", label: " Araba", img: "./img/Banderas/Flag_of_Álava.svg" },
-    { value: "Nabarra", label: "Nabarra", img: "./img/Banderas/descarga.png" },
   ];
 
   useEffect(()=>{

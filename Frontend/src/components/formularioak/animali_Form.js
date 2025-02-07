@@ -95,8 +95,9 @@ function Animali_Form({tituloa, atras}){
   // Manejador del envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!formData.name || !mota || !arraza || !sexo || etxekoa !='' || !formData.descripcion || !formData.year) {
+    // console.log( "name:"+formData.name+" Mota:"+mota+" Raza:"+arraza+" Sexo:"+sexo+" Etxekoa:"+etxekoa+" Esterilizado:"+esterilizado+" Descripcion:"+formData.descripcion+" Data"+formData.year);
+    if (!formData.name || !mota || !arraza || (sexo !== 1 && sexo !== 2) || (etxekoa !== 1 && etxekoa !== 0) || (esterilizado !== 1 && esterilizado !== 2) || !formData.descripcion || !formData.year) {
+      
       alert("Por favor, completa todos los campos requeridos.");
       return;
     }
@@ -241,7 +242,6 @@ function Animali_Form({tituloa, atras}){
                       name='Etxekoa' 
                       value={1} 
                       onChange={(e) => setEtxekoa(parseInt(e.target.value))} 
-                      checked={etxekoa === 1} 
                       required 
                     />
                     <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Bai')}</label>
@@ -252,7 +252,6 @@ function Animali_Form({tituloa, atras}){
                       name='Etxekoa' 
                       value={0} 
                       onChange={(e) => setEtxekoa(parseInt(e.target.value))} 
-                      checked={etxekoa === 0} 
                       required 
                     />
                     <label className='ml-1 dark:text-white fonts_ubutu'>{t('ad_galduta:Ez')}</label>

@@ -13,16 +13,15 @@ import { useLocation } from 'react-router-dom';
 import Irudiak_input from './../components/notiziak/IrudiakInput.js';
 import { document } from 'postcss';
 import EditPage from '../components/editLosted/EditPage.jsx';
-
-
+import LostedEdit from '../components/editLosted/LostedEdit.jsx';
+import LostedPage from '../components/editLosted/LostedPage.jsx';
 
 function Edit_animal() {
 
     const navigate = useNavigate();  // Hook para la navegación
     const location = useLocation(); // Asegúrate de obtener location después de la inicialización
-    const [etxekoa, setEtxekoa] = useState(1); // Valor inicial predeterminado
-    const [esterilizado, setEsterilizado]= useState(1);
     const [activeSection, setActiveSection] = useState('Profile');
+    
 
     // console.log(etxekoa);
 
@@ -52,7 +51,12 @@ function Edit_animal() {
                         </div>
                     </div>
 
-                    <EditPage item={item} ruta={ruta} />
+                    <LostedEdit onActiveChange={setActiveSection} />
+
+                    
+
+                    {activeSection === 'Profile' && <EditPage item={item} ruta={ruta} />}
+                    {activeSection === 'Contact' && <LostedPage item={item} ruta={ruta} />}
 
                     
 

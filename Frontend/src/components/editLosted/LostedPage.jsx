@@ -16,8 +16,8 @@ function LostedPage({ item, ruta }) {
     const [formData, setFormData] = useState({
         id: item.id,
         hiria: '',
-        provintzia: '',
-        data: '',
+        probintzia: '',
+        fecha: '',
         moreInformation: ''
     });
 
@@ -59,9 +59,10 @@ function LostedPage({ item, ruta }) {
             const formattedDate = new Date(lostedInformation.animal.galduta.fecha);
             const dateString = formattedDate.toISOString().split('T')[0];
             setFormData({
+                id: item.id,
                 hiria: lostedInformation.animal.galduta.hiria || '',
-                provintzia: lostedInformation.animal.galduta.probintzia || '',
-                data: dateString || '',
+                probintzia: lostedInformation.animal.galduta.probintzia || '',
+                fecha: dateString || '',
                 moreInformation: lostedInformation.animal.galduta.moreInformation || ''
             });
             console.log("form data: "+formData);
@@ -80,10 +81,12 @@ function LostedPage({ item, ruta }) {
 
         const tok = localStorage.getItem('token');
         
-
+        // console.log("Form data:", tok);
         if(!isDisabled){
             console.log("Esta perdido");
-            
+            console.log("Form data:", formData);
+            console.log("Form data antes de enviar:", JSON.stringify(formData, null, 2));
+
             
             try {
                 const response = await fetch(`${IpAPI}/api/set-losted`, {
@@ -92,7 +95,7 @@ function LostedPage({ item, ruta }) {
                         'Authorization': `Bearer ${tok}`,
                         'Content-Type': 'application/json',
                     },
-                    body: formData,
+                    body: JSON.stringify(formData),
                 });
     
                 if (!response.ok) {
@@ -105,9 +108,10 @@ function LostedPage({ item, ruta }) {
                 const result = await response.json();
                 console.log("Server response:", result);
                 setFormData({
+                    id: item.id,
                     hiria: '',
-                    provintzia: '',
-                    data: '',
+                    probintzia: '',
+                    fecha: '',
                     moreInformation: ''
                 });
                 navigate(ruta);
@@ -138,9 +142,10 @@ function LostedPage({ item, ruta }) {
                 const result = await response.json();
                 console.log("Server response:", result);
                 setFormData({
+                    id: item.id,
                     hiria: '',
-                    provintzia: '',
-                    data: '',
+                    probintzia: '',
+                    fecha: '',
                     moreInformation: ''
                 });
                 navigate(ruta);
@@ -180,8 +185,8 @@ function LostedPage({ item, ruta }) {
                 <div className='flex flex-row'>
                     <div className='flex flex-col w-1/2 mr-10'>
                         <ProvinciasYCiudades 
-                            selectedProvincia={formData.provintzia}
-                            setSelectedProvincia={(value) => setFormData((prev) => ({ ...prev, provintzia: value }))}
+                            selectedProvincia={formData.probintzia}
+                            setSelectedProvincia={(value) => setFormData((prev) => ({ ...prev, probintzia: value }))}
                             selectedPueblo={formData.hiria}
                             setSelectedPueblo={(value) => setFormData((prev) => ({ ...prev, hiria: value }))}
                             disabled={isDisabled} // Deshabilita si el checkbox está marcado
@@ -192,8 +197,8 @@ function LostedPage({ item, ruta }) {
                         <label className='font-semibold dark:text-white'>{t('ad_galduta:Fecha')}</label>
                         <input 
                             type='date' 
-                            name='data' 
-                            value={formData.data} 
+                            name='fecha' 
+                            value={formData.fecha} 
                             onChange={handleChange} 
                             className={`dark:border-primary border-black border-2 rounded-lg ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`} 
                             disabled={isDisabled}

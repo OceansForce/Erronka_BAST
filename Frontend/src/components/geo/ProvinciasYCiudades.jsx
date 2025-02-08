@@ -68,7 +68,15 @@ const ProvinciasYCiudades = ({
         disabled={disabled} 
         className={`border-2 rounded-lg p-2 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
-        <option value="">{t('createProtektora:ProbintziaAukeratu')}</option>
+        {selectedProvincia ? (
+            <option value={selectedProvincia} key={selectedProvincia}>
+                {selectedProvincia}
+            </option>
+        ) : (
+            <option value="" disabled>
+                {t('createProtektora:ProbintziaAukeratu')}
+            </option>
+        )}
         {provincias.map((provincia, index) => (
           <option key={index} value={provincia}>
             {provincia}
@@ -85,7 +93,22 @@ const ProvinciasYCiudades = ({
             disabled={disabled} 
             className={`border-2 rounded-lg p-2 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
-            <option value="">{t('createProtektora:HiriaAukeratu')}</option>
+            {selectedPueblo ? (
+                <option value={selectedPueblo} key={selectedPueblo}>
+                    {selectedPueblo}
+                </option>
+            ) : (
+                <option value="" disabled>
+                    {t('createProtektora:HiriaAukeratu')}
+                </option>
+            )}
+
+            {pueblos.map((pueblo, index) => (
+                <option key={index} value={pueblo}>
+                    {pueblo}
+                </option>
+            ))}
+
             {pueblos.map((pueblo, index) => (
               <option key={index} value={pueblo}>
                 {pueblo}

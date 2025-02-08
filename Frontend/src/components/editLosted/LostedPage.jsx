@@ -166,8 +166,10 @@ function LostedPage({ item, ruta }) {
             
 
             <form className='flex flex-col text-left' onSubmit={handleSubmit}>
+               
                 {/* Checkbox para habilitar/deshabilitar */}
                 <div className="inline-flex items-center">
+                    <p className='dark:text-white mr-2 font-semibold'>{t('ad_galduta:animalLost')}:</p>
                     <label className="flex items-center cursor-pointer relative">
                         <input 
                             type="checkbox" 

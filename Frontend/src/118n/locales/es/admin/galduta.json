@@ -20,7 +20,9 @@
     "Deskribapena":"Descripción",
     "Selecciona_mota":"Escoje el animal",
     "razaSelecionar":"Seleciona la raza",
-    "animalEdit":"Editar animal"
+    "animalEdit":"Editar animal",
+    "animalLost":"Animal perdido"
+
 
 
 }

@@ -1,27 +1,23 @@
-import { useEffect } from 'react';
-import LanguageSelector from '../../header-footer/header/desplegable/lenguageSelector';
-import DarkModeToggle from '../../header-footer/header/dark-light/dark';
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import i18n from '../../118n/menu';
-import IpAPI from '../../config/ipAPI';
-import BackButton from '../../components/bottons/backBotom';
-import SendButom from '../../components/bottons/sendBotton';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import ProvinciasYCiudades from '../../components/geo/ProvinciasYCiudades.jsx';
+import SendButom from '../../components/bottons/sendBotton';
+import { useNavigate } from 'react-router-dom';
+import IpAPI from '../../config/ipAPI';
+import { useTranslation } from 'react-i18next';
 
 function LostedPage({ item, ruta }) {
     const navigate = useNavigate();
-    const location = useLocation();
-    const [etxekoa, setEtxekoa] = useState(1);
-    const { t, i18n } = useTranslation();
-    console.log(item);
-    
+    const { t } = useTranslation();
+
+    // Estado para manejar si los campos están deshabilitados
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [lostedInformation, setLostedInformation] = useState();
+
     const [formData, setFormData] = useState({
         id: item.id,
         hiria: '',
         provintzia: '',
-        data: '',  // Campo para la fecha
+        data: '',
         moreInformation: ''
     });
 
@@ -30,15 +26,62 @@ function LostedPage({ item, ruta }) {
         setFormData({ ...formData, [name]: value });
     };
 
+    useEffect(() => {
+        const fetchAnimalData = async () => {
+            try {
+                const response = await fetch(`${IpAPI}/api/animal-losted/${formData.id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+    
+                if (response.ok) {
+                    const result = await response.json();
+
+                    setLostedInformation(result);
+                    console.log("datos Recibidos", result);
+                }
+            } catch (error) {
+                setLostedInformation(null);
+                console.error("No hay datos:", error);
+            }
+        };
+    
+        fetchAnimalData(); // Ejecuta la función al cargar el componente
+    }, []); // Dependencias vacías para ejecutarse solo al montar
+    
+    useEffect(() => {
+        console.log("Datos de la mascota:", lostedInformation);
+
+        if (lostedInformation && lostedInformation.galduta) {
+            setFormData({
+                hiria: lostedInformation.galduta.hiria || '',
+                provintzia: lostedInformation.galduta.probintzia || '',
+                data: lostedInformation.galduta.fecha || '',
+                moreInformation: lostedInformation.galduta.moreInformation || ''
+            });
+            
+        }
+    }, [lostedInformation]); // Se ejecuta solo cuando lostedInformation cambia
+    
+
+    // Manejar el cambio del checkbox
+    const handleCheckboxChange = () => {
+        setIsDisabled((prev) => !prev); // Alterna el estado
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (isDisabled) return; // Evita enviar si está deshabilitado
+
         const tok = localStorage.getItem('token');
         const formDataToSend = new FormData();
         
         formDataToSend.append('id', formData.id);
         formDataToSend.append('hiria', formData.hiria);
         formDataToSend.append('provintzia', formData.provintzia);
-        formDataToSend.append('fecha', formData.data); // Asegúrate de que el nombre coincida con el backend
+        formDataToSend.append('fecha', formData.data);
         formDataToSend.append('moreInformation', formData.moreInformation);
         
         try {
@@ -49,24 +92,24 @@ function LostedPage({ item, ruta }) {
                 },
                 body: formDataToSend,
             });
-        
+
             if (!response.ok) {
                 const errorText = await response.text();
                 console.error("Error response:", errorText);
                 alert(`Error: ${errorText}`);
                 return;
             }
-        
+
             const result = await response.json();
             console.log("Server response:", result);
             setFormData({
                 hiria: '',
                 provintzia: '',
-                data: '', // Resetear el campo de fecha
+                data: '',
                 moreInformation: ''
             });
             navigate(ruta);
-        
+
         } catch (error) {
             console.error("Request failed:", error);
             alert('Error en la solicitud: ' + error.message);
@@ -76,31 +119,45 @@ function LostedPage({ item, ruta }) {
     return (
         <>
             <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('ad_galduta:animalEdit')}</p>
+
+            {/* Checkbox para habilitar/deshabilitar */}
+            <div className="inline-flex items-center">
+                <label className="flex items-center cursor-pointer relative">
+                    <input 
+                        type="checkbox" 
+                        className="peer h-6 w-6 cursor-pointer transition-all appearance-none rounded-full bg-slate-100 shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800" 
+                        id="check-custom-style" 
+                        onChange={handleCheckboxChange}
+                    />
+                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                        </svg>
+                    </span>
+                </label>
+            </div>
+
             <form className='flex flex-col text-left' onSubmit={handleSubmit}>
                 <div className='flex flex-row'>
                     <div className='flex flex-col w-1/2 mr-10'>
                         <ProvinciasYCiudades 
                             selectedProvincia={formData.provintzia}
-                            setSelectedProvincia={(value) => {
-                                console.log("Provincia seleccionada en formData:", value);
-                                setFormData((prev) => ({ ...prev, provintzia: value }));
-                            }}
+                            setSelectedProvincia={(value) => setFormData((prev) => ({ ...prev, provintzia: value }))}
                             selectedPueblo={formData.hiria}
-                            setSelectedPueblo={(value) => {
-                                console.log("Ciudad seleccionada en formData:", value);
-                                setFormData((prev) => ({ ...prev, hiria: value }));
-                            }}
+                            setSelectedPueblo={(value) => setFormData((prev) => ({ ...prev, hiria: value }))}
+                            disabled={isDisabled} // Deshabilita si el checkbox está marcado
+                            className={isDisabled ? 'opacity-50 cursor-not-allowed' : ''}
                         />
                     </div>
                     <div className='flex flex-col w-1/2'>
-                        {/* Campo para la fecha */}
                         <label className='font-semibold dark:text-white'>{t('ad_galduta:Fecha')}</label>
                         <input 
                             type='date' 
                             name='data' 
                             value={formData.data} 
                             onChange={handleChange} 
-                            className='dark:border-primary border-black border-2 rounded-lg' 
+                            className={`dark:border-primary border-black border-2 rounded-lg ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`} 
+                            disabled={isDisabled}
                             required 
                         />
                     </div>
@@ -110,17 +167,18 @@ function LostedPage({ item, ruta }) {
                     <div className='w-full flex flex-col'>
                         <label className='font-semibold dark:text-white'>{t('ad_galduta:Deskribapena')}</label>
                         <textarea 
-                            className='dark:border-primary border-black border-2 rounded-lg' 
+                            className={`dark:border-primary border-black border-2 rounded-lg ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`} 
                             rows={6} 
                             name='moreInformation' 
                             value={formData.moreInformation} 
                             onChange={handleChange} 
+                            disabled={isDisabled}
                             required
                         />
                     </div>
                 </div>
                 
-                <SendButom value={t('saioa_sortu:input')} />
+                <SendButom value={t('saioa_sortu:input')} disabled={isDisabled} className={isDisabled ? 'opacity-50 cursor-not-allowed' : ''} />
             </form>
         </>
     );

@@ -5,21 +5,20 @@ const ProvinciasYCiudades = ({
   selectedProvincia, 
   setSelectedProvincia, 
   selectedPueblo, 
-  setSelectedPueblo 
+  setSelectedPueblo,
+  disabled // Recibe el estado de deshabilitación
 }) => {
-
   const { t } = useTranslation();
   const [provincias, setProvincias] = useState([]);
   const [pueblos, setPueblos] = useState([]);
 
-  // Cargar los datos del JSON
   useEffect(() => {
     fetch('https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/pueblos_euskadi_turismo/opendata/pueblos.json')
       .then((response) => response.json())
       .then((data) => {
         const provinciasPueblos = {};
         Object.values(data).forEach((pueblo) => {
-          const territorio = pueblo.territory.split(' ')[0]; 
+          const territorio = pueblo.territory.split(' ')[0];
           const nombrePueblo = pueblo.documentName;
 
           if (!provinciasPueblos[territorio]) {
@@ -35,9 +34,9 @@ const ProvinciasYCiudades = ({
 
   // Manejar cambio de provincia
   const handleProvinciaChange = (event) => {
+    if (disabled) return; // Evita cambios si está deshabilitado
     const provinciaSeleccionada = event.target.value;
     setSelectedProvincia(provinciaSeleccionada);
-    console.log("Provincia seleccionada:", provinciaSeleccionada);
 
     if (provinciaSeleccionada) {
       fetch('https://opendata.euskadi.eus/contenidos/ds_recursos_turisticos/pueblos_euskadi_turismo/opendata/pueblos.json')
@@ -56,15 +55,19 @@ const ProvinciasYCiudades = ({
 
   // Manejar cambio de pueblo
   const handlePuebloChange = (event) => {
-    const puebloSeleccionado = event.target.value;
-    setSelectedPueblo(puebloSeleccionado);
-    console.log("Pueblo seleccionado:", puebloSeleccionado);
+    if (disabled) return; // Evita cambios si está deshabilitado
+    setSelectedPueblo(event.target.value);
   };
 
   return (
     <div>
       <p className='font-semibold dark:text-white'>{t('createProtektora:Probintzia')}</p>
-      <select value={selectedProvincia} onChange={handleProvinciaChange}>
+      <select 
+        value={selectedProvincia} 
+        onChange={handleProvinciaChange} 
+        disabled={disabled} 
+        className={`border-2 rounded-lg p-2 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      >
         <option value="">{t('createProtektora:ProbintziaAukeratu')}</option>
         {provincias.map((provincia, index) => (
           <option key={index} value={provincia}>
@@ -76,7 +79,12 @@ const ProvinciasYCiudades = ({
       {selectedProvincia && (
         <>
           <p className='font-semibold dark:text-white'>{t('createProtektora:Hiria')}</p>
-          <select value={selectedPueblo} onChange={handlePuebloChange}>
+          <select 
+            value={selectedPueblo} 
+            onChange={handlePuebloChange} 
+            disabled={disabled} 
+            className={`border-2 rounded-lg p-2 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+          >
             <option value="">{t('createProtektora:HiriaAukeratu')}</option>
             {pueblos.map((pueblo, index) => (
               <option key={index} value={pueblo}>

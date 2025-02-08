@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
 use App\Models\Animals;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -139,14 +139,29 @@ class LostedController extends Controller
     public function setLosted(Request $request)
     {
         // Validación de los parámetros
-        $request->validate([
-            'id' => 'required|integer|exists:animals,id', // Verifica que el id del animal exista en la base de datos
-            'hiria' => 'required|string|max:255', 
-            'probintzia' => 'required|string|max:255', 
-            'fecha' => 'required|date', 
-            'moreInformation' => 'required|string|max:255', 
-        ]);
+//        $request->validate([
+//            'id' => 'required|integer|exists:animals,id', // Verifica que el id del animal exista en la base de datos
+  ///          'hiria' => 'required|string|max:255', 
+     ///       'probintzia' => 'required|string|max:255', 
+        ///    'fecha' => 'required|date', 
+        ///    'moreInformation' => 'required|string|max:255', 
+        ///]);
+$validator = Validator::make($request->all(), [
+        'id' => 'required|integer|exists:animals,id',
+        'hiria' => 'required|string|max:255',
+        'probintzia' => 'required|string|max:255',
+        'fecha' => 'required|date',
+        'moreInformation' => 'required|string|max:255',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'error' => 'Validación fallida',
+            'messages' => $validator->errors()
+        ], 422);
+    }
     
+
         // Obtener el usuario autenticado
         $user = auth()->user();
     

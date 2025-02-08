@@ -7,7 +7,7 @@ const Filtroa = ({bidali}) => {
 
   const [selectedOption, setSelectedOption] = useState({
     value: "gui",
-    label: "Guipuzkoa",
+    label: "Gipuzkoa",
     img: "./img/Banderas/Flag_of_Guipúzcoa.svg.png",
   });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -17,7 +17,7 @@ const Filtroa = ({bidali}) => {
 
   const options = [
     { value: "Bizkaia", label: " Bizkaia", img: "./img/Banderas/Bandera_de_Vizcaya.svg.png" },
-    { value: "Guipuzkoa", label: " Guipuzkoa", img: "./img/Banderas/Flag_of_Guipúzcoa.svg.png" },
+    { value: "Gipuzkoa", label: " Gipuzkoa", img: "./img/Banderas/Flag_of_Guipúzcoa.svg.png" },
     { value: "Araba", label: " Araba", img: "./img/Banderas/Flag_of_Álava.svg" },
   ];
 

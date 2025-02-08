@@ -196,7 +196,7 @@ function LostedPage({ item, ruta }) {
                         />
                     </div>
                     <div className='flex flex-col w-1/2'>
-                        <label className='font-semibold dark:text-white'>{t('ad_galduta:Fecha')}</label>
+                        <label className='font-semibold dark:text-white'>{t('ad_galduta:noiz')}</label>
                         <input 
                             type='date' 
                             name='fecha' 

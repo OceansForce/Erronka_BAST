@@ -11,7 +11,7 @@ function LostedPage({ item, ruta }) {
 
     // Estado para manejar si los campos están deshabilitados
     const [isDisabled, setIsDisabled] = useState(false);
-    const [lostedInformation, setLostedInformation] = useState();
+    const [lostedInformation, setLostedInformation] = useState(null);
 
     const [formData, setFormData] = useState({
         id: item.id,
@@ -38,30 +38,33 @@ function LostedPage({ item, ruta }) {
     
                 if (response.ok) {
                     const result = await response.json();
-
-                    setLostedInformation(result);
-                    console.log("datos Recibidos", result);
+                    setLostedInformation(result); // Guardamos los datos en el estado
+                    // console.log("datos Recibidos", result);
                 }
             } catch (error) {
                 setLostedInformation(null);
-                console.error("No hay datos:", error);
+                // console.error("No hay datos:", error);
             }
         };
     
         fetchAnimalData(); // Ejecuta la función al cargar el componente
-    }, []); // Dependencias vacías para ejecutarse solo al montar
-    
+    }, [formData.id]); // Dependencia de formData.id para que se ejecute cuando el id cambie
+
     useEffect(() => {
         console.log("Datos de la mascota:", lostedInformation);
 
-        if (lostedInformation && lostedInformation.galduta) {
+        // Solo actualizamos el formulario si la información está disponible
+        if (lostedInformation && lostedInformation.animal.galduta) {
+
+            const formattedDate = new Date(lostedInformation.animal.galduta.fecha);
+            const dateString = formattedDate.toISOString().split('T')[0];
             setFormData({
-                hiria: lostedInformation.galduta.hiria || '',
-                provintzia: lostedInformation.galduta.probintzia || '',
-                data: lostedInformation.galduta.fecha || '',
-                moreInformation: lostedInformation.galduta.moreInformation || ''
+                hiria: lostedInformation.animal.galduta.hiria || '',
+                provintzia: lostedInformation.animal.galduta.probintzia || '',
+                data: dateString || '',
+                moreInformation: lostedInformation.animal.galduta.moreInformation || ''
             });
-            
+            // console.log("form data: "+formData);
         }
     }, [lostedInformation]); // Se ejecuta solo cuando lostedInformation cambia
     

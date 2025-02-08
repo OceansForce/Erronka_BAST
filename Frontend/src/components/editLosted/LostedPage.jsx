@@ -125,7 +125,7 @@ function LostedPage({ item, ruta }) {
                         'Authorization': `Bearer ${tok}`,
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ id: formData.id }),
+                    body: JSON.stringify({ id: item.id }), // Correcto
                 });
     
                 if (!response.ok) {

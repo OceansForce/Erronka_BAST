@@ -10,7 +10,7 @@ function LostedPage({ item, ruta }) {
     const { t } = useTranslation();
 
     // Estado para manejar si los campos están deshabilitados
-    const [isDisabled, setIsDisabled] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
     const [lostedInformation, setLostedInformation] = useState(null);
 
     const [formData, setFormData] = useState({
@@ -55,7 +55,7 @@ function LostedPage({ item, ruta }) {
 
         // Solo actualizamos el formulario si la información está disponible
         if (lostedInformation && lostedInformation.animal.galduta) {
-
+            setIsDisabled(false); // Deshabilitamos los campos
             const formattedDate = new Date(lostedInformation.animal.galduta.fecha);
             const dateString = formattedDate.toISOString().split('T')[0];
             setFormData({
@@ -80,43 +80,78 @@ function LostedPage({ item, ruta }) {
 
         const tok = localStorage.getItem('token');
         const formDataToSend = new FormData();
-        
         formDataToSend.append('id', formData.id);
-        formDataToSend.append('hiria', formData.hiria);
-        formDataToSend.append('provintzia', formData.provintzia);
-        formDataToSend.append('fecha', formData.data);
-        formDataToSend.append('moreInformation', formData.moreInformation);
-        
-        try {
-            const response = await fetch(`${IpAPI}/api/set-losted`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${tok}`,
-                },
-                body: formDataToSend,
-            });
 
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error("Error response:", errorText);
-                alert(`Error: ${errorText}`);
-                return;
+        if(!isDisabled){
+            formDataToSend.append('hiria', formData.hiria);
+            formDataToSend.append('provintzia', formData.provintzia);
+            formDataToSend.append('fecha', formData.data);
+            formDataToSend.append('moreInformation', formData.moreInformation);
+            
+            try {
+                const response = await fetch(`${IpAPI}/api/set-losted`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${tok}`,
+                    },
+                    body: formDataToSend,
+                });
+    
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Error response:", errorText);
+                    alert(`Error: ${errorText}`);
+                    return;
+                }
+    
+                const result = await response.json();
+                console.log("Server response:", result);
+                setFormData({
+                    hiria: '',
+                    provintzia: '',
+                    data: '',
+                    moreInformation: ''
+                });
+                navigate(ruta);
+    
+            } catch (error) {
+                console.error("Request failed:", error);
+                alert('Error en la solicitud: ' + error.message);
             }
-
-            const result = await response.json();
-            console.log("Server response:", result);
-            setFormData({
-                hiria: '',
-                provintzia: '',
-                data: '',
-                moreInformation: ''
-            });
-            navigate(ruta);
-
-        } catch (error) {
-            console.error("Request failed:", error);
-            alert('Error en la solicitud: ' + error.message);
+        }else{
+            try {
+                const response = await fetch(`${IpAPI}/api/set-not-losted`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${tok}`,
+                    },
+                    body: formDataToSend,
+                });
+    
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Error response:", errorText);
+                    alert(`Error: ${errorText}`);
+                    return;
+                }
+    
+                const result = await response.json();
+                console.log("Server response:", result);
+                setFormData({
+                    hiria: '',
+                    provintzia: '',
+                    data: '',
+                    moreInformation: ''
+                });
+                navigate(ruta);
+    
+            } catch (error) {
+                console.error("Request failed:", error);
+                alert('Error en la solicitud: ' + error.message);
+            }
         }
+        
+        
     };
 
     return (

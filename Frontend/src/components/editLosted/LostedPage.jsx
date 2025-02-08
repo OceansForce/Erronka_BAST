@@ -64,7 +64,7 @@ function LostedPage({ item, ruta }) {
                 data: dateString || '',
                 moreInformation: lostedInformation.animal.galduta.moreInformation || ''
             });
-            // console.log("form data: "+formData);
+            console.log("form data: "+formData);
         }
     }, [lostedInformation]); // Se ejecuta solo cuando lostedInformation cambia
     
@@ -76,25 +76,23 @@ function LostedPage({ item, ruta }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (isDisabled) return; // Evita enviar si está deshabilitado
+        //if (isDisabled) return; // Evita enviar si está deshabilitado
 
         const tok = localStorage.getItem('token');
-        const formDataToSend = new FormData();
-        formDataToSend.append('id', formData.id);
+        
 
         if(!isDisabled){
-            formDataToSend.append('hiria', formData.hiria);
-            formDataToSend.append('provintzia', formData.provintzia);
-            formDataToSend.append('fecha', formData.data);
-            formDataToSend.append('moreInformation', formData.moreInformation);
+            console.log("Esta perdido");
+            
             
             try {
                 const response = await fetch(`${IpAPI}/api/set-losted`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${tok}`,
+                        'Content-Type': 'application/json',
                     },
-                    body: formDataToSend,
+                    body: formData,
                 });
     
                 if (!response.ok) {
@@ -119,13 +117,15 @@ function LostedPage({ item, ruta }) {
                 alert('Error en la solicitud: ' + error.message);
             }
         }else{
+            console.log("No esta perdido");
             try {
                 const response = await fetch(`${IpAPI}/api/set-not-losted`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${tok}`,
+                        'Content-Type': 'application/json',
                     },
-                    body: formDataToSend,
+                    body: JSON.stringify({ id: formData.id }),
                 });
     
                 if (!response.ok) {
@@ -158,24 +158,25 @@ function LostedPage({ item, ruta }) {
         <>
             <p className='font-semibold text-2xl my-5 dark:text-white uppercase'>{t('ad_galduta:animalEdit')}</p>
 
-            {/* Checkbox para habilitar/deshabilitar */}
-            <div className="inline-flex items-center">
-                <label className="flex items-center cursor-pointer relative">
-                    <input 
-                        type="checkbox" 
-                        className="peer h-6 w-6 cursor-pointer transition-all appearance-none rounded-full bg-slate-100 shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800" 
-                        id="check-custom-style" 
-                        onChange={handleCheckboxChange}
-                    />
-                    <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-                        </svg>
-                    </span>
-                </label>
-            </div>
+            
 
             <form className='flex flex-col text-left' onSubmit={handleSubmit}>
+                {/* Checkbox para habilitar/deshabilitar */}
+                <div className="inline-flex items-center">
+                    <label className="flex items-center cursor-pointer relative">
+                        <input 
+                            type="checkbox" 
+                            className="peer h-6 w-6 cursor-pointer transition-all appearance-none rounded-full bg-slate-100 shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800" 
+                            id="check-custom-style" 
+                            onChange={handleCheckboxChange}
+                        />
+                        <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                            </svg>
+                        </span>
+                    </label>
+                </div>
                 <div className='flex flex-row'>
                     <div className='flex flex-col w-1/2 mr-10'>
                         <ProvinciasYCiudades 
@@ -216,7 +217,7 @@ function LostedPage({ item, ruta }) {
                     </div>
                 </div>
                 
-                <SendButom value={t('saioa_sortu:input')} disabled={isDisabled} className={isDisabled ? 'opacity-50 cursor-not-allowed' : ''} />
+                <SendButom value={t('saioa_sortu:input')} />
             </form>
         </>
     );

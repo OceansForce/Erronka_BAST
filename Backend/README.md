@@ -4,7 +4,7 @@
 
 Link: 
 ```
-http://bastbackend.ddns.net:8000/api/translations/keys
+https://bastbackend.ddns.net/api/translations/keys
 ```
 Header:
 ```
@@ -47,7 +47,7 @@ Response Error:
   
 Link: 
 ```
-http://bastbackend.ddns.net:8000/api/register
+https://bastbackend.ddns.net/api/register
 ```
 Header:
 ```
@@ -63,7 +63,7 @@ Body:
     "password": "123maite",
     "password_confirmation": "123maite",
     "year": "2005-01-10",
-    "img": "https://proba.com"
+    "img": img->Object
 }
 
 ```
@@ -77,7 +77,8 @@ Response:
     "secondName": "Alcon",
     "email": "Casca@example.com",
     "year": "2010-10-10T00:00:00.000000Z",
-    "id": 3
+    "id": 3,
+    "img": "www.bastbackend.ddns.net/public/storage/profile.jpg"
   }
 }
 ```
@@ -97,6 +98,34 @@ Response Error:
 ```
 </details>
 
+<details>
+<summary> <h2> Verify Email </h2> </summary>
+Emaila Verifikatzeko erabiltzen da
+Link: 
+```
+https://bastbackend.ddns.net/api/verity-email/34298df983hfdkd
+```
+Header:
+```
+Content-Type:application/json
+```
+
+
+Response:
+```
+{
+  "msg":"Email Verificado"
+}
+```
+Response Error:
+```
+{
+  "message": "Datos incorrectos o incompletos.",
+}
+```
+
+</details>
+
 
 
 
@@ -105,7 +134,7 @@ Response Error:
   
 Link: 
 ```
-http://bastbackend.ddns.net:8000/api/login
+https://bastbackend.ddns.net/api/login
 ```
 Header:
 ```
@@ -128,8 +157,9 @@ Response:
     "email": "manex@zubiri.com",
     "year": "2005-01-10T00:00:00.000000Z",
     "rola": "erabiltzaile",
-    "idProtektora": null
-  },
+    "idProtektora": null,
+    "img":"img": "www.bastbackend.ddns.net/public/storage/profile.jpg"
+  }
   "token": "16|kFjHTrpajMNzVl3mFdxyolREya60S9Jr766ip9y0d582b690"
 }
 ```
@@ -147,7 +177,74 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/user-data
+https://bastbackend.ddns.net/api/user-data
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Response:
+```
+{
+    "user": {
+        "id": 1,
+        "DNI": "123456789A",
+        "name": "Juan",
+        "secondName": "Pérez",
+        "email": "juan.perez@ejemplo.com",
+        "year": "1990-05-20",
+        "img": "http://urlimagen.com/imagen.jpg"
+    },
+    "animals": [
+        {
+            "id": 1,
+            "name": "Fido",
+            "type": "txakurra",
+            "animalType": "Perro",
+            "img": "http://urlimagen.com/fido.jpg",
+            "bakuna": true,
+            "gender": "Macho",
+            "descripcion": "Perro muy amigable",
+            "year": "2020",
+            "losted": false,
+            "noiztik": "2023-01-01",
+            "userID": 1
+        },
+        {
+            "id": 2,
+            "name": "Mimi",
+            "type": "katua",
+            "animalType": "Gato",
+            "img": "http://urlimagen.com/mimi.jpg",
+            "bakuna": true,
+            "gender": "Hembra",
+            "descripcion": "Gato tranquilo",
+            "year": "2019",
+            "losted": false,
+            "noiztik": "2022-12-01",
+            "userID": 1
+        }
+    ]
+}
+
+```
+Response Error:
+```
+{
+        "error": "Usuario no autenticado"
+}
+```
+</details>
+
+
+<details>
+<summary> <h2> Get User Data Admin</h2> </summary>
+Lortzen dira erabiltzaile guztien datuak
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/get-all-user
 ```
 Header:
 ```
@@ -214,7 +311,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/user-data-edit
+https://bastbackend.ddns.net/api/user-data-edit
 ```
 Header:
 ```
@@ -230,7 +327,7 @@ Body:
     "email": "juan.garcia@ejemplo.com",
     "password": "nuevaContraseña123",
     "year": "1991-06-15",
-    "img": "http://urlimagen.com/nueva-imagen.jpg"
+    "img": img->Object
 }
 ```
 Response:
@@ -266,12 +363,14 @@ Response Error:
 ```
 </details>
 
+<details>
+
 <summary> <h2> Delete User </h2> </summary>
 <p> **Delete** bitartez egin behar da</p>
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/user-delete
+https://bastbackend.ddns.net/api/user-delete
 ```
 Header:
 ```
@@ -304,7 +403,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/user-add-protectora
+https://bastbackend.ddns.net/api/user-add-protectora
 ```
 Header:
 ```
@@ -354,7 +453,7 @@ Response Error:
   
 Link: 
 ```
-http://bastbackend.ddns.net:8000/api/news
+https://bastbackend.ddns.net/api/news
 ```
 Header:
 ```
@@ -368,7 +467,7 @@ Body:
   "titleEU": "Titulua euskaraz",
   "textES": "Este es el texto de la noticia en Español",
   "textEU": "Hau da euskarazko albistearen testua",
-  "img": https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg
+  "img": img->object
 }
 ```
 Response:
@@ -401,7 +500,7 @@ Link:
 <p>Protektora_id is optional</p>
     
 ```
-http://bastbackend.ddns.net:8000/api/latest-news?count=5&offset=10&protektora_id=1
+https://bastbackend.ddns.net/api/latest-news?count=5&offset=10&protektora_id=1
 ```
 Header:
 ```
@@ -445,7 +544,7 @@ Link:
 <p>Protektora_id is optional</p>
     
 ```
-http://bastbackend.ddns.net:8000/api/new-obtein/45
+https://bastbackend.ddns.net/api/new-obtein/45
 ```
 Header:
 ```
@@ -500,7 +599,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/news/50
+https://bastbackend.ddns.net/api/news/50
 ```
 Header:
 ```
@@ -514,7 +613,7 @@ Body:
    "titleEU": "Berriaren izenburua euskaraz",
    "textES": "Texto de la noticia en español.",
    "textEU": "Albistearen testua euskaraz111.",
-   "img": "https://ejemplo.com/imagen.jpg"
+   "img": img->object
  }
 ```
 Response:
@@ -540,6 +639,34 @@ Response Error:
 ```
 </details>
 
+<details>
+    
+<summary> <h2> Delete News </h2> </summary>
+<p> **delete** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/news/50
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Response:
+```
+{
+  "msg":"New Deleted"
+}
+```
+Response Error:
+```
+{
+  "error": "Las credenciales proporcionadas son incorrectas."
+}
+```
+</details>
+
 
 <details>
     
@@ -548,7 +675,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/animals-adopt?limit=5&offset=0&protektora_id=123&type=txakurra
+https://bastbackend.ddns.net/api/animals-adopt?limit=5&offset=0&protektora_id=123&type=txakurra
 ```
 Header:
 ```
@@ -607,7 +734,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/animals-personal?limit=5&offset=0&protektora_id=123&type=txakurra
+https://bastbackend.ddns.net/api/animals-personal?limit=5&offset=0&protektora_id=123&type=txakurra
 ```
 Header:
 ```
@@ -668,7 +795,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/animals-create
+https://bastbackend.ddns.net/api/animals-create
 ```
 Header:
 ```
@@ -683,7 +810,7 @@ Body:
     "etxekoAnimalia": true,
     "type": "txakurra",
     "animalType": "Pastor Alemán",
-    "img": "http://url_del_imagen.com/fido.jpg",
+    "img": img->object,
     "bakuna": 1,
     "gender": 1,
     "descripcion": "Perro amigable y enérgico",
@@ -716,7 +843,7 @@ Response Error:
 Link: 
  
 ```
-http://bastbackend.ddns.net:8000/api/animals-edit
+https://bastbackend.ddns.net/api/animals-edit
 ```
 Header:
 ```
@@ -731,7 +858,7 @@ Body:
   "etxekoAnimalia": true,
   "type": "txakurra",
   "animalType": "Pastor Alemán",
-  "img": "http://urlimagen.com/nueva-imagen.jpg",
+  "img": img->object,
   "bakuna": 2,
   "gender": 1,
   "descripcion": "Animal amigable y activo.",
@@ -777,6 +904,472 @@ Response Error:
     "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
   }
 }
+
+```
+</details>
+
+
+<details>
+    
+<summary> <h2> Get adop animal information</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/animal-adopt/33
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+{
+  "id": 1,
+  "name": "Max",
+  "etxekoAnimalia": true,
+  "type": "txakurra",
+  "animalType": "Pastor Alemán",
+  "img": "http://urlimagen.com/nueva-imagen.jpg",
+  "bakuna": 2,
+  "gender": 1,
+  "descripcion": "Animal amigable y activo.",
+  "year": "2020-05-10",
+  "losted": null,
+  "noiztik": null,
+  "userID": 2,
+  "protektora_id": 5
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>
+
+
+
+
+
+<details>
+    
+<summary> <h2> Get Animals Losted </h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/animals-losted?limit=5&offset=0&protektora_id=123&type=txakurra&herria=Donostia&lurraldea=Guipuzkoa
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+[
+    {
+        "id": 1,
+        "name": "Fido",
+        "etxekoAnimalia": true,
+        "type": "txakurra",
+        "animalType": "Dog",
+        "img": null,
+        "bakuna": 1,
+        "gender": 1,
+        "descripcion": "Friendly dog",
+        "year": "2020-05-01 00:00:00",
+        "losted": 0,
+        "noiztik": "2025-01-01 00:00:00",
+        "userID": 2,
+        "protektora_id": 123,
+        "losted":3
+    },
+    {
+        "id": 2,
+        "name": "Luna",
+        "etxekoAnimalia": true,
+        "type": "katua",
+        "animalType": "Cat",
+        "img": null,
+        "bakuna": 1,
+        "gender": 0,
+        "descripcion": "Playful cat",
+        "year": "2021-03-15 00:00:00",
+        "losted": 0,
+        "noiztik": "2025-01-01 00:00:00",
+        "userID": 3,
+        "protektora_id": 123,
+        "losted":4
+    }
+]
+
+```
+Response Error:
+```
+{
+    "message": "No animals found for the given criteria"
+}
+```
+</details>
+
+
+
+<details>
+    
+<summary> <h2> Get losted animal information</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/animal-losted/{id}
+```
+Header:
+```
+Content-Type:application/json
+```
+Response:
+```
+{
+  "id": 1,
+  "name": "Max",
+  "etxekoAnimalia": true,
+  "type": "txakurra",
+  "animalType": "Pastor Alemán",
+  "img": "http://urlimagen.com/nueva-imagen.jpg",
+  "bakuna": 2,
+  "gender": 1,
+  "descripcion": "Animal amigable y activo.",
+  "year": "2020-05-10",
+  "losted": null,
+  "noiztik": null,
+  "userID": 2,
+  "protektora_id": 5
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>
+
+<details>
+    
+<summary> <h2> Set losted</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/set-losted
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Body:
+```
+{
+  "id": 1,
+  "hiria": "Donostia",
+  "probintzia": "Guipuzkoa",
+  "fecha": "2022-01-01",
+  "moreInformation": "text text"
+}
+```
+Response:
+```
+{
+  "mesagge":"losted"
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>
+
+<details>
+    
+<summary> <h2> Set Not losted</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/set-not-losted
+```
+Header:
+```
+Content-Type:application/json
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+Body:
+```
+{
+  "id": 1  
+}
+```
+Response:
+```
+{
+  "mesagge":"not losted"
+}
+
+```
+Response Error:
+```
+{
+  "error": "Animal no encontrado"
+}
+{
+  "message": "Datos incorrectos o incompletos.",
+  "errors": {
+    "name": ["El campo name es obligatorio."],
+    "bakuna": ["El campo bakuna debe ser un número entero mayor o igual a 0."]
+  }
+}
+
+```
+</details>
+
+
+
+
+
+<details>
+    
+<summary> <h2> Get protektorak</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/protectora-list
+```
+
+Response:
+```
+{
+    "name": "Protección Animal",
+    "provintzia": "Vizcaya",
+    "hiria": "Bilbao",
+    "telefono": "123456789",
+    "email": "contacto@proteccionanimal.org",
+    "logo": "https://example.com/images/logo.jpg"
+}
+{
+    "name": "Protección Animal",
+    "provintzia": "Vizcaya",
+    "hiria": "Bilbao",
+    "telefono": "123456789",
+    "email": "contacto@proteccionanimal.org",
+    "logo": "https://example.com/images/logo.jpg"
+}
+
+
+```
+Response Error:
+```
+{
+  "error": "Protectora no encontrado"
+}
+
+```
+</details>
+
+<details>
+    
+<summary> <h2> Create protektora</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/protectora-create
+```
+Header:
+```
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+body:
+```
+{
+    "name": "Protección Animal",
+    "provintzia": "Vizcaya",
+    "hiria": "Bilbao",
+    "telefono": "123456789",
+    "email": "contacto@proteccionanimal.org",
+    "logo": img ➡️ object
+}
+
+
+```
+Response Error:
+```
+{
+  "perfe": "Protectora sortuta"
+}
+
+```
+</details>
+
+
+
+<details>
+    
+<summary> <h2> Edit protektora</h2> </summary>
+<p> **Post** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/protectora-edit
+```
+Header:
+```
+Authorization:Bearer 41|FsqTSzQTGSKTy9UB6FhbTi8NjdeYSHE65Nd3hS0505a2bb25
+```
+body:
+```
+{
+    "id":1,
+    "name": "Protección Animal",
+    "provintzia": "Vizcaya",
+    "hiria": "Bilbao",
+    "telefono": "123456789",
+    "email": "contacto@proteccionanimal.org",
+    "logo": img ➡️ object
+}
+
+
+```
+Response Error:
+```
+{
+  "perfe": "Protectora editatuta"
+}
+
+```
+</details>
+
+
+
+<details>
+    
+<summary> <h2> Get losted place</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/losted-place
+```
+
+Response:
+```
+{
+    "Araba": ["Vitoria-Gasteiz"],
+    "Bizkaia": ["Barakaldo", "Bilbao", "Getxo"],
+    "Gipuzkoa": ["Donostia", "Irun", "Tolosa"]
+}
+
+
+```
+</details>
+
+
+
+
+<details>
+    
+<summary> <h2>Adopt</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+<p>Korreo bat bidaltzen da basbesleari esanez animali hori nahi duzula adoptatu </p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/adop
+```
+
+Response:
+```
+{
+    "msg":"mezua bidalita"
+}
+
+
+```
+</details>
+
+
+<details>
+    
+<summary> <h2>Adopt verify</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+<p>Korreo bat bidaltzen da erabiltzaileari esanez animalia berea dela </p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/verify-adoption/{token}
+```
+
+Response:
+```
+{
+    "msg":"mezua bidalita"
+}
+
+
+```
+</details>
+
+
+
+<details>
+    
+<summary> <h2>Adopt cancel</h2> </summary>
+<p> **Get** bitartez egin behar da</p>
+<p>Korreo bat bidaltzen da erabiltzaileari esanez animalia berea dela </p>
+Link: 
+ 
+```
+https://bastbackend.ddns.net/api/adop-cancel/{token}
+```
+
+Response:
+```
+{
+    "msg":"mezua bidalita"
+}
+
 
 ```
 </details>

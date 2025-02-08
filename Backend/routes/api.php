@@ -6,6 +6,7 @@
 
 
 
+
 // Lortu tradukzioak
 use App\Http\Controllers\TranslationController;
 
@@ -25,8 +26,9 @@ Route::get('user-data', [UserController::class, 'getUserDate'])
 
 
 // ERABILTZAILEAREN DATUAK LORTU + BERE ANIMALIAK
-Route::put('user-data-edit', [UserCreateController::class, 'edit'])->middleware('auth:sanctum');  // Ruta para editar un usuario
+Route::post('user-data-edit', [UserCreateController::class, 'edit'])->middleware('auth:sanctum');  // Ruta para editar un usuario
 Route::delete('user-delete', [UserCreateController::class, 'delete'])->middleware('auth:sanctum');  // Ruta para editar un usuario
+
 
 // ERABILTZAILE bateri ezarri protektora bat
 Route::put('user-add-protectora', [UserCreateController::class, 'addProtectora'])->middleware('auth:sanctum');  // Ruta para asignar una protectora a un usuario
@@ -43,7 +45,7 @@ use App\Http\Controllers\NewsController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('news', [NewsController::class, 'store'])->middleware('\App\Http\Middleware\CheckCreateNewsPermissions');
-    Route::put('news/{news}', [NewsController::class, 'update'])->middleware('\App\Http\Middleware\CheckUpdateNewsPermissions');
+    Route::post('news/{news}', [NewsController::class, 'update'])->middleware('\App\Http\Middleware\CheckUpdateNewsPermissions');
     Route::delete('news/{news}', [NewsController::class, 'destroy'])->middleware('\App\Http\Middleware\CheckUpdateNewsPermissions');
 });
 
@@ -62,7 +64,38 @@ Route::post('/animals-edit', [AnimalController::class, 'editAnimal'])->middlewar
 Route::get('/animal-adopt/{id}', [AnimalController::class, 'getAnimal']);
 
 
+// Animali galduen atala
+use App\Http\Controllers\LostedController;
+Route::get('/animals-losted', [LostedController::class, 'getAnimals']);
+Route::get('/animal-losted/{id}', [LostedController::class, 'getAnimal']);
+Route::post('/set-losted', [LostedController::class, 'setLosted'])->middleware('auth:sanctum');
+Route::post('/set-not-losted', [LostedController::class, 'setNotLosted'])->middleware('auth:sanctum');
+Route::get('/losted-place', [LostedController::class, 'getLekuak']);
+
+
+
+
 Route::get('/animals-personal', [AnimalController::class, 'getPersonalAnimals'])->middleware('auth:sanctum');
+
+
+// Protectoras
+use App\Http\Controllers\ProtektoraController;
+Route::get('/protectora-list', [ProtektoraController::class, 'getAllProtektoras']);
+Route::get('/protectora-list/{id}', [ProtektoraController::class, 'getProtektora']);
+Route::post('/protectora-create', [ProtektoraController::class, 'createProtektora'])->middleware('auth:sanctum');;
+Route::post('/protectora-edit', [ProtektoraController::class, 'editProtektora'])->middleware('auth:sanctum');;
+
+
+// Adoptar 
+use App\Http\Controllers\AdoptController;
+
+Route::post('/adop', [AdoptController::class, 'adoptButtom'])->middleware('auth:sanctum');
+Route::get('/verify-adoption/{token}', [AdoptController::class, 'adoptConfirmation']);
+Route::get('/adop-cancel/{token}', [AdoptController::class, 'adoptCancel']);
+
+
+
+
 
 
 // UP images

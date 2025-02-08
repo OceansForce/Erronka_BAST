@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  laravel-app:
+    image: laravel:latest
+    container_name: laravel-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    networks:
+      - backend
+    expose:
+      - "9000"
+
+  nginx-server:
+    image: nginx:latest
+    container_name: nginx-server
+    ports:
+      - "80:80"   # Puerto HTTP
+      - "443:443" # Puerto HTTPS
+      - "8000:8000" # Irudien portua
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/your-certificate.crt:/etc/ssl/certs/your-certificate.crt
+      - ./docker/nginx/your-certificate.key:/etc/ssl/private/your-certificate.key
+      - .:/var/www/html
+    depends_on:
+      - laravel-app
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

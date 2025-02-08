@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Animals extends Model
 {
     use HasFactory;
@@ -32,6 +33,7 @@ class Animals extends Model
         'losted',
         'noiztik',
         'userID',
+        'adoptToken',
     ];
 
     // Si necesitas castings específicos
@@ -53,5 +55,12 @@ class Animals extends Model
     {
         return $this->belongsTo(User::class, 'userID'); // Aquí le indicas el nombre correcto de la columna
     }
+
+
+    public function galduta()
+    {
+        return $this->belongsTo(Losted::class, 'losted', 'id'); // 'losted' es la columna en `animals` y 'id' es la clave primaria en `losted`
+    }
+
 
 }

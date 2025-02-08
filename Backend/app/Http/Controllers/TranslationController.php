@@ -28,15 +28,9 @@ class TranslationController extends Controller
         $translations = [];
 
         foreach ($keys as $key) {
-            // Crear una clave única para cada traducción (por ejemplo, 'descripcion0_es')
-            $cacheKey = 'translation_' . $key;
-
-            // Intentar obtener la traducción desde la caché
-            $translation = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($key) {
-                // Obtener todas las traducciones de la clave dada
-                return Translation::where('keyValue', $key)->get();
-            });
-
+            // Obtener todas las traducciones de la clave dada
+            $translation = Translation::where('keyValue', $key)->get();
+        
             // Si la traducción fue encontrada, organizarla por idioma
             if ($translation->isNotEmpty()) {
                 $translations[$key] = $translation->mapWithKeys(function ($item) {
@@ -44,6 +38,7 @@ class TranslationController extends Controller
                 });
             }
         }
+        
 
         // Si no se encontraron traducciones, devolver un mensaje de error
         if (empty($translations)) {

@@ -10,10 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 class Protektora extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $table = 'protektora';
 
     protected $fillable = [
         'name',
-        'location',
+        'provintzia',
+        'hiria',
         'telefono',
         'email',
         'logo'

@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LoginBotoiaPesado from './loginBotoiaPesado';
 import i18n from './../../118n/menu';
+import IpAPI from '../../config/ipAPI';
 
 
-const AdopzioBotoia = ({ text }) => {
+const AdopzioBotoia = ({ text, animalID }) => {
     const { t, i18n } = useTranslation();
 
     const [isModalOpen, setIsModalOpen] = useState(false); // Estado para manejar si el modal está abierto o cerrado
     const tok = localStorage.getItem('token'); // Obtener el token de localStorage
+    const id = JSON.stringify(animalID);
+
 
     const handleClick = () => {
         if (tok === null) {
@@ -23,8 +26,34 @@ const AdopzioBotoia = ({ text }) => {
                 setIsModalOpen(true);
             }
         } else {
-            // Si el token existe, mostramos un mensaje en la consola
-            console.log("Token encontrado. Usuario autenticado.");
+
+          const token = localStorage.getItem('token');
+          const fetchSingleAnimal = async () => {
+            try {
+              const response = await fetch(`${IpAPI}/api/adop`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization':`Bearer ${token}`
+                },
+                body: JSON.stringify({ id })  // Enviar el id dentro de un objeto JSON
+              });
+      
+              console.log("Response:", response);
+              if (!response.ok) {
+                console.log("Error al al adoptar.");
+                throw new Error(`Error fetching news with id ${response}`);
+              }
+      
+              const data = await response.json();
+              console.log('mensaje enviado:', data);
+              
+            } catch (error) {
+              console.error('Error', error);
+              alert('Error al adoptar.');
+            }
+          };
+          fetchSingleAnimal();
         }
     };
 

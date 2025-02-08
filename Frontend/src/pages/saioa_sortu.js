@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../118n/menu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LanguageSelector from '../header-footer/header/desplegable/lenguageSelector';
 import DarkModeToggle from '../header-footer/header/dark-light/dark';
 
 import SendButom from '../components/bottons/sendBotton';
 import BackButtonLittle from '../components/bottons/backButtomLittle';
+
+import ErrorMenu from '../components/errors/ErrorMenu';
 
 import IpAPI from '../config/ipAPI';
 
@@ -21,7 +23,12 @@ function Saioa_sortu() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [year, setYear] = useState('');
-  const [img, setImg] = useState('');
+  const [img, setImg] = useState(null);
+
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorText, setErrorText] = useState('');
+  const navigate = useNavigate();
 
   // Función para cambiar el idioma
   const changeLanguage = (lang) => {
@@ -39,38 +46,65 @@ function Saioa_sortu() {
     }
 
     // Crear un objeto con los datos del formulario
-    const formData = {
-      DNI: dni,
-      name,
-      secondName: surname,
-      email,
-      password,
-      password_confirmation: confirmPassword,
-      year,
-      img,
-    };
+    const formData = new FormData();
+    formData.append('DNI', dni);
+    formData.append('name', name);
+    formData.append('secondName', surname);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('password_confirmation', confirmPassword);
+    formData.append('year', year);
+    if (img) formData.append('img', img);
+   
 
     // Aquí puedes enviar los datos a un servidor, por ejemplo:
     fetch(`${IpAPI}/api/register`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        //'Content-Type': 'multipart/form-data',
       },
-      body: JSON.stringify(formData),
+      body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
         console.log('Formulario enviado correctamente:', data);
         // Realizar alguna acción después de enviar (e.g., redirigir al usuario)
+        if (data.errors) {
+          if (data.errors.DNI) {
+            setErrorText(t('error:DNIErabilita'));
+            setShowErrorModal(true);  // Mostrar el modal
+          }
+          if (data.errors.email) {
+            setErrorText(t('error:emailErabilita'));
+            setShowErrorModal(true);  // Mostrar el modal
+          }
+        } else {
+          // Si no hay errores, puedes realizar otras acciones aquí
+          console.log('Usuario registrado correctamente');
+          navigate('/');
+          // Redirigir o mostrar un mensaje de éxito
+        }
+
       })
       .catch((error) => {
         console.error('Error al enviar el formulario:', error);
+        setErrorText(t('error:generalError'));
+        setShowErrorModal(true);  // Mostrar el modal
       });
   };
 
   return (
     <>
-      <div className="container flex justify-center erdian">
+
+        {showErrorModal && (
+            <ErrorMenu 
+                text={errorText} 
+                buttonText={t('error:close')} 
+                openError = {showErrorModal}
+                closeError = {setShowErrorModal}
+            />
+          )}
+      <div className="w-full flex justify-center">
         <div className="flex flex-col dark:bg-dark bg-primary p-6 m-10 w-96 rounded-lg text-center border-black dark:border-transparent border-2">
           <div className="w-full flex">
             <div className="w-1/2">
@@ -142,11 +176,12 @@ function Saioa_sortu() {
             />
             <label className="font-semibold hidden dark:text-white">{t('saioa_sortu:imagen')}</label>
             <input
-              className="mb-2 hidden dark:border-primary border-black border-2 rounded-lg"
-              type="url"
-              value={img}
-              onChange={(e) => setImg('/public/img/animal-approve-cat-svgrepo-com.svg')}
+              className="mb-2 dark:border-primary border-black border-2 rounded-lg"
+              type="file"
+              //value={img}
+              onChange={(e) => setImg(e.target.files[0])}
               placeholder="URL de la imagen"
+              accept="image/*"
             />
             {/* <input
               className="bg-black text-white mt-2 p-2 rounded-lg"

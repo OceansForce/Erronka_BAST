@@ -1,4 +1,4 @@
-import Adopzioak from "../components/adopzioa/adopzio";
+
 import { useParams } from 'react-router-dom';
 
 import Header from '../header-footer/header';

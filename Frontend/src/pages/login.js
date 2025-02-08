@@ -3,10 +3,10 @@ import DarkModeToggle from '../header-footer/header/dark-light/dark';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../118n/menu';
-import { Link, useNavigate } from 'react-router-dom'; // Usa useNavigate aquí
+import { Link, useNavigate } from 'react-router-dom';
 import SendButom from '../components/bottons/sendBotton';
 import BackButtonLittle from '../components/bottons/backButtomLittle';
-
+import ErrorMenu from '../components/errors/ErrorMenu';
 
 import IpAPI from '../config/ipAPI';
 
@@ -14,7 +14,9 @@ function Login() {
     const { t, i18n } = useTranslation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Usamos el hook useNavigate
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [errorText, setErrorText] = useState('');
+    const navigate = useNavigate();
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang);
@@ -42,23 +44,34 @@ function Login() {
             if (data.token) {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('izena', data.user.name);
+                localStorage.setItem('img', data.user.img);
                 if(data.user.idProtektora !=null){
                   localStorage.setItem('protektora', data.user.idProtektora);
                 }
 
-
                 navigate('/'); // Redirige al usuario usando navigate
             } else if (data.error) {
-                alert(t('error:loginFailed'));
+                setErrorText(t('error:loginFailed'));
+                setShowErrorModal(true);  // Mostrar el modal
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
-            alert(t('error:generalError'));
+            setErrorText(t('error:loginFailed'));
+            setShowErrorModal(true);  // Mostrar el modal
         }
     };
 
     return (
         <>
+            {showErrorModal && (
+                <ErrorMenu 
+                    text={errorText} 
+                    buttonText={t('error:close')} 
+                    openError = {showErrorModal}
+                    closeError = {setShowErrorModal}
+                />
+            )}
+
             <div className='container flex justify-center erdian'>
                 <div className='flex flex-col dark:bg-dark bg-primary p-6 m-10 w-96 rounded-lg text-center border-black dark:border-transparent border-2'>
                     <div className='w-full flex'>
@@ -88,7 +101,6 @@ function Login() {
                             onChange={(e) => setPassword(e.target.value)} 
                             required 
                         />
-                        {/* <input className='bg-black text-white mt-2 p-2 rounded-lg' type='submit' value={} /> */}
                         <SendButom value={t('saioa_sortu:input')} />
                     </form>
                 </div>
@@ -98,4 +110,3 @@ function Login() {
 }
 
 export default Login;
-

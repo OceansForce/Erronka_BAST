@@ -11,7 +11,7 @@
 
 /* Contenedor del carrusel */
 .carousel-wrapper {
-  width: 100%;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,11 +21,11 @@
 /* Contenedor de los elementos del carrusel */
 .carousel-content {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 10px;
-  width: 100%;
-  grid-template-rows: repeat(2, auto); /* 2 filas */
-  transition: transform 0.5s ease-in-out; /* Transición suave */
+  grid-auto-rows: auto; 
+  grid-auto-flow: row dense; 
+  transition: transform 0.5s ease-in-out; 
 }
 
 /* Estilo para cada item del carrusel */
@@ -38,14 +38,13 @@
   box-sizing: border-box;
 }
 
-.carousel-item img {
-  width: 100%;
+.carousel-img {
+  width: 463.72px;
   height: 230px;
   border-radius: 8px;
 }
 
 .carousel-text {
-  width: 100%;
   text-align: center;
   margin-top: 10px;
 }

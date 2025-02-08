@@ -1,7 +1,7 @@
-import adopzioak from "../components/adopzioa/adopzio";
+
 import Header from '../header-footer/header';
 import Footer from '../header-footer/footer';
-import Mapa from '../components/mapa/mapa';
+import Mapa from '../components/mapa/mapa_iframe.js';
 import Wallpaper from '../components/body/wallpaper.js';
 
 function mapa_orria() {

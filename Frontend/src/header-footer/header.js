@@ -3,12 +3,11 @@ import i18n from '../118n/menu';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './header/desplegable/lenguageSelector';
 import DarkModeToggle from './header/dark-light/dark';
-import User from './header/user/user';
-import { Link } from 'react-router-dom';  // Asegúrate de importar Link
+import User from './header/user/desplegable/userOptions';
+import { Link } from 'react-router-dom';  
 
 
 import Adopzioa  from './header/desplegable/adopzioa';
-import Denda from './header/desplegable/denda';
 
 
 const Header = () => {
@@ -34,7 +33,7 @@ const Header = () => {
         
       </div>
       
-      <div className=' justify-center flex-center p-3 capitalize'>
+      <div className=' justify-center flex-center p-3 capitalize z-10'>
         <ul className='list-none flex flex-col sm:flex-row sm:space-x-10 text-center sm:text-left'>
           <li className='transition-all duration-300
                            hover:scale-110 hover:shadow-lg
@@ -48,15 +47,12 @@ const Header = () => {
           <li className='transition-all duration-300
                            hover:scale-110 hover:shadow-lg
                            active:scale-95 active:shadow-sm'><Adopzioa /></li>
-          <li className='transition-all duration-300
-                           hover:scale-110 hover:shadow-lg
-                           active:scale-95 active:shadow-sm'><Denda /></li>
-          
+        
           
         </ul>
       </div>
 
-      <div className=' flex items-center space-x-6 '>
+      <div className=' flex items-center space-x-6 z-0'>
         {/* Componente LanguageSelector con la función changeLanguage como prop */}
         <LanguageSelector changeLanguage={changeLanguage} />
         <DarkModeToggle />
@@ -75,8 +71,7 @@ const Header = () => {
           </Link>
         </>
       ) : (
-        <div>
-          {/* Aquí va el contenido de usuario, como un saludo o el nombre del usuario */}
+        <div className='z-0'>
           <User />
         </div>
       )}

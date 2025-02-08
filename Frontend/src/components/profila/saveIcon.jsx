@@ -1,10 +1,4 @@
 const SaveIcon = ({darkIMG, lightIMG, text}) => {
-    
-    
-    
-
-    
-
 
     return (
         <>

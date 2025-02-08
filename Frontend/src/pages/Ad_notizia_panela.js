@@ -61,6 +61,11 @@ function Ad_notizia_panela() {
         loadInitialNews();
     }, [i18n.language]);
 
+
+    const handleDelete = (id) => {
+        setNews(news.filter(item => item.id !== id));  // Esto elimina la noticia de la lista localmente
+    };
+
     return (
         <>
             <div className='w-full container flex justify-center'>
@@ -72,24 +77,13 @@ function Ad_notizia_panela() {
                             <DarkModeToggle className='w-1/2' />
                         </div>
                     </div>
-                    <p className='w-full font-semibold text-2xl my-5 dark:text-white uppercase'>Notiziak</p>
+                    <p className='w-full font-semibold text-2xl my-5 dark:text-white uppercase'>{t("ad_notiziak:tituloa_P")}</p>
                     <div className='w-full flex flex-col text-left' id='notiziak'>
                         <Link to={"/Ad_notiziak"} className='flex flex-row ml-2 w-44 p-1 mb-5 items-center bg-white rounded-full transition-all duration-300 hover:scale-110 active:scale-95'>
                             <img src='./img/icons/profil/plus_black.svg' className='size-5 mr-3' />
-                            <p className='font-bold font-ubuntu'>Sortu Iragarki bat</p>
+                            <p className='font-bold font-ubuntu'>{t("ad_notiziak:sortu")}</p>
                         </Link>
 
-                        {/* <div  className='flex flex-row dark:bg-primary bg-dark p-2 mb-5 rounded-3xl justify-between'>
-                            <p className='text-white dark:text-black text-left'>Izena</p>
-                            <div className='flex flex-row text-right'>
-                                <Link  to="/Ad_notiziak_aditatu" state={{id: 1, title: "izena"}}>
-                                    <img src='./img/icons/profil/pen_white.svg' className='size-7 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
-                                    <img src='./img/icons/profil/pen_Black.svg' className='size-7 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
-                                </Link>
-                                <img src='./img/icons/notizia/trash_white.svg' className='size-7 mr-3 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-red-500 rounded-full' />
-                                <img src='./img/icons/notizia/trash_black.svg' className='size-7 mr-3 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-red-500 rounded-full' />
-                            </div>
-                        </div> */}
 
                         {news.map((item) => (
                             <div key={item.id} className='flex flex-row dark:bg-primary bg-dark p-2 mb-5 rounded-3xl justify-between'>
@@ -99,7 +93,7 @@ function Ad_notizia_panela() {
                                         <img src='./img/icons/profil/pen_white.svg' className='size-7 dark:hidden transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
                                         <img src='./img/icons/profil/pen_Black.svg' className='size-7 hidden dark:block transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-green-500 rounded-full' />
                                     </Link>
-                                    <Trash id={item.id} />
+                                    <Trash id={item.id} onDelete={handleDelete} />
 
                                 </div>
                             </div>
@@ -109,7 +103,7 @@ function Ad_notizia_panela() {
                         <input 
                             className='w-1/12 bg-black text-white mt-2 p-2 rounded-lg transition-all duration-300 hover:bg-gray-700 hover:scale-105 active:scale-95 active:bg-gray-600' 
                             type='submit' 
-                            value='Mas' 
+                            value={t("menu:mas")} 
                             onClick={loadMoreNews} 
                         />
                     )}

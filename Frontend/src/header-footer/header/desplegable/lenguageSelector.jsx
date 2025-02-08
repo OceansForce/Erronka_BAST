@@ -22,7 +22,7 @@ const LanguageSelector = ({ changeLanguage }) => {
   }, []);
 
   return (
-    <div className="relative language-selector">
+    <div className="relative language-selector flex flex-row items-center">
       <img
         src="/img/icons/menu/language.svg"
         className="size-7 cursor-pointer dark:hidden hover:scale-110 active:scale-95 duration-300"

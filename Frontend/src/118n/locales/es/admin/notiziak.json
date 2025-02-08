@@ -1,7 +1,9 @@
 {
+    "tituloa_P":"Noticias",
     "tituloa_D":"Editar Noticia",
     "tituloa_N":"Crear Noticia",
     "img": "Imagen",
     "tituloa": "Titulo",
-    "Paragrafoa": "Parrafo"
+    "Paragrafoa": "Parrafo",
+    "sortu":"Crear noticia"
 }

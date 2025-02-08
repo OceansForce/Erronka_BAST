@@ -19,6 +19,10 @@
     "Beharrak":"Necesidades especiales",
     "Deskribapena":"Descripción",
     "Selecciona_mota":"Escoje el animal",
-    "razaSelecionar":"Seleciona la raza"
+    "razaSelecionar":"Seleciona la raza",
+    "animalEdit":"Editar animal",
+    "animalLost":"Animal perdido"
+
+
 
 }

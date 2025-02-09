@@ -18,14 +18,11 @@ import LostedPage from '../components/editLosted/LostedPage.jsx';
 
 function Edit_animal() {
 
-    const navigate = useNavigate();  // Hook para la navegación
-    const location = useLocation(); // Asegúrate de obtener location después de la inicialización
+
+    const location = useLocation(); 
     const [activeSection, setActiveSection] = useState('Profile');
     
-
-    // console.log(etxekoa);
-
-    const { item } = location.state || {}; // Acceder a item desde location.state
+    const { item } = location.state || {};
     const { ruta } = location.state || {};
     
 

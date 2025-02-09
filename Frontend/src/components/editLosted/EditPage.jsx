@@ -16,13 +16,11 @@ import { document } from 'postcss';
 
 function EditPage({item, ruta}) {
 
-    const navigate = useNavigate();  // Hook para la navegación
-    const location = useLocation(); // Asegúrate de obtener location después de la inicialización
+    const navigate = useNavigate();
+    const location = useLocation(); 
     const [etxekoa, setEtxekoa] = useState(1); // Valor inicial predeterminado
     const [esterilizado, setEsterilizado]= useState(1);
     const [activeSection, setActiveSection] = useState('Profile');
-
-    // console.log(etxekoa);
 
     
     console.log(item);

@@ -8,7 +8,7 @@ const DarkModeToggle = () => {
     if (storedPreference !== null) {
       return storedPreference === "true";
     }
-    // Si no hay preferencia almacenada, comprobar las preferencias del sistema
+    
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
